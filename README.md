@@ -1,15 +1,14 @@
 ## The Team
-- Brandon Palomino
-- Kenneth Ung
-- Christopher Rivas
-- Dongri Zhu
-- Daniel Gurrera
 
-## Welcome to GitHub Pages
+Brandon Palomino
 
-You can use the [editor on GitHub](https://github.com/bpalomino5/RealTech-Inc/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Kenneth Ung
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Christopher Rivas
+
+Dongri Zhu
+
+Daniel Gurrera
 
 ### Markdown
 
