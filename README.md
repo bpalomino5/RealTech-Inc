@@ -1,3 +1,10 @@
+## The Team
+- Brandon Palomino
+- Kenneth Ung
+- Christopher Rivas
+- Dongri Zhu
+- Daniel Gurrera
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/bpalomino5/RealTech-Inc/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
