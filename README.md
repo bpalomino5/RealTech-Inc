@@ -49,3 +49,5 @@ What Got Done:
  - Brandon: Research Heroku addons
  - Christopher: Research Firebase and Heroku Tutorial(NodeJS)
  - Dongri: Heroku Tutorial(NodeJS)
+
+Meeting End: 10:20 AM
