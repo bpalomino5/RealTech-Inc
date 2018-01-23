@@ -13,7 +13,7 @@ Daniel Gurrera
 # Meeting Notes
 
 ## Date: 1/19/18
-Meeting start: 9:05 PM
+
 Sprint One
 
 Goals for the First Sprint:
@@ -29,10 +29,7 @@ Tasks for each member for 1/19:
  - Christopher: General Research
  - Dongri: General Research
 
-Meeting end: 9:29 PM
-
 ## Date: 1/22/18
-Meeting Start: 9:30 AM
 
 What Got Done:
 
@@ -49,5 +46,3 @@ What Got Done:
  - Brandon: Research Heroku addons
  - Christopher: Research Firebase and Heroku Tutorial(NodeJS)
  - Dongri: Heroku Tutorial(NodeJS)
-
-Meeting End: 10:20 AM
