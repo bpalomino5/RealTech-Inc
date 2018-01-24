@@ -46,3 +46,21 @@ What Got Done:
  - Brandon: Research Heroku addons
  - Christopher: Research Firebase and Heroku Tutorial(NodeJS)
  - Dongri: Heroku Tutorial(NodeJS)
+
+## Date: 1/23/18
+
+What Got Done:
+
+ - Brandon: Organized group communication
+ - Chris: Heroku tutorial / installed some necessary tools
+ - Kenneth: ER progress / NodeJS research
+ - Dongri: Installed some necessary tools / MAMP tutorial
+ - Daniel: General Research
+ 
+ Tasks for each member for 1/23:
+ 
+ - Brandon: Research Heroku(NodeJS)
+ - Chris: Assist Kenneth with ER model
+ - Kenneth: Continue ER model
+ - Dongri: Research database tools
+ - Daniel: Practice Heroku(NodeJS)
