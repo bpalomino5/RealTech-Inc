@@ -12,22 +12,23 @@ Daniel Gurrera
 
 # Meeting Notes
 
-## Date: 1/19/18
+## Date: 1/23/18
 
-Sprint One
+What Got Done:
 
-Goals for the First Sprint:
-
- - Bring everyone up to speed on all final project topics (Database/Database Tools, Servers, Database-Server interaction)
- - Decide on Host, Database, and create a Data Model
-
-Tasks for each member for 1/19:
-
- - Kenneth: General Research / Start on ER model
+ - Brandon: Organized group communication
+ - Chris: Heroku tutorial / installed some necessary tools
+ - Kenneth: ER progress / NodeJS research
+ - Dongri: Installed some necessary tools / MAMP tutorial
  - Daniel: General Research
- - Brandon: Research on NodeJS
- - Christopher: General Research
- - Dongri: General Research
+ 
+ Tasks for each member for 1/23:
+ 
+ - Brandon: Research Heroku(NodeJS)
+ - Chris: Assist Kenneth with ER model
+ - Kenneth: Continue ER model
+ - Dongri: Research database tools
+ - Daniel: Practice Heroku(NodeJS)
 
 ## Date: 1/22/18
 
@@ -46,21 +47,20 @@ What Got Done:
  - Brandon: Research Heroku addons
  - Christopher: Research Firebase and Heroku Tutorial(NodeJS)
  - Dongri: Heroku Tutorial(NodeJS)
+ 
+ ## Date: 1/19/18
 
-## Date: 1/23/18
+Sprint One
 
-What Got Done:
+Goals for the First Sprint:
 
- - Brandon: Organized group communication
- - Chris: Heroku tutorial / installed some necessary tools
- - Kenneth: ER progress / NodeJS research
- - Dongri: Installed some necessary tools / MAMP tutorial
+ - Bring everyone up to speed on all final project topics (Database/Database Tools, Servers, Database-Server interaction)
+ - Decide on Host, Database, and create a Data Model
+
+Tasks for each member for 1/19:
+
+ - Kenneth: General Research / Start on ER model
  - Daniel: General Research
- 
- Tasks for each member for 1/23:
- 
- - Brandon: Research Heroku(NodeJS)
- - Chris: Assist Kenneth with ER model
- - Kenneth: Continue ER model
- - Dongri: Research database tools
- - Daniel: Practice Heroku(NodeJS)
+ - Brandon: Research on NodeJS
+ - Christopher: General Research
+ - Dongri: General Research
