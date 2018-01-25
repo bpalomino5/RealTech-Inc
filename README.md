@@ -12,6 +12,24 @@ Daniel Gurrera
 
 # Meeting Notes
 
+## Date: 1/24/18
+
+What Got Done:
+
+ - Brandon: General research regarding front-end web-apps
+ - Chris: General research regarding MAMP and Firebase
+ - Kenneth: ER progress
+ - Dongri: General Research regarding databases
+ - Daniel: General Research regarding servers
+ 
+ Tasks for each member for 1/23:
+ 
+ - Brandon: Practice Heroku and Mobile-app resources
+ - Chris: Practice using MAMP and Firebase
+ - Kenneth: Continue ER model
+ - Dongri: Research MAMP and NodeJS
+ - Daniel: Practice Heroku
+
 ## Date: 1/23/18
 
 What Got Done:
