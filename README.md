@@ -12,6 +12,24 @@ Daniel Gurrera
 
 # Meeting Notes
 
+## Date: 1/25/18
+
+What Got Done:
+
+ - Brandon: Created a Heroku app
+ - Chris: Created a Heroku app, Read about MAMP and Express
+ - Kenneth: Finished the ER model
+ - Dongri: Researched MAMP and NodeJS
+ - Daniel: Researched Database-server interaction
+ 
+ Tasks for each member for 1/26:
+ 
+ - Brandon: Review ER model and add input
+ - Chris: General Research on NodeJS
+ - Kenneth: Research NodeJS and MAMP
+ - Dongri: Review ER model and add input
+ - Daniel: Create an app through Heroku and research server requests
+
 ## Date: 1/24/18
 
 What Got Done:
@@ -22,7 +40,7 @@ What Got Done:
  - Dongri: General Research regarding databases
  - Daniel: General Research regarding servers
  
- Tasks for each member for 1/23:
+ Tasks for each member for 1/25:
  
  - Brandon: Practice Heroku and Mobile-app resources
  - Chris: Practice using MAMP and Firebase
@@ -40,7 +58,7 @@ What Got Done:
  - Dongri: Installed some necessary tools / MAMP tutorial
  - Daniel: General Research
  
- Tasks for each member for 1/23:
+ Tasks for each member for 1/24:
  
  - Brandon: Research Heroku(NodeJS)
  - Chris: Assist Kenneth with ER model
@@ -58,7 +76,7 @@ What Got Done:
  - Christopher: Researched Heroku
  - Dongri: Studied Databases/Servers (Heroku)
  
- Tasks for each member for 1/22:
+ Tasks for each member for 1/23:
  
  - Kenneth: Continue ER model / Heroku Tutorial
  - Daniel: Focus on Heroku Back-end (NodeJS) / Front-End
@@ -75,7 +93,7 @@ Goals for the First Sprint:
  - Bring everyone up to speed on all final project topics (Database/Database Tools, Servers, Database-Server interaction)
  - Decide on Host, Database, and create a Data Model
 
-Tasks for each member for 1/19:
+Tasks for each member for 1/20:
 
  - Kenneth: General Research / Start on ER model
  - Daniel: General Research
