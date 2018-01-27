@@ -12,6 +12,33 @@ Daniel Gurrera
 
 # Meeting Notes
 
+## Date: 1/26/18
+
+Sprint Two
+
+Goals for the Second Sprint:
+
+ - Set up mySQL
+ - Finish data model and create database
+ - Populate database with mockup data
+ - Implement a prototype web portal
+
+What Got Done:
+
+ - Brandon: Worked on website requirements
+ - Chris: Worked on website requirements
+ - Kenneth: Worked on website requirements
+ - Dongri: Worked on website requirements
+ - Daniel: Worked on website requirements
+ 
+ Tasks for each member for the weekend:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
 ## Date: 1/25/18
 
 What Got Done:
