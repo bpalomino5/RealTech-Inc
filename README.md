@@ -31,13 +31,13 @@ What Got Done:
  - Dongri: Worked on website requirements
  - Daniel: Worked on website requirements
  
- Tasks for each member for the weekend:
+ Tasks for the weekend:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Plan weekday goals / Relational Model
+ - Chris: Plan weekday goals / Create functions for front-end 
+ - Kenneth: Plan weekday goals 
+ - Dongri: Plan weekday goals / Work with Chris
+ - Daniel: Plan weekday goals / Website name 
 
 ## Date: 1/25/18
 
@@ -49,7 +49,7 @@ What Got Done:
  - Dongri: Researched MAMP and NodeJS
  - Daniel: Researched Database-server interaction
  
- Tasks for each member for 1/26:
+ Tasks for 1/26:
  
  - Brandon: Review ER model and add input
  - Chris: General Research on NodeJS
@@ -67,7 +67,7 @@ What Got Done:
  - Dongri: General Research regarding databases
  - Daniel: General Research regarding servers
  
- Tasks for each member for 1/25:
+ Tasks for 1/25:
  
  - Brandon: Practice Heroku and Mobile-app resources
  - Chris: Practice using MAMP and Firebase
@@ -85,7 +85,7 @@ What Got Done:
  - Dongri: Installed some necessary tools / MAMP tutorial
  - Daniel: General Research
  
- Tasks for each member for 1/24:
+ Tasks for 1/24:
  
  - Brandon: Research Heroku(NodeJS)
  - Chris: Assist Kenneth with ER model
@@ -103,7 +103,7 @@ What Got Done:
  - Christopher: Researched Heroku
  - Dongri: Studied Databases/Servers (Heroku)
  
- Tasks for each member for 1/23:
+ Tasks for 1/23:
  
  - Kenneth: Continue ER model / Heroku Tutorial
  - Daniel: Focus on Heroku Back-end (NodeJS) / Front-End
@@ -120,7 +120,7 @@ Goals for the First Sprint:
  - Bring everyone up to speed on all final project topics (Database/Database Tools, Servers, Database-Server interaction)
  - Decide on Host, Database, and create a Data Model
 
-Tasks for each member for 1/20:
+Tasks for 1/20:
 
  - Kenneth: General Research / Start on ER model
  - Daniel: General Research
