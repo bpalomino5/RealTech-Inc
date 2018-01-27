@@ -111,7 +111,7 @@ What Got Done:
  - Christopher: Research Firebase and Heroku Tutorial(NodeJS)
  - Dongri: Heroku Tutorial(NodeJS)
  
- ## Date: 1/19/18
+## Date: 1/19/18
 
 Sprint One
 
