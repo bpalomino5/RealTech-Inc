@@ -12,6 +12,24 @@ Daniel Gurrera
 
 # Meeting Notes
 
+## Date: 1/29/18
+
+What Got Done:
+
+ - Brandon: Organized team roles and created a sample database relationship chart / Updated data model
+ - Chris: Created a simple server request sample with Express
+ - Kenneth: Updated data model
+ - Dongri: Updated data model
+ - Daniel: Followed a tutorial on Express / Updated data model
+ 
+ Tasks for 1/30:
+ 
+ - Brandon: 
+ - Chris: Test server requests further
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: Create simple server request handler with Express
+
 ## Date: 1/26/18
 
 Sprint Two
