@@ -16,7 +16,7 @@ Daniel Gurrera
 
 What Got Done:
 
- - Brandon: Organized team roles and created a sample database relationship chart / Updated data model
+ - Brandon: Organized team roles and created a sample database relationship table / Updated data model
  - Chris: Created a simple server request sample with Express
  - Kenneth: Updated data model
  - Dongri: Updated data model
@@ -26,8 +26,8 @@ What Got Done:
  
  - Brandon: 
  - Chris: Test server requests further
- - Kenneth: 
- - Dongri: 
+ - Kenneth: Begin creation of database
+ - Dongri: Build database tables
  - Daniel: Create simple server request handler with Express
 
 ## Date: 1/26/18
