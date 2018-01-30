@@ -24,7 +24,7 @@ What Got Done:
  
  Tasks for 1/30:
  
- - Brandon: 
+ - Brandon: Start Web app and organize project structure
  - Chris: Test server requests further
  - Kenneth: Begin creation of database
  - Dongri: Build database tables
