@@ -24,7 +24,7 @@ What Got Done:
  
  Tasks for 1/31:
  
- - Brandon: 
+ - Brandon: Revise project set-up
  - Chris: 
  - Kenneth: 
  - Dongri: 
