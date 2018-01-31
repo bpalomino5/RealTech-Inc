@@ -12,6 +12,24 @@ Daniel Gurrera
 
 # Meeting Notes
 
+## Date: 1/30/18
+
+What Got Done:
+
+ - Brandon: Created some project set-up the group can work with
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: Planned when to do tasks for the rest of the sprint
+ 
+ Tasks for 1/31:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: Express Tutorial / Create Express Project as practice
+
 ## Date: 1/29/18
 
 What Got Done:
