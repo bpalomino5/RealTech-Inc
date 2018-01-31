@@ -17,7 +17,7 @@ Daniel Gurrera
 What Got Done:
 
  - Brandon: Created some project set-up the group can work with
- - Chris: 
+ - Chris: Researched recieving requests and getting data from database
  - Kenneth: Built a database using MAMP
  - Dongri: Built database recipe table
  - Daniel: Planned when to do tasks for the rest of the sprint
