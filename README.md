@@ -25,10 +25,10 @@ What Got Done:
  Tasks for 1/31:
  
  - Brandon: Revise project set-up
- - Chris: 
+ - Chris: Work on server requests with Daniel
  - Kenneth: Work on database with group
  - Dongri: Start connecting the database with the back end server
- - Daniel: Express Tutorial / Create Express Project as practice
+ - Daniel: Express Tutorial / Work on server requests with Chris
 
 ## Date: 1/29/18
 
