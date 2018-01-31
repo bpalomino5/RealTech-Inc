@@ -18,8 +18,8 @@ What Got Done:
 
  - Brandon: Created some project set-up the group can work with
  - Chris: 
- - Kenneth: 
- - Dongri: 
+ - Kenneth: Built a database using MAMP
+ - Dongri: Built database recipe table
  - Daniel: Planned when to do tasks for the rest of the sprint
  
  Tasks for 1/31:
