@@ -26,7 +26,7 @@ What Got Done:
  
  - Brandon: Revise project set-up
  - Chris: 
- - Kenneth: 
+ - Kenneth: Work on database with group
  - Dongri: Start connecting the database with the back end server
  - Daniel: Express Tutorial / Create Express Project as practice
 
