@@ -12,6 +12,24 @@ Daniel Gurrera
 
 # Meeting Notes
 
+## Date: 1/31/18
+
+What Got Done:
+
+ - Brandon: Worked on wep-app front-end / Worked on connecting front-end with back-end
+ - Chris: Worked on web-app front-end
+ - Kenneth: Worked database
+ - Dongri: Worked on database
+ - Daniel: Worked on database / Worked on Express back-end
+ 
+ Tasks for 2/1:
+ 
+ - Brandon: database connections to back-end
+ - Chris: Study React
+ - Kenneth: Help Dongri and populate database
+ - Dongri: Database connections
+ - Daniel: Create prototype web app
+
 ## Date: 1/30/18
 
 What Got Done:
