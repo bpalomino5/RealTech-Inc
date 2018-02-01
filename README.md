@@ -12,6 +12,42 @@ Daniel Gurrera
 
 # Meeting Notes
 
+## Date: 1/31/18
+
+What Got Done:
+
+ - Brandon: Worked on wep-app front-end / Worked on connecting front-end with back-end
+ - Chris: Worked on web-app front-end / Worked with ReactJS
+ - Kenneth: Worked database
+ - Dongri: Worked on database
+ - Daniel: Worked on database / Worked on Express back-end
+ 
+ Tasks for 2/1:
+ 
+ - Brandon: database connections to back-end
+ - Chris: Create Recipe and user functions with ReactJS
+ - Kenneth: Help Dongri and populate database
+ - Dongri: Database connections
+ - Daniel: Create prototype web app
+
+## Date: 1/30/18
+
+What Got Done:
+
+ - Brandon: Created some project set-up the group can work with
+ - Chris: Researched recieving requests and getting data from database
+ - Kenneth: Built a database using MAMP
+ - Dongri: Built database recipe table
+ - Daniel: Planned when to do tasks for the rest of the sprint
+ 
+ Tasks for 1/31:
+ 
+ - Brandon: Revise project set-up
+ - Chris: Work on server requests with Daniel
+ - Kenneth: Work on database with group
+ - Dongri: Start connecting the database with the back end server
+ - Daniel: Express Tutorial / Work on server requests with Chris
+
 ## Date: 1/29/18
 
 What Got Done:
