@@ -17,7 +17,7 @@ Daniel Gurrera
 What Got Done:
 
  - Brandon: Worked on wep-app front-end / Worked on connecting front-end with back-end
- - Chris: Worked on web-app front-end
+ - Chris: Worked on web-app front-end / Worked with ReactJS
  - Kenneth: Worked database
  - Dongri: Worked on database
  - Daniel: Worked on database / Worked on Express back-end
@@ -25,7 +25,7 @@ What Got Done:
  Tasks for 2/1:
  
  - Brandon: database connections to back-end
- - Chris: Study React
+ - Chris: Create Recipe and user functions with ReactJS
  - Kenneth: Help Dongri and populate database
  - Dongri: Database connections
  - Daniel: Create prototype web app
