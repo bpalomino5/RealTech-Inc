@@ -1,5 +1,14 @@
 Instructions to run project so far
 
+1) Go to root of project directory
+	 $ cd Recette-Sample
+
+2) To run everything well (needs unix terminal to work, not windows friendly right now)
+	 $ npm start
+
+
+
+## OLD
 1) Open two terminal screens/tabs
 
 In screen one:
