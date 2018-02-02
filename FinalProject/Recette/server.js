@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'production') {
 //   database: 'Recette'
 // });
 
-const con = mysql.createConnection({
+var con = mysql.createPool({
   host: 'us-cdbr-iron-east-05.cleardb.net',
   user: 'bd3873c3be4cfe',
   password: '50713e21',
@@ -36,21 +36,21 @@ const con = mysql.createConnection({
 });
 
 
-con.connect((err) => {
-  if(err){
-    console.log('Error connecting to Db');
-    return;
-  }
-  console.log('Connection established');
- //  con.query('SELECT * FROM recipes', (err,rows) => {
-	//   if(err) throw err;
+// con.connect((err) => {
+//   if(err){
+//     console.log('Error connecting to Db');
+//     return;
+//   }
+//   console.log('Connection established');
+//  //  con.query('SELECT * FROM recipes', (err,rows) => {
+// 	//   if(err) throw err;
 
-	//   console.log('Data received from Db:\n');
-	//   rows.forEach( (row) => {
-	//     console.log(row.name);
-	//   });
-	// });
-});
+// 	//   console.log('Data received from Db:\n');
+// 	//   rows.forEach( (row) => {
+// 	//     console.log(row.name);
+// 	//   });
+// 	// });
+// });
 
 function getRecipes(callback) {
 	var recipes = [];
@@ -66,15 +66,15 @@ function getRecipes(callback) {
 };
 
 
-process.on('SIGINT', function(){
-	console.log('killing connection');
-	con.end((err) => {
-  	// The connection is terminated gracefully
-  	// Ensures all previously enqueued queries are still
-  	// before sending a COM_QUIT packet to the MySQL server.
-	});
-	process.exit();
-});
+// process.on('SIGINT', function(){
+// 	console.log('killing connection');
+// 	con.release((err) => {
+//   	// The connection is terminated gracefully
+//   	// Ensures all previously enqueued queries are still
+//   	// before sending a COM_QUIT packet to the MySQL server.
+// 	});
+// 	process.exit();
+// });
 
 app.get('/getRecipes', function(req,res){
 	getRecipes(function(recipes){
