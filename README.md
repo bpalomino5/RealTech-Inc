@@ -20,7 +20,7 @@ What Got Done:
  - Chris: Worked on React code for Recipes
  - Kenneth: Inserted mockup data in database
  - Dongri: Inserted mockup data in database
- - Daniel: Worked on connecting the database to the server
+ - Daniel: Studied mySQL - NodeJS connection
  
  Tasks for 2/2:
  
