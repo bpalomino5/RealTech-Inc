@@ -12,6 +12,24 @@ Daniel Gurrera
 
 # Meeting Notes
 
+## Date: 2/1/18
+
+What Got Done:
+
+ - Brandon: Set-up project framework
+ - Chris: Worked on React code for Recipes
+ - Kenneth: Inserted mockup data in database
+ - Dongri: Inserted mockup data in database
+ - Daniel: Worked on connecting the database to the server
+ 
+ Tasks for 2/2:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
 ## Date: 1/31/18
 
 What Got Done:
@@ -24,7 +42,7 @@ What Got Done:
  
  Tasks for 2/1:
  
- - Brandon: database connections to back-end
+ - Brandon: Database connections to back-end
  - Chris: Create Recipe and user functions with ReactJS
  - Kenneth: Help Dongri and populate database
  - Dongri: Database connections
