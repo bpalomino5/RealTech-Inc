@@ -1,17 +1,32 @@
 import React, { Component } from 'react';
+import Client from './Client';
 
-class Todo extends React.Component {
+class Todo extends Component {
   constructor(props) {
     super(props);
-    this.state = { items: [], text: '' };
+    this.state = { items: [], text: '', data: []};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount(){
+    this.getData();
+  }
+
+  async getData(){
+    var data = await Client.getRecipes();
+    this.setState({data: data.recipes});
   }
 
   render() {
     return (
       <div>
-        <h3>TODO</h3>
+        <h3>Recipes</h3>
+        <ul>
+          {this.state.data.map(recipe => (
+            <li>{recipe}</li>
+          ))}
+        </ul>
         <TodoList items={this.state.items} />
         <form onSubmit={this.handleSubmit}>
           <input
