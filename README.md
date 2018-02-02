@@ -18,7 +18,7 @@ What Got Done:
 
  - Brandon: Set-up project framework
  - Chris: Worked on React code for Recipes
- - Kenneth: Inserted mockup data in database
+ - Kenneth: Inserted mockup data in database and wrote procedures
  - Dongri: Inserted mockup data in database
  - Daniel: Studied mySQL - NodeJS connection
  
