@@ -30,11 +30,11 @@ What Got Done:
  
  Tasks for the Weekend:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Work on an acceptable Sprint Two web-app
+ - Chris: Work on an acceptable Sprint Two web-app
+ - Kenneth: Finish a fully functional database
+ - Dongri: Finish a fully functional database
+ - Daniel: Work on an acceptable Sprint Two web-app
 
 ## Date: 2/1/18
 
