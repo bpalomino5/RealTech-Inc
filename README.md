@@ -12,6 +12,30 @@ Daniel Gurrera
 
 # Meeting Notes
 
+## Date: 2/2/18
+
+Sprint Three
+
+Goals for the Third Sprint:
+
+ - Get the website looking like a final product
+ 
+What Got Done:
+
+ - Brandon: Cover all aspects of the project code
+ - Chris: Cover all aspects of the project code
+ - Kenneth: Cover all aspects of the project code
+ - Dongri: Cover all aspects of the project code
+ - Daniel: Cover all aspects of the project code
+ 
+ Tasks for the Weekend:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
 ## Date: 2/1/18
 
 What Got Done:
@@ -24,11 +48,11 @@ What Got Done:
  
  Tasks for 2/2:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Cover all aspects of the project code
+ - Chris: Cover all aspects of the project code
+ - Kenneth: Cover all aspects of the project code
+ - Dongri: Cover all aspects of the project code
+ - Daniel: Cover all aspects of the project code
 
 ## Date: 1/31/18
 
