@@ -380,6 +380,80 @@ ALTER TABLE `recipes`
   ADD CONSTRAINT `recipes_ibfk_2` FOREIGN KEY (`origin_id`) REFERENCES `origin` (`origin_id`),
   ADD CONSTRAINT `recipes_ibfk_3` FOREIGN KEY (`style_id`) REFERENCES `style` (`style_id`);
 
+--
+-- Stored Procedures
+--
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addRecipe`(IN `creator_id` INT(100), IN `recipe_name` VARCHAR(30), IN `recipe_prep_time` TIME, IN `recipe_cooking_time` TIME, IN `recipe_origin_id` INT(20), IN `recipe_style_id` INT(20), IN `recipe_image` LONGBLOB)
+BEGIN
+  insert into recipes(user_id, name, prep_time, cooking_time, rating, origin_id, style_id, image)
+  values(creator_id, recipe_name, recipe_prep_time, recipe_cooking_time, recipe_origin_id, recipe_style_id, recipe_image);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addIngredient`(IN `recipes_id` INT(100), IN `ingredients_id` INT(30), IN `ingredient_quantity` INT(30))
+BEGIN
+  insert into has_ingredients(recipe_id, ingredient_id, quantity)
+  values(recipes_id, ingredients_id, ingredient_quantity);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `createUser`(
+  in user_username varchar(30),
+  in user_password varchar(30),
+  in user_email varchar(40),
+  in user_first varchar(20),
+  in user_last varchar(20)
+)
+BEGIN
+  insert into user_data(username,user_data.password,email,first_name,last_name)
+  values(user_username, user_password, user_email, user_first, user_last);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`‘root’`@`‘localhost’` PROCEDURE `findIngredientsByID`(IN `recipe_id` INT)
+BEGIN
+  #Returns Ingredients that the recipe is using (ID).
+  SELECT ingredient_id FROM has_ingredients where has_ingredients.recipe_id = recipe_id; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`‘root’`@`‘localhost’` PROCEDURE `getRecipeByID`(IN `recipe_id` INT)
+BEGIN
+  #This procedure gets data from the recipe table
+  SELECT name, prep_time, cooking_time, origin_id, style_id, image, rating FROM recipes where recipes.recipe_id = recipe_id; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`‘root’`@`‘localhost’` PROCEDURE `getIngredients`()
+BEGIN
+  #This procedure returns all Ingredients in the database
+  SELECT name FROM ingredients; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`‘root’`@`‘localhost’` PROCEDURE `getRecipe`()
+BEGIN
+  SELECT name, prep_time, cooking_time, origin_id, style_id, image, rating FROM recipes; # This procedure grabs information from the Recipe table.
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `newIngredient`(IN `ingredient_unit` INT(20), IN `ingredient_name` VARCHAR(30))
+BEGIN
+  insert into ingredients(name, unit_id)
+  values(ingredient_name, ingredient_unit)
+  on DUPLICATE KEY UPDATE name = name;
+END$$
+DELIMITER ;
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
