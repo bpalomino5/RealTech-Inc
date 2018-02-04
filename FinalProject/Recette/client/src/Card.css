@@ -1,7 +1,83 @@
-body, html {
-  overflow-x: hidden;
+.card {
+  width: 280px;
+  display: block;
+  margin: 60px auto;
+  box-shadow: 10px 5px 40px 20px black;
+  transition: .25s;
+}
+.card:hover {
+  box-shadow: 10px 5px 40px 20px #271580;
+  cursor: pointer;
+}
+.card:hover .button-primary {
+  transform: translate(10px, 0);
 }
 
+.card-header {
+  height: 150px;
+  width: 100%;
+  padding: 15px;
+  width: 100%;
+  background-size: cover;
+  color: #fff;
+}
+
+.card-header--title {
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.card-body {
+  padding: 15px;
+  background-color: #fff;
+  width: 100%;
+}
+
+.date {
+  font-size: 11px;
+  font-weight: 600;
+  color: grey;
+}
+
+.body-content {
+  padding-bottom: 40px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.button-primary {
+  border: none;
+  box-shadow: none;
+  font-family: inherit;
+  background-color: transparent;
+  color: #341cac;
+  font-size: 15px;
+  transition: .25s;
+}
+.button-primary i {
+  padding-right: 4px;
+}
+
+.recipe-header {
+  color: white;
+  padding: 10px;
+  padding-left: 20px;
+  font-size: 28px;
+  text-align: left;
+}
+
+/*.designer-link {
+  color: #fff;
+  text-align: center;
+  fon-size: 12px;
+  text-decoration: none;
+  display: block;
+}
+*/
+/*body, html {
+  overflow-x: hidden;
+}*/
+/*
 .app-header {
   display:block;
   padding: 30px;
@@ -45,17 +121,17 @@ body, html {
     position:absolute;
     text-align:left;
   }
-}
+}*/
 
-.app-card-list {
+/*.app-card-list {
   display:inline-block;
   width:100%;
-  float:right;
+  float:center;
   margin:0;
   min-height: 75vh;
   white-space:normal;
   overflow-x: scroll;
-  margin-top:-70px;
+  margin-top:10px;
   
   &::-webkit-scrollbar { 
     display: none; 
@@ -75,9 +151,9 @@ body, html {
         white-space: normal;
     }
   }
-}
+}*/
 
-.designer-link {
+/*.designer-link {
   display:inline-block;
   padding-top:40px;
-}
+}*/

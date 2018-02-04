@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import './Card.css';
 
-class Button extends React.Component {
+class Button extends Component {
   render() {
     return (
       <button className="button button-primary">
@@ -11,7 +12,7 @@ class Button extends React.Component {
 }
 
 
-class CardHeader extends React.Component {
+class CardHeader extends Component {
   render() {
     const { image, category } = this.props;
     var style = { 
@@ -26,16 +27,13 @@ class CardHeader extends React.Component {
 }
 
 
-class CardBody extends React.Component {
+class CardBody extends Component {
   render() {
     return (
       <div className="card-body">
         <p className="date">March 20 2015</p>
-        
-        <h2>{this.props.title}</h2>
-        
-        <p className="body-content">{this.props.text}</p>
-        
+        <h2>{this.props.title}</h2>       
+        <p className="body-content">{this.props.text}</p>        
         <Button />
       </div>
     )
@@ -43,7 +41,7 @@ class CardBody extends React.Component {
 }
 
 
-class Card extends React.Component {
+class Card extends Component {
   render() {
     return (
       <article className="card">
