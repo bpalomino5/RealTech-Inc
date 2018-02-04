@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Client from './Client';
+import StackGrid from "react-stack-grid";
+
 
 class Todo extends Component {
   constructor(props) {
@@ -22,11 +24,12 @@ class Todo extends Component {
     return (
       <div>
         <h3>Recipes</h3>
-        <ul>
+        <StackGrid
+          columnWidth={150}>
           {this.state.data.map(recipe => (
-            <li>{recipe}</li>
+            <div>{recipe}</div>
           ))}
-        </ul>
+        </StackGrid>
         <TodoList items={this.state.items} />
         <form onSubmit={this.handleSubmit}>
           <input
