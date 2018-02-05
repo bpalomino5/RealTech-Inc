@@ -14,10 +14,9 @@
 }
 
 .card-header {
-  height: 150px;
+  height: 180px;
   width: 100%;
   padding: 15px;
-  width: 100%;
   background-size: cover;
   color: #fff;
 }
@@ -28,10 +27,14 @@
 }
 
 .card-body {
-  height: 80px;
-  padding: 0px;
+  height: 50px;
+  /*padding: 0px;*/
   background-color: #fff;
   width: 100%;
+}
+
+.card-body--title {
+  text-align: center;
 }
 
 .date {
