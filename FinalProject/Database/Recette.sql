@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 05, 2018 at 07:13 AM
+-- Generation Time: Feb 05, 2018 at 07:58 AM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.8
 
@@ -192,11 +192,11 @@ INSERT INTO `recipes` (`recipe_id`, `user_id`, `name`, `prep_time`, `cooking_tim
 (8, 1, 'Scrambled Eggs', '01:00:00', '00:05:00', '4', 1, 1, 'images/eggs8.jpg'),
 (9, 1, 'Ice Cream', '01:00:00', '00:05:00', '4', 1, 2, 'images/iceCream9.jpg'),
 (10, 1, 'Kimchi', '01:00:00', '00:05:00', '3', 7, 3, 'images/kimchi10.jpg'),
-(11, 1, 'Taco', '01:00:00', '00:05:00', '4', 5, 2, ''),
-(12, 1, 'Meat Lasagna', '01:00:00', '00:05:00', '4', 1, 2, NULL),
-(13, 1, 'Fried Chicken', '01:00:00', '00:05:00', '5', 1, 4, NULL),
-(14, 1, 'Coffee', '01:00:00', '00:05:00', '5', 1, 1, NULL),
-(15, 1, 'Hot Dog', '01:00:00', '00:05:00', '4', 1, 3, NULL);
+(11, 1, 'Taco', '01:00:00', '00:05:00', '4', 5, 2, 'images/taco-11.jpg'),
+(12, 1, 'Meat Lasagna', '01:00:00', '00:05:00', '4', 1, 2, 'images/lasagna12.jpg'),
+(13, 1, 'Fried Chicken', '01:00:00', '00:05:00', '5', 1, 4, 'images/chicken13.jpg'),
+(14, 1, 'Coffee', '01:00:00', '00:05:00', '5', 1, 1, 'images/coffer14.jpg'),
+(15, 1, 'Hot Dog', '01:00:00', '00:05:00', '4', 1, 3, 'images/hotdog15.jpg');
 
 -- --------------------------------------------------------
 
@@ -446,39 +446,39 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`‘root’`@`‘localhost’` PROCEDURE `getIngredients`()
 BEGIN
-	#This procedure returns all Ingredients in the database
-	SELECT name FROM ingredients; 
+  #This procedure returns all Ingredients in the database
+  SELECT name FROM ingredients; 
 END$$
 DELIMITER ;
 
 DELIMITER $$
 CREATE DEFINER=`‘root’`@`‘localhost’` PROCEDURE `getImage`()
 BEGIN
-	#This procedure returns all Ingredients in the database
-	SELECT image_location FROM recipes; 
+  #This procedure returns all Ingredients in the database
+  SELECT image_location FROM recipes; 
 END$$
 DELIMITER ;
 
 DELIMITER $$
 CREATE DEFINER=`‘root’`@`‘localhost’` PROCEDURE `findIngredientsByID`(IN `recipe_id` INT)
 BEGIN
-	#Returns Ingredients that the recipe is using (ID).
-	SELECT ingredient_id FROM has_ingredients where has_ingredients.recipe_id = recipe_id; 
+  #Returns Ingredients that the recipe is using (ID).
+  SELECT ingredient_id FROM has_ingredients where has_ingredients.recipe_id = recipe_id; 
 END$$
 DELIMITER ;
 
 DELIMITER $$
 CREATE DEFINER=`‘root’`@`‘localhost’` PROCEDURE `getRecipeByID`(IN `recipe_id` INT)
 BEGIN
-	#This procedure gets data from the recipe table
-	SELECT name, prep_time, cooking_time, origin_id, style_id, image, rating FROM recipes where recipes.recipe_id = recipe_id; 
+  #This procedure gets data from the recipe table
+  SELECT name, prep_time, cooking_time, origin_id, style_id, image, rating FROM recipes where recipes.recipe_id = recipe_id; 
 END$$
 DELIMITER ;
 
 DELIMITER $$
 CREATE DEFINER=`‘root’`@`‘localhost’` PROCEDURE `getRecipe`()
 BEGIN
-	SELECT name, prep_time, cooking_time, origin_id, style_id, image, rating FROM recipes; # This procedure grabs information from the Recipe table.
+  SELECT name, prep_time, cooking_time, origin_id, style_id, image, rating FROM recipes; # This procedure grabs information from the Recipe table.
 END$$
 DELIMITER ;
 
@@ -490,7 +490,6 @@ BEGIN
   on DUPLICATE KEY UPDATE name = name;
 END$$
 DELIMITER ;
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
