@@ -10,6 +10,13 @@ app.set('port', (process.env.PORT || 3001));
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
+
+	var con = mysql.createPool({
+	  host: 'us-cdbr-iron-east-05.cleardb.net',
+	  user: 'bd3873c3be4cfe',
+	  password: '50713e21',
+	  database: 'heroku_c7d7094d02a13d7'
+	});
 }
 else {
 	//else running local development use local server for now
@@ -27,48 +34,9 @@ else {
 // app.use(bodyParser.urlencoded({extended:false}));
 
 //static path
-// app.use(express.static(path.join(__dirname, 'public')));
+//serving static path for images stored on server
+app.use('/images', express.static(path.join(__dirname, 'images')))
 
-// const con = mysql.createConnection({
-//   //setup up like this b/c of brew, need to change
-//   host: 'localhost',
-//   user: 'root',
-//   password: 'root',
-//   database: 'Recette'
-// });
-
-<<<<<<< HEAD
-var con = mysql.createPool({
-  host: 'us-cdbr-iron-east-05.cleardb.net',
-  user: 'bd3873c3be4cfe',
-  password: '50713e21',
-  database: 'heroku_c7d7094d02a13d7'
-});
-
-=======
-// var con = mysql.createPool({
-//   host: 'us-cdbr-iron-east-05.cleardb.net',
-//   user: 'bd3873c3be4cfe',
-//   password: '50713e21',
-//   database: 'heroku_c7d7094d02a13d7'
-// });
->>>>>>> 729f0dba30c42c7e77776879c89e5dba7e75392c
-
-// con.connect((err) => {
-//   if(err){
-//     console.log('Error connecting to Db');
-//     return;
-//   }
-//   console.log('Connection established');
-//  //  con.query('SELECT * FROM recipes', (err,rows) => {
-// 	//   if(err) throw err;
-
-// 	//   console.log('Data received from Db:\n');
-// 	//   rows.forEach( (row) => {
-// 	//     console.log(row.name);
-// 	//   });
-// 	// });
-// });
 
 function getRecipes(callback) {
 	var recipes = [];
@@ -78,38 +46,18 @@ function getRecipes(callback) {
 	  // console.log('Data received from Db:\n');
 	  rows.forEach( (row) => {
 	  	recipes.push({
-			name: row.name,
-			image: row.image_location
-		});
+				name: row.name,
+				image: row.image_location
+			});
 	  });
 	  callback(recipes);
 	});
 };
 
-function insertRecipe ()
-{
-	var sql = "INSERT INTO recipes (name, cooking_time, image_location, origin_id, prep) VALUES ("Enchiladas")";
-	con.query(sql, (err, result) )
-	
-}
-
-app.get
-
-// process.on('SIGINT', function(){
-// 	console.log('killing connection');
-// 	con.release((err) => {
-//   	// The connection is terminated gracefully
-//   	// Ensures all previously enqueued queries are still
-//   	// before sending a COM_QUIT packet to the MySQL server.
-// 	});
-// 	process.exit();
-// });
-
 app.get('/getRecipes', function(req,res){
 	getRecipes(function(recipes){
 		res.send({recipes: recipes});
 	});
-	// res.send('Hello world');
 });
 
 app.listen(app.get('port'), () => {
