@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Client from './Client';
 import StackGrid from "react-stack-grid";
 import Card from './Card';
+import { Button, Icon } from 'semantic-ui-react';
+
 
 // class Title extends Component {
 //   render() {
@@ -34,6 +36,31 @@ class Todo extends Component {
   }
 
   render() {
+    const ButtonExampleAnimated = (
+      <div>
+        <Button animated>
+          <Button.Content visible>Next</Button.Content>
+          <Button.Content hidden>
+            <Icon name='right arrow' />
+          </Button.Content>
+        </Button>
+        <Button animated='vertical'>
+          <Button.Content hidden>Shop</Button.Content>
+          <Button.Content visible>
+            <Icon name='shop' />
+          </Button.Content>
+        </Button>
+        <Button animated='fade'>
+          <Button.Content visible>
+            Sign-up for a Pro account
+          </Button.Content>
+          <Button.Content hidden>
+            $12.99 a month
+          </Button.Content>
+        </Button>
+      </div>
+    );
+
     return (
       <div>
         <h2 className="recipe-header">Recipes</h2>
@@ -69,7 +96,8 @@ class Todo extends Component {
           </div>
 
         </StackGrid>
-        */}        
+        */}
+        {ButtonExampleAnimated}       
       </div>
     );
   }

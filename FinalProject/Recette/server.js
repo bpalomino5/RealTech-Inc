@@ -11,6 +11,15 @@ app.set('port', (process.env.PORT || 3001));
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
+else {
+	//else running local development use local server for now
+	var con = mysql.createPool({
+	  host: 'localhost',
+	  user: 'root',
+	  password: 'root',
+	  database: 'Recette'
+	});
+}
 
 //support parsing of application/json type post data
 // app.use(bodyParser.json());
@@ -28,6 +37,7 @@ if (process.env.NODE_ENV === 'production') {
 //   database: 'Recette'
 // });
 
+<<<<<<< HEAD
 var con = mysql.createPool({
   host: 'us-cdbr-iron-east-05.cleardb.net',
   user: 'bd3873c3be4cfe',
@@ -35,6 +45,14 @@ var con = mysql.createPool({
   database: 'heroku_c7d7094d02a13d7'
 });
 
+=======
+// var con = mysql.createPool({
+//   host: 'us-cdbr-iron-east-05.cleardb.net',
+//   user: 'bd3873c3be4cfe',
+//   password: '50713e21',
+//   database: 'heroku_c7d7094d02a13d7'
+// });
+>>>>>>> 729f0dba30c42c7e77776879c89e5dba7e75392c
 
 // con.connect((err) => {
 //   if(err){
