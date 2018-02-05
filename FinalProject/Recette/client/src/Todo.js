@@ -79,6 +79,9 @@ class Todo extends Component {
   render() {
     return (
       <div>
+        <div className="images">
+          <img src={'images/burger3.jpg'} />
+        </div>
         <h2 className="recipe-header">Recipes</h2>
         <StackGrid
           columnWidth={300}>

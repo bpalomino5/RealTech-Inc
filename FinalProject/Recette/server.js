@@ -10,6 +10,13 @@ app.set('port', (process.env.PORT || 3001));
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
+
+	var con = mysql.createPool({
+	  host: 'us-cdbr-iron-east-05.cleardb.net',
+	  user: 'bd3873c3be4cfe',
+	  password: '50713e21',
+	  database: 'heroku_c7d7094d02a13d7'
+	});
 }
 
 //support parsing of application/json type post data
@@ -20,6 +27,9 @@ if (process.env.NODE_ENV === 'production') {
 //static path
 // app.use(express.static(path.join(__dirname, 'public')));
 
+//serving static path for images stored on server
+app.use('/images', express.static(path.join(__dirname, 'images')))
+
 // const con = mysql.createConnection({
 //   //setup up like this b/c of brew, need to change
 //   host: 'localhost',
@@ -29,11 +39,18 @@ if (process.env.NODE_ENV === 'production') {
 // });
 
 var con = mysql.createPool({
-  host: 'us-cdbr-iron-east-05.cleardb.net',
-  user: 'bd3873c3be4cfe',
-  password: '50713e21',
-  database: 'heroku_c7d7094d02a13d7'
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'Recette'
 });
+
+// var con = mysql.createPool({
+//   host: 'us-cdbr-iron-east-05.cleardb.net',
+//   user: 'bd3873c3be4cfe',
+//   password: '50713e21',
+//   database: 'heroku_c7d7094d02a13d7'
+// });
 
 
 // con.connect((err) => {
