@@ -76,7 +76,10 @@ function getRecipes(callback) {
 
 	  // console.log('Data received from Db:\n');
 	  rows.forEach( (row) => {
-	  	recipes.push(row.name);
+	  	recipes.push({
+			name: row.name,
+			image: row.image_location
+		});
 	  });
 	  callback(recipes);
 	});
