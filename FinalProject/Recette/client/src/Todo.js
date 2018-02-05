@@ -79,7 +79,7 @@ class Todo extends Component {
   render() {
     return (
       <div>
-        <h3 className="recipe-header">Recipes</h3>
+        <h2 className="recipe-header">Recipes</h2>
         <StackGrid
           columnWidth={300}>
           {this.state.data.map(recipe => (

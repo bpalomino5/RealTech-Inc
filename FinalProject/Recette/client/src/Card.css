@@ -6,7 +6,7 @@
   transition: .25s;
 }
 .card:hover {
-  box-shadow: 10px 5px 40px 20px #271580;
+  box-shadow: 10px 5px 40px 20px grey;
   cursor: pointer;
 }
 .card:hover .button-primary {
@@ -28,7 +28,8 @@
 }
 
 .card-body {
-  padding: 15px;
+  height: 80px;
+  padding: 0px;
   background-color: #fff;
   width: 100%;
 }
