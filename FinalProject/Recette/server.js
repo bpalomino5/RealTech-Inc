@@ -25,8 +25,6 @@ if (process.env.NODE_ENV === 'production') {
 // app.use(bodyParser.urlencoded({extended:false}));
 
 //static path
-// app.use(express.static(path.join(__dirname, 'public')));
-
 //serving static path for images stored on server
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
@@ -53,22 +51,6 @@ var con = mysql.createPool({
 // });
 
 
-// con.connect((err) => {
-//   if(err){
-//     console.log('Error connecting to Db');
-//     return;
-//   }
-//   console.log('Connection established');
-//  //  con.query('SELECT * FROM recipes', (err,rows) => {
-// 	//   if(err) throw err;
-
-// 	//   console.log('Data received from Db:\n');
-// 	//   rows.forEach( (row) => {
-// 	//     console.log(row.name);
-// 	//   });
-// 	// });
-// });
-
 function getRecipes(callback) {
 	var recipes = [];
 	con.query('SELECT * FROM recipes', (err,rows) => {
@@ -77,30 +59,18 @@ function getRecipes(callback) {
 	  // console.log('Data received from Db:\n');
 	  rows.forEach( (row) => {
 	  	recipes.push({
-			name: row.name,
-			image: row.image_location
-		});
+				name: row.name,
+				image: row.image_location
+			});
 	  });
 	  callback(recipes);
 	});
 };
 
-
-// process.on('SIGINT', function(){
-// 	console.log('killing connection');
-// 	con.release((err) => {
-//   	// The connection is terminated gracefully
-//   	// Ensures all previously enqueued queries are still
-//   	// before sending a COM_QUIT packet to the MySQL server.
-// 	});
-// 	process.exit();
-// });
-
 app.get('/getRecipes', function(req,res){
 	getRecipes(function(recipes){
 		res.send({recipes: recipes});
 	});
-	// res.send('Hello world');
 });
 
 app.listen(app.get('port'), () => {

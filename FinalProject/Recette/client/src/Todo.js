@@ -3,45 +3,6 @@ import Client from './Client';
 import StackGrid from "react-stack-grid";
 import Card from './Card';
 
-const PostsData = [
-  {
-    "category": "News",
-    "title": "CNN Acquire BEME",
-    "text": "CNN purchased Casey Neistat's Beme app for $25million.",
-    "image": "https://source.unsplash.com/user/erondu/600x400"
-  },
-  {
-    "category": "Travel",
-    "title": "Nomad Lifestyle",
-    "text": "Learn our tips and tricks on living a nomadic lifestyle",
-    "image": "https://source.unsplash.com/user/_vickyreyes/600x400"
-  },
-  {
-    "category": "Development",
-    "title": "React and the WP-API",
-    "text": "The first ever decoupled starter theme for React & the WP-API",
-    "image": "https://source.unsplash.com/user/ilyapavlov/600x400"
-  },
-  {
-    "category": "News",
-    "title": "CNN Acquire BEME",
-    "text": "CNN purchased Casey Neistat's Beme app for $25million.",
-    "image": "https://source.unsplash.com/user/erondu/600x400"
-  },
-  {
-    "category": "Travel",
-    "title": "Nomad Lifestyle",
-    "text": "Learn our tips and tricks on living a nomadic lifestyle",
-    "image": "https://source.unsplash.com/user/_vickyreyes/600x400"
-  },
-  {
-    "category": "Development",
-    "title": "React and the WP-API",
-    "text": "The first ever decoupled starter theme for React & the WP-API",
-    "image": "https://source.unsplash.com/user/ilyapavlov/600x400"
-  }
-]
-
 // class Title extends Component {
 //   render() {
 //     return <section className="app-title">
@@ -58,13 +19,9 @@ const PostsData = [
 class Todo extends Component {
   constructor(props) {
     super(props);
-    this.state = { items: [], text: '', data: [], posts: {}};
+    this.state = { items: [], text: '', data: []};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentWillMount(){
-    this.setState({posts: PostsData});
   }
 
   componentDidMount(){
@@ -79,15 +36,14 @@ class Todo extends Component {
   render() {
     return (
       <div>
-        <div className="images">
-          <img src={'images/burger3.jpg'} />
-        </div>
         <h2 className="recipe-header">Recipes</h2>
         <StackGrid
           columnWidth={300}>
           {this.state.data.map(recipe => (
-            // <div>{recipe}</div>
-            <Card details={{title:recipe,text:'description'}}/>
+            <Card
+              onClick={() => console.log(recipe.name)}
+              details={{title:recipe.name, image:recipe.image}}
+            />
           ))}
         </StackGrid>
         

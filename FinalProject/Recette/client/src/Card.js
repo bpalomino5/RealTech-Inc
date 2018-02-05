@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './Card.css';
 
-class Button extends Component {
-  render() {
-    return (
-      <button className="button button-primary">
-        <i className="fa fa-chevron-right"></i> Find out more
-      </button>
-    )
-  }
-}
+// class Button extends Component {
+//   render() {
+//     return (
+//       <button className="button button-primary">
+//         <i className="fa fa-chevron-right"></i> Find out more
+//       </button>
+//     )
+//   }
+// }
 
 
 class CardHeader extends Component {
@@ -42,7 +42,7 @@ class CardBody extends Component {
 class Card extends Component {
   render() {
     return (
-      <article className="card">
+      <article className="card" onClick={this.props.onClick}>
         <CardHeader category={this.props.details.category} image={this.props.details.image}/>
         <CardBody title={this.props.details.title} text={this.props.details.text}/>
       </article>
