@@ -23,16 +23,16 @@ What Got Done:
  - Brandon: Created home page UI
  - Chris: Helped with home page UI
  - Kenneth: Made adjustments to database
- - Dongri: 
+ - Dongri: Helped with database
  - Daniel: Made adjustments to server request handler
  
  Tasks for 2/6:
  
  - Brandon: Get everyone credentials to access database
- - Chris: 
+ - Chris: Handle requests for getting specific recipe data
  - Kenneth: Flush out database values 
- - Dongri: 
- - Daniel: 
+ - Dongri: Entering recipes into the database
+ - Daniel: Handle requests for getting specific recipe data
 
 ## Date: 2/2/18
 
