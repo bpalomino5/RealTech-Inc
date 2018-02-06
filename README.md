@@ -16,6 +16,24 @@ https://damp-garden-53847.herokuapp.com/
 
 # Meeting Notes
 
+## Date: 2/5/18
+
+What Got Done:
+
+ - Brandon: Created home page UI
+ - Chris: Helped with home page UI
+ - Kenneth: Made adjustments to database
+ - Dongri: 
+ - Daniel: Made adjustments to server request handler
+ 
+ Tasks for 2/6:
+ 
+ - Brandon: Get everyone credentials to access database
+ - Chris: 
+ - Kenneth: Flush out database values 
+ - Dongri: 
+ - Daniel: 
+
 ## Date: 2/2/18
 
 Sprint Three
