@@ -16,6 +16,24 @@ https://damp-garden-53847.herokuapp.com/
 
 # Meeting Notes
 
+## Date: 2/6/18
+
+What Got Done:
+
+ - Brandon: Gave everyone access to main database
+ - Chris: Worked on generic request handler for recipe info
+ - Kenneth: Flushed out database values
+ - Dongri: Entered recipes data into database
+ - Daniel: Worked on generic request handler for recipe info
+ 
+ Tasks for 2/7:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
 ## Date: 2/5/18
 
 What Got Done:
