@@ -44,14 +44,14 @@ function getRecipeByID(callback, ID) {
 		if (err) throw err;
 			// console.log("Successfully retrieved Recipe by ID");
 			recipeInfo.push( {
-				name: 			result.name;
-				prep_time: 		prep_time;
-				cooking_time:   cooking_time;
-				origin_id:      origin_id;
-				style_id:       style_id;
-				image:          image;
-				rating:         rating;
-			})
+				name: 			result.name
+				prep_time: 		prep_time
+				cooking_time:   cooking_time
+				origin_id:      origin_id
+				style_id:       style_id
+				image:          image
+				rating:         rating
+			});
 		});
 	callback(recipeInfo);
 };
