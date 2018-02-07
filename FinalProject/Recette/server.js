@@ -63,7 +63,7 @@ function getRecipes(callback) {
 		rows.forEach( (row) => {
 	  		recipes.push({
 				name: row.name,
-				image: row.image_location
+				image: row.image_location // may need to change to row.image;
 			});
 	 	});
 		callback(recipes);
