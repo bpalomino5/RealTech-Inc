@@ -30,9 +30,9 @@ What Got Done:
  
  - Brandon: 
  - Chris: 
- - Kenneth: 
+ - Kenneth: Continue flushing out database values
  - Dongri: 
- - Daniel: 
+ - Daniel: Finish up some server request handling
 
 ## Date: 2/5/18
 
