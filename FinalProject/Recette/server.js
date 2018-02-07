@@ -45,7 +45,6 @@ else {
 //serving static path for images stored on server
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
-
 function getRecipeByID(ID, callback) {
 	var recipeInfo = {};
 	var sql = 'SELECT name, prep_time, cooking_time, origin_id, style_id, image_location, rating FROM recipes where recipes.recipe_id = ' + ID; // ID receieved from User Request, concatenate with sql command

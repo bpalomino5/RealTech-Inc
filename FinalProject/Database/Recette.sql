@@ -432,36 +432,6 @@ INSERT INTO `unit` (`unit_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `unit`
---
-
-CREATE TABLE `unit` (
-  `unit_id` int(20) NOT NULL,
-  `name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `unit`
---
-
-INSERT INTO `unit` (`unit_id`, `name`) VALUES
-(3, 'cup'),
-(12, 'fluid oz'),
-(7, 'gallon'),
-(11, 'grams'),
-(13, 'kilogram'),
-(6, 'liter'),
-(10, 'milliliter'),
-(9, 'ounces'),
-(4, 'pint'),
-(8, 'pound'),
-(5, 'quart'),
-(2, 'tablespoon'),
-(1, 'teaspoon');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `user_data`
 --
 
@@ -593,11 +563,6 @@ ALTER TABLE `style`
 --
 ALTER TABLE `unit`
   MODIFY `unit_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
---
--- AUTO_INCREMENT for table `unit`
---
-ALTER TABLE `unit`
-  MODIFY `unit_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `user_data`
 --
