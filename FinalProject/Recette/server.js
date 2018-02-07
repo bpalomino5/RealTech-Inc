@@ -37,20 +37,24 @@ else {
 //serving static path for images stored on server
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
+function getRecipeByID(ID) {
+	var recipeInfo = [];
+	
+};
 
 function getRecipes(callback) {
 	var recipes = [];
-	con.query('SELECT * FROM recipes', (err,rows) => {
-	  if(err) throw err;
+	con.query('SELECT * FROM recipes LIMIT 0, 29', (err,rows) => {
+		if(err) throw err;
 
-	  // console.log('Data received from Db:\n');
-	  rows.forEach( (row) => {
-	  	recipes.push({
+		// console.log('Data received from Db:\n');
+		rows.forEach( (row) => {
+	  		recipes.push({
 				name: row.name,
 				image: row.image_location
 			});
-	  });
-	  callback(recipes);
+	 	});
+		callback(recipes);
 	});
 };
 
