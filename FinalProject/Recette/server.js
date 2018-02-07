@@ -37,9 +37,10 @@ else {
 //serving static path for images stored on server
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
-function getRecipeByID(ID) {
+function getRecipeByID(callback, ID) {
 	var recipeInfo = [];
 	
+	callback(recipeInfo);
 };
 
 function getRecipes(callback) {
@@ -57,6 +58,12 @@ function getRecipes(callback) {
 		callback(recipes);
 	});
 };
+
+app.get('/getRecipeByID', function(req,res){
+	getRecipeByID(function(recipeInfo){
+		res.send({recipeInfo: recipeInfo});
+	});
+});
 
 app.get('/getRecipes', function(req,res){
 	getRecipes(function(recipes){
