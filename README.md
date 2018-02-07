@@ -28,10 +28,10 @@ What Got Done:
  
  Tasks for 2/7:
  
- - Brandon: 
- - Chris: 
+ - Brandon: Work on UI for displaying individual recipe info
+ - Chris: Input Recipes to the database
  - Kenneth: Continue flushing out database values
- - Dongri: 
+ - Dongri: Take React tutorials
  - Daniel: Finish up some server request handling
 
 ## Date: 2/5/18
