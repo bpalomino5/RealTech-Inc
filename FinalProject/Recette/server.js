@@ -39,7 +39,20 @@ app.use('/images', express.static(path.join(__dirname, 'images')))
 
 function getRecipeByID(callback, ID) {
 	var recipeInfo = [];
-	
+	var sql = 'SELECT name, prep_time, cooking_time, origin_id, style_id, image, rating FROM recipes where recipes.recipe_id = ' + ID; // ID receieved from User Request, concatenate with sql command
+	con.query( sql, (err, result) => {
+		if (err) throw err;
+			// console.log("Successfully retrieved Recipe by ID");
+			recipeInfo.push( {
+				name: 			result.name;
+				prep_time: 		prep_time;
+				cooking_time:   cooking_time;
+				origin_id:      origin_id;
+				style_id:       style_id;
+				image:          image;
+				rating:         rating;
+			})
+		});
 	callback(recipeInfo);
 };
 
