@@ -20,11 +20,19 @@ if (process.env.NODE_ENV === 'production') {
 }
 else {
 	//else running local development use local server for now
+	// var con = mysql.createPool({
+	//   host: 'localhost',
+	//   user: 'root',
+	//   password: 'root',
+	//   database: 'sitepoint'
+	// });
+
+	//will be using hosted db from now on, not local
 	var con = mysql.createPool({
-	  host: 'localhost',
-	  user: 'root',
-	  password: 'root',
-	  database: 'Recette'
+	  host: 'us-cdbr-iron-east-05.cleardb.net',
+	  user: 'bd3873c3be4cfe',
+	  password: '50713e21',
+	  database: 'heroku_c7d7094d02a13d7'
 	});
 }
 
@@ -37,37 +45,38 @@ else {
 //serving static path for images stored on server
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
-// const con = mysql.createConnection({
-//   //setup up like this b/c of brew, need to change
-//   host: 'localhost',
-//   user: 'root',
-//   password: 'root',
-//   database: 'Recette'
-// });
 
-// var con = mysql.createPool({
-//   host: 'us-cdbr-iron-east-05.cleardb.net',
-//   user: 'bd3873c3be4cfe',
-//   password: '50713e21',
-//   database: 'heroku_c7d7094d02a13d7'
-// });
-
+function getRecipeByID(ID, callback) {
+	var recipeInfo = {};
+	var sql = 'SELECT name, prep_time, cooking_time, origin_id, style_id, image_location, rating FROM recipes where recipes.recipe_id = ' + ID; // ID receieved from User Request, concatenate with sql command
+	con.query( sql, (err, rows) => {
+		if (err) throw err;
+			callback(rows[0]);	//returns the only one row
+	});
+};
 
 function getRecipes(callback) {
 	var recipes = [];
-	con.query('SELECT * FROM recipes', (err,rows) => {
-	  if(err) throw err;
+	con.query('SELECT * FROM recipes LIMIT 0, 29', (err,rows) => {
+		if(err) throw err;
 
-	  // console.log('Data received from Db:\n');
-	  rows.forEach( (row) => {
-	  	recipes.push({
+		// console.log('Data received from Db:\n');
+		rows.forEach( (row) => {
+	  		recipes.push({
 				name: row.name,
-				image: row.image_location
+				image: row.image_location // may need to change to row.image;
 			});
-	  });
-	  callback(recipes);
+	 	});
+		callback(recipes);
 	});
 };
+
+app.get('/getRecipeByID', function(req,res){
+	// res.send({params:req.query.id});
+	getRecipeByID(req.query.id, function(recipeInfo){
+		res.send({recipeInfo: recipeInfo});
+	});
+});
 
 app.get('/getRecipes', function(req,res){
 	getRecipes(function(recipes){
