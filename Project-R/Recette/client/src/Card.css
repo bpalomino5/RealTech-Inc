@@ -27,14 +27,14 @@
 }
 
 .card-body {
-  height: 50px;
-  /*padding: 0px;*/
+  height: 60px;
   background-color: #fff;
   width: 100%;
 }
 
 .card-body--title {
   text-align: center;
+  /*padding-bottom: 10px;*/
 }
 
 .date {

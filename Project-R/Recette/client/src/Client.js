@@ -1,11 +1,19 @@
 /* eslint-disable no-undef */
-function search(query, cb) {
-  return fetch(`api/food?q=${query}`, {
-    accept: "application/json"
+// function search(query, cb) {
+//   return fetch(`api/food?q=${query}`, {
+//     accept: "application/json"
+//   })
+//     .then(checkStatus)
+//     .then(parseJSON)
+//     .then(cb);
+// }
+
+function getRecipeByID(id){
+  return fetch(`/getRecipeByID?id=${encodeURIComponent(id)}`, {
+    accept: 'application/json'
   })
     .then(checkStatus)
-    .then(parseJSON)
-    .then(cb);
+    .then(parseJSON);
 }
 
 function getRecipes(){
@@ -31,5 +39,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { search, getRecipes };
+const Client = { getRecipes, getRecipeByID };
 export default Client;

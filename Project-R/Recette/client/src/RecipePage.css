@@ -1,0 +1,7 @@
+.body {
+	margin: 15px;
+}
+
+.display-linebreak {
+  white-space: pre-line;
+}
