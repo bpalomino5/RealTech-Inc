@@ -16,6 +16,68 @@ https://damp-garden-53847.herokuapp.com/
 
 # Meeting Notes
 
+## Date: 2/9/18
+
+Goals for Fourth Sprint:
+
+ - Implement Searching
+ - Fix Recipe Display Page
+ - Add user experience
+ - User profile page (Real name, user name, bio, preferences, activity, myRecipes)
+ - Fix Database values
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for the weekend:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
+## Date: 2/8/18
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for 2/9:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
+## Date: 2/7/18
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for 2/8:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
 ## Date: 2/6/18
 
 What Got Done:
