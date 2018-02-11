@@ -28,19 +28,19 @@ Goals for Fourth Sprint:
 
 What Got Done:
 
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Began creating sub-tasks for user experience implementation
+ - Chris: Read into routing for website
+ - Kenneth: Fixed mock up data
+ - Dongri: Fixed mock up data
+ - Daniel: Organized weekend tasks
  
  Tasks for the weekend:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Break up user implementation into smaller portions
+ - Chris: Read up on routing to improve website
+ - Kenneth: Fix database values
+ - Dongri: Fix database values
+ - Daniel: Work on pushing ingredients to recipe page
 
 ## Date: 2/8/18
 
