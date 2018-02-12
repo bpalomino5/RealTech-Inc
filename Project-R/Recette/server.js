@@ -39,7 +39,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')))
 
 function getRecipeByID(ID, callback) {
 	var recipeInfo = {};
-	var sql = 'SELECT name, prep_time, cooking_time, origin_id, style_id, image_location, rating, instruction FROM recipes where recipes.recipe_id = ' + ID; // ID receieved from User Request, concatenate with sql command
+	var sql = 'SELECT name, prep_time, cooking_time, style_id, image_location, instruction FROM recipes where recipes.recipe_id = ' + ID; // ID receieved from User Request, concatenate with sql command
 	con.query( sql, (err, rows) => {
 		if (err) throw err;
 		callback(rows[0]);	//returns the only one row
@@ -53,7 +53,7 @@ function getRecipes(callback) {
 		rows.forEach( (row) => {
 	  		recipes.push({
 	  		id: row.recipe_id,
-				name: row.name,
+				title: row.name,
 				image: row.image_location // may need to change to row.image;
 			});
 	 	});

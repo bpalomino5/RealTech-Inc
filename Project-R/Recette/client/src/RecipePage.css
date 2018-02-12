@@ -1,7 +1,41 @@
+.container {
+	background-color: #222;
+}
+
+.topSection {
+	background-color: white;
+  height: 150px;
+  padding: 0px;
+}
+
 .body {
-	margin: 15px;
+	padding-top: 20px;
 }
 
 .display-linebreak {
   white-space: pre-line;
+  color: white;
+}
+
+.imageContainer {
+	width: 100%;
+	background-color: #E7E8E7;
+	height: 390px;	
+	overflow: hidden;
+}
+
+img {
+	display: block;
+	width: 50%;
+	height: 390px;
+	margin: 0 auto;
+}
+
+.infoSection {
+	padding: 50px;
+}
+
+.textStyle {
+	text-align: center;
+	color: white;
 }

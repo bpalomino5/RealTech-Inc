@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './RecipePage.css';
 import Client from './Client';
-import { Image } from 'semantic-ui-react';
+import { Divider } from 'semantic-ui-react';
 
 
 class RecipePage extends Component{
@@ -27,14 +27,20 @@ class RecipePage extends Component{
 
 	render() {
 		return(
-			<div className='body'>
+			<div className='container'>
+				<div className='topSection'>
+				</div>
 				{this.state.data.map(item => (
-					<div>
-						<h2>{item.name}</h2>
-						<Image src={`../../${item.image_location}`} size='large'/>
-						<br></br>
-						<h3>Instructions</h3>
-						<div className='display-linebreak'>{item.instruction}</div>
+					<div className='body'>
+						<h1 className='textStyle'>{item.name}</h1>
+						<div className='imageContainer'>
+							<img src={`../../${item.image_location}`} alt="recipe example" align="middle" />
+						</div>
+						<div className='infoSection'>
+					   	<h2 className='textStyle'>Directions </h2>
+					    <Divider />
+							<div className='display-linebreak'>{item.instruction}</div>
+						</div>
 					</div>
 				))}
 			</div>
