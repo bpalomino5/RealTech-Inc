@@ -32,7 +32,7 @@ What Got Done:
  - Chris: Read into routing for website
  - Kenneth: Fixed mock up data
  - Dongri: Fixed mock up data
- - Daniel: Organized weekend tasks
+ - Daniel: Gave weekend tasks to prepare for next Sprint
  
  Tasks for the weekend:
  
@@ -46,35 +46,35 @@ What Got Done:
 
 What Got Done:
 
- - Brandon: 
- - Chris: 
- - Kenneth: 
+ - Brandon: Fixed query for getting recipes
+ - Chris: Studied Navigator
+ - Kenneth: Fixed some mock up data
  - Dongri: 
  - Daniel: 
  
  Tasks for 2/9:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Wait for new Sprint goal
+ - Chris: Wait for new Sprint goal
+ - Kenneth: Wait for new Sprint goal
+ - Dongri: Wait for new Sprint goal
+ - Daniel: Wait for new Sprint goal
 
 ## Date: 2/7/18
 
 What Got Done:
 
- - Brandon: 
- - Chris: 
- - Kenneth: 
+ - Brandon: Created a UI for displaying recipe info
+ - Chris: Studied routing functions
+ - Kenneth: Made adjustments to database
  - Dongri: 
  - Daniel: 
  
  Tasks for 2/8:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
+ - Brandon: Fix query for getting recipes from database
+ - Chris: Study Navigator
+ - Kenneth: Fix some mock up data
  - Dongri: 
  - Daniel: 
 
@@ -91,7 +91,7 @@ What Got Done:
  Tasks for 2/7:
  
  - Brandon: Work on UI for displaying individual recipe info
- - Chris: Input Recipes to the database
+ - Chris: Study routing functions
  - Kenneth: Continue flushing out database values
  - Dongri: Take React tutorials
  - Daniel: Finish up some server request handling
