@@ -50,7 +50,7 @@ What Got Done:
  - Chris: Studied Navigator
  - Kenneth: Fixed some mock up data
  - Dongri: 
- - Daniel: 
+ - Daniel: Wrote the SRS
  
  Tasks for 2/9:
  
@@ -68,7 +68,7 @@ What Got Done:
  - Chris: Studied routing functions
  - Kenneth: Made adjustments to database
  - Dongri: 
- - Daniel: 
+ - Daniel: Added query for getting recipe info
  
  Tasks for 2/8:
  
@@ -76,7 +76,7 @@ What Got Done:
  - Chris: Study Navigator
  - Kenneth: Fix some mock up data
  - Dongri: 
- - Daniel: 
+ - Daniel: Look into additional queries needed
 
 ## Date: 2/6/18
 
