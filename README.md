@@ -49,7 +49,7 @@ What Got Done:
  - Brandon: Fixed query for getting recipes
  - Chris: Studied Navigator
  - Kenneth: Fixed some mock up data
- - Dongri: 
+ - Dongri: Fixed some mock up data
  - Daniel: Wrote the SRS
  
  Tasks for 2/9:
@@ -67,7 +67,7 @@ What Got Done:
  - Brandon: Created a UI for displaying recipe info
  - Chris: Studied routing functions
  - Kenneth: Made adjustments to database
- - Dongri: 
+ - Dongri: Adjusted databse values
  - Daniel: Added query for getting recipe info
  
  Tasks for 2/8:
@@ -75,7 +75,7 @@ What Got Done:
  - Brandon: Fix query for getting recipes from database
  - Chris: Study Navigator
  - Kenneth: Fix some mock up data
- - Dongri: 
+ - Dongri: Fix mock up data
  - Daniel: Look into additional queries needed
 
 ## Date: 2/6/18
