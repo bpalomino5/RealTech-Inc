@@ -1,4 +1,4 @@
-﻿http://allrecipes.com/recipe/231783/tao-hummus/?internalSource=rotd&referringId=76&referringContentType=recipe%20hub
+http://allrecipes.com/recipe/231783/tao-hummus/?internalSource=rotd&referringId=76&referringContentType=recipe%20hub
 http://allrecipes.com/recipe/237491/loaded-queso-fundido/?internalSource=staff%20pick&referringId=76&referringContentType=recipe%20hub
 http://allrecipes.com/recipe/246256/bacon-jalapeno-popper-puffs/?internalSource=staff%20pick&referringId=76&referringContentType=recipe%20hub
 http://allrecipes.com/recipe/51147/super-nachos/?internalSource=staff%20pick&referringId=76&referringContentType=recipe%20hub
@@ -8,3 +8,14 @@ http://allrecipes.com/recipe/237835/big-rays-mexican-monkey-bread/?internalSourc
 http://allrecipes.com/recipe/231170/baked-crab-and-artichoke-dip/?internalSource=staff%20pick&referringId=76&referringContentType=recipe%20hub
 http://allrecipes.com/recipe/234476/cheesy-burrito-game-day-dip/?internalSource=staff%20pick&referringId=76&referringContentType=recipe%20hub
 http://allrecipes.com/recipe/14231/guacamole/?internalSource=hub%20recipe&referringId=76&referringContentType=recipe%20hub
+---------------Newly Added-------------------------
+http://allrecipes.com/recipe/10813/best-chocolate-chip-cookies/?internalSource=hub%20recipe&referringContentType=search%20results&clickId=cardslot%202
+http://allrecipes.com/recipe/219634/chef-johns-french-fries/?internalSource=hub%20recipe&referringContentType=search%20results&clickId=cardslot%202
+http://allrecipes.com/recipe/142220/sun-dried-tomato-and-blue-cheese-burgers/?internalSource=rotd&referringId=473&referringContentType=recipe%20hub
+http://allrecipes.com/recipe/222582/baked-spaghetti/?internalSource=hub%20recipe&referringContentType=search%20results&clickId=cardslot%202
+--------------------------------------NEWLY ADDED-----------------------------------------
+http://allrecipes.com/recipe/229559/best-ever-meat-loaf/?internalSource=hub%20recipe&referringContentType=search%20results&clickId=cardslot%201
+http://allrecipes.com/recipe/245946/healthy-turmeric-chicken-stew/?internalSource=staff%20pick&referringId=84&referringContentType=recipe%20hub
+http://allrecipes.com/recipe/259262/acai-smoothie-bowl/?internalSource=staff%20pick&referringId=84&referringContentType=recipe%20hub
+http://allrecipes.com/recipe/51283/maple-salmon/?internalSource=hub%20recipe&referringId=84&referringContentType=recipe%20hub
+http://allrecipes.com/recipe/189477/california-roll-sushi/?internalSource=staff%20pick&referringId=227&referringContentType=recipe%20hub
