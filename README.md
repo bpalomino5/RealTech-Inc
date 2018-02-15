@@ -16,6 +16,60 @@ https://damp-garden-53847.herokuapp.com/
 
 # Meeting Notes
 
+## Date: 2/14/18
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for 2/15:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
+## Date: 2/13/18
+
+What Got Done:
+
+ - Brandon: Worked on user page UI
+ - Chris: Fixed some UI issues on recipe page
+ - Kenneth: Fixed some database values with Dongri
+ - Dongri: Fixed some database values with Kenneth
+ - Daniel: Worked on querying for ingredient info
+ 
+ Tasks for 2/14:
+ 
+ - Brandon: Work on user page UI
+ - Chris: Work on user page UI
+ - Kenneth: Enter recipes into database
+ - Dongri: Fix some values on database
+ - Daniel: Work on creating users and logging in
+
+## Date: 2/12/18
+
+What Got Done:
+
+ - Brandon: Created sub tasks for each member to do
+ - Chris: Worked on UI for cards
+ - Kenneth: Enetered more recipes
+ - Dongri: Entered more recipes
+ - Daniel: Made entering recipes easier
+ 
+ Tasks for 2/13:
+ 
+ - Brandon: Work on UI for user page
+ - Chris: Look into sub-queries
+ - Kenneth: Fix some database values
+ - Dongri: Fix some database values
+ - Daniel: Look into sub-queries
+
 ## Date: 2/9/18
 
 Goals for Fourth Sprint:
