@@ -10,7 +10,7 @@ module.exports = {
 
 			rows.forEach( (row) => {
 		  		recipes.push({
-		  		id: row.recipe_id,
+		  			id: row.recipe_id,
 					title: row.name,
 					image: row.image_location // may need to change to row.image;
 				});
