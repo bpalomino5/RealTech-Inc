@@ -1,5 +1,6 @@
 var db = require('./DBPoolConnection.js')
 var connectionPool = db.getPool();
+var bcrypt = require('bcrypt');
 
 module.exports = {
 	getRecipes:function(callback) {
@@ -38,5 +39,27 @@ module.exports = {
 			});
 			callback(ingredients);
 		})
+	},
+	function createUser(user_name, user_password, user_email, callback) {
+ 		var existingUser = false;
+ 		connectionPool.query('SELECT username FROM user_data', (err, rows) => {
+ 			if(err) throw err;
+ 			rows.forEach( (row) => {
+ 				if(row.username == user_name)
+ 				{
+ 					existingUser = true;
+ 					callback(0, "User already exists.");
+ 				}
+ 			});
+ 		});
+
+ 		if (!existingUser)
+ 		{
+			var hash = bcrypt.hashSync(user_password, 10);
+ 			connectionPool.query('INSERT INTO user_data (username, password, email) VALUES (user_name, hash, user_email)', function(err, result) {
+ 				if (err) throw err;
+ 				callback(1, "User was added.");
+ 			});
+ 		}
 	},
 }

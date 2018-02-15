@@ -40,37 +40,11 @@ app.get('/getRecipes', function(req,res){
 	})
 });
 
-//Create user should be POST i.e. app.post
-// app.post('/createUser', function(req,res){
-	//call functionality using serverFunctions
-	//serverFunctions.createUser()
-// 	createUser(req.query.user_name, req.query.user_password, req.query.user_email, function(status){
-// 		res.send({status: status});
-// 	});
-// });
-
-//THIS needs to be implemented in serverFunctions.js
-// function createUser(user_name, user_password, user_email, callback) {
-// 	var existingUser = false;
-// 	connectionPool.query('SELECT username FROM user_data', (err, rows) => {
-// 		if(err) throw err;
-// 		rows.forEach( (row) => {
-// 			if(row.username == user_name)
-// 			{
-// 				existingUser = true;
-// 				callback(0, "User already exists.");
-// 			}
-// 		});
-// 	});
-
-// 	if (!existingUser)
-// 	{
-// 		connectionPool.query('INSERT INTO user_data (username, password, email) VALUES (user_name, user_password, user_email)', function(err, result) {
-// 			if (err) throw err;
-// 			callback(1, "User was added.");
-// 		});
-// 	}
-// };
+app.post('/createUser', function(req,res){
+ 	serverFunctions.createUser(req.query.user_name, req.query.user_password, req.query.user_email, function(status){
+ 		res.send({status: status});
+ 	});
+});
 
 app.listen(app.get('port'), () => {
   console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
