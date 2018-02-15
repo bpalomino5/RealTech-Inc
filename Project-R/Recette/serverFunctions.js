@@ -9,8 +9,8 @@ module.exports = {
 				throw err;
 
 			rows.forEach( (row) => {
-		  		recipes.push({
-		  			id: row.recipe_id,
+		  	recipes.push({
+		  		id: row.recipe_id,
 					title: row.name,
 					image: row.image_location // may need to change to row.image;
 				});
@@ -24,5 +24,19 @@ module.exports = {
 			if (err) throw err;
 			callback(rows[0]);	//returns the only one row
 		});
+	},
+	getIngredients:function(ID,callback) {
+		var ingredients = [];	
+		var sql = 'Select has_ingredients.quantity, ingredients.name From has_ingredients inner join ingredients on has_ingredients.ingredient_id=ingredients.ingredient_id where has_ingredients.recipe_id ='+ ID;
+		connectionPool.query(sql, (err, rows) => {
+			if (err) throw err;
+			rows.forEach( (row) => {
+				ingredients.push({
+					name: row.name,
+					quantity: row.quantity
+				});
+			});
+			callback(ingredients);
+		})
 	},
 }
