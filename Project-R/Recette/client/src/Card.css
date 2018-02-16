@@ -62,102 +62,21 @@
   padding-right: 4px;
 }
 
+.headerContainer {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
 .recipe-header {
-  color: white;
-  padding: 10px;
-  padding-left: 20px;
+  display: flex;
+  flex: 1;
+  align-self: flex-start;
+  padding-left: 10px;
+}
+
+.recipe-header h2 {
   font-size: 28px;
-  text-align: left;
+  color: white;
 }
-
-/*.designer-link {
-  color: #fff;
-  text-align: center;
-  fon-size: 12px;
-  text-decoration: none;
-  display: block;
-}
-*/
-/*body, html {
-  overflow-x: hidden;
-}*/
-/*
-.app-header {
-  display:block;
-  padding: 30px;
-}
-
-.app-title {
-  display:inline-block;
-  width: 100%;
-  margin: 80px 0 0 0;
-  float:left;
-  position:relative;
-  color:#fff;
-  
-  @media(min-width:768px) {
-    width: 20%;
-    margin: 280px 0 0 0;
-  }
-  
-  h1 {
-    font-size: 52px;
-    margin: 0;
-  }
-  
-  p {
-    font-weight: 200;
-    opacity: .5;
-  }
-  
-}
-
-.app-title-content {
-  position:relative;
-  top:50%;
-  left: 50%;
-  width:100%;
-  text-align:center;
-  transform:translate(-50%, -50%);
-  
-  @media(min-width:768px) {
-    width:auto;
-    position:absolute;
-    text-align:left;
-  }
-}*/
-
-/*.app-card-list {
-  display:inline-block;
-  width:100%;
-  float:center;
-  margin:0;
-  min-height: 75vh;
-  white-space:normal;
-  overflow-x: scroll;
-  margin-top:10px;
-  
-  &::-webkit-scrollbar { 
-    display: none; 
-  }
-  
-  @media(min-width:768px) {
-      width:80%;
-      white-space:nowrap;
-      margin-top: 0;
-  }
-  
-  .card {
-    margin: 60px 30px;
-    display: inline-block;
-    
-    .card-body {
-        white-space: normal;
-    }
-  }
-}*/
-
-/*.designer-link {
-  display:inline-block;
-  padding-top:40px;
-}*/
