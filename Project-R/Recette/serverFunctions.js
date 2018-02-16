@@ -23,6 +23,16 @@ module.exports = {
 			}
 		})
 	},
+	login:function(user_name, user_password, callback){
+		connectionPool.query('IF EXISTS SELECT username, password FROM user_data WHERE user_data.username = '+ user_name, function(err, rows){
+			if(err) 
+				module.exports.printError("login", "SQL Query Error: could not find user", err, {})
+			bcrypt.compare(user_password, rows[0].password, function(err, res) {
+				callback(1, "Username and Password is correct.", bcrypt.hashSync(rows[0].username, 10));
+			});
+			callback(-1, "Passwords did not match", 0);
+		});
+	},
 	addComment:function(data,callback){
 		module.exports.getTime(function(time){
 			var query_insert_comment = "INSERT INTO recipe_comments (user_id, recipe_id, text) VALUES ("+ data.user_id +","+ data.recipe_id +",'"+data.message+"')";
@@ -75,7 +85,7 @@ module.exports = {
 			callback(ingredients);
 		})
 	},
-	createUser:function(user_name, user_password, user_email, callback) {
+	createUser:function(user_name, user_password, user_email, firstname, lastname, callback) {
  		var existingUser = false;
  		connectionPool.query('SELECT username FROM user_data', (err, rows) => {
  			if(err) throw err;
@@ -90,12 +100,28 @@ module.exports = {
 
  		if (!existingUser)
  		{
-			var hash = bcrypt.hashSync(user_password, 10);
- 			connectionPool.query('INSERT INTO user_data (username, password, email) VALUES (user_name, hash, user_email)', function(err, result) {
- 				if (err) throw err;
- 				callback(1, "User was added.");
- 			});
+			bcrypt.hash(user_password, 10, function(err, hash) {
+				connectionPool.query('INSERT INTO user_data (username, password, email, first_name, last_name) VALUES (user_name, hash, user_email, firstname, lastname)', function(err, result) {
+ 					if (err) throw err;
+ 					callback(1, "User was added.");
+ 				});
+			});
  		}
+	},
+	updateBio:function(bio, session_id, callback) {
+		var user = 0;
+		connectionPool.query('SELECT * FROM user_data', function(err, rows) {
+			rows.forEach( (row) => {
+				bcrypt.compare(row.username, session_id, function(err, res) {
+					user = row.user_id;
+				});
+			});
+		});
+		
+		connectionPool.query('UPDATE user_data SET biography = ' + bio + ' WHERE user_id =' + user, function (err, result) {
+			if (err) throw err;
+			callback(1, "User bio updated.");
+		});
 	},
 	getComments:function(ID, callback){
 		var comments = [];

@@ -53,10 +53,22 @@ app.get('/getComments', function(req,res){
 });
 
 // app.post('/createUser', function(req,res){
-//  	serverFunctions.createUser(req.query.user_name, req.query.user_password, req.query.user_email, function(status){
+//  	serverFunctions.createUser(req.query.user_name, req.query.user_password, req.query.user_email, req.query.firstname, req.query.lastname, function(status){
 //  		res.send({status: status});
 //  	})
 // });
+
+app.post('/updateBio', function(req,res){
+	serverFunctions.updateBio(req.query.bio, req.query.session_id, function(status){
+		res.send({status: status});
+	})
+});
+
+app.post('/login', function(req,res){
+	serverFunctins.login(req.query.user_name, req.query.user_password, function(status){
+		res.send({status: status});
+	})
+});
 
 app.post('/addComment', function(req,res) {
 	gen.checkReqSpecific(req,res,function(data){
