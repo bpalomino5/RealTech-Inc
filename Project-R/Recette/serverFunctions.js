@@ -63,7 +63,7 @@ module.exports = {
 	},
 	getIngredients:function(ID, callback) {
 		var ingredients = [];	
-		var sql = 'SELECT has_ingredients.quantity, ingredients.name FROM has_ingredients inner join ingredients on has_ingredients.ingredient_id=ingredients.ingredient_id where has_ingredients.recipe_id ='+ ID;
+		var sql = 'SELECT has_ingredients.quantity, ingredients.name FROM has_ingredients INNER JOIN ingredients ON has_ingredients.ingredient_id=ingredients.ingredient_id WHERE has_ingredients.recipe_id ='+ ID;
 		connectionPool.query(sql, (err, rows) => {
 			if (err) throw err;
 			rows.forEach( (row) => {
@@ -99,7 +99,7 @@ module.exports = {
 	},
 	getComments:function(ID, callback){
 		var comments = [];
-		var sql = 'SELECT recipe_comments.text, user_data.first_name FROM recipe_comments inner join user_data on recipe_comments.user_id=user_data.user_id where recipe_comments.recipe_id = ' + ID;
+		var sql = 'SELECT recipe_comments.text, user_data.first_name FROM recipe_comments INNER JOIN user_data ON recipe_comments.user_id=user_data.user_id WHERE recipe_comments.recipe_id ='+ ID;
 		connectionPool.query(sql, (err, rows) => {
 			if(err) 
 				module.exports.printError("getComments", "SQL Query Error: getting comments",err,{ID:ID})
