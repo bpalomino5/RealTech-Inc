@@ -6,18 +6,19 @@ import { Search, Button, Icon } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 
-
 class Todo extends Component {
   constructor(props) {
     super(props);
     this.state = { 
       data: [], 
       redirect: false, 
+      page: null,
       recipe_id: null,
       isLoading: false,
       results: [],
       value: ''
     };
+    this.AttemptLogin=this.AttemptLogin.bind(this);
   }
 
   componentWillMount(){
@@ -53,9 +54,17 @@ class Todo extends Component {
     }, 500)
   }
 
+  AttemptLogin(){
+    this.setState({redirect: true, page: 1});
+  }
+
   render() {
     if(this.state.redirect) {
-      return <Redirect push to={{pathname: `/recipes/${this.state.recipe_id}`, state: { recipe_id: this.state.recipe_id}}} />;
+      if(this.state.page === 1){
+        return <Redirect push to={{pathname: `/login`}} />;
+      }
+      else
+        return <Redirect push to={{pathname: `/recipes/${this.state.recipe_id}`, state: { recipe_id: this.state.recipe_id}}} />;
     }
 
     const ButtonExampleAnimated = (
@@ -89,6 +98,7 @@ class Todo extends Component {
           <div className='recipe-header'>
             <h2>Recipes</h2>
           </div>
+          <Button color='teal' onClick={this.AttemptLogin}>SIGN UP / LOG IN</Button>
           <Search 
             loading={this.state.isLoading}
             onResultSelect={this.handleResultSelect}

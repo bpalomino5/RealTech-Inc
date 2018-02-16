@@ -23,15 +23,21 @@ module.exports = {
 			}
 		})
 	},
-	login:function(user_name, user_password, callback){
-		connectionPool.query('IF EXISTS SELECT username, password FROM user_data WHERE user_data.username = '+ user_name, function(err, rows){
-			if(err) 
-				module.exports.printError("login", "SQL Query Error: could not find user", err, {})
-			bcrypt.compare(user_password, rows[0].password, function(err, res) {
-				callback(1, "Username and Password is correct.", bcrypt.hashSync(rows[0].username, 10));
-			});
-			callback(-1, "Passwords did not match", 0);
-		});
+	login:function(data, callback){
+		var query = "Select * from user_data where user_data.username = '" + data.user_name + "'";
+		connectionPool.query(query, function(err, result){
+			if(err){
+				module.exports.printError("login", "SQL Query Error: could not find user", err, {user_name:data.user_name,user_password:data.user_password})
+				callback("An Internal Error Occured")
+			}
+			bcrypt.compare(data.user_password, result[0].password).then(function(res){
+				if(res){
+					callback(false,false)
+				}
+				else
+					callback(false,"Invalid password")
+			})
+		})
 	},
 	addComment:function(data,callback){
 		module.exports.getTime(function(time){

@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Todo from './Todo';
 import RecipePage from './RecipePage';
+import LoginForm from './LoginPage';
 import { Route } from 'react-router-dom';
 
 //this is the home screen
@@ -24,6 +25,7 @@ class App extends Component {
       <div>
         <Route exact path="/" component={Home}/>
         <Route path="/recipes/:id" component={RecipePage} />
+        <Route path="/login" component={LoginForm} />
       </div>
     );
   }

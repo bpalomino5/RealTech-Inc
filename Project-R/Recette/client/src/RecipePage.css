@@ -4,7 +4,7 @@
 
 .topSection {
 	background-color: white;
-  height: 150px;
+  /*height: 150px;*/
   padding: 0px;
 }
 
@@ -19,7 +19,7 @@
 
 .imageContainer {
 	width: 100%;
-	background-color: #E7E8E7;
+	background-color: #FBFAF8;
 	height: 390px;	
 	overflow: hidden;
 }
@@ -38,4 +38,14 @@ img {
 .textStyle {
 	text-align: center;
 	color: white;
+}
+
+.ingredientTextStyle {
+	text-align: left;
+	color: white;
+}
+
+.commentSection {
+	background-color: #FBFAF8;
+	padding: 50px;
 }

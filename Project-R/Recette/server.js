@@ -7,6 +7,7 @@ var gen = require('./generalFunctions.js');
 var serverFunctions = require('./serverFunctions.js');
 var db = require('./DBPoolConnection.js');
 var connectionPool = db.getPool();
+var action = require('./actionFunctions.js');
 
 //server continues to run if any exception occurs, will print error instead of exiting
 process.on('uncaughtException', function(err){
@@ -58,15 +59,15 @@ app.get('/getComments', function(req,res){
 //  	})
 // });
 
-app.post('/updateBio', function(req,res){
-	serverFunctions.updateBio(req.query.bio, req.query.session_id, function(status){
-		res.send({status: status});
-	})
-});
+// app.post('/updateBio', function(req,res){
+// 	serverFunctions.updateBio(req.query.bio, req.query.session_id, function(status){
+// 		res.send({status: status});
+// 	})
+// });
 
 app.post('/login', function(req,res){
-	serverFunctins.login(req.query.user_name, req.query.user_password, function(status){
-		res.send({status: status});
+	action.loginUser(req.body,res,function(message,data){
+		gen.validResponse(res,message,data)
 	})
 });
 
