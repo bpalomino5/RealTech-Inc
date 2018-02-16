@@ -3,9 +3,15 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var mysql = require('mysql');
 
-var serverFunctions = require('./serverFunctions.js')
-var db = require('./DBPoolConnection.js')
+var gen = require('./generalFunctions.js');
+var serverFunctions = require('./serverFunctions.js');
+var db = require('./DBPoolConnection.js');
 var connectionPool = db.getPool();
+
+//server continues to run if any exception occurs, will print error instead of exiting
+process.on('uncaughtException', function(err){
+	serverFunctions.printError("Error occured","An undefined error in runtime",err,null)
+});
 
 var app = express();
 
@@ -46,16 +52,22 @@ app.get('/getComments', function(req,res){
 	})
 });
 
-app.post('/createUser', function(req,res){
- 	serverFunctions.createUser(req.query.user_name, req.query.user_password, req.query.user_email, function(status){
- 		res.send({status: status});
- 	})
-});
+// app.post('/createUser', function(req,res){
+//  	serverFunctions.createUser(req.query.user_name, req.query.user_password, req.query.user_email, function(status){
+//  		res.send({status: status});
+//  	})
+// });
 
 app.post('/addComment', function(req,res) {
-	serverFunctions.addComment(req.query.user_id, req.query.message, req.query.recipe_id, function(status){
-		res.send({status: status});
-	});
+	gen.checkReqSpecific(req,res,function(data){
+		serverFunctions.addComment(data,function(err){
+			if(err){
+				gen.structuralError(res, "Sorry!, An Error Occured")
+			}
+			else
+				gen.validResponse(res, "Comment has been recorded")
+		})
+	})
 });
 
 app.listen(app.get('port'), () => {
