@@ -26,9 +26,9 @@ module.exports = {
 			callback(rows[0]);	//returns the only one row
 		});
 	},
-	getIngredients:function(ID,callback) {
+	getIngredients:function(ID, callback) {
 		var ingredients = [];	
-		var sql = 'Select has_ingredients.quantity, ingredients.name From has_ingredients inner join ingredients on has_ingredients.ingredient_id=ingredients.ingredient_id where has_ingredients.recipe_id ='+ ID;
+		var sql = 'SELECT has_ingredients.quantity, ingredients.name FROM has_ingredients inner join ingredients on has_ingredients.ingredient_id=ingredients.ingredient_id where has_ingredients.recipe_id ='+ ID;
 		connectionPool.query(sql, (err, rows) => {
 			if (err) throw err;
 			rows.forEach( (row) => {
@@ -40,7 +40,7 @@ module.exports = {
 			callback(ingredients);
 		})
 	},
-	function createUser(user_name, user_password, user_email, callback) {
+	createUser:function(user_name, user_password, user_email, callback) {
  		var existingUser = false;
  		connectionPool.query('SELECT username FROM user_data', (err, rows) => {
  			if(err) throw err;
@@ -61,5 +61,24 @@ module.exports = {
  				callback(1, "User was added.");
  			});
  		}
+	},
+	getComments:function(ID, callback){
+		var comments = [];
+		var sql = 'SELECT recipe_comments.text, user_data.first_name FROM recipe_comments inner join user_data on recipe_comments.user_id=user_data.user_id where recipe_comments.recipe_id = ' + ID;
+		connectionPool.query(sql, (err, rows) => {
+			if(err) throw err;
+			rows.forEach( (row) => {
+				comments.push({
+					user: row.first_name,
+					comment: row.text
+				});
+			});
+		});
+	},
+	addComment:function(user, message, recipe, callback){
+		connectionPool.query('INSERT INTO recipe_comments (user_id, recipe_id, text) VALUES (user, recipe, message)', function(err, result) {
+			if(err) throw err;
+			callback(1, "Message was added.");
+		});
 	},
 }

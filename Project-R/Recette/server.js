@@ -40,10 +40,22 @@ app.get('/getRecipes', function(req,res){
 	})
 });
 
+app.get('/getComments', function(req,res){
+	serverFunctions.getComments(req.query.recipe_id, function(comments){
+		res.json({comments: comments});
+	})
+});
+
 app.post('/createUser', function(req,res){
  	serverFunctions.createUser(req.query.user_name, req.query.user_password, req.query.user_email, function(status){
  		res.send({status: status});
- 	});
+ 	})
+});
+
+app.post('/addComment', function(req,res) {
+	serverFunctions.addComment(req.query.user_id, req.query.message, req.query.recipe_id, function(status){
+		res.send({status: status});
+	});
 });
 
 app.listen(app.get('port'), () => {
