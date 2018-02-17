@@ -54,7 +54,7 @@ app.get('/getComments', function(req,res){
 });
 
 // app.post('/createUser', function(req,res){
-//  	serverFunctions.createUser(req.query.user_name, req.query.user_password, req.query.user_email, req.query.firstname, req.query.lastname, function(status){
+//  	serverFunctions.createUser(req.body.user_name, req.body.user_password, req.query.user_email, req.query.firstname, req.query.lastname, function(status){
 //  		res.send({status: status});
 //  	})
 // });

@@ -112,7 +112,7 @@ class RecipePage extends Component{
 										<h2 className='textStyle'>Ingredients</h2>
 										<Divider />
 										{item.ingredients.map(i => (
-											<div className='ingredientTextStyle'>{i.quantity} - {i.name}</div>
+											<div className='ingredientTextStyle'>{i.quantity} {i.unit_name} {i.name}</div>
 										))}
 									</Segment>
 								</Grid.Column>

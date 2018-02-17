@@ -79,13 +79,16 @@ module.exports = {
 	},
 	getIngredients:function(ID, callback) {
 		var ingredients = [];	
-		var sql = 'SELECT has_ingredients.quantity, ingredients.name FROM has_ingredients INNER JOIN ingredients ON has_ingredients.ingredient_id=ingredients.ingredient_id WHERE has_ingredients.recipe_id ='+ ID;
+		var sql = 'SELECT has_ingredients.quantity, unit.unit_name, ingredients.name FROM has_ingredients INNER JOIN ingredients ON has_ingredients.ingredient_id=ingredients.ingredient_id inner join unit on has_ingredients.unit_id=unit.unit_id WHERE has_ingredients.recipe_id ='+ ID;
 		connectionPool.query(sql, (err, rows) => {
 			if (err) throw err;
 			rows.forEach( (row) => {
+				if(parseInt(row.quantity)>1) row.unit_name=row.unit_name.concat('s');
+				
 				ingredients.push({
 					name: row.name,
-					quantity: row.quantity
+					quantity: row.quantity,
+					unit_name: row.unit_name
 				});
 			});
 			callback(ingredients);
