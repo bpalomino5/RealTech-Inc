@@ -16,6 +16,140 @@ https://damp-garden-53847.herokuapp.com/
 
 # Meeting Notes
 
+## Date: 2/15/18
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for 2/16:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
+## Date: 2/14/18
+
+What Got Done:
+
+ - Brandon: Worked on fixing some server handles
+ - Chris: Worked on user page UI
+ - Kenneth: Fixed some database values and add recipes
+ - Dongri: Added some recipes
+ - Daniel: Worked on request handling
+ 
+ Tasks for 2/15:
+ 
+ - Brandon: Work on User functions
+ - Chris: Work on user UI
+ - Kenneth: Fix some database values
+ - Dongri: Add some recipes
+ - Daniel: Add addition request handling
+
+## Date: 2/13/18
+
+What Got Done:
+
+ - Brandon: Worked on user page UI
+ - Chris: Fixed some UI issues on recipe page
+ - Kenneth: Fixed some database values with Dongri
+ - Dongri: Fixed some database values with Kenneth
+ - Daniel: Worked on querying for ingredient info
+ 
+ Tasks for 2/14:
+ 
+ - Brandon: Work on user page UI
+ - Chris: Work on user page UI
+ - Kenneth: Enter recipes into database
+ - Dongri: Fix some values on database
+ - Daniel: Work on creating users and logging in
+
+## Date: 2/12/18
+
+What Got Done:
+
+ - Brandon: Created sub tasks for each member to do
+ - Chris: Worked on UI for cards
+ - Kenneth: Enetered more recipes
+ - Dongri: Entered more recipes
+ - Daniel: Made entering recipes easier
+ 
+ Tasks for 2/13:
+ 
+ - Brandon: Work on UI for user page
+ - Chris: Look into sub-queries
+ - Kenneth: Fix some database values
+ - Dongri: Fix some database values
+ - Daniel: Look into sub-queries
+
+## Date: 2/9/18
+
+Goals for Fourth Sprint:
+
+ - Implement Searching
+ - Fix Recipe Display Page
+ - Add user experience
+ - User profile page (Real name, user name, bio, preferences, activity, myRecipes)
+ - Fix Database values
+
+What Got Done:
+
+ - Brandon: Began creating sub-tasks for user experience implementation
+ - Chris: Read into routing for website
+ - Kenneth: Fixed mock up data
+ - Dongri: Fixed mock up data
+ - Daniel: Gave weekend tasks to prepare for next Sprint
+ 
+ Tasks for the weekend:
+ 
+ - Brandon: Break up user implementation into smaller portions
+ - Chris: Read up on routing to improve website
+ - Kenneth: Fix database values
+ - Dongri: Fix database values
+ - Daniel: Work on pushing ingredients to recipe page
+
+## Date: 2/8/18
+
+What Got Done:
+
+ - Brandon: Fixed query for getting recipes
+ - Chris: Studied Navigator
+ - Kenneth: Fixed some mock up data
+ - Dongri: Fixed some mock up data
+ - Daniel: Wrote the SRS
+ 
+ Tasks for 2/9:
+ 
+ - Brandon: Wait for new Sprint goal
+ - Chris: Wait for new Sprint goal
+ - Kenneth: Wait for new Sprint goal
+ - Dongri: Wait for new Sprint goal
+ - Daniel: Wait for new Sprint goal
+
+## Date: 2/7/18
+
+What Got Done:
+
+ - Brandon: Created a UI for displaying recipe info
+ - Chris: Studied routing functions
+ - Kenneth: Made adjustments to database
+ - Dongri: Adjusted databse values
+ - Daniel: Added query for getting recipe info
+ 
+ Tasks for 2/8:
+ 
+ - Brandon: Fix query for getting recipes from database
+ - Chris: Study Navigator
+ - Kenneth: Fix some mock up data
+ - Dongri: Fix mock up data
+ - Daniel: Look into additional queries needed
+
 ## Date: 2/6/18
 
 What Got Done:
@@ -29,7 +163,7 @@ What Got Done:
  Tasks for 2/7:
  
  - Brandon: Work on UI for displaying individual recipe info
- - Chris: Input Recipes to the database
+ - Chris: Study routing functions
  - Kenneth: Continue flushing out database values
  - Dongri: Take React tutorials
  - Daniel: Finish up some server request handling
