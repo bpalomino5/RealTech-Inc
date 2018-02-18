@@ -53,17 +53,17 @@ app.get('/getComments', function(req,res){
 	})
 });
 
-// app.post('/createUser', function(req,res){
-//  	serverFunctions.createUser(req.body.user_name, req.body.user_password, req.query.user_email, req.query.firstname, req.query.lastname, function(status){
-//  		res.send({status: status});
-//  	})
-// });
-
 // app.post('/updateBio', function(req,res){
 // 	serverFunctions.updateBio(req.query.bio, req.query.session_id, function(status){
 // 		res.send({status: status});
 // 	})
 // });
+
+app.post('/createUser', function(req,res){
+	action.createUser(req.body, res, function(message){
+		gen.validResponse(res,message)
+	})
+})
 
 app.post('/login', function(req,res){
 	action.loginUser(req.body,res,function(message,data){
@@ -73,12 +73,8 @@ app.post('/login', function(req,res){
 
 app.post('/addComment', function(req,res) {
 	gen.checkReqSpecific(req,res,function(data){
-		serverFunctions.addComment(data,function(err){
-			if(err){
-				gen.structuralError(res, "Sorry!, An Error Occured")
-			}
-			else
-				gen.validResponse(res, "Comment has been recorded")
+		action.addComment(data,res,function(message){
+			gen.validResponse(res,message)
 		})
 	})
 });

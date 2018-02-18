@@ -11,7 +11,8 @@
     "bcrypt": "^1.0.3",
     "express": "^4.16.2",
     "mysql": "^2.15.0",
-    "nodemon": "^1.15.0"
+    "nodemon": "^1.15.0",
+    "randomstring": "^1.1.5"
   },
   "scripts": {
     "lint": "eslint .",

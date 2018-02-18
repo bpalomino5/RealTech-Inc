@@ -3,24 +3,66 @@ var connectionPool = db.getPool();
 var bcrypt = require('bcrypt');
 
 module.exports = {
-	getUserData:function(rec, user_id, callback){
-		var getUserData = "Select * from user_data where user_id = " + user_id;
-		connectionPool.query(getUserData, function(err, result){
+	checkUsername:function(user_name, callback){
+		var query = "Select * from user_data where user_data.username = '" + user_name + "'";
+		connectionPool.query(query, function(err, results){
 			if(err){
-				module.exports.printError("getUserData","SQL Query Error: getting user data based on user_id",err, {user_id:user_id})
-				callback("An interal error occured")
+				module.exports.printError("login", "SQL Query Error: selecting user from user_data", err, {user_name:user_name})
+				callback("An Internal Error Occured")
 			}
-			else{
-				if(result.length === 0){
-					if(rec){
-						module.exports.printError("getUserData","Parameter Error: invalid user_id",null,{user_id:user_id})
-					}
-					callback(false, 'Invalid User ID')
+			if(results.length !=0){
+				callback(false, "Username is taken");
+			}
+			else
+				callback(false,false)
+		})
+	},
+	createUser:function(data,callback){
+		bcrypt.hash(data.user_password, 10, function(password_err,hash){
+			if(password_err){
+				module.exports.printError("createUser","Bcrypt Error: error hashing password",password_err,data)
+				callback("An Internal Error Occured")
+			}
+			//store hash in db
+			var query = "INSERT INTO user_data (username, password, email, first_name, last_name) VALUES ('" + data.user_name + "','" + hash + "','" + data.user_email + "','" + data.firstname + "','" + data.lastname + "')";
+			connectionPool.query(query, function(err,result){
+				if(err){
+					module.exports.printError("createUser", "SQL Query Error: could not add user", err, data)
+					callback('Could not add user')
 				}
 				else{
-					callback(false,false,result[0])
+					callback(false,false)
 				}
+			})
+		});
+	},
+	getUserData:function(user_id, callback){
+		var query = "Select * from is_loggedin where user_id = " + user_id;
+		connectionPool.query(query, function(err, results){
+			if(err){
+				module.exports.printError("getUserData", "SQL Query Error: could not get data from is_loggedin",err,{user_id:user_id})
+				callback("An Internal Error Occured")
 			}
+			if(results.length==0){
+				module.exports.printError("getUserData", "Internal Error: querying for userdata without being logged in",err,{user_id:user_id})
+				callback(false,"User is not logged in")
+			}
+			else
+				callback(false,false,results[0])
+		})
+	},
+	checkLogins(user_id, callback){
+		var query = "Select * from is_loggedin where user_id = " + user_id;
+		connectionPool.query(query, function(err, results){
+			if(err){
+				module.exports.printError("checkLogins", "SQL Query Error: could not get data from is_loggedin",err,{user_id:user_id})
+				callback("An Internal Error Occured")
+			}
+			if(results.length != 0){
+				callback(false,"User is already logged in")
+			}
+			else
+				callback(false,false)
 		})
 	},
 	login:function(data, callback){
@@ -44,9 +86,20 @@ module.exports = {
 					callback(false, 'invalid password')
 				}
 				else{
-					callback(false,false)
+					callback(false,false, results[0].user_id)
 				}
 			})
+		})
+	},
+	storeLoginToken:function(data, callback){
+		var query = "INSERT INTO is_loggedin (user_id, user_token) VALUES (" + data.user_id + ",'"+ data.user_token + "')";
+		connectionPool.query(query, function(err, results){
+			if(err){
+				module.exports.printError("storeLoginToken","SQL Query Error: could not insert token into is_loggedin",err,data)
+				callback("An internal Error Occured")
+			}
+			else
+				callback(false,false)
 		})
 	},
 	addComment:function(data,callback){
@@ -58,7 +111,7 @@ module.exports = {
 					callback("An Internal Error Occured")
 				}
 				else
-					callback(false)
+					callback(false,false)
 			})
 		})
 	},
@@ -103,29 +156,6 @@ module.exports = {
 			});
 			callback(ingredients);
 		})
-	},
-	createUser:function(user_name, user_password, user_email, firstname, lastname, callback) {
- 		var existingUser = false;
- 		connectionPool.query('SELECT username FROM user_data', (err, rows) => {
- 			if(err) throw err;
- 			rows.forEach( (row) => {
- 				if(row.username == user_name)
- 				{
- 					existingUser = true;
- 					callback(0, "User already exists.");
- 				}
- 			});
- 		});
-
- 		if (!existingUser)
- 		{
-			bcrypt.hash(user_password, 10, function(err, hash) {
-				connectionPool.query('INSERT INTO user_data (username, password, email, first_name, last_name) VALUES (user_name, hash, user_email, firstname, lastname)', function(err, result) {
- 					if (err) throw err;
- 					callback(1, "User was added.");
- 				});
-			});
- 		}
 	},
 	updateBio:function(bio, session_id, callback) {
 		var user = 0;
