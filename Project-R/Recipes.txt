@@ -11,7 +11,12 @@ http://allrecipes.com/recipe/14231/guacamole/?internalSource=hub%20recipe&referr
 http://allrecipes.com/recipe/10813/best-chocolate-chip-cookies/?internalSource=hub%20recipe&referringContentType=search%20results&clickId=cardslot%202
 http://allrecipes.com/recipe/219634/chef-johns-french-fries/?internalSource=hub%20recipe&referringContentType=search%20results&clickId=cardslot%202
 http://allrecipes.com/recipe/142220/sun-dried-tomato-and-blue-cheese-burgers/?internalSource=rotd&referringId=473&referringContentType=recipe%20hub
-http://allrecipes.com/recipe/222582/baked-spaghetti/?internalSource=hub%20recipe&referringContentType=search%20results&clickId=cardslot%202
+http://allrecipes.com/recipe/222582/baked-spaghetti/?
+http://allrecipes.com/recipe/218542/shanghai-noodle-salad/?internalSource=streams&referringId=530&referringContentType=recipe%20hub&clickId=st_trending_b
+http://allrecipes.com/recipe/230818/pork-fried-rice/?internalSource=hub%20recipe&referringContentType=search%20results&clickId=cardslot%201
+http://allrecipes.com/recipe/88309/whole-grain-waffles/?internalSource=hub%20recipe&referringContentType=search%20results&clickId=cardslot%202
+http://allrecipes.com/recipe/57459/oven-scrambled-eggs/?internalSource=hub%20recipe&referringContentType=search%20results&clickId=cardslot%201
+internalSource=hub%20recipe&referringContentType=search%20results&clickId=cardslot%202
 http://allrecipes.com/recipe/229559/best-ever-meat-loaf/?internalSource=hub%20recipe&referringContentType=search%20results&clickId=cardslot%201
 http://allrecipes.com/recipe/245946/healthy-turmeric-chicken-stew/?internalSource=staff%20pick&referringId=84&referringContentType=recipe%20hub
 http://allrecipes.com/recipe/259262/acai-smoothie-bowl/?internalSource=staff%20pick&referringId=84&referringContentType=recipe%20hub
