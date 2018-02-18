@@ -25,17 +25,27 @@ module.exports = {
 	},
 	login:function(data, callback){
 		var query = "Select * from user_data where user_data.username = '" + data.user_name + "'";
-		connectionPool.query(query, function(err, result){
+		connectionPool.query(query, function(err, results){
 			if(err){
-				module.exports.printError("login", "SQL Query Error: could not find user", err, {user_name:data.user_name,user_password:data.user_password})
+				module.exports.printError("login", "SQL Query Error: could not find user", err, data)
 				callback("An Internal Error Occured")
 			}
-			bcrypt.compare(data.user_password, result[0].password).then(function(res){
-				if(res){
+			if(results.length==0){
+				module.exports.printError("login", "Parameter Error: invalid username",null,data)
+				callback(false, "Invalid username");
+			}
+			bcrypt.compare(data.user_password, results[0].password, function(password_err,result){
+				if(password_err){
+					module.exports.printError("login","Bcrypt Error: error comparing passwords",password_err,data)
+					callback("An Internal Error Occured")
+				}
+				else if(result == false){
+					module.exports.printError("login","Parameter Error: invalid password",null,data)
+					callback(false, 'invalid password')
+				}
+				else{
 					callback(false,false)
 				}
-				else
-					callback(false,"Invalid password")
 			})
 		})
 	},
