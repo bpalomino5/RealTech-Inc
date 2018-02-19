@@ -4,6 +4,7 @@ import './App.css';
 import Todo from './Todo';
 import RecipePage from './RecipePage';
 import LoginForm from './LoginPage';
+import SignUpForm from './SignUpPage';
 import { Route } from 'react-router-dom';
 
 //this is the home screen
@@ -19,6 +20,7 @@ const Home = () => (
   </div>
 )
 
+
 class App extends Component {
   render() {
     return (
@@ -26,9 +28,11 @@ class App extends Component {
         <Route exact path="/" component={Home}/>
         <Route path="/recipes/:id" component={RecipePage} />
         <Route path="/login" component={LoginForm} />
+        <Route path="/signup" component={SignUpForm} />
       </div>
     );
   }
 }
+
 
 export default App;
