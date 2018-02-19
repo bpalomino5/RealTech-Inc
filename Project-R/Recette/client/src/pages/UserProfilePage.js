@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Checkbox, Item, Image, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
-import '../layouts/SignUpPage.css';
+import { Button, Checkbox, List, Divider, Item, Image, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import '../layouts/UserProfilePage.css';
 
 const UserProfile = () => (
   <div className='user-profile'>
@@ -25,25 +25,47 @@ const UserProfile = () => (
        </p>
     </div>
 
+  <div className='container'>
+        <div className='topSection'>
+        </div>
+        
+          <div className='body'>
+            <h1 className='textStyle'>First, Last</h1>
+            <div className='display-linebreak'></div>
+            <div className='infoSection'>
+              <Grid columns={2} relaxed>
+                <Grid.Column width={5}>
+                  <Segment basic>
+                      <h2 className='textStyle'>My Info </h2>
+                      <Divider />
+                      <div className='display-linebreak'></div>
+                      <div> First Name | Last Name </div>
+                      <div> Email Address </div>
+                      <div> @Username </div>
+                  </Segment>
+                </Grid.Column>
+                <Grid.Column width={9}>
+                  <Segment basic>
+                    <h2 className='textStyle'>My Recipes</h2>
+                    <Divider />
+                      <div className='myRecipesList'>
+                      <List ordered>
+                        <List.Item as='a'>Pupusas</List.Item>
+                        <List.Item as='a'>Enchiladas</List.Item>
+                        <List.Item as='a'>Orange Chicken</List.Item>
+                        <List.Item as='a'>Neopolitan Ice Cream</List.Item>
+                        <List.Item as='a'>Pavlova</List.Item>
+                        <List.Item as='a'>Belgian French Fries</List.Item>
+                      </List>
+                      </div>
+                  </Segment>
+                </Grid.Column>
+              </Grid>
+            </div>
+          </div>
+        
 
-       <Item.Group>
-    <Item>
-      <Item.Image size='tiny' src='/assets/images/wireframe/image.png' />
-
-      <Item.Content>
-        <Item.Header as='a'>First, Last</Item.Header>
-        <Item.Meta>@username</Item.Meta>
-        <Item.Meta>@email</Item.Meta>
-        <Item.Description>
-          
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
-
-    
-  </Item.Group>
-  
+  </div>
   </div>
 )
 
