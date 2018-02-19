@@ -1,3 +1,15 @@
+body > div {
+	height: 100%
+}
+
+body > div > div {
+	height: 100%
+}
+
+body > div > div > div.signup-form {
+	height: 100%
+}
+
 .app-title {
 	color: white;
 	text-align: center;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import '../layouts/LoginPage.css';
 import ClientTools from '../res/ClientTools';
 import { Redirect } from 'react-router-dom';
@@ -19,19 +19,16 @@ class LoginPage extends Component{
     this.AttemptLogin=this.AttemptLogin.bind(this);
   }
 
-  goTo(page){
+  goToPage(page){
     this.setState({redirect: true, page: page})
   }
-
-  handleUsernameChange = (e,{value}) => this.setState({username: value})
-  handlePasswordChange = (e, {value}) => this.setState({password: value})
 
   async AttemptLogin() {
     let response = await ClientTools.login({user_name:this.state.username, user_password: this.state.password});
     console.log(response);
     if(response!=null){
-      if(response.code==1){ //login successful
-        this.goTo('/')
+      if(response.code===1){ //login successful
+        this.goToPage('/')
       }
       else{
         this.setState({error:true, errorMessage: response.message})
@@ -64,7 +61,7 @@ class LoginPage extends Component{
                   iconPosition='left'
                   placeholder='Username'
                   value={this.state.username}
-                  onChange={this.handleUsernameChange}
+                  onChange={(e, {value}) => this.setState({username: value})}
                 />
                 <Form.Input
                   fluid
@@ -73,7 +70,7 @@ class LoginPage extends Component{
                   placeholder='Password'
                   type='password'
                   value={this.state.password}
-                  onChange={this.handlePasswordChange}
+                  onChange={(e, {value}) => this.setState({password: value})}
                 />
 
                 <Button color='teal' fluid size='large' onClick={this.AttemptLogin}>Login</Button>

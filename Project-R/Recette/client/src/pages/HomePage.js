@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Search, Button, Icon } from 'semantic-ui-react';
+import { Search, Button } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 

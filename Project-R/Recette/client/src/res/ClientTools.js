@@ -13,6 +13,10 @@ class ClientTools{
     .then(this.parseJSON);
   }
 
+  createUser(data){
+    return this.rawPostRequest('/createUser',data);
+  }
+
   login(data){
     return this.rawPostRequest('/login',data);   
   }
