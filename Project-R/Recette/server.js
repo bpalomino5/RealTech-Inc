@@ -53,12 +53,15 @@ app.get('/getComments', function(req,res){
 	})
 });
 
+<<<<<<< Updated upstream
 app.post('/updateBio', function(req,res){
 	action.updateBio(req.body, res, function(status){
 		gen.validResponse(res, message)
 	})
 });
 
+=======
+>>>>>>> Stashed changes
 app.post('/createUser', function(req,res){
 	action.createUser(req.body, res, function(message){
 		gen.validResponse(res,message)
@@ -81,6 +84,8 @@ app.post('/logout', function(req, res){
 		gen.validResponse(res,message, data)
 	})
 });
+
+
 
 app.post('/addComment', function(req,res) {
 	gen.checkReqSpecific(req,res,function(data){
