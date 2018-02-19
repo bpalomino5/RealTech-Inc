@@ -132,7 +132,7 @@ class SignUpPage extends Component{
                     />
                 </Form.Field>
 
-                <Button color='green' fluid size='large' onClick={this.AttemptCreateUser}>Sign Up</Button>
+                <Button color='teal' fluid size='large' onClick={this.AttemptCreateUser}>Sign Up</Button>
               </Segment>
               <Message
                 error
@@ -141,7 +141,7 @@ class SignUpPage extends Component{
               />
             </Form>
             <Message>
-              Already have an account? <a href='' onClick={() => this.goToPage('/login')}>Log in</a>
+              Already have an account? <Button basic color='teal' size='small' onClick={() => this.goToPage('/login')}>Log in</Button>
             </Message>
           </Grid.Column>
         </Grid>
