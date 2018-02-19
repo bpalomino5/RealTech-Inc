@@ -1,7 +1,6 @@
-import React from 'react'
-import { Button, Checkbox, Divider, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import logo from './logo.svg';
-import './SignUpPage.css';
+import React from 'react';
+import { Button, Checkbox, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import '../layouts/SignUpPage.css';
 
 const SignUpForm = () => (
   <div className='signup-form'>
