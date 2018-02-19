@@ -14,7 +14,7 @@ class App extends Component {
         <Route path="/recipes/:id" component={RecipePage} />
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignUpForm} />
-        <Route path="/userProfile" component={UserProfile} />
+        <Route path="/userprofile" component={UserProfile} />
       </div>
     );
   }
