@@ -57,7 +57,7 @@ module.exports = {
 		})
 	},
 	attemptLogoutUser:function(res, data, callback){
-		if(data.session_id == undefined){
+		if(data.user_token == undefined){
 			gen.structuralError(res, "Error. Parametes not met")
 		}
 		else
