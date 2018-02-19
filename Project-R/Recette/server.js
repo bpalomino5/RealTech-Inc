@@ -71,6 +71,12 @@ app.post('/login', function(req,res){
 	})
 });
 
+app.post('/logout', function(req, res){
+	action.logoutUser(req.body, red, function(message,data){
+		gen.validResponse(res,message, data)
+	})
+});
+
 app.post('/addComment', function(req,res) {
 	gen.checkReqSpecific(req,res,function(data){
 		action.addComment(data,res,function(message){

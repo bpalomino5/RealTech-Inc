@@ -56,6 +56,26 @@ module.exports = {
 			})
 		})
 	},
+	attemptLogoutUser:function(res, data, callback){
+		if(data.session_id == undefined){
+			gen.structuralError(res, "Error. Parametes not met")
+		}
+		else
+			callback()
+	},
+	logoutUser:function(data, res, callback){
+		module.exports.attemptLogoutUser(res, data, function(){
+			serverFunctions.logout(data, function(struct_err, simple_err){
+				gen.handleErrors(res, struct_err, simple_err, function(){
+					serverFunctions.removeUserToken(data, function(store_struct_err, store_simple_err){
+						gen.handleErrors(res, store_struct_err, store_simple_err, function(){
+							callback("Logout Successful", data)
+						})
+					})
+				})
+			})
+		})
+	},
 	attemptAddComment:function(data,res,callback){
 		if(data.recipe_id == undefined || data.message == undefined){
 			gen.structuralError(res, "Error.Base Headers/Parameters not met")

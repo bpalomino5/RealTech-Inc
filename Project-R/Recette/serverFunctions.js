@@ -91,6 +91,34 @@ module.exports = {
 			})
 		})
 	},
+	logout:function(data, callback){
+		var query = "SELECT * FROM is_loggedin WHERE user_token = " + data.user_token;
+		connectionPool.query(query, function(err, results){
+			if(err){
+				module.exports.printError("logout", "SQL Query Error", err, data)
+				callback("An Internal Error Occured")
+			}
+			else if(results.length==0){
+				module.exports.printError("logout", "Parameter Error: invalid user token", null, data)
+				callback(false, 'invalid user token')
+			}
+			else {
+				callback(false, false)
+			}
+		})
+	},
+	removeUserToken:function(data, callback){
+		var query = "DELETE FROM is_loggedin WHERE user_token = " + data.user_token;
+		connectionPool.query(query, function(err, results){
+			if (err) {
+				module.exports.printError("removeUserToken","SQL Query Error", err, data)
+				callback("An internal Error Occured")
+			}
+			else
+				callback(false, false)
+			}
+		});
+	},
 	storeLoginToken:function(data, callback){
 		var query = "INSERT INTO is_loggedin (user_id, user_token) VALUES (" + data.user_id + ",'"+ data.user_token + "')";
 		connectionPool.query(query, function(err, results){
