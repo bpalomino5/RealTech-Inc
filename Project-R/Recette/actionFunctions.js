@@ -20,9 +20,13 @@ module.exports = {
 		module.exports.attemptCreateUser(data,res,function(){
 			serverFunctions.checkUsername(data.user_name, function(check_struct_err, check_simple_err){
 				gen.handleErrors(res,check_struct_err,check_simple_err, function(){
-					serverFunctions.createUser(data, function(create_struct_err,create_simple_err){
-						gen.handleErrors(res,create_struct_err,create_simple_err, function(){
-							callback("User Account Created!")
+					serverFunctions.checkEmail(data.user_email, function(check_struct_err, check_simple_err){
+						gen.handleErrors(res,check_struct_err,check_simple_err, function(){
+							serverFunctions.createUser(data, function(create_struct_err,create_simple_err){
+								gen.handleErrors(res,create_struct_err,create_simple_err, function(){
+									callback("User Account Created!")
+								})
+							})
 						})
 					})
 				})
@@ -50,6 +54,26 @@ module.exports = {
 									})
 								})
 							})
+						})
+					})
+				})
+			})
+		})
+	},
+	attemptLogoutUser:function(res, data, callback){
+		if(data.user_token == undefined){
+			gen.structuralError(res, "Error. Parameters not met")
+		}
+		else
+			callback()
+	},
+	logoutUser:function(data, res, callback){
+		module.exports.attemptLogoutUser(res, data, function(){
+			serverFunctions.logout(data, function(struct_err, simple_err){
+				gen.handleErrors(res, struct_err, simple_err, function(){
+					serverFunctions.removeUserToken(data, function(store_struct_err, store_simple_err){
+						gen.handleErrors(res, store_struct_err, store_simple_err, function(){
+							callback("Logout Successful", data)
 						})
 					})
 				})
