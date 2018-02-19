@@ -53,11 +53,11 @@ app.get('/getComments', function(req,res){
 	})
 });
 
-// app.post('/updateBio', function(req,res){
-// 	serverFunctions.updateBio(req.query.bio, req.query.session_id, function(status){
-// 		res.send({status: status});
-// 	})
-// });
+app.post('/updateBio', function(req,res){
+	action.updateBio(req.body, res, function(status){
+		gen.validResponse(res, message)
+	})
+});
 
 app.post('/createUser', function(req,res){
 	action.createUser(req.body, res, function(message){
@@ -72,7 +72,7 @@ app.post('/login', function(req,res){
 });
 
 app.post('/logout', function(req, res){
-	action.logoutUser(req.body, red, function(message,data){
+	action.logoutUser(req.body, res, function(message,data){
 		gen.validResponse(res,message, data)
 	})
 });

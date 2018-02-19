@@ -114,7 +114,7 @@ module.exports = {
 				module.exports.printError("removeUserToken","SQL Query Error", err, data)
 				callback("An internal Error Occured")
 			}
-			else
+			else {
 				callback(false, false)
 			}
 		});
@@ -185,20 +185,16 @@ module.exports = {
 			callback(ingredients);
 		})
 	},
-	updateBio:function(bio, session_id, callback) {
-		var user = 0;
-		connectionPool.query('SELECT * FROM user_data', function(err, rows) {
-			rows.forEach( (row) => {
-				bcrypt.compare(row.username, session_id, function(err, res) {
-					user = row.user_id;
-				});
-			});
-		});
-		
-		connectionPool.query('UPDATE user_data SET biography = ' + bio + ' WHERE user_id =' + user, function (err, result) {
-			if (err) throw err;
-			callback(1, "User bio updated.");
-		});
+	updateBio:function(data, callback) {
+		var query = "UPDATE user_data SET biography = " + data.biography + " WHERE user_id = " + data.user_id;
+		connectionPool.query(query, function(err, result){
+			if (err) {
+				module.exports.printError("updateBio","SQL Query Error",err,data)
+				callback("An Internal Error Occured")
+			} 
+			else 
+				callback(false, false)
+		})
 	},
 	getComments:function(ID, callback){
 		var comments = [];
