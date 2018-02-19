@@ -80,6 +80,13 @@ module.exports = {
 			})
 		})
 	},
+	updateBio:function(data,res,callback){
+		serverFunctions.updateBio(data,function(bio_struct_err,bio_simple_err){
+			gen.handleErrors(res,bio_struct_err,bio_simple_err, function(){
+				callback("Biography Updated.", data)
+				})
+			})
+	},
 	attemptAddComment:function(data,res,callback){
 		if(data.recipe_id == undefined || data.message == undefined){
 			gen.structuralError(res, "Error.Base Headers/Parameters not met")
