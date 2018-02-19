@@ -84,7 +84,7 @@ class LoginPage extends Component{
               />
             </Form>
             <Message>
-              New to us? <a href='signup'>Sign Up</a>
+              New to us? <a href='' onClick={() => this.goToPage('/signup')}>Sign Up</a>
             </Message>
           </Grid.Column>
         </Grid>

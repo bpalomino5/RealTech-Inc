@@ -141,7 +141,7 @@ class SignUpPage extends Component{
               />
             </Form>
             <Message>
-              Already have an account? <a href='login'>Log in</a>
+              Already have an account? <a href='' onClick={() => this.goToPage('/login')}>Log in</a>
             </Message>
           </Grid.Column>
         </Grid>
