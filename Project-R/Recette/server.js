@@ -70,9 +70,14 @@ app.post('/login', function(req,res){
 		gen.validResponse(res,message,data)
 	})
 });
+// app.post('/logoff', function(req,res) {
+// 	action.logoffUser(req.body,res,function(message,data){
+// 		gen.validResponse(res,message,data)
+// 	})
+// });
 
 app.post('/logout', function(req, res){
-	action.logoutUser(req.body, red, function(message,data){
+	action.logoutUser(req.body, res, function(message,data){
 		gen.validResponse(res,message, data)
 	})
 });
