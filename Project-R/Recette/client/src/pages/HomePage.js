@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Search, Button } from 'semantic-ui-react';
+import { Search, Button, Image } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 
 import ClientTools from '../res/ClientTools';
 import StackGrid from "react-stack-grid";
 import Card from '../components/Card';
-import logo from '../res/logo.svg';
 import '../layouts/HomePage.css';
 
 class HomePage extends Component {
@@ -19,12 +18,18 @@ class HomePage extends Component {
       recipe_id: null,
       isLoading: false,
       results: [],
-      value: ''
+      value: '',
+      isloggedin: false,
+      user_token: '',
     };
     this.AttemptLogin=this.AttemptLogin.bind(this);
+    this.OpenProfilePage=this.OpenProfilePage.bind(this);
   }
 
   componentWillMount(){
+    if(this.props.location.state){
+      this.setState({isloggedin: this.props.location.state.isloggedin, user_token: this.props.location.state.user_token})
+    }
     this.getData();
   }
 
@@ -34,7 +39,8 @@ class HomePage extends Component {
   }
 
   handleCardClick(id) {
-    this.setState({redirect: true, recipe_id: id});
+    this.goToPage(`/recipes/${id}`)
+    // this.setState({redirect: true, recipe_id: id});
   }
 
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
@@ -57,52 +63,71 @@ class HomePage extends Component {
     }, 500)
   }
 
+  goToPage(page){
+    this.setState({redirect: true, page: page})
+  }
+
   AttemptLogin(){
-    this.setState({redirect: true, page: 1});
+    this.goToPage('/login')
+    // this.setState({redirect: true, page: 1});
+  }
+
+  OpenProfilePage() {
+    this.goToPage('/userprofile')
   }
 
   render() {
-    if(this.state.redirect) {
-      if(this.state.page === 1){
-        return <Redirect push to={{pathname: `/login`}} />;
-      }
-      else
-        return <Redirect push to={{pathname: `/recipes/${this.state.recipe_id}`, state: { recipe_id: this.state.recipe_id}}} />;
+    // if(this.state.redirect) {
+    //   if(this.state.page === 1){
+    //     return <Redirect push to={{pathname: `/login`}} />;
+    //   }
+    //   else
+    //     return <Redirect push to={{pathname: `/recipes/${this.state.recipe_id}`, state: { recipe_id: this.state.recipe_id}}} />;
+    // }
+
+    if(this.state.redirect){
+      return <Redirect push to={{pathname: this.state.page, state: { user_token: this.state.user_token}}} />;
     }
 
     return (
       <div className="Home">
-        <header className="Home-header">
-          <img src={logo} className="Home-logo" alt="logo" />
+        <div className="headerContainer">
           <h1 className="Home-title">Recette</h1>
-        </header>
-        <p className="Home-intro">
-          <div>
-            <div className='headerContainer'>
-              <div className='recipe-header'>
-                <h2>Recipes</h2>
+          <Search 
+              className="searchBox"
+              loading={this.state.isLoading}
+              onResultSelect={this.handleResultSelect}
+              onSearchChange={this.handleSearchChange}
+              results={this.state.results}
+              value={this.state.value}
+              aligned='right'
+            />
+            <div className="buttonBox">
+              <div hidden={!this.state.isloggedin} className="profileBox" onClick={this.OpenProfilePage}>
+                <Image src='https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg' />
+                <h2></h2>
               </div>
-              <Button color='teal' onClick={this.AttemptLogin}>SIGN UP / LOG IN</Button>
-              <Search 
-                loading={this.state.isLoading}
-                onResultSelect={this.handleResultSelect}
-                onSearchChange={this.handleSearchChange}
-                results={this.state.results}
-                value={this.state.value}
-                aligned='right'
-              />
+              <div hidden={this.state.isloggedin}>
+                <Button color='teal' onClick={this.AttemptLogin}>SIGN UP / LOG IN</Button>
+              </div>
             </div>
-            <StackGrid
-              columnWidth={300}>
-              {this.state.data.map(recipe => (
-                <Card
-                  onClick={() => this.handleCardClick(recipe.id)}
-                  details={{title:recipe.title, image:recipe.image}}
-                />
-              ))}
-            </StackGrid>
+        </div>
+        <div className="Home-intro">
+          <div className='recipeContainer'>
+            <div className='recipe-header'>
+              <h2>Recipes</h2>
+            </div>            
           </div>
-        </p>
+          <StackGrid
+            columnWidth={300}>
+            {this.state.data.map(recipe => (
+              <Card
+                onClick={() => this.handleCardClick(recipe.id)}
+                details={{title:recipe.title, image:recipe.image}}
+              />
+            ))}
+          </StackGrid>
+        </div>
       </div>
     );
   }
