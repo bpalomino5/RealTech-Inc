@@ -1,55 +1,97 @@
-import React from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
+import '../layouts/LoginPage.css';
+import ClientTools from '../res/ClientTools';
+import { Redirect } from 'react-router-dom';
 
-const LoginForm = () => (
-  <div className='login-form'>
-    {/*
-      Heads up! The styles below are necessary for the correct render of this example.
-      You can do same with CSS, the main idea is that all the elements up to the `Grid`
-      below must have a height of 100%.
-    */}
-    <style>{`
-      body > div,
-      body > div > div,
-      body > div > div > div.login-form {
-        height: 100%;
+
+class LoginPage extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+      error: false,
+      errorMessage: '',
+      redirect: false,
+      page: '',
+    };
+    this.AttemptLogin=this.AttemptLogin.bind(this);
+  }
+
+  goTo(page){
+    this.setState({redirect: true, page: page})
+  }
+
+  handleUsernameChange = (e,{value}) => this.setState({username: value})
+  handlePasswordChange = (e, {value}) => this.setState({password: value})
+
+  async AttemptLogin() {
+    let response = await ClientTools.login({user_name:this.state.username, user_password: this.state.password});
+    console.log(response);
+    if(response!=null){
+      if(response.code==1){ //login successful
+        this.goTo('/')
       }
-    `}</style>
-    <Grid
-      textAlign='center'
-      style={{ height: '100%' }}
-      verticalAlign='middle'
-    >
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as='h2' color='teal' textAlign='center'>
-          <Image src='/logo.png' />
-          {' '}Log-in to your account
-        </Header>
-        <Form size='large'>
-          <Segment stacked>
-            <Form.Input
-              fluid
-              icon='user'
-              iconPosition='left'
-              placeholder='E-mail address'
-            />
-            <Form.Input
-              fluid
-              icon='lock'
-              iconPosition='left'
-              placeholder='Password'
-              type='password'
-            />
+      else{
+        this.setState({error:true, errorMessage: response.message})
+      }
+    }
+  }
 
-            <Button color='teal' fluid size='large'>Login</Button>
-          </Segment>
-        </Form>
-        <Message>
-          New to us? <a href='#'>Sign Up</a>
-        </Message>
-      </Grid.Column>
-    </Grid>
-  </div>
-)
+  render() {
+    if(this.state.redirect){
+      return <Redirect push to={{pathname: this.state.page}} />;
+    }
+    return(
+      <div className='login-form'>
+        <Grid
+          textAlign='center'
+          style={{ height: '100%'}}
+          verticalAlign='middle'
+        >
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as='h2' color='teal' textAlign='center'>
+              Log-in to your account
+            </Header>
+            <Form 
+              size='large'
+              error={this.state.error}>
+              <Segment stacked>
+                <Form.Input
+                  fluid
+                  icon='user'
+                  iconPosition='left'
+                  placeholder='Username'
+                  value={this.state.username}
+                  onChange={this.handleUsernameChange}
+                />
+                <Form.Input
+                  fluid
+                  icon='lock'
+                  iconPosition='left'
+                  placeholder='Password'
+                  type='password'
+                  value={this.state.password}
+                  onChange={this.handlePasswordChange}
+                />
 
-export default LoginForm
+                <Button color='teal' fluid size='large' onClick={this.AttemptLogin}>Login</Button>
+              </Segment>
+              <Message
+                error
+                header='Sorry!'
+                content={this.state.errorMessage}
+              />
+            </Form>
+            <Message>
+              New to us? <a href='signup'>Sign Up</a>
+            </Message>
+          </Grid.Column>
+        </Grid>
+      </div>
+    )
+  }
+}
+
+export default LoginPage;

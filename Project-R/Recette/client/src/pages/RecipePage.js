@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../layouts/RecipePage.css';
-import Client from '../res/Client';
+import ClientTools from '../res/ClientTools';
 import { Button, Comment, Form, Header, Grid, Segment, Divider } from 'semantic-ui-react';
 
 
@@ -17,7 +17,7 @@ class RecipePage extends Component{
 	}
 
 	async getRecipeData() {
-		var data = await Client.getRecipeByID(this.props.match.params.id);
+		var data = await ClientTools.getRecipeByID(this.props.match.params.id);
 		this.setState({data: [...this.state.data, data.recipeInfo]});
 	}
 

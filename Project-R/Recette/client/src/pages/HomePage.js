@@ -3,7 +3,7 @@ import { Search, Button, Icon } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 
-import Client from '../res/Client';
+import ClientTools from '../res/ClientTools';
 import StackGrid from "react-stack-grid";
 import Card from '../components/Card';
 import logo from '../res/logo.svg';
@@ -29,7 +29,7 @@ class HomePage extends Component {
   }
 
   async getData(){
-    var data = await Client.getRecipes();
+    var data = await ClientTools.getRecipes();
     this.setState({data: data.recipes});
   }
 
@@ -70,31 +70,6 @@ class HomePage extends Component {
         return <Redirect push to={{pathname: `/recipes/${this.state.recipe_id}`, state: { recipe_id: this.state.recipe_id}}} />;
     }
 
-    const ButtonExampleAnimated = (
-      <div>
-        <Button animated>
-          <Button.Content visible>Next</Button.Content>
-          <Button.Content hidden>
-            <Icon name='right arrow' />
-          </Button.Content>
-        </Button>
-        <Button animated='vertical'>
-          <Button.Content hidden>Shop</Button.Content>
-          <Button.Content visible>
-            <Icon name='shop' />
-          </Button.Content>
-        </Button>
-        <Button animated='fade'>
-          <Button.Content visible>
-            Sign-up for a Pro account
-          </Button.Content>
-          <Button.Content hidden>
-            $12.99 a month
-          </Button.Content>
-        </Button>
-      </div>
-    );
-
     return (
       <div className="Home">
         <header className="Home-header">
@@ -126,7 +101,6 @@ class HomePage extends Component {
                 />
               ))}
             </StackGrid>
-            {ButtonExampleAnimated}
           </div>
         </p>
       </div>
