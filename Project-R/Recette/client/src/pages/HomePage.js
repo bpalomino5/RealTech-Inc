@@ -20,7 +20,7 @@ class HomePage extends Component {
       results: [],
       value: '',
       isloggedin: false,
-      user_token: '',
+      userdata: null,
     };
     this.AttemptLogin=this.AttemptLogin.bind(this);
     this.OpenProfilePage=this.OpenProfilePage.bind(this);
@@ -28,7 +28,7 @@ class HomePage extends Component {
 
   componentWillMount(){
     if(this.props.location.state){
-      this.setState({isloggedin: this.props.location.state.isloggedin, user_token: this.props.location.state.user_token})
+      this.setState({isloggedin: this.props.location.state.isloggedin, userdata: this.props.location.state.data})
     }
     this.getData();
   }
@@ -40,12 +40,14 @@ class HomePage extends Component {
 
   handleCardClick(id) {
     this.goToPage(`/recipes/${id}`)
-    // this.setState({redirect: true, recipe_id: id});
   }
 
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
-  handleResultSelect = (e, { result }) => this.setState({ value: result.title })
+  handleResultSelect = (e, { result }) => {
+    // this.setState({ value: result.title })
+    this.handleCardClick(result.id)
+  }
 
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value })
@@ -69,7 +71,6 @@ class HomePage extends Component {
 
   AttemptLogin(){
     this.goToPage('/login')
-    // this.setState({redirect: true, page: 1});
   }
 
   OpenProfilePage() {
@@ -77,16 +78,8 @@ class HomePage extends Component {
   }
 
   render() {
-    // if(this.state.redirect) {
-    //   if(this.state.page === 1){
-    //     return <Redirect push to={{pathname: `/login`}} />;
-    //   }
-    //   else
-    //     return <Redirect push to={{pathname: `/recipes/${this.state.recipe_id}`, state: { recipe_id: this.state.recipe_id}}} />;
-    // }
-
     if(this.state.redirect){
-      return <Redirect push to={{pathname: this.state.page, state: { user_token: this.state.user_token}}} />;
+      return <Redirect push to={{pathname: this.state.page, state: { data: this.state.userdata}}} />;
     }
 
     return (
@@ -105,7 +98,7 @@ class HomePage extends Component {
             <div className="buttonBox">
               <div hidden={!this.state.isloggedin} className="profileBox" onClick={this.OpenProfilePage}>
                 <Image src='https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg' />
-                <h2></h2>
+                <h2>{this.state.userdata && this.state.userdata.first_name}</h2>
               </div>
               <div hidden={this.state.isloggedin}>
                 <Button color='teal' onClick={this.AttemptLogin}>SIGN UP / LOG IN</Button>

@@ -100,7 +100,7 @@ module.exports = {
 					callback(false, 'invalid password')
 				}
 				else{
-					callback(false,false, results[0].user_id)
+					callback(false,false, results[0])
 				}
 			})
 		})

@@ -42,15 +42,17 @@ module.exports = {
 	},
 	loginUser:function(data,res,callback){
 		module.exports.attemptLogin(res, data, function(){
-			serverFunctions.login(data, function(struct_err,simple_err,user_id){
+			serverFunctions.login(data, function(struct_err,simple_err,userData){
 				gen.handleErrors(res,struct_err,simple_err, function(){
-					serverFunctions.checkLogins(user_id, function(check_struct_err, check_simple_err){
+					serverFunctions.checkLogins(userData.user_id, function(check_struct_err, check_simple_err){
 						gen.handleErrors(res,check_struct_err,check_simple_err, function(){
 							module.exports.generateUserToken(function(user_token){
-								var resData = {user_id:user_id,user_token:user_token};
+								var resData = {user_id:userData.user_id,user_token:user_token};
 								serverFunctions.storeLoginToken(resData, function(store_struct_err,store_simple_err){
 									gen.handleErrors(res,store_struct_err,store_simple_err, function(){
-										callback("Login Successful", resData)
+										userData.user_token=user_token;
+										delete userData.password;
+										callback("Login Successful", userData)
 									})
 								})
 							})

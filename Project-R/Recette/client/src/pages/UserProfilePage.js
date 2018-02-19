@@ -8,7 +8,7 @@ class UserProfilePage extends Component{
   constructor(props){
     super(props);
     this.state = {
-      user_token: '',
+      data: null,
     };
 
     this.AttemptLogout=this.AttemptLogout.bind(this);
@@ -16,7 +16,7 @@ class UserProfilePage extends Component{
 
   componentWillMount(){
     if(this.props.location.state){
-      this.setState({user_token: this.props.location.state.user_token})
+      this.setState({data: this.props.location.state.data})
     }
   }
 
@@ -25,7 +25,7 @@ class UserProfilePage extends Component{
   }
 
   async AttemptLogout() {
-    let response = await ClientTools.logout({user_token: this.state.user_token});
+    let response = await ClientTools.logout({user_token: this.state.data.user_token});
     console.log(response);
     if(response!=null){
       if(response.code===1){
@@ -66,7 +66,7 @@ class UserProfilePage extends Component{
             </div>
             
               <div className='body'>
-                <h1 className='textStyle'>First, Last</h1>
+                <h1 className='textStyle'>{this.state.data.first_name}, {this.state.data.last_name}</h1>
                 <div className='display-linebreak'></div>
                 <div className='infoSection'>
                   <Grid columns={2} relaxed>
@@ -75,9 +75,9 @@ class UserProfilePage extends Component{
                           <h2 className='textStyle'>My Info </h2>
                           <Divider />
                           <div className='display-linebreak'></div>
-                          <div> First Name | Last Name </div>
-                          <div> Email Address </div>
-                          <div> @Username </div>
+                          <div> {this.state.data.first_name} | {this.state.data.last_name} </div>
+                          <div> {this.state.data.email} </div>
+                          <div> @{this.state.data.username} </div>
                       </Segment>
                     </Grid.Column>
                     <Grid.Column width={9}>
