@@ -1,5 +1,7 @@
 import React from 'react'
-import { Button, Checkbox, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Checkbox, Divider, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import logo from './logo.svg';
+import './SignUpPage.css';
 
 const SignUpForm = () => (
   <div className='signup-form'>
@@ -15,6 +17,15 @@ const SignUpForm = () => (
         height: 100%;
       }
     `}</style>
+    
+    <div className="title-container">
+    <header className="Recette-header">
+      <h1 className='app-title'>Welcome to Recette</h1>
+    </header>
+    <p className="Recette">
+    </p>
+  </div>
+
     <Grid
       textAlign='center'
       style={{ height: '100%' }}
@@ -22,7 +33,7 @@ const SignUpForm = () => (
     >
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2' color='teal' textAlign='center'>
-          <Image src='/logo.png' />
+          
           {' '}Create your account
         </Header>
         <Form size='large'>

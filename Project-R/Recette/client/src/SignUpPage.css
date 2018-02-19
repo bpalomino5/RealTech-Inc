@@ -1,0 +1,12 @@
+.app-title {
+	color: white;
+	text-align: center;
+
+}
+
+.title-container {
+    padding-top: 10px;
+    /*padding-bottom: 40px;*/
+	height: 55px;
+	background-color: turquoise;
+}
