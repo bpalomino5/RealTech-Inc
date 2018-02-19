@@ -16,23 +16,41 @@ https://damp-garden-53847.herokuapp.com/
 
 # Meeting Notes
 
+## Date: 2/16/18
+
+What Got Done:
+
+ - Brandon: Partially debugged createUser function (not fully functional)
+ - Chris: Worked on user page UI
+ - Kenneth: Fixed database values
+ - Dongri: Added recipes
+ - Daniel: Worked on login and logout requests
+ 
+ Tasks for the weekend:
+ 
+ - Brandon: Finish debugging createUser and link to front-end
+ - Chris: Work on user page UI
+ - Kenneth: Work with Daniel/Dongri on server requests
+ - Dongri: Work with Kenneth/Daniel on server requests
+ - Daniel: Work with Kenneth/Dongri on server requests
+
 ## Date: 2/15/18
 
 What Got Done:
 
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Organized code layout
+ - Chris: Worked on user page UI
+ - Kenneth: Fixed some database values
+ - Dongri: Added more recipes
+ - Daniel: Worked on server functions
  
  Tasks for 2/16:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Debug createUser function
+ - Chris: Work on user page UI
+ - Kenneth: Fix some database values
+ - Dongri: Add more recipes
+ - Daniel: Work on login and logout server requests
 
 ## Date: 2/14/18
 
