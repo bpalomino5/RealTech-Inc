@@ -51,3 +51,8 @@ http://allrecipes.com/recipe/141716/korean-bbq-short-ribs-gal-bi/?internalSource
 http://allrecipes.com/recipe/238977/lamb-korma/?internalSource=staff%20pick&referringId=227&referringContentType=recipe%20hub
 http://allrecipes.com/recipe/14565/naan/?internalSource=hub%20recipe&referringId=227&referringContentType=recipe%20hub
 http://allrecipes.com/recipe/61024/asian-orange-chicken/?internalSource=hub%20recipe&referringId=227&referringContentType=recipe%20hub
+http://allrecipes.com/recipe/24087/restaurant-style-buffalo-chicken-wings/?internalSource=hub%20recipe&referringId=76&referringContentType=recipe%20hub
+http://allrecipes.com/recipe/20669/double-tomato-bruschetta/?internalSource=hub%20recipe&referringId=76&referringContentType=recipe%20hub
+http://allrecipes.com/recipe/33474/artichoke-spinach-dip-restaurant-style/?internalSource=hub%20recipe&referringId=76&referringContentType=recipe%20hub
+http://allrecipes.com/recipe/19673/seven-layer-taco-dip/?internalSource=hub%20recipe&referringId=76&referringContentType=recipe%20hub
+
