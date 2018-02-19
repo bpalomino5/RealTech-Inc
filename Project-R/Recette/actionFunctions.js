@@ -81,15 +81,11 @@ module.exports = {
 		})
 	},
 	updateBio:function(data,res,callback){
-		serverFunctions.checkLogins(user_id, function(check_struct_err, check_simple_err){
-			gen.handleErrors(res,check_struct_err,check_simple_err, function(){
-				serverFunctions.updateBio(data,function(bio_struct_err,bio_simple_err){
-					gen.handleErrors(res,bio_struct_err,bio_simple_err, function(){
-						callback("Biography Updated.", data)
-					})
+		serverFunctions.updateBio(data,function(bio_struct_err,bio_simple_err){
+			gen.handleErrors(res,bio_struct_err,bio_simple_err, function(){
+				callback("Biography Updated.", data)
 				})
 			})
-		})
 	},
 	attemptAddComment:function(data,res,callback){
 		if(data.recipe_id == undefined || data.message == undefined){

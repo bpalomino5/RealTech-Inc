@@ -53,15 +53,12 @@ app.get('/getComments', function(req,res){
 	})
 });
 
-<<<<<<< Updated upstream
 app.post('/updateBio', function(req,res){
 	action.updateBio(req.body, res, function(status){
-		gen.validResponse(res, message)
+		gen.validResponse(res, status)
 	})
 });
 
-=======
->>>>>>> Stashed changes
 app.post('/createUser', function(req,res){
 	action.createUser(req.body, res, function(message){
 		gen.validResponse(res,message)

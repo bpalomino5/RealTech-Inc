@@ -200,7 +200,7 @@ module.exports = {
 		})
 	},
 	updateBio:function(data, callback) {
-		var query = "UPDATE user_data SET biography = " + data.biography + " WHERE user_id = " + data.user_id;
+		var query = "UPDATE user_data SET biography = '" + data.biography + "' WHERE user_id = '" + data.user_id + "'";
 		connectionPool.query(query, function(err, result){
 			if (err) {
 				module.exports.printError("updateBio","SQL Query Error",err,data)
