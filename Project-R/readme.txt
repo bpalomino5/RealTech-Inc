@@ -7,13 +7,5 @@ Instructions to run project so far
 	 $ npm install
 	 $ cd client && npm install
 
-## FIXED #########
-**if running on Windows**
-	$ cd Recette\client\src
-	$ open and edit Todo.js
-	$ edit line 3, instead of "class Todo extends React.Component", change to "class Todo extends Component"
-	$ cd.. (to return to client directory)
-###############################
-
-3) To run everything well (needs unix terminal to work, not windows friendly right now) at project root run:
+3) To run everything well at project root run:
 	 $ npm start

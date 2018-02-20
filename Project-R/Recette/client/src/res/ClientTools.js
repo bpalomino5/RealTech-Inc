@@ -29,6 +29,10 @@ class ClientTools{
     return this.rawPostRequest('/getUserData',data);
   }
 
+  addComment(data){
+    return this.rawPostRequest('/addComment',data);
+  }
+
   getRecipes(){
     return fetch('/getRecipes', {
       accept: "application/json"
@@ -43,6 +47,14 @@ class ClientTools{
     })
     .then(this.checkStatus)
     .then(this.parseJSON);
+  }
+
+  getComments(recipe_id){
+    return fetch(`/getComments?recipe_id=${encodeURIComponent(recipe_id)}`, {
+      accept: 'application/json'
+    })
+      .then(this.checkStatus)
+      .then(this.parseJSON)
   }
 
   checkStatus(response) {

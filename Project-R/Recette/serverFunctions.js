@@ -235,7 +235,7 @@ module.exports = {
 			rows.forEach( (row) => {
 				comments.push({
 					user: row.first_name,
-					comment: row.text
+					message: row.text
 				});
 			});
 			callback(comments);

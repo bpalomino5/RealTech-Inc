@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
 import '../layouts/RecipePage.css';
 import ClientTools from '../res/ClientTools';
-import { Button, Comment, Form, Header, Grid, Segment, Divider } from 'semantic-ui-react';
+import { Button, Comment, Form, Header, Grid, Segment, Divider, Modal, Icon } from 'semantic-ui-react';
 
 
 class RecipePage extends Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-			data: []
-		}
+			data: [],
+			comments: [],
+			reply: '',
+			session_data: null,
+			showPrompt: false,
+			user_firstname: '',
+		};
+		this.SubmitComment=this.SubmitComment.bind(this);
 	}
 
-	componentDidMount() {
+	componentWillMount() {
+		if(this.props.location.state.session_data){
+			this.setState({session_data: this.props.location.state.session_data, user_firstname: this.props.location.state.user_firstname})
+		}
 		this.getRecipeData();
+		this.getRecipeComments();
 	}
 
 	async getRecipeData() {
@@ -21,80 +31,33 @@ class RecipePage extends Component{
 		this.setState({data: [...this.state.data, data.recipeInfo]});
 	}
 
+	async getRecipeComments(){
+		let data = await ClientTools.getComments(this.props.match.params.id);
+		if(data!=null){
+			this.setState({comments: data.comments});
+		}
+	}
+
+	async SubmitComment() {
+		if(this.state.session_data){
+			let data = this.state.session_data;
+			data.recipe_id = this.props.match.params.id;
+			data.message = this.state.reply
+			let response = await ClientTools.addComment(data);
+			console.log(response);
+			if(response!=null){
+				if(response.code===1){
+					this.setState({comments: [...this.state.comments, {user: this.state.user_firstname, message: data.message}]})
+					//reset textarea
+					this.setState({reply: ''})
+				}
+			}
+		}
+		else
+			this.setState({showPrompt: true})
+	}
+
 	render() {
-		const CommentExampleComment = (
-		  <Comment.Group>
-		    <Header as='h2' dividing>Comments</Header>
-
-		    <Comment>
-		      <Comment.Content>
-		        <Comment.Author as='a'>Matt</Comment.Author>
-		        <Comment.Metadata>
-		          <div>Today at 5:42PM</div>
-		        </Comment.Metadata>
-		        <Comment.Text>How artistic!</Comment.Text>
-		        <Comment.Actions>
-		          <Comment.Action>Reply</Comment.Action>
-		        </Comment.Actions>
-		      </Comment.Content>
-		    </Comment>
-
-		    <Comment>
-		      
-		      <Comment.Content>
-		        <Comment.Author as='a'>Elliot Fu</Comment.Author>
-		        <Comment.Metadata>
-		          <div>Yesterday at 12:30AM</div>
-		        </Comment.Metadata>
-		        <Comment.Text>
-		          <p>This has been very useful for my research. Thanks as well!</p>
-		        </Comment.Text>
-		        <Comment.Actions>
-		          <Comment.Action>Reply</Comment.Action>
-		        </Comment.Actions>
-		      </Comment.Content>
-		      <Comment.Group>
-		        <Comment>
-		          
-		          <Comment.Content>
-		            <Comment.Author as='a'>Jenny Hess</Comment.Author>
-		            <Comment.Metadata>
-		              <div>Just now</div>
-		            </Comment.Metadata>
-		            <Comment.Text>
-		              Elliot you are always so right :)
-		            </Comment.Text>
-		            <Comment.Actions>
-		              <Comment.Action>Reply</Comment.Action>
-		            </Comment.Actions>
-		          </Comment.Content>
-		        </Comment>
-		      </Comment.Group>
-		    </Comment>
-
-		    <Comment>
-		      
-		      <Comment.Content>
-		        <Comment.Author as='a'>Joe Henderson</Comment.Author>
-		        <Comment.Metadata>
-		          <div>5 days ago</div>
-		        </Comment.Metadata>
-		        <Comment.Text>
-		          Dude, this is awesome. Thanks so much
-		        </Comment.Text>
-		        <Comment.Actions>
-		          <Comment.Action>Reply</Comment.Action>
-		        </Comment.Actions>
-		      </Comment.Content>
-		    </Comment>
-
-		    <Form reply>
-		      <Form.TextArea />
-		      <Button content='Add Reply' labelPosition='left' icon='edit' primary />
-		    </Form>
-		  </Comment.Group>
-		);
-
 		return(
 			<div className='container'>
 				<div className='topSection'>
@@ -128,8 +91,39 @@ class RecipePage extends Component{
 					</div>
 				))}
 				<div className='commentSection'>
-					{CommentExampleComment}
+					<Comment.Group>
+						<Header as='h2' dividing>Comments</Header>
+						{this.state.comments.map(comment => (
+							<Comment>
+					      <Comment.Content>
+					        <Comment.Author as='a'>{comment.user}</Comment.Author>
+					        <Comment.Metadata>
+					          <div>Today at 5:42PM</div>
+					        </Comment.Metadata>
+					        <Comment.Text>{comment.message}</Comment.Text>
+					      </Comment.Content>
+					    </Comment>
+						))}
+						<Form reply>
+				      <Form.TextArea 
+				      	value={this.state.reply}
+                onChange={(e, {value}) => this.setState({reply: value})}
+              />
+				      <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={this.SubmitComment} />
+				    </Form>
+					</Comment.Group>
 				</div>
+				<Modal open={this.state.showPrompt} basic size='small' closeOnDimmerClick={true}>
+			    <Header icon='archive' content='User account is required' />
+			    <Modal.Content>
+			      <p>Hi! If you enjoy our content, then please sign in or create a user account in order to comment on this recipe. Thanks!</p>
+			    </Modal.Content>
+			    <Modal.Actions>
+			      <Button color='green' inverted onClick={() => this.setState({showPrompt: false})}>
+			        <Icon name='checkmark' /> Close
+			      </Button>
+			    </Modal.Actions>
+			  </Modal>
 			</div>
 		);
 	}

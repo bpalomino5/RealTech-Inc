@@ -35,8 +35,9 @@ class HomePage extends Component {
   }
 
   componentDidMount(){
-    if(this.props.location.state.session_data){
-      this.getUserData();
+    if(this.props.location.state){
+      if(this.props.location.state.session_data)
+        this.getUserData();
     }
   }
 
@@ -96,7 +97,7 @@ class HomePage extends Component {
 
   render() {
     if(this.state.redirect){
-      return <Redirect push to={{pathname: this.state.page, state: { session_data: this.state.session_data}}} />;
+      return <Redirect push to={{pathname: this.state.page, state: { session_data: this.state.session_data, user_firstname: this.state.user_firstname}}} />;
     }
 
     return (
