@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import '../layouts/LoginPage.css';
 import ClientTools from '../res/ClientTools';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 
 class LoginPage extends Component{
@@ -84,7 +84,7 @@ class LoginPage extends Component{
               />
             </Form>
             <Message>
-              New to us? <Button basic color='teal' size='small' onClick={() => this.goToPage('/signup')}>Sign Up</Button>
+              New to us? <Link to="/signup" replace>Sign Up</Link>
             </Message>
           </Grid.Column>
         </Grid>

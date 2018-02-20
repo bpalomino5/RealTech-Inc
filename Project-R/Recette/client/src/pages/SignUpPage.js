@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Checkbox, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import '../layouts/SignUpPage.css';
 import ClientTools from '../res/ClientTools';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 class SignUpPage extends Component{
   constructor(props){
@@ -141,7 +141,7 @@ class SignUpPage extends Component{
               />
             </Form>
             <Message>
-              Already have an account? <Button basic color='teal' size='small' onClick={() => this.goToPage('/login')}>Log in</Button>
+              Already have an account? <Link to="/login" replace>Log in</Link>
             </Message>
           </Grid.Column>
         </Grid>
