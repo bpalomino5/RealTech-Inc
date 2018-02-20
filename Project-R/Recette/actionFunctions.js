@@ -42,17 +42,15 @@ module.exports = {
 	},
 	loginUser:function(data,res,callback){
 		module.exports.attemptLogin(res, data, function(){
-			serverFunctions.login(data, function(struct_err,simple_err,userData){
+			serverFunctions.login(data, function(struct_err,simple_err,user_id){
 				gen.handleErrors(res,struct_err,simple_err, function(){
-					serverFunctions.checkLogins(userData.user_id, function(check_struct_err, check_simple_err){
+					serverFunctions.checkLogins(user_id, function(check_struct_err, check_simple_err){
 						gen.handleErrors(res,check_struct_err,check_simple_err, function(){
 							module.exports.generateUserToken(function(user_token){
-								var resData = {user_id:userData.user_id,user_token:user_token};
+								var resData = {user_id:user_id,user_token:user_token};
 								serverFunctions.storeLoginToken(resData, function(store_struct_err,store_simple_err){
 									gen.handleErrors(res,store_struct_err,store_simple_err, function(){
-										userData.user_token=user_token;
-										delete userData.password;
-										callback("Login Successful", userData)
+										callback("Login Successful", resData)
 									})
 								})
 							})
@@ -75,7 +73,7 @@ module.exports = {
 				gen.handleErrors(res, struct_err, simple_err, function(){
 					serverFunctions.removeUserToken(data, function(store_struct_err, store_simple_err){
 						gen.handleErrors(res, store_struct_err, store_simple_err, function(){
-							callback("Logout Successful", data)
+							callback("Logout Successful")
 						})
 					})
 				})
@@ -102,6 +100,14 @@ module.exports = {
 				gen.handleErrors(res,struct_err,simple_err, function(){
 					callback("Comment has been added")
 				})
+			})
+		})
+	},
+	getUserData:function(data,res,callback){
+		serverFunctions.getUserData(data.user_id, function(struct_err,simple_err, userData){
+			gen.handleErrors(res,struct_err,simple_err, function(){
+				delete userData.password;
+				callback("User data request successful", userData)
 			})
 		})
 	},

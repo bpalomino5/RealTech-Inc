@@ -11,9 +11,9 @@ module.exports = {
 			module.exports.structuralError(res,"Error: Base Headers/Parameters not met")
 		}
 		else{
-			serverFunctions.getUserData(req.body.user_id, function(struct_err,simple_err,userData){
+			serverFunctions.getLoginData(req.body.user_id, function(struct_err,simple_err,loginData){
 				module.exports.handleErrors(res,struct_err,simple_err,function(){
-					if(req.body.user_token == userData.user_token)
+					if(req.body.user_token == loginData.user_token)
 						callback(req.body)
 					else{
 						serverFunctions.printError("checkReqSpecific","Error: User Token Invalid",null,req.body)

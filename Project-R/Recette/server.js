@@ -70,24 +70,25 @@ app.post('/login', function(req,res){
 		gen.validResponse(res,message,data)
 	})
 });
-// app.post('/logoff', function(req,res) {
-// 	action.logoffUser(req.body,res,function(message,data){
-// 		gen.validResponse(res,message,data)
-// 	})
-// });
 
 app.post('/logout', function(req, res){
-	action.logoutUser(req.body, res, function(message,data){
-		gen.validResponse(res,message, data)
+	action.logoutUser(req.body, res, function(message){
+		gen.validResponse(res,message)
 	})
 });
-
-
 
 app.post('/addComment', function(req,res) {
 	gen.checkReqSpecific(req,res,function(data){
 		action.addComment(data,res,function(message){
 			gen.validResponse(res,message)
+		})
+	})
+});
+
+app.post('/getUserData', function(req,res){
+	gen.checkReqSpecific(req,res,function(data){
+		action.getUserData(data,res,function(message,data){
+			gen.validResponse(res,message,data)
 		})
 	})
 });

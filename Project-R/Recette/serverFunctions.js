@@ -51,14 +51,29 @@ module.exports = {
 		});
 	},
 	getUserData:function(user_id, callback){
+		var query = "Select * from user_data where user_data.user_id = " + user_id; 
+		connectionPool.query(query, function(err, results){
+			if(err){
+				module.exports.printError("getUserData", "SQL Query Error: could not get data from user_data",err,{user_id:user_id})
+				callback("An internal error occured")
+			}
+			if(results.length==0){
+				module.exports.printError('getUserData',"Internal error: querying for userdata, user does not exist",err,{user_id:user_id})
+				callback(false, "User does not exist")
+			}
+			else
+				callback(false,false,results[0])
+		})
+	},
+	getLoginData:function(user_id, callback){
 		var query = "Select * from is_loggedin where user_id = " + user_id;
 		connectionPool.query(query, function(err, results){
 			if(err){
-				module.exports.printError("getUserData", "SQL Query Error: could not get data from is_loggedin",err,{user_id:user_id})
+				module.exports.printError("getLoginData", "SQL Query Error: could not get data from is_loggedin",err,{user_id:user_id})
 				callback("An Internal Error Occured")
 			}
 			if(results.length==0){
-				module.exports.printError("getUserData", "Internal Error: querying for userdata without being logged in",err,{user_id:user_id})
+				module.exports.printError("getLoginData", "Internal Error: querying for logindata without being logged in",err,{user_id:user_id})
 				callback(false,"User is not logged in")
 			}
 			else
@@ -100,7 +115,7 @@ module.exports = {
 					callback(false, 'invalid password')
 				}
 				else{
-					callback(false,false, results[0])
+					callback(false,false, results[0].user_id)
 				}
 			})
 		})
