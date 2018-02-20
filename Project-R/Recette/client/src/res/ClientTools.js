@@ -25,6 +25,10 @@ class ClientTools{
     return this.rawPostRequest('/logout',data);
   }
 
+  getUserData(data){
+    return this.rawPostRequest('/getUserData',data);
+  }
+
   getRecipes(){
     return fetch('/getRecipes', {
       accept: "application/json"

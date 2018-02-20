@@ -15,7 +15,7 @@ class LoginPage extends Component{
       errorMessage: '',
       redirect: false,
       page: '',
-      data: null,
+      session_data: null,
     };
     this.AttemptLogin=this.AttemptLogin.bind(this);
   }
@@ -29,7 +29,7 @@ class LoginPage extends Component{
     console.log(response);
     if(response!=null){
       if(response.code===1){ //login successful
-        this.setState({data: response.data})
+        this.setState({session_data: response.data})
         this.goToPage('/')
       }
       else{
@@ -40,7 +40,7 @@ class LoginPage extends Component{
 
   render() {
     if(this.state.redirect){
-      return <Redirect push to={{pathname: this.state.page, state: {isloggedin: true, data: this.state.data}}} />;
+      return <Redirect push to={{pathname: this.state.page, state: {isloggedin: true, session_data: this.state.session_data}}} />;
     }
     return(
       <div className='login-form'>

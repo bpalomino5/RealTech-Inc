@@ -8,7 +8,8 @@ class UserProfilePage extends Component{
   constructor(props){
     super(props);
     this.state = {
-      data: null,
+      session_data: null,
+      userdata: {username:'',email:'',first_name:'',last_name:'',biography:''},
     };
 
     this.AttemptLogout=this.AttemptLogout.bind(this);
@@ -16,16 +17,31 @@ class UserProfilePage extends Component{
 
   componentWillMount(){
     if(this.props.location.state){
-      this.setState({data: this.props.location.state.data})
+      this.setState({session_data: this.props.location.state.session_data})
     }
+  }
+
+  componentDidMount(){
+    if(this.props.location.state.session_data)
+      this.getUserData();
   }
 
   goToPage(page){
     this.setState({redirect: true, page: page})
   }
 
+  async getUserData() {
+    let response = await ClientTools.getUserData({user_id:this.state.session_data.user_id, user_token: this.state.session_data.user_token});
+    console.log(response);
+    if(response!=null){
+      if(response.code===1){
+        this.setState({userdata: response.data})
+      }
+    }
+  }
+
   async AttemptLogout() {
-    let response = await ClientTools.logout({user_token: this.state.data.user_token});
+    let response = await ClientTools.logout({user_token: this.state.session_data.user_token});
     console.log(response);
     if(response!=null){
       if(response.code===1){
@@ -35,7 +51,7 @@ class UserProfilePage extends Component{
   }
   render() {
     if(this.state.redirect){
-      return <Redirect push to={{pathname: this.state.page, state: {isloggedin: false}}} />;
+      return <Redirect to={{pathname: this.state.page, state: {isloggedin: false}}} />;
     }
     return(
       <div className='user-profile'>
@@ -64,9 +80,8 @@ class UserProfilePage extends Component{
       <div className='container'>
             <div className='topSection'>
             </div>
-            
               <div className='body'>
-                <h1 className='textStyle'>{this.state.data.first_name}, {this.state.data.last_name}</h1>
+                <h1 className='textStyle'>{this.state.userdata.first_name}, {this.state.userdata.last_name}</h1>
                 <div className='display-linebreak'></div>
                 <div className='infoSection'>
                   <Grid columns={2} relaxed>
@@ -75,9 +90,9 @@ class UserProfilePage extends Component{
                           <h2 className='textStyle'>My Info </h2>
                           <Divider />
                           <div className='display-linebreak'></div>
-                          <div> {this.state.data.first_name} | {this.state.data.last_name} </div>
-                          <div> {this.state.data.email} </div>
-                          <div> @{this.state.data.username} </div>
+                          <div> {this.state.userdata.first_name} | {this.state.userdata.last_name} </div>
+                          <div> {this.state.userdata.email} </div>
+                          <div> @{this.state.userdata.username} </div>
                       </Segment>
                     </Grid.Column>
                     <Grid.Column width={9}>

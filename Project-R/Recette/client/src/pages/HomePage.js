@@ -20,7 +20,8 @@ class HomePage extends Component {
       results: [],
       value: '',
       isloggedin: false,
-      userdata: null,
+      session_data: null,
+      user_firstname: '',
     };
     this.AttemptLogin=this.AttemptLogin.bind(this);
     this.OpenProfilePage=this.OpenProfilePage.bind(this);
@@ -28,9 +29,25 @@ class HomePage extends Component {
 
   componentWillMount(){
     if(this.props.location.state){
-      this.setState({isloggedin: this.props.location.state.isloggedin, userdata: this.props.location.state.data})
+      this.setState({isloggedin: this.props.location.state.isloggedin, session_data: this.props.location.state.session_data})
     }
     this.getData();
+  }
+
+  componentDidMount(){
+    if(this.props.location.state.session_data){
+      this.getUserData();
+    }
+  }
+
+   async getUserData() {
+    let response = await ClientTools.getUserData({user_id:this.state.session_data.user_id, user_token: this.state.session_data.user_token});
+    console.log(response);
+    if(response!=null){
+      if(response.code===1){
+        this.setState({user_firstname: response.data.first_name})
+      }
+    }
   }
 
   async getData(){
@@ -79,7 +96,7 @@ class HomePage extends Component {
 
   render() {
     if(this.state.redirect){
-      return <Redirect push to={{pathname: this.state.page, state: { data: this.state.userdata}}} />;
+      return <Redirect push to={{pathname: this.state.page, state: { session_data: this.state.session_data}}} />;
     }
 
     return (
@@ -98,7 +115,7 @@ class HomePage extends Component {
             <div className="buttonBox">
               <div hidden={!this.state.isloggedin} className="profileBox" onClick={this.OpenProfilePage}>
                 <Image src='https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg' />
-                <h2>{this.state.userdata && this.state.userdata.first_name}</h2>
+                <h2>{this.state.user_firstname}</h2>
               </div>
               <div hidden={this.state.isloggedin}>
                 <Button color='teal' onClick={this.AttemptLogin}>SIGN UP / LOG IN</Button>
