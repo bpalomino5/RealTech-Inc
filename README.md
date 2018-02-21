@@ -36,6 +36,13 @@ What Got Done:
 
 ## Date: 2/16/18
 
+Goals for Fifth Sprint:
+
+ - Saving favorite recipes to profile
+ - Adding activity section to user page
+ - Saving preferences per user
+ - Start working on user function for adding recipes
+
 What Got Done:
 
  - Brandon: Partially debugged createUser function (not fully functional)
