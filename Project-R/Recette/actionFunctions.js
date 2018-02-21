@@ -80,12 +80,21 @@ module.exports = {
 			})
 		})
 	},
+	attemptUpdateBio:function(data,res,callback){
+		if(data.biography == undefined){
+			gen.structuralError(res, "Error.Base Headers/Parameters not met")
+		}
+		else
+			callback()
+	},
 	updateBio:function(data,res,callback){
-		serverFunctions.updateBio(data,function(bio_struct_err,bio_simple_err){
+		module.exports.attemptUpdateBio(data,res,function(){
+			serverFunctions.updateBio(data,function(bio_struct_err,bio_simple_err){
 			gen.handleErrors(res,bio_struct_err,bio_simple_err, function(){
-				callback("Biography Updated.", data)
+				callback("Biography Updated.")
 				})
 			})
+		})
 	},
 	attemptAddComment:function(data,res,callback){
 		if(data.recipe_id == undefined || data.message == undefined){

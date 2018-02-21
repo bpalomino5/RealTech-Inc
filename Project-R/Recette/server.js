@@ -54,8 +54,10 @@ app.get('/getComments', function(req,res){
 });
 
 app.post('/updateBio', function(req,res){
-	action.updateBio(req.body, res, function(status){
-		gen.validResponse(res, status)
+	gen.checkReqSpecific(req,res,function(data){
+		action.updateBio(data, res, function(message){
+			gen.validResponse(res, message)
+		})
 	})
 });
 
