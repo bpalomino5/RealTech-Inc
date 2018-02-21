@@ -33,6 +33,10 @@ class ClientTools{
     return this.rawPostRequest('/addComment',data);
   }
 
+  updateBio(data){
+    return this.rawPostRequest('/updateBio', data);
+  }
+
   getRecipes(){
     return fetch('/getRecipes', {
       accept: "application/json"
