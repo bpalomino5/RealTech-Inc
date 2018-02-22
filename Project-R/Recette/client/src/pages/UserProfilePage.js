@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Checkbox, List, Divider, Item, Image, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import { Button, Checkbox, Feed, Icon, List, Divider, Item, Image, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import '../layouts/UserProfilePage.css';
 import ClientTools from '../res/ClientTools';
 import { Redirect, Link } from 'react-router-dom';
@@ -63,10 +63,10 @@ class UserProfilePage extends Component{
         </div>
         <div className='container'>
           <div className='body'>
-            <h1 className='textStyle'>{this.state.userdata.first_name}, {this.state.userdata.last_name}</h1>
+            <h1 className='textStyle'>{this.state.userdata.first_name} {this.state.userdata.last_name}</h1>
             <div className='display-linebreak'></div>
             <div className='infoSection'>
-              <Grid columns={2} relaxed>
+              <Grid columns={3} relaxed>
                 <Grid.Column width={5}>
                   <Segment basic>
                       <h2 className='textStyle'>My Info </h2>
@@ -77,7 +77,57 @@ class UserProfilePage extends Component{
                       <div> @{this.state.userdata.username} </div>
                   </Segment>
                 </Grid.Column>
-                <Grid.Column width={9}>
+                <Grid.Column width = {5}>
+                  <Segment basic>
+                    <h2 className='textStyle'>My Activity</h2>
+                    <Divider />
+                    <div className='display-linebreak'></div>
+                    
+                      <Feed>
+                        <Feed.Event>
+                          <Feed.Label>
+                           <img src='/assets/images/avatar/small/elliot.jpg' />
+                          </Feed.Label>
+                        <Feed.Content>
+                          <Feed.Summary>
+                            <Feed.User>Elliot Fu</Feed.User> 
+                              <div className='activity-feed'>added you as a friend </div>
+                            <Feed.Date><div className='activity-feed'>1 Hour Ago</div></Feed.Date>
+                          </Feed.Summary>
+                          <Feed.Meta>
+                            <Feed.Like>
+                             <Icon color='teal' name='like' />
+                              <div className='activity-feed'>4 Likes</div>
+                            </Feed.Like>
+                          </Feed.Meta>
+                        </Feed.Content>
+                      </Feed.Event>
+
+                      <Feed.Event>
+                        <Feed.Label image='/assets/images/avatar/small/helen.jpg' />
+                        <Feed.Content>
+                          <Feed.Summary>
+                            <a>Helen Troy</a> <div className='activity-feed'>added</div> <a>2 new illustrations</a>
+                            <Feed.Date><div className='activity-feed'>4 days ago</div> </Feed.Date>
+                          </Feed.Summary>
+                          <Feed.Extra images>
+                            <a><img src='/assets/images/wireframe/image.png' /></a>
+                            <a><img src='/assets/images/wireframe/image.png' /></a>
+                          </Feed.Extra>
+                          <Feed.Meta>
+                            <Feed.Like>
+                              <Icon color='teal' name='like' />
+                              <div className='activity-feed'>1 Like</div>
+                            </Feed.Like>
+                          </Feed.Meta>
+                        </Feed.Content>
+                      </Feed.Event>
+                    </Feed>
+                    
+
+                  </Segment>
+                </Grid.Column>
+                <Grid.Column width={5}>
                   <Segment basic>
                     <h2 className='textStyle'>My Recipes</h2>
                     <Divider />
@@ -94,6 +144,7 @@ class UserProfilePage extends Component{
                   </Segment>
                 </Grid.Column>
               </Grid>
+
             </div>
           </div>
         </div>

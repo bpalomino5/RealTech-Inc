@@ -50,8 +50,8 @@ module.exports = {
 	validResponse:function(res, message="Valid", data={}){
 		res.json({code: 1, message: message, data: data});
 	},
-	/* Reponse Handler for calling appropriate response method
-	param {Reponse} res - the http response variable
+	/* Response Handler for calling appropriate response method
+	param {Response} res - the http response variable
 	param {structuralError} struct - strong error function
 	param {simpleError} simple - simple error function
 	param {callback} - successful route function
