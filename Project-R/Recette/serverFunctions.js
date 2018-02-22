@@ -174,7 +174,7 @@ module.exports = {
 	},
 	addFavorite:function(data,callback){
 		var sql = "INSERT INTO user_favorites (user_id, recipe_id) VALUES ("+ data.user_id +","+ data.recipe_id +")";
-		connectionPool.query(query, function(err, results){
+		connectionPool.query(sql, function(err, results){
 			if(err){
 				module.exports.printError("addFavorite","SQL Query Error: inserting new favorite",err,{data:data})
 				callback("An Internal Error Occured")
@@ -185,7 +185,7 @@ module.exports = {
 	},
 	addPreferences:function(data, callback){
 		var sql = "INSERT INTO user_preferences (user_id, style_id) VALUES ("+ data.user_id +","+ data.style_id +")";
-		connectionPool.query(query, function(err, results){
+		connectionPool.query(sql, function(err, results){
 			if(err){
 				module.exports.printError("addPreferences","SQL Query Error: inserting new preferences",err,{data:data})
 				callback("An Internal Error Occured")

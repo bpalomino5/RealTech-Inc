@@ -112,6 +112,22 @@ module.exports = {
 			})
 		})
 	},
+	attemptAddRecipe:function(data,res,callback){
+		if(data.name == undefined || data.instruction == undefined){ //Might want to include more checks
+			gen.structuralError(res, "Error.Base Headers/Parameters not met") 
+		}
+		else
+			callback()
+	},
+	// addRecipe:function(data,res,callback){
+	// 	module.exports.attemptAddRecipe(data,res,function(){
+	// 		serverFunctions.addRecipe(data,function(struct_err,simple_err){
+	// 			gen.handleErrors(res,struct_err,simple_err,function(){
+					
+	// 			})
+	// 		})
+	// 	})
+	// },
 	attemptAddPreferences:function(data,res,callback){
 		if(data.style_id == undefined || data.user_id == undefined)
 			gen.structuralError(res, "Error. Parameters not met")

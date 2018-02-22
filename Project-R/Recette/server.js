@@ -74,11 +74,11 @@ app.post('/addPreferences', function(req, res){
 });
 
 app.post('/addFavorite', function(req, res){
-	gen.checkReqSpecific(req, res, function(data){
+	 gen.checkReqSpecific(req, res, function(data){
 		action.addFavorite(data, res, function(message){
 			gen.validResponse(res, message)
 		})
-	})
+	 })
 });
 
 app.post('/updateBio', function(req,res){
