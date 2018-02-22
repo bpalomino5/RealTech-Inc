@@ -276,7 +276,7 @@ module.exports = {
 
 			rows.forEach( (row) => {
 				preferences.push({
-					style = row.style_id
+					style: row.style_id
 				});
 			});
 			callback(preferences);

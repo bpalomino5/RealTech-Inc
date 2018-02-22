@@ -120,7 +120,7 @@ module.exports = {
 	},
 	addPreferences:function(data,res,callback){
 		module.exports.attemptAddPreferences(data,res,function(){
-			serverFunctions.addPreferences(data,function(struct_err,simple_err, function(){
+			serverFunctions.addPreferences(data,function(struct_err,simple_err){
 				gen.handleErrors(res,struct_err,simple_err, function(){
 					callback("Preferences have been added")
 				})
