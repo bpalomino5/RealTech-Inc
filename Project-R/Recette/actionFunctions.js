@@ -112,6 +112,36 @@ module.exports = {
 			})
 		})
 	},
+	attemptAddPreferences:function(data,res,callback){
+		if(data.style_id == undefined || data.user_id == undefined)
+			gen.structuralError(res, "Error. Parameters not met")
+		else
+			callback()
+	},
+	addPreferences:function(data,res,callback){
+		module.exports.attemptAddPreferences(data,res,function(){
+			serverFunctions.addPreferences(data,function(struct_err,simple_err, function(){
+				gen.handleErrors(res,struct_err,simple_err, function(){
+					callback("Preferences have been added")
+				})
+			})
+		})
+	},
+	attemptAddFavorite:function(data,res,callback){
+		if(data.user_id == undefined || data.recipe_id == undefined)
+			gen.structuralError(res, "Error. Parameters not met")
+		else
+			callback()
+	},
+	addFavorite:function(data,res,callback){
+		module.exports.attemptAddFavorite(data,res,function(){
+			serverFunctions.addFavorite(data,function(struct_err,simple_err){
+				gen.handleErrors(res,struct_err,simple_err, function(){
+					callback("Favorite has been added")
+				})
+			})
+		})
+	},
 	getUserData:function(data,res,callback){
 		serverFunctions.getUserData(data.user_id, function(struct_err,simple_err, userData){
 			gen.handleErrors(res,struct_err,simple_err, function(){

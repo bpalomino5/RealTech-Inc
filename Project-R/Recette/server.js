@@ -53,6 +53,34 @@ app.get('/getComments', function(req,res){
 	})
 });
 
+app.get('/getPreferences', function(req, res){
+	serverFunctions.getPreferences(req.query.user_id, function(preferences){
+		res.json({preferences:preferences});
+	})
+});
+
+app.get('/getFavorites', function(req, res){
+	serverFunctions.getFavorites(req.query.user_id, function(favorites){
+		res.json({favorites:favorites});
+	})
+});
+
+app.post('/addPreferences', function(req, res){
+	gen.checkReqSpecific(req,res,function(data){
+		action.addPreferences(data, res, function(message){
+			gen.validResponse(res, message)
+		})
+	})
+});
+
+app.post('/addFavorite', function(req, res){
+	gen.checkReqSpecific(req, res, function(data){
+		action.addFavorite(data, res, function(message){
+			gen.validResponse(res, message)
+		})
+	})
+});
+
 app.post('/updateBio', function(req,res){
 	gen.checkReqSpecific(req,res,function(data){
 		action.updateBio(data, res, function(message){

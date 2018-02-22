@@ -172,6 +172,28 @@ module.exports = {
 			})
 		})
 	},
+	addFavorite:function(data,callback){
+		var sql = "INSERT INTO user_favorites (user_id, recipe_id) VALUES ("+ data.user_id +","+ data.recipe_id +")";
+		connectionPool.query(query, function(err, results){
+			if(err){
+				module.exports.printError("addFavorite","SQL Query Error: inserting new favorite",err,{data:data})
+				callback("An Internal Error Occured")
+			}
+			else
+				callback(false,false)
+		});
+	},
+	addPreferences:function(data, callback){
+		var sql = "INSERT INTO user_preferences (user_id, style_id) VALUES ("+ data.user_id +","+ data.style_id +")";
+		connectionPool.query(query, function(err, results){
+			if(err){
+				module.exports.printError("addPreferences","SQL Query Error: inserting new preferences",err,{data:data})
+				callback("An Internal Error Occured")
+			}
+			else
+				callback(false,false)
+		});
+	},
 	getRecipes:function(callback) {
 		var recipes = [];
 		connectionPool.query('SELECT recipe_id, name, image_location FROM recipes LIMIT 0, 29', (err,rows) => {
@@ -240,6 +262,44 @@ module.exports = {
 			});
 			callback(comments);
 		});
+	},
+	getPreferences:function(ID, callback) {
+		var preferences = [];
+		var sql = 'SELECT * FROM user_preferences WHERE user_id = ' + ID;
+		connectionPool.query(sql, function(err, rows) {
+			if (err)
+				module.exports.printError("getPreferences", "SQL Query Error: getting preferences", err, {ID:ID})
+			else if(rows.length==0){
+				module.exports.printError("getPreferences", "No Preferences", null, ID)
+				callback("no preferences listed")
+			}
+
+			rows.forEach( (row) => {
+				preferences.push({
+					style = row.style_id
+				});
+			});
+			callback(preferences);
+		});
+	},
+	getFavorites:function(ID, callback) {
+		var favorites = [];
+		var sql = 'SELECT * FROM user_favorites WHERE user_id = ' + ID;
+		connectionPool.query(sql, function(err, rows) {
+			if (err)
+				module.exports.printError("getFavorites", "SQL Query Error: getting favorites", err, {ID:ID})
+			else if(rows.length==0){
+				module.exports.printError("getFavorites", "No Favorites", null, ID)
+				callback("no favorites listed")
+			}
+
+			rows.forEach( (row) => {
+				favorites.push({
+					recipe: row.recipe_id
+				});
+			});
+			callback(favorites);
+		})
 	},
 	getTime:function(callback){
 		callback(Math.round((new Date()).getTime() / 1000))
