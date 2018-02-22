@@ -16,6 +16,42 @@ https://damp-garden-53847.herokuapp.com/
 
 # Meeting Notes
 
+## Date: 2/21/18
+
+What Got Done:
+
+ - Brandon: Worked on adding favorites
+ - Chris: Worked on saving preferences
+ - Kenneth: Fixed some database values
+ - Dongri: Fixed some recipes
+ - Daniel: Worked on server functions
+ 
+ Tasks for 2/22:
+ 
+ - Brandon: Work on addRecipe user page
+ - Chris: Worked on user page
+ - Kenneth: Work on server function with Dongri/Daniel
+ - Dongri: Work on server function with Kenneth/Daniel
+ - Daniel: Work on server function with Dongri/Kenneth
+
+## Date: 2/20/18
+
+What Got Done:
+
+ - Brandon: Connected comment functions to client
+ - Chris: Worked on user UI
+ - Kenneth: Added database tables
+ - Dongri: Added some recipes
+ - Daniel: Worked on server functions
+ 
+ Tasks for 2/21:
+ 
+ - Brandon: Work on adding favorites client side
+ - Chris: Work on saving preferences client side
+ - Kenneth: Fix some database values
+ - Dongri: Add/fix some recipes
+ - Daniel: Work on server functions
+
 ## Date: 2/19/18
 
 What Got Done:
