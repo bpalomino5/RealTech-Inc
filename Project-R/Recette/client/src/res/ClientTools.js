@@ -40,10 +40,6 @@ class ClientTools{
   getActivity(data){
     return this.rawPostRequest('/getActivity',data);
   }
-  
-  getFavorites(data){
-    return this.rawPostRequest('/getFavorites',data);
-  }
 
   getPreferences(data){
     return this.rawPostRequest('/getPreferences',data);
@@ -67,6 +63,14 @@ class ClientTools{
 
   getComments(recipe_id){
     return fetch(`/getComments?recipe_id=${encodeURIComponent(recipe_id)}`, {
+      accept: 'application/json'
+    })
+      .then(this.checkStatus)
+      .then(this.parseJSON)
+  }
+
+  getFavorites(user_id){
+    return fetch(`/getFavorites?user_id=${encodeURIComponent(user_id)}`, {
       accept: 'application/json'
     })
       .then(this.checkStatus)

@@ -11,7 +11,7 @@ class UserProfilePage extends Component{
       session_data: null,
       userdata: {username:'',email:'',first_name:'',last_name:'',biography:''},
       userActivity: {activity:''},
-      userFavorites: {},
+      userFavorites: [],
     };
 
     this.AttemptLogout=this.AttemptLogout.bind(this);
@@ -27,7 +27,7 @@ class UserProfilePage extends Component{
     if(this.props.location.state.session_data){
       this.getUserData();
       // this.getActivity();
-      // this.getFavorites();
+      this.getFavorites();
     }
   }
 
@@ -57,12 +57,10 @@ class UserProfilePage extends Component{
 
   
   async getFavorites() {
-    let response = await ClientTools.getFavorites({user_id:this.state.session_data.user_id, user_token: this.state.session_data.user_token});
-    console.log(response);
-    if(response!=null){
-      if(response.code===1){
-        this.setState({userFavorites: response.data})
-      }
+    let data = await ClientTools.getFavorites(this.state.session_data.user_id);
+    console.log(data);
+    if(data!=null){
+      this.setState({userFavorites: data.favorites})
     }
   }
   
@@ -113,9 +111,6 @@ class UserProfilePage extends Component{
                     
                       <Feed>
                         <Feed.Event>
-                          <Feed.Label>
-                           <img src='/assets/images/avatar/small/elliot.jpg' />
-                          </Feed.Label>
                         <Feed.Content>
                           <Feed.Summary>
                             <Feed.User>{this.state.userdata.username}</Feed.User> 
@@ -132,16 +127,12 @@ class UserProfilePage extends Component{
                       </Feed.Event>
 
                       <Feed.Event>
-                        <Feed.Label image='/assets/images/avatar/small/helen.jpg' />
                         <Feed.Content>
                           <Feed.Summary>
                             <a>{this.state.userdata.username}</a> <div className='activity-feed'>posted</div> <a>activity</a>
                             <Feed.Date><div className='activity-feed'>4 days ago</div> </Feed.Date>
                           </Feed.Summary>
-                          <Feed.Extra images>
-                            <a><img src='/assets/images/wireframe/image.png' /></a>
-                            <a><img src='/assets/images/wireframe/image.png' /></a>
-                          </Feed.Extra>
+                         
                           <Feed.Meta>
                             <Feed.Like>
                               <Icon color='teal' name='like' />
@@ -160,14 +151,14 @@ class UserProfilePage extends Component{
                     <h2 className='textStyle'>My Recipes</h2>
                     <Divider />
                       <div className='myRecipesList'>
-                        <List ordered>
-                          <List.Item as='a'>Favorite1</List.Item>
-                          <List.Item as='a'>Favorite2</List.Item>
-                          <List.Item as='a'>Favorite3</List.Item>
-                          <List.Item as='a'>Neopolitan Ice Cream</List.Item>
-                          <List.Item as='a'>Pavlova</List.Item>
-                          <List.Item as='a'>Belgian French Fries</List.Item>
-                        </List>
+                        <ul>
+                        {this.state.userFavorites.map(favorite => (
+                          <li>
+                            <Link to={{pathname:`/recipes/${favorite.recipe}`, state: { session_data: this.state.session_data}}}>{favorite.recipe}</Link>
+                          </li>
+                        ))}
+                        </ul>
+
                       </div>
                   </Segment>
                 </Grid.Column>

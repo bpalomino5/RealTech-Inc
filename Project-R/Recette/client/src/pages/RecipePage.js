@@ -19,11 +19,15 @@ class RecipePage extends Component{
 	}
 
 	componentWillMount() {
-		if(this.props.location.state.session_data){
+		if(this.props.location.state){
 			this.setState({session_data: this.props.location.state.session_data, user_firstname: this.props.location.state.user_firstname})
 		}
 		this.getRecipeData();
 		this.getRecipeComments();
+	}
+
+	componentDidMount(){
+
 	}
 
 	async getRecipeData() {
