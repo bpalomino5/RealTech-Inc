@@ -304,7 +304,7 @@ module.exports = {
 	getRecipesByIng:function(data, callback){
 		var recipes = [];
 		data.forEach( (row) => {
-			var sql = 'SELECT recipe_id, name, image_location FROM recipes where recipes.recipe_id = ' + row;
+			var sql = 'SELECT recipe_id, name, image_location FROM recipes WHERE recipes.recipe_id = ' + row;
 			connectionPool.query(sql, function(err, results) {
 				if (err)
 					module.exports.printError("getRecipesByIngredient", "SQL Query Error: could not get recipes", err, {})
@@ -317,6 +317,59 @@ module.exports = {
 			});
 		});
 		callback(recipes);
+	},
+	getRecipesByStyle:function(ID, callback){
+		module.exports.getRecipeIDsByStyle(ID, function(recipe_ids){
+			module.exports.getRecipesBySty(recipe_ids, function(recipes){
+				callback(recipes);
+			});
+		});
+	},
+	getRecipeIDsByStyle:function(ID, callback) {
+		var recipe_ids = [];
+		var sql = 'SELECT recipe_id FROM has_style WHERE style_id = ' + ID;
+		connectionPool.query(sql, function(err, rows) {
+			if (err)
+				module.exports.printError("getRecipesByStyle", "SQL Query Error: could not get recipes by style", err, {ID:ID})
+			
+			rows.forEach( (row) => {
+				recipe_ids.push(row.recipe_id);
+			});
+			callback(recipe_ids);
+		});
+	},
+	getRecipesBySty:function(data, callback){
+		var recipes = [];
+		data.forEach( (row) => {
+			var sql = 'SELECT recipe_id, name, image_location FROM recipes WHERE recipes.recipe_id = ' + row;
+			connectionPool.query(sql, function(err, results) {
+				if (err)
+					module.exports.printError("getRecipesByStyle", "SQL Query Error: could not get recipes", err, {})
+				
+				recipes.push({
+					id: row.recipe_id,
+					title: row.name,
+					image: row.image_location
+				});
+			});
+		});
+		callback(recipes);
+	},
+	getRecipesByOrigin:function(data, callback){
+		var recipes = [];	
+		var sql = 'SELECT recipe_id, name, image_location FROM recipes WHERE origin ='+ data.origin;
+		connectionPool.query(sql, (err, rows) => {
+			if (err)
+				module.exports.printError("getRecipesByOrigin", "SQL Query Error: could not get recipes", err, {})
+				
+				rows.forEach( (row) => {
+					id: row.recipe_id,
+					title: row.name,
+					image: row.image_location
+				});
+			});
+			callback(recipes);
+		})
 	},
 	getAllIngredients:function(callback) {
 		var ingredients = [];
