@@ -208,6 +208,21 @@ module.exports = {
 				callback(false, false)
 		});
 	},
+	getUnits:function(callback) {
+		var units = [];
+		connectionPool.query('SELECT * FROM unit', function(err, rows){
+			if (err)
+				module.exports.printError("getUnits","SQL Query Error: could not get units", err, {})
+
+			rows.forEach( (row) => {
+				units.push({
+					unit: row.unit_id,
+					name: row.unit_name
+				});
+			});
+			callback(units);
+		});
+	},
 	getRecipes:function(callback) {
 		var recipes = [];
 		connectionPool.query('SELECT recipe_id, name, image_location FROM recipes LIMIT 0, 29', (err,rows) => {

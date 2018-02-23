@@ -71,6 +71,12 @@ app.get('/getActivity',function(req,res){
 	})
 });
 
+app.get('/getUnits',function(req,res){
+	serverFunctions.getUnits(function(units){
+		res.json({units:units});
+	})
+});
+
 app.post('/addActivity',function(req,res){
 	gen.checkReqSpecific(req,res,function(data){
 		action.addActivity(data, res, function(message){
