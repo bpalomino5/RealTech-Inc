@@ -248,6 +248,20 @@ module.exports = {
 			callback(rows[0]);	//returns the only one row
 		});
 	},
+	getAllIngredients:function(callback) {
+		var ingredients = [];
+		connectionPool.query('SELECT ingredient_id, name FROM ingredients', (err,rows) =>{
+			if(err)
+				module.exports.printError("getAllIngredients","SQL Query Error: could not get ingredients", err, {})
+			rows.forEach( (row) => {
+				ingredients.push({
+					id: row.ingredient_id,
+						title: row.name
+				});
+			});
+			callback(ingredients);
+		});
+	},
 	getIngredients:function(ID, callback) {
 		var ingredients = [];	
 		var sql = 'SELECT has_ingredients.quantity, unit.unit_name, ingredients.name FROM has_ingredients INNER JOIN ingredients ON has_ingredients.ingredient_id=ingredients.ingredient_id inner join unit on has_ingredients.unit_id=unit.unit_id WHERE has_ingredients.recipe_id ='+ ID;

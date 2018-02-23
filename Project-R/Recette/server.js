@@ -53,6 +53,12 @@ app.get('/getComments', function(req,res){
 	})
 });
 
+app.get('/getIngredients', function(req,res){
+	serverFunctions.getAllIngredients(function(ingredients){
+		res.json({ingredients: ingredients});
+	})
+});
+
 app.get('/getPreferences', function(req, res){
 	serverFunctions.getPreferences(req.query.user_id, function(preferences){
 		res.json({preferences:preferences});
