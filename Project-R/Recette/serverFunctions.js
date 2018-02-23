@@ -273,7 +273,7 @@ module.exports = {
 		});
 	},
 	getRecipeByID:function(ID, callback) {
-		var sql = 'SELECT name, prep_time, cooking_time, style_id, image_location, instruction FROM recipes where recipes.recipe_id = ' + ID; // ID receieved from User Request, concatenate with sql command
+		var sql = 'SELECT name, prep_time, has_style.style_id, cooking_time, image_location, instruction FROM recipes, has_style WHERE recipes.recipe_id = ' + ID; // ID receieved from User Request, concatenate with sql command
 		connectionPool.query( sql, (err, rows) => {
 			if (err)
 				module.exports.printError("getRecipeByID", "SQL Query Error: could not get recipes by id", err, {ID:ID})
