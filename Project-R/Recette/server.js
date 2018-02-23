@@ -65,6 +65,20 @@ app.get('/getFavorites', function(req, res){
 	})
 });
 
+app.get('/getActivity',function(req,res){
+	serverFunctions.getActivity(req.query.user_id, function(activity){
+		res.json({activity:activity});
+	})
+});
+
+app.post('/addActivity',function(req,res){
+	gen.checkReqSpecific(req,res,function(data){
+		action.addActivity(data, res, function(message){
+			gen.validResponse(res,message)
+		})
+	})
+});
+
 app.post('/addPreferences', function(req, res){
 	gen.checkReqSpecific(req,res,function(data){
 		action.addPreferences(data, res, function(message){

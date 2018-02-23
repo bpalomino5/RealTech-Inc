@@ -184,14 +184,28 @@ module.exports = {
 		});
 	},
 	addPreferences:function(data, callback){
-		var sql = "INSERT INTO user_preferences (user_id, style_id) VALUES ("+ data.user_id +","+ data.style_id +")";
+		var rows = data.style_id;
+		rows.forEach( (row) => {
+			var sql = "INSERT INTO user_preferences (user_id, style_id) VALUES ("+ data.user_id +","+ row +")";
+			connectionPool.query(sql, function(err, results){
+				if(err){
+					module.exports.printError("addPreferences","SQL Query Error: inserting new preferences",err,{data:data})
+					callback("An Internal Error Occured")
+				}
+				else
+					callback(false,false)
+			});
+		});
+	},
+	addActivity:function(data, callback){
+		var sql = "INSERT INTO user_activity (user_id, message) VALUES ("+ data.user_id +","+ data.message +")";
 		connectionPool.query(sql, function(err, results){
 			if(err){
-				module.exports.printError("addPreferences","SQL Query Error: inserting new preferences",err,{data:data})
+				module.exports.printError("addActivity","SQL Query Error: inserting new activity",err,{data:data})
 				callback("An Internal Error Occured")
 			}
 			else
-				callback(false,false)
+				callback(false, false)
 		});
 	},
 	getRecipes:function(callback) {
@@ -300,6 +314,25 @@ module.exports = {
 			});
 			callback(favorites);
 		})
+	},
+	getActivity:function(ID, callback) {
+		var activity = [];
+		var sql = 'SELECT * FROM user_activity WHERE user_id = ' +ID;
+		connectionPool.query(sql, function(err, rows) {
+			if (err)
+				module.exports.printError("getActivity", "SQL Query Error: getting activity", err, {ID:ID})
+			else if(rows.length==0){
+				module.exports.printError("getActivity", "No Activity", null, ID)
+				callback("no favorites listed")
+			}
+
+			rows.forEach( (row) => {
+				activity.push({
+					activity: row.message
+				});
+			});
+			callback(activity);
+		});
 	},
 	getTime:function(callback){
 		callback(Math.round((new Date()).getTime() / 1000))

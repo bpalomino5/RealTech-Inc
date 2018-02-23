@@ -143,6 +143,21 @@ module.exports = {
 			})
 		})
 	},
+	attemptAddActivity:function(data,res,callback){
+		if(data.message == undefined || data.user_id == undefined)
+			gen.structuralError(res, "Error. Parameters not met")
+		else
+			callback()
+	},
+	addActivity:function(data,res,callback){
+		module.exports.attemptAddActivity(data,res,function(){
+			serverFunctions.addActivity(data,function(struct_err,simple_err){
+				gen.handleErrors(res,struct_err,simple_err,function(){
+					callback("Activity has been added")
+				})
+			})
+		})
+	},
 	attemptAddFavorite:function(data,res,callback){
 		if(data.user_id == undefined || data.recipe_id == undefined)
 			gen.structuralError(res, "Error. Parameters not met")
