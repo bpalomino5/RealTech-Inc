@@ -181,4 +181,18 @@ module.exports = {
 			})
 		})
 	},
+	getActivity:function(data,res,callback){
+		serverFunctions.getActivity(data.user_id, function(struct_err,simple_err, userActivity){
+			gen.handleErrors(res,struct_err,simple_err, function(){
+				callback("User ac request successful", userActivity)
+			})
+		})
+	},
+	getFavorites:function(data,res,callback){
+		serverFunctions.getFavorites(data.user_id, function(struct_err,simple_err, userFavorites){
+			gen.handleErrors(res,struct_err,simple_err, function(){
+				callback("User's favorites request successful", userFavorites)
+			})
+		})
+	},
 };

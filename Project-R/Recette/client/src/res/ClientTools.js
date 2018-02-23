@@ -34,7 +34,19 @@ class ClientTools{
   }
 
   updateBio(data){
-    return this.rawPostRequest('/updateBio', data);
+    return this.rawPostRequest('/updateBio',data);
+  }
+
+  getActivity(data){
+    return this.rawPostRequest('/getActivity',data);
+  }
+  
+  getFavorites(data){
+    return this.rawPostRequest('/getFavorites',data);
+  }
+
+  getPreferences(data){
+    return this.rawPostRequest('/getPreferences',data);
   }
 
   getRecipes(){

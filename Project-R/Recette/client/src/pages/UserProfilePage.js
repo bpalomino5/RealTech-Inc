@@ -10,6 +10,8 @@ class UserProfilePage extends Component{
     this.state = {
       session_data: null,
       userdata: {username:'',email:'',first_name:'',last_name:'',biography:''},
+      userActivity: {activity:''},
+      userFavorites: {},
     };
 
     this.AttemptLogout=this.AttemptLogout.bind(this);
@@ -22,8 +24,11 @@ class UserProfilePage extends Component{
   }
 
   componentDidMount(){
-    if(this.props.location.state.session_data)
+    if(this.props.location.state.session_data){
       this.getUserData();
+      // this.getActivity();
+      // this.getFavorites();
+    }
   }
 
   goToPage(page){
@@ -40,6 +45,27 @@ class UserProfilePage extends Component{
     }
   }
 
+  async getActivity() {
+    let response = await ClientTools.getActivity({user_id:this.state.session_data.user_id, user_token: this.state.session_data.user_token});
+    console.log(response);
+    if(response!=null){
+      if(response.code===1){
+        this.setState({userActivity: response.data})
+      }
+    }
+  }
+
+  
+  async getFavorites() {
+    let response = await ClientTools.getFavorites({user_id:this.state.session_data.user_id, user_token: this.state.session_data.user_token});
+    console.log(response);
+    if(response!=null){
+      if(response.code===1){
+        this.setState({userFavorites: response.data})
+      }
+    }
+  }
+  
   async AttemptLogout() {
     let response = await ClientTools.logout({user_token: this.state.session_data.user_token});
     console.log(response);
@@ -75,6 +101,8 @@ class UserProfilePage extends Component{
                       <div> {this.state.userdata.first_name} | {this.state.userdata.last_name} </div>
                       <div> {this.state.userdata.email} </div>
                       <div> @{this.state.userdata.username} </div>
+                      <h3> Biography </h3>
+                      <div> {this.state.userdata.biography} </div>
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width = {5}>
@@ -90,8 +118,8 @@ class UserProfilePage extends Component{
                           </Feed.Label>
                         <Feed.Content>
                           <Feed.Summary>
-                            <Feed.User>Elliot Fu</Feed.User> 
-                              <div className='activity-feed'>added you as a friend </div>
+                            <Feed.User>{this.state.userdata.username}</Feed.User> 
+                              <div className='activity-feed'>posted activity</div>
                             <Feed.Date><div className='activity-feed'>1 Hour Ago</div></Feed.Date>
                           </Feed.Summary>
                           <Feed.Meta>
@@ -107,7 +135,7 @@ class UserProfilePage extends Component{
                         <Feed.Label image='/assets/images/avatar/small/helen.jpg' />
                         <Feed.Content>
                           <Feed.Summary>
-                            <a>Helen Troy</a> <div className='activity-feed'>added</div> <a>2 new illustrations</a>
+                            <a>{this.state.userdata.username}</a> <div className='activity-feed'>posted</div> <a>activity</a>
                             <Feed.Date><div className='activity-feed'>4 days ago</div> </Feed.Date>
                           </Feed.Summary>
                           <Feed.Extra images>
@@ -133,9 +161,9 @@ class UserProfilePage extends Component{
                     <Divider />
                       <div className='myRecipesList'>
                         <List ordered>
-                          <List.Item as='a'>Pupusas</List.Item>
-                          <List.Item as='a'>Enchiladas</List.Item>
-                          <List.Item as='a'>Orange Chicken</List.Item>
+                          <List.Item as='a'>Favorite1</List.Item>
+                          <List.Item as='a'>Favorite2</List.Item>
+                          <List.Item as='a'>Favorite3</List.Item>
                           <List.Item as='a'>Neopolitan Ice Cream</List.Item>
                           <List.Item as='a'>Pavlova</List.Item>
                           <List.Item as='a'>Belgian French Fries</List.Item>
