@@ -53,6 +53,12 @@ app.get('/getComments', function(req,res){
 	})
 });
 
+app.get('/getIngredients', function(req,res){
+	serverFunctions.getAllIngredients(function(ingredients){
+		res.json({ingredients: ingredients});
+	})
+});
+
 app.get('/getPreferences', function(req, res){
 	serverFunctions.getPreferences(req.query.user_id, function(preferences){
 		res.json({preferences:preferences});
@@ -68,6 +74,20 @@ app.get('/getFavorites', function(req, res){
 app.get('/getActivity',function(req,res){
 	serverFunctions.getActivity(req.query.user_id, function(activity){
 		res.json({activity:activity});
+	})
+});
+
+app.get('/getUnits',function(req,res){
+	serverFunctions.getUnits(function(units){
+		res.json({units:units});
+	})
+});
+
+app.post('/addIngredient',function(req,res){
+	gen.checkReqSpecific(req,res,function(data){
+		action.addIngredient(data,res,function(message){
+			gen.validResponse(res,message)
+		})
 	})
 });
 

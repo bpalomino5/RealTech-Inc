@@ -159,6 +159,17 @@ module.exports = {
 				callback(false,false)
 		})
 	},
+	addIngredient:function(data, callback){
+		var sql = "INSERT INTO ingredients (ingredient_id, name) VALUES ("+ data.ingredient_id +",'"+ data.name +"')";
+		connectionPool.query(sql, function(err,results){
+			if(err){
+				module.exports.printError("addIngredient","SQL Query Error: inserting new ingredient",err,{data:data})
+				callback("An Internal Error Occured")
+			}
+			else
+				callback(false, false)
+		});
+	},
 	addComment:function(data,callback){
 		module.exports.getTime(function(time){
 			var query_insert_comment = "INSERT INTO recipe_comments (user_id, recipe_id, text) VALUES ("+ data.user_id +","+ data.recipe_id +",'"+data.message+"')";
@@ -198,7 +209,7 @@ module.exports = {
 		});
 	},
 	addActivity:function(data, callback){
-		var sql = "INSERT INTO user_activity (user_id, message) VALUES ("+ data.user_id +","+ data.message +")";
+		var sql = "INSERT INTO user_activities (user_id, message) VALUES ("+ data.user_id +",'"+ data.message +"')";
 		connectionPool.query(sql, function(err, results){
 			if(err){
 				module.exports.printError("addActivity","SQL Query Error: inserting new activity",err,{data:data})
@@ -206,6 +217,21 @@ module.exports = {
 			}
 			else
 				callback(false, false)
+		});
+	},
+	getUnits:function(callback) {
+		var units = [];
+		connectionPool.query('SELECT * FROM unit', function(err, rows){
+			if (err)
+				module.exports.printError("getUnits","SQL Query Error: could not get units", err, {})
+
+			rows.forEach( (row) => {
+				units.push({
+					unit: row.unit_id,
+					name: row.unit_name
+				});
+			});
+			callback(units);
 		});
 	},
 	getRecipes:function(callback) {
@@ -231,6 +257,20 @@ module.exports = {
 				module.exports.printError("getRecipeByID", "SQL Query Error: could not get recipes by id", err, {ID:ID})
 
 			callback(rows[0]);	//returns the only one row
+		});
+	},
+	getAllIngredients:function(callback) {
+		var ingredients = [];
+		connectionPool.query('SELECT ingredient_id, name FROM ingredients', (err,rows) =>{
+			if(err)
+				module.exports.printError("getAllIngredients","SQL Query Error: could not get ingredients", err, {})
+			rows.forEach( (row) => {
+				ingredients.push({
+					id: row.ingredient_id,
+						title: row.name
+				});
+			});
+			callback(ingredients);
 		});
 	},
 	getIngredients:function(ID, callback) {
