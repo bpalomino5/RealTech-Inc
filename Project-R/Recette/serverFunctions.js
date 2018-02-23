@@ -198,7 +198,7 @@ module.exports = {
 		});
 	},
 	addActivity:function(data, callback){
-		var sql = "INSERT INTO user_activity (user_id, message) VALUES ("+ data.user_id +","+ data.message +")";
+		var sql = "INSERT INTO user_activities (user_id, message) VALUES ("+ data.user_id +",'"+ data.message +"')";
 		connectionPool.query(sql, function(err, results){
 			if(err){
 				module.exports.printError("addActivity","SQL Query Error: inserting new activity",err,{data:data})
