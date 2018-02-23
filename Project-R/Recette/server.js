@@ -83,9 +83,18 @@ app.get('/getUnits',function(req,res){
 	})
 });
 
+
 app.post('/addIngredient',function(req,res){
 	gen.checkReqSpecific(req,res,function(data){
 		action.addIngredient(data,res,function(message){
+			gen.validResponse(res,message)
+		})
+	})
+});
+
+app.post('/addUnit', function(req,res){
+	gen.checkReqSpecific(req,res,function(data){
+		action.addUnit(data,res,function(message){
 			gen.validResponse(res,message)
 		})
 	})

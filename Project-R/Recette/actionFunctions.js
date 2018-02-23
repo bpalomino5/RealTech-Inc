@@ -188,6 +188,21 @@ module.exports = {
 			})
 		})
 	},
+	attemptAddUnit:function(data,res,callback){
+		if(data.unit_name == undefined)
+			gen.structuralError(res,"Error. Parameters not met")
+		else
+			callback()
+	},
+	addUnit:function(data,res,callback){
+		module.exports.attemptAddUnit(data,res,function(){
+			serverFunctions.addUnit(data,function(struct_err,simple_err){
+				gen.handleErrors(res,struct_err,simple_err,function(){
+					callback("Unit has been added")
+				})
+			})
+		})
+	},
 	getUserData:function(data,res,callback){
 		serverFunctions.getUserData(data.user_id, function(struct_err,simple_err, userData){
 			gen.handleErrors(res,struct_err,simple_err, function(){
