@@ -173,6 +173,21 @@ module.exports = {
 			})
 		})
 	},
+	attemptAddIngredient:function(data,res,callback){
+		if(data.ingredient_id == undefined || data.name == undefined)
+			gen.structuralError(res,"Error. Parameters not met")
+		else
+			callback()
+	},
+	addIngredient:function(data,res,callback){
+		module.exports.attemptAddIngredient(data,res,function(){
+			serverFunctions.addIngredient(data,function(struct_err,simple_err){
+				gen.handleErrors(res,struct_err,simple_err,function(){
+					callback("Ingredient has been added")
+				})
+			})
+		})
+	},
 	getUserData:function(data,res,callback){
 		serverFunctions.getUserData(data.user_id, function(struct_err,simple_err, userData){
 			gen.handleErrors(res,struct_err,simple_err, function(){

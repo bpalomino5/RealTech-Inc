@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Search, Button, Image } from 'semantic-ui-react';
+import { Search, Button, Image, Menu } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 
@@ -22,6 +22,7 @@ class HomePage extends Component {
       isloggedin: false,
       session_data: null,
       user_firstname: '',
+      activeItem: 'home',
     };
     this.AttemptLogin=this.AttemptLogin.bind(this);
     this.OpenProfilePage=this.OpenProfilePage.bind(this);
@@ -95,6 +96,8 @@ class HomePage extends Component {
     this.goToPage('/userprofile')
   }
 
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
   render() {
     if(this.state.redirect){
       return <Redirect push to={{pathname: this.state.page, state: { session_data: this.state.session_data, user_firstname: this.state.user_firstname}}} />;
@@ -102,16 +105,17 @@ class HomePage extends Component {
 
     return (
       <div className="Home">
-        <div className="headerContainer">
-          <h1 className="Home-title">Recette</h1>
-          <Search 
-              className="searchBox"
-              loading={this.state.isLoading}
-              onResultSelect={this.handleResultSelect}
-              onSearchChange={this.handleSearchChange}
-              results={this.state.results}
-              value={this.state.value}
-              aligned='right'
+        <Menu fixed='top'>
+          <div className="headerContainer">
+            <h1 className="Home-title">Recette</h1>
+            <Search 
+                className="searchBox"
+                loading={this.state.isLoading}
+                onResultSelect={this.handleResultSelect}
+                onSearchChange={this.handleSearchChange}
+                results={this.state.results}
+                value={this.state.value}
+                aligned='right'
             />
             <div className="buttonBox">
               <div hidden={!this.state.isloggedin} className="profileBox" onClick={this.OpenProfilePage}>
@@ -122,7 +126,8 @@ class HomePage extends Component {
                 <Button color='teal' onClick={this.AttemptLogin}>SIGN UP / LOG IN</Button>
               </div>
             </div>
-        </div>
+          </div>
+        </Menu>
         <div className="Home-intro">
           <div className='recipeContainer'>
             <div className='recipe-header'>

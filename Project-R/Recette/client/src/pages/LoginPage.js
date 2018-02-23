@@ -50,7 +50,7 @@ class LoginPage extends Component{
           verticalAlign='middle'
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as='h2' color='teal' textAlign='center'>
+            <Header as='h2' textAlign='center' inverted>
               Log-in to your account
             </Header>
             <Form 
