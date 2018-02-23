@@ -41,6 +41,12 @@ app.get('/getRecipeByID', function(req,res){
 	})
 });
 
+app.get('/getRecipesByIngredient', function(req,res){
+	serverFunctions.getRecipesByIngredient(req.query.id, function(recipeInfo){
+		res.json({recipeInfo:recipeInfo})
+	})
+});
+
 app.get('/getRecipes', function(req,res){
 	serverFunctions.getRecipes(function(recipes){
 		res.json({recipes: recipes});
@@ -82,7 +88,6 @@ app.get('/getUnits',function(req,res){
 		res.json({units:units});
 	})
 });
-
 
 app.post('/addIngredient',function(req,res){
 	gen.checkReqSpecific(req,res,function(data){

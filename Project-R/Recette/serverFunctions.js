@@ -263,8 +263,8 @@ module.exports = {
 				module.exports.printError("getRecipes", "SQL Query Error: could not get recipes", err, {})
 
 			rows.forEach( (row) => {
-		  	recipes.push({
-		  		id: row.recipe_id,
+		  		recipes.push({
+		  			id: row.recipe_id,
 					title: row.name,
 					image: row.image_location // may need to change to row.image;
 				});
@@ -280,6 +280,43 @@ module.exports = {
 
 			callback(rows[0]);	//returns the only one row
 		});
+	},
+	getRecipesByIngredient:function(ID, callback){
+		module.exports.getRecipeIDsByIngredient(ID, function(recipe_ids){
+			module.exports.getRecipesByIng(recipe_ids, function(recipes){
+				callback(recipes);
+			});
+		});
+	},
+	getRecipeIDsByIngredient:function(ID, callback) {
+		var recipe_ids = [];
+		var sql = 'SELECT recipe_id FROM has_ingredients WHERE ingredient_id = ' + ID;
+		connectionPool.query(sql, function(err, rows) {
+			if (err)
+				module.exports.printError("getRecipeByIngredient", "SQL Query Error: could not get recipes by ingredient", err, {ID:ID})
+			
+			rows.forEach( (row) => {
+				recipe_ids.push(row.recipe_id);
+			});
+			callback(recipe_ids);
+		});
+	},
+	getRecipesByIng:function(data, callback){
+		var recipes = [];
+		data.forEach( (row) => {
+			var sql = 'SELECT recipe_id, name, image_location FROM recipes where recipes.recipe_id = ' + row;
+			connectionPool.query(sql, function(err, results) {
+				if (err)
+					module.exports.printError("getRecipesByIngredient", "SQL Query Error: could not get recipes", err, {})
+				
+				recipes.push({
+					id: row.recipe_id,
+					title: row.name,
+					image: row.image_location
+				});
+			});
+		});
+		callback(recipes);
 	},
 	getAllIngredients:function(callback) {
 		var ingredients = [];
