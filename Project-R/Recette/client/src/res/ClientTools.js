@@ -37,10 +37,6 @@ class ClientTools{
     return this.rawPostRequest('/updateBio',data);
   }
 
-  getActivity(data){
-    return this.rawPostRequest('/getActivity',data);
-  }
-
   getPreferences(data){
     return this.rawPostRequest('/getPreferences',data);
   }
@@ -71,6 +67,14 @@ class ClientTools{
 
   getFavorites(user_id){
     return fetch(`/getFavorites?user_id=${encodeURIComponent(user_id)}`, {
+      accept: 'application/json'
+    })
+      .then(this.checkStatus)
+      .then(this.parseJSON)
+  }
+
+  getActivity(user_id){
+    return fetch(`/getActivity?user_id=${encodeURIComponent(user_id)}`, {
       accept: 'application/json'
     })
       .then(this.checkStatus)

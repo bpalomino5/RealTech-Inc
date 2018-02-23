@@ -10,7 +10,7 @@ class UserProfilePage extends Component{
     this.state = {
       session_data: null,
       userdata: {username:'',email:'',first_name:'',last_name:'',biography:''},
-      userActivity: {activity:''},
+      userActivity: [],
       userFavorites: [],
     };
 
@@ -26,7 +26,7 @@ class UserProfilePage extends Component{
   componentDidMount(){
     if(this.props.location.state.session_data){
       this.getUserData();
-      // this.getActivity();
+      this.getActivity();
       this.getFavorites();
     }
   }
@@ -46,12 +46,10 @@ class UserProfilePage extends Component{
   }
 
   async getActivity() {
-    let response = await ClientTools.getActivity({user_id:this.state.session_data.user_id, user_token: this.state.session_data.user_token});
+    let response = await ClientTools.getActivity(this.state.session_data.user_id);
     console.log(response);
     if(response!=null){
-      if(response.code===1){
-        this.setState({userActivity: response.data})
-      }
+      this.setState({userActivity: response.activity})
     }
   }
 
@@ -108,42 +106,26 @@ class UserProfilePage extends Component{
                     <h2 className='textStyle'>My Activity</h2>
                     <Divider />
                     <div className='display-linebreak'></div>
-                    
                       <Feed>
-                        <Feed.Event>
-                        <Feed.Content>
-                          <Feed.Summary>
-                            <Feed.User>{this.state.userdata.username}</Feed.User> 
-                              <div className='activity-feed'>posted activity</div>
-                            <Feed.Date><div className='activity-feed'>1 Hour Ago</div></Feed.Date>
-                          </Feed.Summary>
-                          <Feed.Meta>
-                            <Feed.Like>
-                             <Icon color='teal' name='like' />
-                              <div className='activity-feed'>4 Likes</div>
-                            </Feed.Like>
-                          </Feed.Meta>
-                        </Feed.Content>
-                      </Feed.Event>
+                        {this.state.userActivity.map(activity => (
+                          <Feed.Event>
+                            <Feed.Content>
+                              <Feed.Summary>
+                                <Feed.User>{this.state.userdata.username}</Feed.User> 
+                                  <div className='activity-feed'>{activity.activity}</div>
+                                <Feed.Date><div className='activity-feed'>1 Hour Ago</div></Feed.Date>
+                              </Feed.Summary>
+                              <Feed.Meta>
+                                <Feed.Like>
+                                 <Icon color='teal' name='like' />
+                                  <div className='activity-feed'>4 Likes</div>
+                                </Feed.Like>
+                              </Feed.Meta>
+                            </Feed.Content>
+                          </Feed.Event>
 
-                      <Feed.Event>
-                        <Feed.Content>
-                          <Feed.Summary>
-                            <a>{this.state.userdata.username}</a> <div className='activity-feed'>posted</div> <a>activity</a>
-                            <Feed.Date><div className='activity-feed'>4 days ago</div> </Feed.Date>
-                          </Feed.Summary>
-                         
-                          <Feed.Meta>
-                            <Feed.Like>
-                              <Icon color='teal' name='like' />
-                              <div className='activity-feed'>1 Like</div>
-                            </Feed.Like>
-                          </Feed.Meta>
-                        </Feed.Content>
-                      </Feed.Event>
+                        ))}                      
                     </Feed>
-                    
-
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={5}>

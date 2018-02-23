@@ -368,7 +368,7 @@ module.exports = {
 	},
 	getActivity:function(ID, callback) {
 		var activity = [];
-		var sql = 'SELECT * FROM user_activity WHERE user_id = ' +ID;
+		var sql = 'SELECT * FROM user_activities WHERE user_id = ' +ID;
 		connectionPool.query(sql, function(err, rows) {
 			if (err)
 				module.exports.printError("getActivity", "SQL Query Error: getting activity", err, {ID:ID})
