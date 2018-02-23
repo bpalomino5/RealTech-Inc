@@ -92,6 +92,14 @@ app.post('/addIngredient',function(req,res){
 	})
 });
 
+app.post('/addStyle', function(req,res){
+	gen.checkReqSpecific(req,res,function(data){
+		action.addUnit(data,res,function(message){
+			gen.validResponse(res,message)
+		})
+	})
+});
+
 app.post('/addUnit', function(req,res){
 	gen.checkReqSpecific(req,res,function(data){
 		action.addUnit(data,res,function(message){

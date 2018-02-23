@@ -188,6 +188,21 @@ module.exports = {
 			})
 		})
 	},
+	attemptAddStyle:function(data,res,callback){
+		if(data.style_name == undefined)
+			gen.structuralError(res,"Error. Parameters not met")
+		else
+			callback()
+	},
+	addStyle:function(data,res,callback){
+		module.exports.attemptAddStyle(data,res,function(){
+			serverFunctions.addStyle(data,function(struct_err,simple_err){
+				gen.handleErrors(res,struct_err,simple_err,function(){
+					callback("Style has been added")
+				})
+			})
+		})
+	},
 	attemptAddUnit:function(data,res,callback){
 		if(data.unit_name == undefined)
 			gen.structuralError(res,"Error. Parameters not met")

@@ -170,6 +170,17 @@ module.exports = {
 				callback(false, false)
 		});
 	},
+	addStyle:function(data,callback){
+		var sql = "INSERT INTO style (name) VALUES ('" + data.style_name + "')";
+		connectionPool.query(sql,function(err,results){
+			if(err){
+				module.exports.printError("addStyle","SQL Query Error: inserting new style",err,{data:data})
+				callback("An Internal Error Occured")
+			}
+			else
+				callback(false,false)
+		})
+	},
 	addUnit:function(data,callback){
 		var sql = "INSERT INTO unit (unit_name) VALUES ('" + data.unit_name + "')";
 		connectionPool.query(sql,function(err,results){
