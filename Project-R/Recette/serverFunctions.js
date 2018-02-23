@@ -355,14 +355,15 @@ module.exports = {
 		});
 		callback(recipes);
 	},
-	getRecipesByOrigin:function(data, callback){
+	getRecipesByOrigin:function(origin, callback){
 		var recipes = [];	
-		var sql = 'SELECT recipe_id, name, image_location FROM recipes WHERE origin ='+ data.origin;
+		var sql = 'SELECT recipe_id, name, image_location FROM recipes WHERE origin ='+ origin;
 		connectionPool.query(sql, (err, rows) => {
 			if (err)
 				module.exports.printError("getRecipesByOrigin", "SQL Query Error: could not get recipes", err, {})
 				
-				rows.forEach( (row) => {
+			rows.forEach( (row) => {
+				recipes.push({
 					id: row.recipe_id,
 					title: row.name,
 					image: row.image_location

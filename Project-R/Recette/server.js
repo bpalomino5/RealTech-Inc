@@ -54,7 +54,7 @@ app.get('/getRecipesByStyle', function(req,res){
 });
 
 app.get('/getRecipesByOrigin', function(req,res){
-	serverFunctions.getRecipesByOrigin(data, function(recipeInfo){
+	serverFunctions.getRecipesByOrigin(req.query.origin, function(recipeInfo){
 		res.json({recipeInfo:recipeInfo})
 	})
 });
