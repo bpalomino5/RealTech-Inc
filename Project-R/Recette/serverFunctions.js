@@ -159,6 +159,17 @@ module.exports = {
 				callback(false,false)
 		})
 	},
+	addIngredient:function(data, callback){
+		var sql = "INSERT INTO ingredients (ingredient_id, name) VALUES ("+ data.ingredient_id +",'"+ data.name +"')";
+		connectionPool.query(sql, function(err,results){
+			if(err){
+				module.exports.printError("addIngredient","SQL Query Error: inserting new ingredient",err,{data:data})
+				callback("An Internal Error Occured")
+			}
+			else
+				callback(false, false)
+		});
+	},
 	addComment:function(data,callback){
 		module.exports.getTime(function(time){
 			var query_insert_comment = "INSERT INTO recipe_comments (user_id, recipe_id, text) VALUES ("+ data.user_id +","+ data.recipe_id +",'"+data.message+"')";
