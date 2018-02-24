@@ -145,10 +145,15 @@ class UserProfilePage extends Component{
                       <div className='myRecipesList'>
                         <ul>
                         {this.state.userFavorites.map(favorite => (
-                          <li>
-                            <Link to={{pathname:`/recipes/${favorite.recipe}`, state: { session_data: this.state.session_data}}}>{favorite.recipe}</Link>
-                          </li>
-                        ))}
+                            <List animated verticalAlign='middle'>
+                              <List.Item>
+                               <List.Icon name='food' size='large' color='teal' circular='true' verticalAlign='middle' />
+                                <List.Content>
+                                  <List.Header><div className='activity-feed'><Link to={{pathname:`/recipes/${favorite.recipe}`, state: { session_data: this.state.session_data}}}>{favorite.recipe}</Link></div></List.Header>
+                               </List.Content>
+                              </List.Item>        
+                            </List>
+                              ))}
                         </ul>
 
                       </div>
@@ -164,7 +169,16 @@ class UserProfilePage extends Component{
                           <Feed.Event>
                             <Feed.Content>
                               <Feed.Summary>
-                                  <div className='activity-feed'>{preferences.style}</div>
+                                <List animated verticalAlign='middle'>
+                                  <List.Item>
+                                  <List.Icon name='star' size='large' color='teal' circular='true' verticalAlign='middle' />
+                                    <List.Content>
+
+                                      <List.Header><div className='activity-feed'>{preferences.style}</div></List.Header>
+                                    </List.Content>
+                                  </List.Item>    
+                                  
+                                </List>
                               </Feed.Summary>
                             </Feed.Content>
                           </Feed.Event>
