@@ -1,6 +1,7 @@
 var db = require('./DBPoolConnection.js')
 var connectionPool = db.getPool();
 var bcrypt = require('bcrypt');
+var async = require('async');
 
 module.exports = {
 	checkUsername:function(user_name, callback){
@@ -303,20 +304,28 @@ module.exports = {
 	},
 	getRecipesByIng:function(data, callback){
 		var recipes = [];
-		data.forEach( (row) => {
-			var sql = 'SELECT recipe_id, name, image_location FROM recipes WHERE recipes.recipe_id = ' + row;
+		async.forEachOf(data, function(recipe_id, i, inner_callback){
+			var sql = 'SELECT recipe_id, name, image_location FROM recipes WHERE recipes.recipe_id = ' + recipe_id;
 			connectionPool.query(sql, function(err, results) {
-				if (err)
+				if (err){
 					module.exports.printError("getRecipesByIngredient", "SQL Query Error: could not get recipes", err, {})
-				
-				recipes.push({
-					id: row.recipe_id,
-					title: row.name,
-					image: row.image_location
-				});
+					inner_callback(err)
+				}
+				else{
+					recipes.push({
+						id: results[0].recipe_id,
+						title: results[0].name,
+						image: results[0].image_location
+					});
+					inner_callback(null);
+				}
 			});
+		}, function(err) {
+			if (err)
+				module.exports.printError("getRecipesByIng","some error",err,data);
+			else
+				callback(recipes)
 		});
-		callback(recipes);
 	},
 	getRecipesByStyle:function(ID, callback){
 		module.exports.getRecipeIDsByStyle(ID, function(recipe_ids){
