@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Checkbox, Feed, Icon, List, Divider, Item, Image, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import { Button, Checkbox, Feed, Card, Icon, List, Divider, Item, Image, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import '../layouts/UserProfilePage.css';
 import ClientTools from '../res/ClientTools';
 import { Redirect, Link } from 'react-router-dom';
@@ -95,23 +95,46 @@ class UserProfilePage extends Component{
         </div>
         <div className='container'>
           <div className='body'>
-            <h1 className='textStyle'>{this.state.userdata.first_name} {this.state.userdata.last_name}</h1>
-            <div className='display-linebreak'></div>
+            <h1 className='textStyle'>
+            </h1>
+
             <div className='infoSection'>
+            <Card centered='true' color = 'teal'>
+               <Icon name='user' />
+              <Card.Content>
+                <Card.Header>
+                  {this.state.userdata.first_name} {this.state.userdata.last_name}
+                </Card.Header>
+                <Card.Meta>
+                  <span className='date'>
+                    Joined in 2018
+                  </span>
+                </Card.Meta>
+                <Card.Description>
+                  {this.state.userdata.biography}
+                </Card.Description>
+              </Card.Content>
+              <Card.Content extra>
+                <a>
+                  <Icon name='food' color='teal' />
+                  {this.state.userFavorites.length} Favorite Recipes
+                </a>
+              </Card.Content>
+            </Card>
               <Grid columns={4} relaxed>
-                <Grid.Column width={5}>
+                <Grid.Column width={4}>
                   <Segment basic>
                       <h2 className='textStyle'>My Info </h2>
                       <Divider />
                       <div className='display-linebreak'></div>
-                      <div> {this.state.userdata.first_name} | {this.state.userdata.last_name} </div>
-                      <div> {this.state.userdata.email} </div>
-                      <div> @{this.state.userdata.username} </div>
+                      <div><Icon name='user' color='teal' circular='true' /> {this.state.userdata.first_name} {this.state.userdata.last_name} </div>
+                      <div><Icon name='mail' color='teal' circular='true' /> {this.state.userdata.email} </div>
+                      <div><Icon name='at' color='teal' circular='true' /> {this.state.userdata.username} </div>
                       <h3> Biography </h3>
                       <div> {this.state.userdata.biography} </div>
                   </Segment>
                 </Grid.Column>
-                <Grid.Column width = {5}>
+                <Grid.Column width = {4}>
                   <Segment basic>
                     <h2 className='textStyle'>My Activity</h2>
                     <Divider />
@@ -138,7 +161,7 @@ class UserProfilePage extends Component{
                     </Feed>
                   </Segment>
                 </Grid.Column>
-                <Grid.Column width={5}>
+                <Grid.Column width={4}>
                   <Segment basic>
                     <h2 className='textStyle'>My Recipes</h2>
                     <Divider />
@@ -159,7 +182,7 @@ class UserProfilePage extends Component{
                       </div>
                   </Segment>
                 </Grid.Column>
-                 <Grid.Column width = {5}>
+                 <Grid.Column width = {4}>
                   <Segment basic>
                     <h2 className='textStyle'>My Preferences</h2>
                     <Divider />
