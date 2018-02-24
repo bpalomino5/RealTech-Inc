@@ -37,10 +37,6 @@ class ClientTools{
     return this.rawPostRequest('/updateBio',data);
   }
 
-  getPreferences(data){
-    return this.rawPostRequest('/getPreferences',data);
-  }
-
   getRecipes(){
     return fetch('/getRecipes', {
       accept: "application/json"
@@ -73,6 +69,15 @@ class ClientTools{
       .then(this.parseJSON)
   }
 
+  getPreferences(user_id){
+    return fetch(`/getPreferences?user_id=${encodeURIComponent(user_id)}`, {
+      accept: 'application/json'
+    })
+      .then(this.checkStatus)
+      .then(this.parseJSON)
+  }
+
+
   getActivity(user_id){
     return fetch(`/getActivity?user_id=${encodeURIComponent(user_id)}`, {
       accept: 'application/json'
@@ -80,7 +85,7 @@ class ClientTools{
       .then(this.checkStatus)
       .then(this.parseJSON)
   }
-
+ 
   checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
       return response;

@@ -12,6 +12,7 @@ class UserProfilePage extends Component{
       userdata: {username:'',email:'',first_name:'',last_name:'',biography:''},
       userActivity: [],
       userFavorites: [],
+      userPreferences: [],
     };
 
     this.AttemptLogout=this.AttemptLogout.bind(this);
@@ -28,11 +29,20 @@ class UserProfilePage extends Component{
       this.getUserData();
       this.getActivity();
       this.getFavorites();
+      this.getPreferences();
     }
   }
 
   goToPage(page){
     this.setState({redirect: true, page: page})
+  }
+
+  async getPreferences() {
+    let data = await ClientTools.getPreferences(this.state.session_data.user_id);
+    console.log(data);
+    if(data!=null){
+      this.setState({userPreferences: data.preferences})
+    }
   }
 
   async getUserData() {
@@ -88,7 +98,7 @@ class UserProfilePage extends Component{
             <h1 className='textStyle'>{this.state.userdata.first_name} {this.state.userdata.last_name}</h1>
             <div className='display-linebreak'></div>
             <div className='infoSection'>
-              <Grid columns={3} relaxed>
+              <Grid columns={4} relaxed>
                 <Grid.Column width={5}>
                   <Segment basic>
                       <h2 className='textStyle'>My Info </h2>
@@ -144,6 +154,26 @@ class UserProfilePage extends Component{
                       </div>
                   </Segment>
                 </Grid.Column>
+                 <Grid.Column width = {5}>
+                  <Segment basic>
+                    <h2 className='textStyle'>My Preferences</h2>
+                    <Divider />
+                    <div className='display-linebreak'></div>
+                      <Feed>
+                        {this.state.userPreferences.map(preferences => (
+                          <Feed.Event>
+                            <Feed.Content>
+                              <Feed.Summary>
+                                  <div className='activity-feed'>{preferences.style}</div>
+                              </Feed.Summary>
+                            </Feed.Content>
+                          </Feed.Event>
+
+                        ))}                      
+                    </Feed>
+                  </Segment>
+                </Grid.Column>
+
               </Grid>
 
             </div>

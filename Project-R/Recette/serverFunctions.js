@@ -446,6 +446,8 @@ module.exports = {
 					style: row.style_id
 				});
 			});
+			// console.log("Preferences output: ");
+			// console.log( preferences );
 			callback(preferences);
 		});
 	},
