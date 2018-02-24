@@ -93,7 +93,7 @@ class HomePage extends Component {
   }
 
   OpenProfilePage() {
-    this.goToPage('/userprofile')
+    this.goToPage(`/profiles/${this.state.session_data.user_id}`)
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })

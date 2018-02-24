@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Checkbox, Feed, Card, Icon, List, Divider, Item, Image, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import { Button, Feed, Card, Icon, List, Divider, Grid, Segment } from 'semantic-ui-react';
 import '../layouts/UserProfilePage.css';
 import ClientTools from '../res/ClientTools';
 import { Redirect, Link } from 'react-router-dom';

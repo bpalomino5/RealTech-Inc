@@ -425,13 +425,14 @@ module.exports = {
 	},
 	getComments:function(ID, callback){
 		var comments = [];
-		var sql = 'SELECT recipe_comments.text, user_data.first_name FROM recipe_comments INNER JOIN user_data ON recipe_comments.user_id=user_data.user_id WHERE recipe_comments.recipe_id ='+ ID;
+		var sql = 'SELECT recipe_comments.text, user_data.first_name, user_data.user_id FROM recipe_comments INNER JOIN user_data ON recipe_comments.user_id=user_data.user_id WHERE recipe_comments.recipe_id ='+ ID;
 		connectionPool.query(sql, (err, rows) => {
 			if(err) 
 				module.exports.printError("getComments", "SQL Query Error: getting comments",err,{ID:ID})
 
 			rows.forEach( (row) => {
 				comments.push({
+					id: row.user_id,
 					user: row.first_name,
 					message: row.text
 				});
@@ -445,18 +446,12 @@ module.exports = {
 		connectionPool.query(sql, function(err, rows) {
 			if (err)
 				module.exports.printError("getPreferences", "SQL Query Error: getting preferences", err, {ID:ID})
-			else if(rows.length==0){
-				module.exports.printError("getPreferences", "No Preferences", null, ID)
-				callback("no preferences listed")
-			}
 
 			rows.forEach( (row) => {
 				preferences.push({
 					style: row.style_id
 				});
 			});
-			// console.log("Preferences output: ");
-			// console.log( preferences );
 			callback(preferences);
 		});
 	},
@@ -466,10 +461,6 @@ module.exports = {
 		connectionPool.query(sql, function(err, rows) {
 			if (err)
 				module.exports.printError("getFavorites", "SQL Query Error: getting favorites", err, {ID:ID})
-			else if(rows.length==0){
-				module.exports.printError("getFavorites", "No Favorites", null, ID)
-				callback("no favorites listed")
-			}
 
 			rows.forEach( (row) => {
 				favorites.push({

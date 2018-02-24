@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../layouts/RecipePage.css';
 import ClientTools from '../res/ClientTools';
 import { Button, Comment, Form, Header, Grid, Segment, Divider, Modal, Icon } from 'semantic-ui-react';
+import { Redirect } from 'react-router-dom';
 
 
 class RecipePage extends Component{
@@ -16,6 +17,7 @@ class RecipePage extends Component{
 			user_firstname: '',
 		};
 		this.SubmitComment=this.SubmitComment.bind(this);
+		this.handleUserNameClick=this.handleUserNameClick.bind(this);
 	}
 
 	componentWillMount() {
@@ -61,7 +63,19 @@ class RecipePage extends Component{
 			this.setState({showPrompt: true})
 	}
 
+	goToPage(page){
+    this.setState({redirect: true, page: page})
+  }
+
+	handleUserNameClick(id) {
+		this.goToPage(`/profiles/${id}`)
+	}
+
 	render() {
+		if(this.state.redirect){
+      return <Redirect push to={{pathname: this.state.page, state: { session_data: this.state.session_data, user_firstname: this.state.user_firstname}}} />;
+    }
+
 		return(
 			<div className='container'>
 				<div className='topSection'>
@@ -100,7 +114,7 @@ class RecipePage extends Component{
 						{this.state.comments.map(comment => (
 							<Comment>
 					      <Comment.Content>
-					        <Comment.Author as='a'>{comment.user}</Comment.Author>
+					        <Comment.Author as='a' onClick={() => this.handleUserNameClick(comment.id)}>{comment.user}</Comment.Author>
 					        <Comment.Metadata>
 					          <div>Today at 5:42PM</div>
 					        </Comment.Metadata>
