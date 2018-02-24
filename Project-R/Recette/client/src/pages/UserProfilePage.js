@@ -127,9 +127,9 @@ class UserProfilePage extends Component{
                       <h2 className='textStyle'>My Info </h2>
                       <Divider />
                       <div className='display-linebreak'></div>
-                      <div><Icon name='user' color='teal' circular='true' /> {this.state.userdata.first_name} {this.state.userdata.last_name} </div>
-                      <div><Icon name='mail' color='teal' circular='true' /> {this.state.userdata.email} </div>
-                      <div><Icon name='at' color='teal' circular='true' /> {this.state.userdata.username} </div>
+                      <div><Icon name='user' color='teal' circular='true' size = 'large'/> {this.state.userdata.first_name} {this.state.userdata.last_name} </div>
+                      <div><Icon name='mail' color='teal' circular='true' size = 'large'/> {this.state.userdata.email} </div>
+                      <div><Icon name='at' color='teal' circular='true' size = 'large'/> {this.state.userdata.username} </div>
                       <h3> Biography </h3>
                       <div> {this.state.userdata.biography} </div>
                   </Segment>
@@ -145,7 +145,7 @@ class UserProfilePage extends Component{
                             <Feed.Content>
                               <Feed.Summary>
                                 <Feed.User>{this.state.userdata.username}</Feed.User> 
-                                  <div className='activity-feed'>{activity.activity}</div>
+                                  <div className='activity-feed'><Icon name='comment' color='teal' circular='true' size = 'large' />{activity.activity}</div>
                                 <Feed.Date><div className='activity-feed'>1 Hour Ago</div></Feed.Date>
                               </Feed.Summary>
                               <Feed.Meta>
