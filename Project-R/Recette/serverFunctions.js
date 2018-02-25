@@ -470,6 +470,20 @@ module.exports = {
 			callback(favorites);
 		})
 	},
+	getStyles:function(callback) {
+		var styles = [];
+		var sql = 'SELECT name FROM style';
+		connectionPool.query(sql, function(err, rows){
+			if(err)
+				module.exports.printError("getStyles", "SQL Query Error: getting styles", err, {ID:ID})
+			rows.forEach((row) =>{
+				styles.push({
+					style: row.name
+				});
+			});
+			callback(styles);
+		});
+	},
 	getActivity:function(ID, callback) {
 		var activity = [];
 		var sql = 'SELECT * FROM user_activities WHERE user_id = ' +ID;

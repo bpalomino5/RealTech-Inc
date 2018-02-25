@@ -83,6 +83,12 @@ app.get('/getPreferences', function(req, res){
 	})
 });
 
+app.get('/getStyles', function(req,res){
+	serverFunctions.getStyles(function(styles){
+		res.json( { styles : styles } );
+	})
+});
+
 app.get('/getFavorites', function(req, res){
 	serverFunctions.getFavorites(req.query.user_id, function(favorites){
 		res.json({favorites:favorites});
