@@ -226,6 +226,14 @@ module.exports = {
 			})
 		})
 	},
+	getPublicUserData:function(data,res,callback){
+		serverFunctions.getUserData(data.profile_id, function(struct_err,simple_err, userData){
+			gen.handleErrors(res,struct_err,simple_err, function(){
+				delete userData.password;
+				callback("Public user data request successful", userData)
+			})
+		})
+	},
 	getActivity:function(data,res,callback){
 		serverFunctions.getActivity(data.user_id, function(struct_err,simple_err, userActivity){
 			gen.handleErrors(res,struct_err,simple_err, function(){

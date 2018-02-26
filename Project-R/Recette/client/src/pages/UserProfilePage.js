@@ -8,7 +8,7 @@ class UserProfilePage extends Component{
   constructor(props){
     super(props);
     this.state = {
-      session_data: null,
+      session_data: {user_id: '', user_token: ''},
       userdata: {username:'',email:'',first_name:'',last_name:'',biography:''},
       userActivity: [],
       userFavorites: [],
@@ -25,12 +25,10 @@ class UserProfilePage extends Component{
   }
 
   componentDidMount(){
-    if(this.props.location.state.session_data){
-      this.getUserData();
-      this.getActivity();
-      this.getFavorites();
-      this.getPreferences();
-    }
+    this.getPublicUserData();
+    this.getActivity();
+    this.getFavorites();
+    this.getPreferences();
   }
 
   goToPage(page){
@@ -38,15 +36,15 @@ class UserProfilePage extends Component{
   }
 
   async getPreferences() {
-    let data = await ClientTools.getPreferences(this.state.session_data.user_id);
+    let data = await ClientTools.getPreferences(this.props.match.params.id);
     console.log(data);
     if(data!=null){
       this.setState({userPreferences: data.preferences})
     }
   }
 
-  async getUserData() {
-    let response = await ClientTools.getUserData({user_id:this.state.session_data.user_id, user_token: this.state.session_data.user_token});
+  async getPublicUserData() {
+    let response = await ClientTools.getPublicUserData({profile_id: this.props.match.params.id});
     console.log(response);
     if(response!=null){
       if(response.code===1){
@@ -56,7 +54,7 @@ class UserProfilePage extends Component{
   }
 
   async getActivity() {
-    let response = await ClientTools.getActivity(this.state.session_data.user_id);
+    let response = await ClientTools.getActivity(this.props.match.params.id);
     console.log(response);
     if(response!=null){
       this.setState({userActivity: response.activity})
@@ -65,7 +63,7 @@ class UserProfilePage extends Component{
 
   
   async getFavorites() {
-    let data = await ClientTools.getFavorites(this.state.session_data.user_id);
+    let data = await ClientTools.getFavorites(this.props.match.params.id);
     console.log(data);
     if(data!=null){
       this.setState({userFavorites: data.favorites})
@@ -85,6 +83,7 @@ class UserProfilePage extends Component{
     if(this.state.redirect){
       return <Redirect to={{pathname: this.state.page, state: {isloggedin: false}}} />;
     }
+
     return(
       <div className='user-profile'>
         <div className="title-container">
@@ -97,7 +96,6 @@ class UserProfilePage extends Component{
           <div className='body'>
             <h1 className='textStyle'>
             </h1>
-
             <div className='infoSection'>
             <Card centered='true' color = 'teal'>
                <Icon name='user' />
@@ -156,7 +154,6 @@ class UserProfilePage extends Component{
                               </Feed.Meta>
                             </Feed.Content>
                           </Feed.Event>
-
                         ))}                      
                     </Feed>
                   </Segment>
@@ -178,7 +175,6 @@ class UserProfilePage extends Component{
                             </List>
                               ))}
                         </ul>
-
                       </div>
                   </Segment>
                 </Grid.Column>
@@ -196,23 +192,18 @@ class UserProfilePage extends Component{
                                   <List.Item>
                                   <List.Icon name='star' size='large' color='teal' circular='true' verticalAlign='middle' />
                                     <List.Content>
-
                                       <List.Header><div className='activity-feed'>{preferences.style}</div></List.Header>
                                     </List.Content>
-                                  </List.Item>    
-                                  
+                                  </List.Item>                                
                                 </List>
                               </Feed.Summary>
                             </Feed.Content>
                           </Feed.Event>
-
                         ))}                      
                     </Feed>
                   </Segment>
                 </Grid.Column>
-
               </Grid>
-
             </div>
           </div>
         </div>

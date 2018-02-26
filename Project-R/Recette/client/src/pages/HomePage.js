@@ -12,7 +12,8 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      data: [], 
+      recipes: [], 
+      ingredients: [],
       redirect: false, 
       page: null,
       recipe_id: null,
@@ -36,9 +37,8 @@ class HomePage extends Component {
   }
 
   componentDidMount(){
-    if(this.props.location.state){
-      if(this.props.location.state.session_data)
-        this.getUserData();
+    if(this.state.session_data){
+      this.getUserData();
     }
   }
 
@@ -54,7 +54,21 @@ class HomePage extends Component {
 
   async getData(){
     var data = await ClientTools.getRecipes();
-    this.setState({data: data.recipes});
+    this.setState({recipes: data.recipes});
+
+    var ingredientData = await ClientTools.getIngredients();
+    this.setState({ingredients: ingredientData.ingredients});
+  }
+
+  async loadRecipesbyIngredient(ingredientID){
+    var data = await ClientTools.getRecipesByIngredient(ingredientID);
+    if(data!=null){
+      if(data.recipeInfo.length){
+        this.setState({recipes: data.recipeInfo})
+      }
+      else
+        console.log("empty array")
+    }
   }
 
   handleCardClick(id) {
@@ -64,8 +78,8 @@ class HomePage extends Component {
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
   handleResultSelect = (e, { result }) => {
-    // this.setState({ value: result.title })
-    this.handleCardClick(result.id)
+    this.loadRecipesbyIngredient(result.id)
+    // this.handleCardClick(result.id)
   }
 
   handleSearchChange = (e, { value }) => {
@@ -79,7 +93,7 @@ class HomePage extends Component {
 
       this.setState({
         isLoading: false,
-        results: _.filter(this.state.data, isMatch),
+        results: _.filter(this.state.ingredients, isMatch),
       })
     }, 500)
   }
@@ -136,7 +150,7 @@ class HomePage extends Component {
           </div>
           <StackGrid
             columnWidth={300}>
-            {this.state.data.map(recipe => (
+            {this.state.recipes.map(recipe => (
               <Card
                 onClick={() => this.handleCardClick(recipe.id)}
                 details={{title:recipe.title, image:recipe.image}}

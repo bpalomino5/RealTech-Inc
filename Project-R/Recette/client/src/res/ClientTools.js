@@ -29,12 +29,32 @@ class ClientTools{
     return this.rawPostRequest('/getUserData',data);
   }
 
+  getPublicUserData(data){
+    return this.rawPostRequest('/getPublicUserData',data);
+  }
+
   addComment(data){
     return this.rawPostRequest('/addComment',data);
   }
 
   updateBio(data){
     return this.rawPostRequest('/updateBio',data);
+  }
+
+  getRecipesByIngredient(id){
+    return fetch(`/getRecipesByIngredient?id=${encodeURIComponent(id)}`, {
+      accept: "application/json"
+    })
+    .then(this.checkStatus)
+    .then(this.parseJSON);
+  }
+
+  getIngredients(){
+    return fetch('/getIngredients', {
+      accept: "application/json"
+    })
+      .then(this.checkStatus)
+      .then(this.parseJSON);
   }
 
   getRecipes(){

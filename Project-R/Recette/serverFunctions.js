@@ -386,6 +386,7 @@ module.exports = {
 		connectionPool.query('SELECT ingredient_id, name FROM ingredients', (err,rows) =>{
 			if(err)
 				module.exports.printError("getAllIngredients","SQL Query Error: could not get ingredients", err, {})
+			
 			rows.forEach( (row) => {
 				ingredients.push({
 					id: row.ingredient_id,
@@ -399,7 +400,11 @@ module.exports = {
 		var ingredients = [];	
 		var sql = 'SELECT has_ingredients.quantity, unit.unit_name, ingredients.name FROM has_ingredients INNER JOIN ingredients ON has_ingredients.ingredient_id=ingredients.ingredient_id inner join unit on has_ingredients.unit_id=unit.unit_id WHERE has_ingredients.recipe_id ='+ ID;
 		connectionPool.query(sql, (err, rows) => {
-			if (err) throw err;
+			if (err){
+				module.exports.printError("getIngredients","SQL Query Error: error getting ingredients by recipe id", err,{ID:ID})
+				callback("An internal error occured")
+			}
+
 			rows.forEach( (row) => {
 				if(parseInt(row.quantity)>1) row.unit_name=row.unit_name.concat('s');
 				
@@ -476,6 +481,7 @@ module.exports = {
 		connectionPool.query(sql, function(err, rows){
 			if(err)
 				module.exports.printError("getStyles", "SQL Query Error: getting styles", err, {ID:ID})
+
 			rows.forEach((row) =>{
 				styles.push({
 					style: row.name
@@ -490,11 +496,7 @@ module.exports = {
 		connectionPool.query(sql, function(err, rows) {
 			if (err)
 				module.exports.printError("getActivity", "SQL Query Error: getting activity", err, {ID:ID})
-			else if(rows.length==0){
-				module.exports.printError("getActivity", "No Activity", null, ID)
-				callback("no favorites listed")
-			}
-
+			
 			rows.forEach( (row) => {
 				activity.push({
 					activity: row.message
