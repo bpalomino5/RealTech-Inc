@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Search, Button, Image, Menu } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
+import { Helmet } from 'react-helmet';
 
 import ClientTools from '../res/ClientTools';
 import StackGrid from "react-stack-grid";
@@ -119,6 +120,7 @@ class HomePage extends Component {
 
     return (
       <div className="Home">
+        <Helmet bodyAttributes={{style: 'background-color : #2E2F2F'}}/>
         <Menu fixed='top'>
           <div className="headerContainer">
             <h1 className="Home-title">Recette</h1>

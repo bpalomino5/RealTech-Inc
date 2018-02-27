@@ -3,6 +3,7 @@ import { Button, Checkbox, Form, Grid, Header, Message, Segment } from 'semantic
 import '../layouts/SignUpPage.css';
 import ClientTools from '../res/ClientTools';
 import { Redirect, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 class SignUpPage extends Component{
   constructor(props){
@@ -55,6 +56,7 @@ class SignUpPage extends Component{
 
     return(
       <div className='signup-form'>
+        <Helmet bodyAttributes={{style: 'background-color : #2E2F2F'}}/>
         <div className="title-container">
           <header className="Recette-header">
             <h1 className='app-title'>Welcome to Recette</h1>

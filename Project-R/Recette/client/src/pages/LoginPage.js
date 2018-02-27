@@ -3,6 +3,7 @@ import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 import '../layouts/LoginPage.css';
 import ClientTools from '../res/ClientTools';
 import { Redirect, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 
 class LoginPage extends Component{
@@ -44,6 +45,7 @@ class LoginPage extends Component{
     }
     return(
       <div className='login-form'>
+        <Helmet bodyAttributes={{style: 'background-color : #2E2F2F'}}/>
         <Grid
           textAlign='center'
           style={{ height: '100%'}}
