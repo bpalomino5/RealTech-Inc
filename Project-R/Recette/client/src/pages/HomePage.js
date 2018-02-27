@@ -80,7 +80,6 @@ class HomePage extends Component {
 
   handleResultSelect = (e, { result }) => {
     this.loadRecipesbyIngredient(result.id)
-    // this.handleCardClick(result.id)
   }
 
   handleSearchChange = (e, { value }) => {
