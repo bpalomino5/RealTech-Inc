@@ -167,6 +167,12 @@ app.post('/createUser', function(req,res){
 	action.createUser(req.body, res, function(message){
 		gen.validResponse(res,message)
 	})
+});
+
+app.post('/linkIngredients', function(req,res){
+	action.linkIngredients(req.body,res,function(message){
+		gen.validResponse(res,message)
+	})
 })
 
 app.post('/login', function(req,res){
@@ -184,6 +190,13 @@ app.post('/logout', function(req, res){
 app.post('/addComment', function(req,res) {
 	gen.checkReqSpecific(req,res,function(data){
 		action.addComment(data,res,function(message){
+			gen.validResponse(res,message)
+		})
+	})
+});
+app.post('/addRecipe', function(req,res){
+	gen.checkReqSpecific(req,res,function(data){
+		action.addRecipe(data,res,function(message){
 			gen.validResponse(res,message)
 		})
 	})
