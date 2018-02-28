@@ -87,118 +87,107 @@ class UserProfilePage extends Component{
     return(
       <div className='user-profile'>
         <div className="title-container">
-            <h1 className='app-title'><Link to={{pathname:`/`, state: { session_data: this.state.session_data}}}>Recette</Link></h1>
-            <div className="buttonBox">
-              <div hidden={this.state.isloggedin} className="profileBox" onClick={this.OpenProfilePage}>
-                <Image src='https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg' />
-                <h2>{this.state.userdata.first_name}</h2>
-              </div>
-            </div>
+            <div className='title'><Link to={{pathname:`/`, state: { session_data: this.state.session_data}}}>Recette</Link> </div>
+            <div className='button-container'> <Button color='teal' onClick={this.AttemptLogout}>LOG OUT</Button> </div>
         </div>
-        <div className='button-container'>
-          <Button color='teal' onClick={this.AttemptLogout}>LOG OUT</Button>
-        </div>
-
-          <div className='user-header'>
-          
+        <div className='banner-container'>
            <Card
             fluid = 'true'
+            color = 'teal'
             image='../../images/recette_header_wide.png'
             header= {this.state.userdata.first_name}
             meta='Recetter'
             description= {this.state.userdata.biography} 
            />
-
-          </div>
-
-          <div className='infoSection'>
-              <Grid columns={4} relaxed>
-                <Grid.Column width={4}>
-                  <Segment basic>
-                      <h2 className='info-section-headers'>My Info </h2>
-                      <Divider />
-                      <div className='display-linebreak'></div>
-                        <div className='my-info-text'>
-                          <List animated verticalAlign='middle'>
-                            <List.Item> <List.Content> <List.Icon name='user' color='teal' circular='true' size = 'large'/> {this.state.userdata.first_name} {this.state.userdata.last_name} </List.Content> </List.Item>
-                            <List.Item> <List.Content> <List.Icon name='mail' color='teal' circular='true' size = 'large'/> {this.state.userdata.email} </List.Content> </List.Item>
-                            <List.Item> <List.Content> <List.Icon name='at' color='teal' circular='true' size = 'large'/> {this.state.userdata.username} </List.Content> </List.Item>
-                          </List>
-                        </div>
-                  </Segment>
-                </Grid.Column>
-                <Grid.Column width = {4}>
-                  <Segment basic>
-                    <h2 className='info-section-headers'>My Activity</h2>
-                    <Divider />
-                    <div className='display-linebreak'></div>
-                      <Feed>
-                        {this.state.userActivity.map(activity => (
-                          <Feed.Event>
-                            <Feed.Content>
-                              <Feed.Summary>
-                                <Feed.User><h3>{this.state.userdata.username}</h3></Feed.User> 
-                                  <div className='activity-feed-text'><Icon name='comment' color='teal' circular='true' size = 'large' />{activity.activity}</div>
-                                <Feed.Date><div className='activity-feed-text'>1 Hour Ago</div></Feed.Date>
-                              </Feed.Summary>
-                              <Feed.Meta>
-                                <Feed.Like>
-                                 <Icon color='teal' name='like' />
-                                  <div className='activity-feed-text'>4 Likes</div>
-                                </Feed.Like>
-                              </Feed.Meta>
-                            </Feed.Content>
-                          </Feed.Event>
-                        ))}                      
-                    </Feed>
-                  </Segment>
-                </Grid.Column>
-                <Grid.Column width={4}>
-                  <Segment basic>
-                    <h2 className='info-section-headers'>My Recipes</h2>
-                    <Divider />
-                      <div className='myRecipesList'>
-                        <ul>
-                        {this.state.userFavorites.map(favorite => (
+        </div>
+        <div className='infoSection'>
+          <Grid columns={4} relaxed>
+            <Grid.Column width={4}>
+              <Segment basic>
+                  <h2 className='info-section-headers'>My Info </h2>
+                  <Divider />
+                  <div className='display-linebreak'></div>
+                    <div className='my-info-text'>
+                      <List animated verticalAlign='middle'>
+                        <List.Item> <List.Content> <List.Icon name='user' color='teal' circular='true' size = 'large'/> {this.state.userdata.first_name} {this.state.userdata.last_name} </List.Content> </List.Item>
+                        <List.Item> <List.Content> <List.Icon name='mail' color='teal' circular='true' size = 'large'/> {this.state.userdata.email} </List.Content> </List.Item>
+                        <List.Item> <List.Content> <List.Icon name='at' color='teal' circular='true' size = 'large'/> {this.state.userdata.username} </List.Content> </List.Item>
+                      </List>
+                    </div>
+              </Segment>
+            </Grid.Column>
+            <Grid.Column width = {4}>
+              <Segment basic>
+                <h2 className='info-section-headers'>My Activity</h2>
+                <Divider />
+                <div className='display-linebreak'></div>
+                  <Feed>
+                    {this.state.userActivity.map(activity => (
+                      <Feed.Event>
+                        <Feed.Content>
+                          <Feed.Summary>
+                            <Feed.User><h3>{this.state.userdata.username}</h3></Feed.User> 
+                              <div className='activity-feed-text'><Icon name='comment' color='teal' circular='true' size = 'large' />{activity.activity}</div>
+                            <Feed.Date><div className='activity-feed-text'>1 Hour Ago</div></Feed.Date>
+                          </Feed.Summary>
+                          <Feed.Meta>
+                            <Feed.Like>
+                             <Icon color='teal' name='like' />
+                              <div className='activity-feed-text'>4 Likes</div>
+                            </Feed.Like>
+                          </Feed.Meta>
+                        </Feed.Content>
+                      </Feed.Event>
+                    ))}                      
+                </Feed>
+              </Segment>
+            </Grid.Column>
+            <Grid.Column width={4}>
+              <Segment basic>
+                <h2 className='info-section-headers'>My Recipes</h2>
+                <Divider />
+                  <div className='myRecipesList'>
+                    <ul>
+                    {this.state.userFavorites.map(favorite => (
+                        <List animated verticalAlign='middle'>
+                          <List.Item>
+                           <List.Icon name='food' size='large' color='teal' circular='true' verticalAlign='middle' />
+                            <List.Content>
+                              <List.Header><div className='activity-feed'><Link to={{pathname:`/recipes/${favorite.recipe}`, state: { session_data: this.state.session_data}}}>{favorite.recipe}</Link></div></List.Header>
+                           </List.Content>
+                          </List.Item>        
+                        </List>
+                          ))}
+                    </ul>
+                  </div>
+              </Segment>
+            </Grid.Column>
+             <Grid.Column width = {4}>
+              <Segment basic>
+                <h2 className='info-section-headers'>My Preferences</h2>
+                <Divider />
+                <div className='display-linebreak'></div>
+                  <Feed>
+                    {this.state.userPreferences.map(preferences => (
+                      <Feed.Event>
+                        <Feed.Content>
+                          <Feed.Summary>
                             <List animated verticalAlign='middle'>
                               <List.Item>
-                               <List.Icon name='food' size='large' color='teal' circular='true' verticalAlign='middle' />
+                              <List.Icon name='star' size='large' color='teal' circular='true' verticalAlign='middle' />
                                 <List.Content>
-                                  <List.Header><div className='activity-feed'><Link to={{pathname:`/recipes/${favorite.recipe}`, state: { session_data: this.state.session_data}}}>{favorite.recipe}</Link></div></List.Header>
-                               </List.Content>
-                              </List.Item>        
+                                  <List.Header><div className='activity-feed'>{preferences.style}</div></List.Header>
+                                </List.Content>
+                              </List.Item>                                
                             </List>
-                              ))}
-                        </ul>
-                      </div>
-                  </Segment>
-                </Grid.Column>
-                 <Grid.Column width = {4}>
-                  <Segment basic>
-                    <h2 className='info-section-headers'>My Preferences</h2>
-                    <Divider />
-                    <div className='display-linebreak'></div>
-                      <Feed>
-                        {this.state.userPreferences.map(preferences => (
-                          <Feed.Event>
-                            <Feed.Content>
-                              <Feed.Summary>
-                                <List animated verticalAlign='middle'>
-                                  <List.Item>
-                                  <List.Icon name='star' size='large' color='teal' circular='true' verticalAlign='middle' />
-                                    <List.Content>
-                                      <List.Header><div className='activity-feed'>{preferences.style}</div></List.Header>
-                                    </List.Content>
-                                  </List.Item>                                
-                                </List>
-                              </Feed.Summary>
-                            </Feed.Content>
-                          </Feed.Event>
-                        ))}                      
-                    </Feed>
-                  </Segment>
-                </Grid.Column>
-              </Grid>
+                          </Feed.Summary>
+                        </Feed.Content>
+                      </Feed.Event>
+                    ))}                      
+                </Feed>
+              </Segment>
+            </Grid.Column>
+          </Grid>
         </div>
       </div>
     );
