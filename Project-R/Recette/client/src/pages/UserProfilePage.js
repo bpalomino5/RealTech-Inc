@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Feed, Card, Icon, List, Divider, Grid, Segment } from 'semantic-ui-react';
+import { Button, Feed, Card, Image, Icon, List, Divider, Grid, Segment } from 'semantic-ui-react';
 import '../layouts/UserProfilePage.css';
 import ClientTools from '../res/ClientTools';
 import { Redirect, Link } from 'react-router-dom';
@@ -87,42 +87,30 @@ class UserProfilePage extends Component{
     return(
       <div className='user-profile'>
         <div className="title-container">
-          <header className="Recette-header">
-            <h1 className='app-title'>Recette</h1>
-            <Button color='teal' onClick={this.AttemptLogout}>LOG OUT</Button>
-          </header>
+            <h1 className='app-title'><Link to={{pathname:`/`, state: { session_data: this.state.session_data}}}>Recette</Link></h1>
+
         </div>
-        <div className='container'>
-          <div className='body'>
-            <h1 className='textStyle'>
-            </h1>
-            <div className='infoSection'>
-            <Card centered='true' color = 'teal'>
-               <Icon name='user' />
-              <Card.Content>
-                <Card.Header>
-                  {this.state.userdata.first_name} {this.state.userdata.last_name}
-                </Card.Header>
-                <Card.Meta>
-                  <span className='date'>
-                    Joined in 2018
-                  </span>
-                </Card.Meta>
-                <Card.Description>
-                  {this.state.userdata.biography}
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <a>
-                  <Icon name='food' color='teal' />
-                  {this.state.userFavorites.length} Favorite Recipes
-                </a>
-              </Card.Content>
-            </Card>
+        <div className='button-container'>
+          <Button color='teal' onClick={this.AttemptLogout}>LOG OUT</Button>
+        </div>
+
+          <div className='user-header'>
+          
+           <Card
+            fluid = 'true'
+            image='../../images/recette_header_wide.png'
+            header='Elliot Baker'
+            meta='Friend'
+            description='Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat.'
+           />
+
+          </div>
+
+          <div className='infoSection'>
               <Grid columns={4} relaxed>
                 <Grid.Column width={4}>
                   <Segment basic>
-                      <h2 className='textStyle'>My Info </h2>
+                      <h2 className='info-section-headers'>My Info </h2>
                       <Divider />
                       <div className='display-linebreak'></div>
                       <div><Icon name='user' color='teal' circular='true' size = 'large'/> {this.state.userdata.first_name} {this.state.userdata.last_name} </div>
@@ -134,7 +122,7 @@ class UserProfilePage extends Component{
                 </Grid.Column>
                 <Grid.Column width = {4}>
                   <Segment basic>
-                    <h2 className='textStyle'>My Activity</h2>
+                    <h2 className='info-section-headers'>My Activity</h2>
                     <Divider />
                     <div className='display-linebreak'></div>
                       <Feed>
@@ -160,7 +148,7 @@ class UserProfilePage extends Component{
                 </Grid.Column>
                 <Grid.Column width={4}>
                   <Segment basic>
-                    <h2 className='textStyle'>My Recipes</h2>
+                    <h2 className='info-section-headers'>My Recipes</h2>
                     <Divider />
                       <div className='myRecipesList'>
                         <ul>
@@ -180,7 +168,7 @@ class UserProfilePage extends Component{
                 </Grid.Column>
                  <Grid.Column width = {4}>
                   <Segment basic>
-                    <h2 className='textStyle'>My Preferences</h2>
+                    <h2 className='info-section-headers'>My Preferences</h2>
                     <Divider />
                     <div className='display-linebreak'></div>
                       <Feed>
@@ -204,8 +192,6 @@ class UserProfilePage extends Component{
                   </Segment>
                 </Grid.Column>
               </Grid>
-            </div>
-          </div>
         </div>
       </div>
     );
