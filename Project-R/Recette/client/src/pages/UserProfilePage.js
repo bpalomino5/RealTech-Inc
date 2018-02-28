@@ -88,7 +88,12 @@ class UserProfilePage extends Component{
       <div className='user-profile'>
         <div className="title-container">
             <h1 className='app-title'><Link to={{pathname:`/`, state: { session_data: this.state.session_data}}}>Recette</Link></h1>
-
+            <div className="buttonBox">
+              <div hidden={this.state.isloggedin} className="profileBox" onClick={this.OpenProfilePage}>
+                <Image src='https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg' />
+                <h2>{this.state.userdata.first_name}</h2>
+              </div>
+            </div>
         </div>
         <div className='button-container'>
           <Button color='teal' onClick={this.AttemptLogout}>LOG OUT</Button>
@@ -99,9 +104,9 @@ class UserProfilePage extends Component{
            <Card
             fluid = 'true'
             image='../../images/recette_header_wide.png'
-            header='Elliot Baker'
-            meta='Friend'
-            description='Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat.'
+            header= {this.state.userdata.first_name}
+            meta='Recetter'
+            description= {this.state.userdata.biography} 
            />
 
           </div>
@@ -113,11 +118,13 @@ class UserProfilePage extends Component{
                       <h2 className='info-section-headers'>My Info </h2>
                       <Divider />
                       <div className='display-linebreak'></div>
-                      <div><Icon name='user' color='teal' circular='true' size = 'large'/> {this.state.userdata.first_name} {this.state.userdata.last_name} </div>
-                      <div><Icon name='mail' color='teal' circular='true' size = 'large'/> {this.state.userdata.email} </div>
-                      <div><Icon name='at' color='teal' circular='true' size = 'large'/> {this.state.userdata.username} </div>
-                      <h3> Biography </h3>
-                      <div> {this.state.userdata.biography} </div>
+                        <div className='my-info-text'>
+                          <List animated verticalAlign='middle'>
+                            <List.Item> <List.Content> <List.Icon name='user' color='teal' circular='true' size = 'large'/> {this.state.userdata.first_name} {this.state.userdata.last_name} </List.Content> </List.Item>
+                            <List.Item> <List.Content> <List.Icon name='mail' color='teal' circular='true' size = 'large'/> {this.state.userdata.email} </List.Content> </List.Item>
+                            <List.Item> <List.Content> <List.Icon name='at' color='teal' circular='true' size = 'large'/> {this.state.userdata.username} </List.Content> </List.Item>
+                          </List>
+                        </div>
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width = {4}>
@@ -130,14 +137,14 @@ class UserProfilePage extends Component{
                           <Feed.Event>
                             <Feed.Content>
                               <Feed.Summary>
-                                <Feed.User>{this.state.userdata.username}</Feed.User> 
-                                  <div className='activity-feed'><Icon name='comment' color='teal' circular='true' size = 'large' />{activity.activity}</div>
-                                <Feed.Date><div className='activity-feed'>1 Hour Ago</div></Feed.Date>
+                                <Feed.User><h3>{this.state.userdata.username}</h3></Feed.User> 
+                                  <div className='activity-feed-text'><Icon name='comment' color='teal' circular='true' size = 'large' />{activity.activity}</div>
+                                <Feed.Date><div className='activity-feed-text'>1 Hour Ago</div></Feed.Date>
                               </Feed.Summary>
                               <Feed.Meta>
                                 <Feed.Like>
                                  <Icon color='teal' name='like' />
-                                  <div className='activity-feed'>4 Likes</div>
+                                  <div className='activity-feed-text'>4 Likes</div>
                                 </Feed.Like>
                               </Feed.Meta>
                             </Feed.Content>
