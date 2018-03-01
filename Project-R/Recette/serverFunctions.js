@@ -171,16 +171,6 @@ module.exports = {
 				callback(false, false)
 		});
 	},
-	addRecipe:function(data,callback){
-		var sql = "INSERT INTO recipes (user_id, name, prep_time, cooking_time, ready_in, origin, instruction, image_location) VALUES ('" + data.user_id + "','" + data.name + "','" + data.prep_time + "','" + data.cooking_time + "','" + data.ready_in + "','" + data.origin + "','" + data.instruction + "','" + data.image_location + "')";
-		connectionPool.query(sql,function(err,results){
-			if(err){
-				module.exports.printError("addRecipe", "SQL Query Error: Adding a new Recipe",err,{data:data})
-			}
-			else
-				callback(false,false)
-		});
-	},
 	addStyle:function(data,callback){
 		var sql = "INSERT INTO style (name) VALUES ('" + data.style_name + "')";
 		connectionPool.query(sql,function(err,results){
@@ -252,8 +242,38 @@ module.exports = {
 				callback(false, false)
 		});
 	},
+	addRecipe:function(data,callback){
+		var sql = "INSERT INTO recipes (user_id, name, prep_time, cooking_time, ready_in, origin, instruction, image_location) VALUES ('" + data.user_id + "','" + data.name + "','" + data.prep_time + "','" + data.cooking_time + "','" + data.ready_in + "','" + data.origin + "','" + data.instruction + "','" + data.image_location + "')";
+		connectionPool.query(sql,function(err,results){
+			if(err){
+				module.exports.printError("addRecipe", "SQL Query Error: Adding a new Recipe",err,{data:data})
+			}
+			else
+				callback(false,false)
+		});
+	},
 	linkIngredients:function(data,callback){
-		var sql = "INSERT INTO has_ingredients (recipe_id, ingredient_id, quantity, unit_id) VALUES (" + data.recipe_id + "," + data.ingredient_id + "," + data.quantity + "," + data.unit_id + ")";
+		module.exports.getRecipeName(data.name,function(recipe_id,struct_err,simple_err){
+			data.body.forEach( (row) => {
+				module.exports.linkIngredient(row,recipe_id,function(struct_err,simple_err){
+					console.log("Ingredient Added.");
+				})
+			});
+			callback(false,false)
+		})
+	},
+	getRecipeName:function(name,callback){
+		var sql = "SELECT recipe_id FROM recipes WHERE name = " + data.name;
+		connectionPool.query(sql,function(err,result) {
+			if (err){
+				module.exports.printError("linkIngredients", "SQL Query Error: Searching for recipe name",err,{data:data})
+			}
+			else
+				callback(result,false, false)
+		});
+	},
+	linkIngredient:function(data,recipe_id,callback){
+		var sql = "INSERT INTO has_ingredients (recipe_id, ingredient_id, quantity, unit_id) VALUES (" + recipe_id + "," + data.ingredient_id + "," + data.quantity + "," + data.unit_id + ")";
 		connectionPool.query(sql, function(err, results){
 			if(err){
 				module.exports.printError("linkIngredients","SQL Query Error: linking ingredients",err,{data:data})

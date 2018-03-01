@@ -169,12 +169,6 @@ app.post('/createUser', function(req,res){
 	})
 });
 
-app.post('/linkIngredients', function(req,res){
-	action.linkIngredients(req.body,res,function(message){
-		gen.validResponse(res,message)
-	})
-})
-
 app.post('/login', function(req,res){
 	action.loginUser(req.body,res,function(message,data){
 		gen.validResponse(res,message,data)
