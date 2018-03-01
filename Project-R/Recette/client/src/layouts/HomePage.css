@@ -10,13 +10,9 @@
   align-items: center;
   justify-content: flex-start;
   height: 70px;
-  /*background-color: green;*/
-  /*padding-top: 15px;
-  padding-bottom: 15px;*/
 }
 
 .Home-title {
-  /*font-size: 1.5em;*/
   margin: 10px;
   padding-left: 15px;
   padding-right: 15px;
@@ -28,7 +24,6 @@
 }
 
 .buttonBox {
-  /*background-color: red;*/
   display: flex;
   flex: 1;
   justify-content: flex-end;
@@ -71,24 +66,18 @@
   font-size: large;
   padding: 1px;
   margin-top: 70px;
-  /*background-color: #222;*/
-  /*background-color: #2E2F2F;*/
 }
 
 
 .recipeContainer {
   display: flex;
   flex: 1;
-  /*background-color: blue;*/
   justify-content: center;
   padding-top: 10px;
   padding-right: 10px;
 }
 
 .recipe-header {
-  /*display: flex;*/
-  /*flex: 1;*/
-  /*align-self: flex-start;*/
   padding-left: 10px;
 }
 

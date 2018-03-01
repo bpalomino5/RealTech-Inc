@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 import { Helmet } from 'react-helmet';
 
-import ClientTools from '../res/ClientTools';
+import ClientTools from '../utils/ClientTools';
 import StackGrid from "react-stack-grid";
 import Card from '../components/Card';
 import '../layouts/HomePage.css';
@@ -68,7 +68,7 @@ class HomePage extends Component {
         this.setState({recipes: data.recipeInfo})
       }
       else
-        console.log("empty array")
+        console.log("empty array") //handle this
     }
   }
 
@@ -150,6 +150,7 @@ class HomePage extends Component {
             </div>            
           </div>
           <StackGrid
+            gutterHeight={-50}
             columnWidth={300}>
             {this.state.recipes.map(recipe => (
               <Card

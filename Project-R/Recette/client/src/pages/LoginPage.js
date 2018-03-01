@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import '../layouts/LoginPage.css';
-import ClientTools from '../res/ClientTools';
+import ClientTools from '../utils/ClientTools';
 import { Redirect, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 

@@ -308,7 +308,7 @@ module.exports = {
 			var sql = 'SELECT recipe_id, name, image_location FROM recipes WHERE recipes.recipe_id = ' + recipe_id;
 			connectionPool.query(sql, function(err, results) {
 				if (err){
-					module.exports.printError("getRecipesByIngredient", "SQL Query Error: could not get recipes", err, {})
+					module.exports.printError("getRecipesByIngredient", "SQL Query Error: could not get recipes", err, data)
 					inner_callback(err)
 				}
 				else{

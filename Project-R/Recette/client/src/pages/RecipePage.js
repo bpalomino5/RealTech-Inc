@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../layouts/RecipePage.css';
-import ClientTools from '../res/ClientTools';
+import ClientTools from '../utils/ClientTools';
 import { Button, Comment, Form, Header, Grid, Segment, Divider, Modal, Icon } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 

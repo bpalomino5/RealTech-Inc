@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Feed, Card, Icon, List, Divider, Grid, Segment } from 'semantic-ui-react';
 import '../layouts/UserProfilePage.css';
-import ClientTools from '../res/ClientTools';
+import ClientTools from '../utils/ClientTools';
 import { Redirect, Link } from 'react-router-dom';
 
 class UserProfilePage extends Component{
