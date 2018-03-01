@@ -33,6 +33,23 @@ module.exports = {
 			})
 		})
 	},
+	attemptLinkIngred:function(data,res,callback){
+		if(data.recipe_id == undefined || data.ingredient_id == undefined){
+			gen.structuralError(res,"Error.Base Headers/Parameters not met")
+		}
+		else
+			callback()
+	},	
+	linkIngredients:function(data,res,callback){
+		module.exports.attemptLinkIngred(data,res,function(){
+			serverFunctions.linkIngredients(data,function(struct_err,simple_err){
+				gen.handleErrors(res,struct_err,simple_err,function(){
+					callback("Ingredient added to recipe")
+				})
+			})
+		})
+
+	},
 	attemptLogin:function(res,data,callback){
 		if(data.user_name == undefined || data.user_password == undefined){
 			gen.structuralError(res, "Error.Base Headers/Parameters not met")
@@ -119,15 +136,15 @@ module.exports = {
 		else
 			callback()
 	},
-	// addRecipe:function(data,res,callback){
-	// 	module.exports.attemptAddRecipe(data,res,function(){
-	// 		serverFunctions.addRecipe(data,function(struct_err,simple_err){
-	// 			gen.handleErrors(res,struct_err,simple_err,function(){
-					
-	// 			})
-	// 		})
-	// 	})
-	// },
+	addRecipe:function(data,res,callback){
+		module.exports.attemptAddRecipe(data,res,function(){
+			serverFunctions.addRecipe(data,function(struct_err,simple_err){
+				gen.handleErrors(res,struct_err,simple_err,function(){
+					callback("Recipe has been added")
+				})
+			})
+		})
+	},
 	attemptAddPreferences:function(data,res,callback){
 		if(data.style_id == undefined || data.user_id == undefined)
 			gen.structuralError(res, "Error. Parameters not met")
