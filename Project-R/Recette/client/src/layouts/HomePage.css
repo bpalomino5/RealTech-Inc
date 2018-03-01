@@ -12,11 +12,25 @@
   height: 70px;
 }
 
-.Home-title {
-  margin: 10px;
+.logoBox{
+  display: flex;
+  flex: 0;
+  height: 70px;
+}
+
+.logoBox h1{
+  align-self: center;
+  margin: 0;
   padding-left: 15px;
   padding-right: 15px;
   color: grey;
+  font-family: 'Jelytta';
+}
+
+.logoBox:hover {
+  background-color: #F1F5F7;
+  cursor: pointer;
+  height: 70px;
 }
 
 .searchBox {
@@ -84,4 +98,6 @@
 .recipe-header h2 {
   font-size: 26px;
   color: white;
+  font-family: 'Shadows Into Light Two', cursive;
+
 }

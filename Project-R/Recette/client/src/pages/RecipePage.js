@@ -78,8 +78,6 @@ class RecipePage extends Component{
 
 		return(
 			<div className='container'>
-				<div className='topSection'>
-				</div>
 				{this.state.data.map(item => (
 					<div className='body'>
 						<h1 className='textStyle'>{item.name}</h1>

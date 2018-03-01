@@ -24,7 +24,7 @@
 	overflow: hidden;
 }
 
-img {
+.imageContainer img {
 	display: block;
 	width: 50%;
 	height: 390px;

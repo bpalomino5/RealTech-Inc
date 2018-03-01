@@ -3,3 +3,8 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+@font-face{
+  font-family: 'Jelytta';
+  src: url(../res/Jelytta.ttf) format('truetype');
+}

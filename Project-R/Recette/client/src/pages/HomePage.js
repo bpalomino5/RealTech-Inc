@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Search, Button, Image, Menu } from 'semantic-ui-react';
+import { Search, Button, Image, Menu, Icon, Transition } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 import { Helmet } from 'react-helmet';
@@ -25,14 +25,23 @@ class HomePage extends Component {
       session_data: null,
       user_firstname: '',
       activeItem: 'home',
+      visible: true,
     };
     this.AttemptLogin=this.AttemptLogin.bind(this);
     this.OpenProfilePage=this.OpenProfilePage.bind(this);
+    this.openMenu=this.openMenu.bind(this);
   }
 
   componentWillMount(){
     if(this.props.location.state){
-      this.setState({isloggedin: this.props.location.state.isloggedin, session_data: this.props.location.state.session_data})
+      //check for data coming from login session start
+      if(this.state.session_data==null){
+        this.setState({isloggedin: !this.state.isloggedin, session_data: this.props.location.state.session_data})
+      }
+      //user log off check
+      if(this.props.location.state.isloggedin!=null){
+        this.setState({isloggedin: this.props.location.state.isloggedin})
+      }
     }
     this.getData();
   }
@@ -110,6 +119,14 @@ class HomePage extends Component {
     this.goToPage(`/profiles/${this.state.session_data.user_id}`)
   }
 
+  refreshPage(){
+    window.location.reload();
+  }
+
+  openMenu(){
+    this.setState({visible: !this.state.visible})
+  }
+
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
@@ -122,7 +139,9 @@ class HomePage extends Component {
         <Helmet bodyAttributes={{style: 'background-color : #2E2F2F'}}/>
         <Menu fixed='top'>
           <div className="headerContainer">
-            <h1 className="Home-title">Recette</h1>
+            <div className="logoBox" onClick={this.refreshPage}>
+              <h1>Recette</h1>
+            </div>
             <Search 
                 className="searchBox"
                 loading={this.state.isLoading}
@@ -141,25 +160,29 @@ class HomePage extends Component {
                 <Button color='teal' onClick={this.AttemptLogin}>SIGN UP / LOG IN</Button>
               </div>
             </div>
+            <Menu.Item onClick={this.openMenu}>
+              <Icon name='bars' size='large' />
+            </Menu.Item>
           </div>
         </Menu>
-        <div className="Home-intro">
-          <div className='recipeContainer'>
-            <div className='recipe-header'>
-              <h2>Recipes</h2>
-            </div>            
+        <Transition visible={this.state.visible} animation='fade down' duration={800}>
+          <div className="Home-intro">
+            <StackGrid
+              gutterHeight={-50}
+              columnWidth={300}>
+              {this.state.recipes.map(recipe => (
+                <Card
+                  onClick={() => this.handleCardClick(recipe.id)}
+                  details={{title:recipe.title, image:recipe.image}}
+                />
+              ))}
+            </StackGrid>
           </div>
-          <StackGrid
-            gutterHeight={-50}
-            columnWidth={300}>
-            {this.state.recipes.map(recipe => (
-              <Card
-                onClick={() => this.handleCardClick(recipe.id)}
-                details={{title:recipe.title, image:recipe.image}}
-              />
-            ))}
-          </StackGrid>
-        </div>
+        </Transition>
+        <Transition visible={!this.state.visible} animation='vertical flip' duration={1200}>
+          <div className="Home-intro">
+          </div>
+        </Transition>
       </div>
     );
   }

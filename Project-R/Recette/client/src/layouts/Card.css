@@ -36,10 +36,11 @@
 
 .card-header--title {
   padding: 15px;
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 100;
   color: white;
   position: absolute;
   bottom: 0;
   left: 0;
+  font-family: 'Shadows Into Light Two', cursive;
 }
