@@ -300,7 +300,7 @@ module.exports = {
 	},
 	getRecipes:function(callback) {
 		var recipes = [];
-		connectionPool.query('SELECT recipe_id, name, image_location FROM recipes LIMIT 0, 29', (err,rows) => {
+		connectionPool.query('SELECT recipe_id, name, image_location FROM recipes', (err,rows) => {
 			if(err)
 				module.exports.printError("getRecipes", "SQL Query Error: could not get recipes", err, {})
 
