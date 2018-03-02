@@ -1,9 +1,3 @@
-.Home {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-}
-
 .headerContainer {
   display: flex;
   flex: 1;
@@ -11,6 +5,7 @@
   justify-content: flex-start;
   height: 70px;
 }
+
 
 .logoBox{
   display: flex;
@@ -73,34 +68,7 @@
   margin-left: 15px;
 }
 
-.Home-intro {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  margin-top: 70px;
-  /*height: 100vh;*/
-}
-
-.test {
-  height: 70px;
+.navBoundsBox {
+	height: 70px;
   width: 100%;
 }
-
-.recipeContainer {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  padding-top: 10px;
-  padding-right: 10px;
-}
-
-.recipe-header {
-  padding-left: 10px;
-}
-
-.recipe-header h2 {
-  font-size: 26px;
-  color: white;
-  font-family: 'Shadows Into Light Two', cursive;
-}
-
