@@ -254,6 +254,7 @@ module.exports = {
 	},
 	linkIngredients:function(data,callback){
 		module.exports.getRecipeName(data.name,function(recipe_id,struct_err,simple_err){
+			console.log(data);
 			data.body.forEach( (row) => {
 				module.exports.linkIngredient(row,recipe_id,function(struct_err,simple_err){
 					console.log("Ingredient Added.");
