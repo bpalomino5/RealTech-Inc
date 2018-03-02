@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Search, Button, Image, Menu, Icon, Transition, Sidebar, Segment} from 'semantic-ui-react';
+import { Search, Button, Image, Menu, Icon, Sidebar, Segment, Grid, Header} from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 import { Helmet } from 'react-helmet';
@@ -28,6 +28,7 @@ class HomePage extends Component {
       visible: true,
     };
     this.AttemptLogin=this.AttemptLogin.bind(this);
+    this.AttemptLogout=this.AttemptLogout.bind(this);
     this.OpenProfilePage=this.OpenProfilePage.bind(this);
     this.openMenu=this.openMenu.bind(this);
   }
@@ -129,6 +130,18 @@ class HomePage extends Component {
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
+  async AttemptLogout() {
+    if(this.state.session_data!=null){
+      let response = await ClientTools.logout({user_token: this.state.session_data.user_token});
+      console.log(response);
+      if(response!=null){
+        if(response.code===1){
+          this.setState({isloggedin: false})
+        }
+      }
+    }
+  }
+
   render() {
     if(this.state.redirect){
       return <Redirect push to={{pathname: this.state.page, state: { session_data: this.state.session_data, user_firstname: this.state.user_firstname}}} />;
@@ -166,37 +179,39 @@ class HomePage extends Component {
           </div>
         </Menu>
         <div className="Home-intro">
-          <Sidebar.Pushable as={'div'} className="test">
-            <Sidebar as={Menu} animation='overlay' width='thin' visible={!this.state.visible} direction='top' icon='labeled' inverted>
-              <Menu.Item name='home'>
-                <Icon name='home' />
-                Home
-              </Menu.Item>
-              <Menu.Item name='gamepad'>
-                <Icon name='gamepad' />
-                Games
-              </Menu.Item>
-              <Menu.Item name='camera'>
-                <Icon name='camera' />
-                Channels
-              </Menu.Item>
-              <Menu.Item>
-                <Icon name='power' size='large' inverted link/> Log out
-              </Menu.Item>
+          <Sidebar.Pushable>
+            <Sidebar as={'div'} animation='overlay' width='very wide' visible={!this.state.visible} direction='top' icon='labeled' inverted>
+              <Segment raised inverted  textAlign='center'>
+                 <Grid columns={3} divided inverted verticalAlign='middle'>
+                  <Grid.Row>
+                    <Grid.Column>
+                      <Header size='large' inverted color='grey'>Company</Header>
+                      <p>About Recette</p>
+                      <p>The Team</p>
+                      <p>Contact Us</p>
+                    </Grid.Column>
+                    <Grid.Column>
+                      <Header size='large' inverted color='grey'>Media</Header>
+                    </Grid.Column>
+                    <Grid.Column>
+                      <Header size='large' inverted color='grey'>Log out</Header>
+                      <Icon name='power' size='large' inverted link onClick={this.AttemptLogout} />
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+              </Segment>
             </Sidebar>
             <Sidebar.Pusher>
-            <Transition visible={this.state.visible} animation='fade up' duration={{hide:800,show:1200}}>
-                <StackGrid
-                  gutterHeight={-50}
-                  columnWidth={300}>
-                  {this.state.recipes.map(recipe => (
-                    <Card
-                      onClick={() => this.handleCardClick(recipe.id)}
-                      details={{title:recipe.title, image:recipe.image}}
-                    />
-                  ))}
-                </StackGrid>
-            </Transition>
+              <StackGrid
+                gutterHeight={-50}
+                columnWidth={300}>
+                {this.state.recipes.map(recipe => (
+                  <Card
+                    onClick={() => this.handleCardClick(recipe.id)}
+                    details={{title:recipe.title, image:recipe.image}}
+                  />
+                ))}
+              </StackGrid>
             </Sidebar.Pusher>
           </Sidebar.Pushable>
         </div>

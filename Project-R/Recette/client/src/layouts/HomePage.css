@@ -78,9 +78,7 @@
   flex: 1;
   flex-direction: column;
   margin-top: 70px;
-  /*background-color: blue;*/
-  height: 100%;
-  width: 100%;
+  height: 100vh;
 }
 
 .recipeContainer {
@@ -101,6 +99,3 @@
   font-family: 'Shadows Into Light Two', cursive;
 }
 
-.pusher {
-  height: 100vh;
-}
