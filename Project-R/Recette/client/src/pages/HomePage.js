@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Search, Button, Image, Menu, Icon, Transition } from 'semantic-ui-react';
+import { Search, Button, Image, Menu, Icon, Transition, Sidebar, Segment} from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 import { Helmet } from 'react-helmet';
@@ -165,24 +165,41 @@ class HomePage extends Component {
             </Menu.Item>
           </div>
         </Menu>
-        <Transition visible={this.state.visible} animation='fade down' duration={800}>
-          <div className="Home-intro">
-            <StackGrid
-              gutterHeight={-50}
-              columnWidth={300}>
-              {this.state.recipes.map(recipe => (
-                <Card
-                  onClick={() => this.handleCardClick(recipe.id)}
-                  details={{title:recipe.title, image:recipe.image}}
-                />
-              ))}
-            </StackGrid>
-          </div>
-        </Transition>
-        <Transition visible={!this.state.visible} animation='vertical flip' duration={1200}>
-          <div className="Home-intro">
-          </div>
-        </Transition>
+        <div className="Home-intro">
+          <Sidebar.Pushable as={'div'} className="test">
+            <Sidebar as={Menu} animation='overlay' width='thin' visible={!this.state.visible} direction='top' icon='labeled' inverted>
+              <Menu.Item name='home'>
+                <Icon name='home' />
+                Home
+              </Menu.Item>
+              <Menu.Item name='gamepad'>
+                <Icon name='gamepad' />
+                Games
+              </Menu.Item>
+              <Menu.Item name='camera'>
+                <Icon name='camera' />
+                Channels
+              </Menu.Item>
+              <Menu.Item>
+                <Icon name='power' size='large' inverted link/> Log out
+              </Menu.Item>
+            </Sidebar>
+            <Sidebar.Pusher>
+            <Transition visible={this.state.visible} animation='fade up' duration={{hide:800,show:1200}}>
+                <StackGrid
+                  gutterHeight={-50}
+                  columnWidth={300}>
+                  {this.state.recipes.map(recipe => (
+                    <Card
+                      onClick={() => this.handleCardClick(recipe.id)}
+                      details={{title:recipe.title, image:recipe.image}}
+                    />
+                  ))}
+                </StackGrid>
+            </Transition>
+            </Sidebar.Pusher>
+          </Sidebar.Pushable>
+        </div>
       </div>
     );
   }

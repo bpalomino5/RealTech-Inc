@@ -77,11 +77,11 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  font-size: large;
-  padding: 1px;
   margin-top: 70px;
+  /*background-color: blue;*/
+  height: 100%;
+  width: 100%;
 }
-
 
 .recipeContainer {
   display: flex;
@@ -99,5 +99,8 @@
   font-size: 26px;
   color: white;
   font-family: 'Shadows Into Light Two', cursive;
+}
 
+.pusher {
+  height: 100vh;
 }
