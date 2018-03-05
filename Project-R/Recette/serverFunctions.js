@@ -254,6 +254,7 @@ module.exports = {
 	},
 	linkIngredients:function(data,callback){
 		module.exports.getRecipeName(data.name,function(recipe_id,struct_err,simple_err){
+			console.log(data);
 			data.body.forEach( (row) => {
 				module.exports.linkIngredient(row,recipe_id,function(struct_err,simple_err){
 					console.log("Ingredient Added.");
@@ -300,7 +301,7 @@ module.exports = {
 	},
 	getRecipes:function(callback) {
 		var recipes = [];
-		connectionPool.query('SELECT recipe_id, name, image_location FROM recipes LIMIT 0, 29', (err,rows) => {
+		connectionPool.query('SELECT recipe_id, name, image_location FROM recipes', (err,rows) => {
 			if(err)
 				module.exports.printError("getRecipes", "SQL Query Error: could not get recipes", err, {})
 

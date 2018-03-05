@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Search, Button, Image, Menu, Icon, Transition } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
-import _ from 'lodash';
 import { Helmet } from 'react-helmet';
 
 import ClientTools from '../utils/ClientTools';
 import StackGrid from "react-stack-grid";
 import Card from '../components/Card';
+import NavBar from '../components/NavBar';
 import '../layouts/HomePage.css';
 
 class HomePage extends Component {
@@ -17,26 +16,18 @@ class HomePage extends Component {
       ingredients: [],
       redirect: false, 
       page: null,
-      recipe_id: null,
-      isLoading: false,
-      results: [],
-      value: '',
       isloggedin: false,
       session_data: null,
       user_firstname: '',
-      activeItem: 'home',
-      visible: true,
     };
-    this.AttemptLogin=this.AttemptLogin.bind(this);
-    this.OpenProfilePage=this.OpenProfilePage.bind(this);
-    this.openMenu=this.openMenu.bind(this);
+    this.handleReset=this.handleReset.bind(this);
   }
 
   componentWillMount(){
     if(this.props.location.state){
       //check for data coming from login session start
       if(this.state.session_data==null){
-        this.setState({isloggedin: !this.state.isloggedin, session_data: this.props.location.state.session_data})
+        this.setState({session_data: this.props.location.state.session_data})
       }
       //user log off check
       if(this.props.location.state.isloggedin!=null){
@@ -85,49 +76,21 @@ class HomePage extends Component {
     this.goToPage(`/recipes/${id}`)
   }
 
-  resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
-
-  handleResultSelect = (e, { result }) => {
-    this.loadRecipesbyIngredient(result.id)
-  }
-
-  handleSearchChange = (e, { value }) => {
-    this.setState({ isLoading: true, value })
-
-    setTimeout(() => {
-      if (this.state.value.length < 1) return this.resetComponent()
-
-      const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-      const isMatch = result => re.test(result.title)
-
-      this.setState({
-        isLoading: false,
-        results: _.filter(this.state.ingredients, isMatch),
-      })
-    }, 500)
+  handleResultSelect = (id) => {
+    this.loadRecipesbyIngredient(id)
   }
 
   goToPage(page){
     this.setState({redirect: true, page: page})
   }
 
-  AttemptLogin(){
-    this.goToPage('/login')
+  handleReset() {
+    this.setState({session_data: null, user_firstname: null, isloggedin: false})
+    this.props.history.replace({
+      pathname: this.props.location.pathname,
+      state: {}
+    });
   }
-
-  OpenProfilePage() {
-    this.goToPage(`/profiles/${this.state.session_data.user_id}`)
-  }
-
-  refreshPage(){
-    window.location.reload();
-  }
-
-  openMenu(){
-    this.setState({visible: !this.state.visible})
-  }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
     if(this.state.redirect){
@@ -137,52 +100,25 @@ class HomePage extends Component {
     return (
       <div className="Home">
         <Helmet bodyAttributes={{style: 'background-color : #2E2F2F'}}/>
-        <Menu fixed='top'>
-          <div className="headerContainer">
-            <div className="logoBox" onClick={this.refreshPage}>
-              <h1>Recette</h1>
-            </div>
-            <Search 
-                className="searchBox"
-                loading={this.state.isLoading}
-                onResultSelect={this.handleResultSelect}
-                onSearchChange={this.handleSearchChange}
-                results={this.state.results}
-                value={this.state.value}
-                aligned='right'
-            />
-            <div className="buttonBox">
-              <div hidden={!this.state.isloggedin} className="profileBox" onClick={this.OpenProfilePage}>
-                <Image src='https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg' />
-                <h2>{this.state.user_firstname}</h2>
-              </div>
-              <div hidden={this.state.isloggedin}>
-                <Button color='teal' onClick={this.AttemptLogin}>SIGN UP / LOG IN</Button>
-              </div>
-            </div>
-            <Menu.Item onClick={this.openMenu}>
-              <Icon name='bars' size='large' />
-            </Menu.Item>
-          </div>
-        </Menu>
-        <Transition visible={this.state.visible} animation='fade down' duration={800}>
-          <div className="Home-intro">
-            <StackGrid
-              gutterHeight={-50}
-              columnWidth={300}>
-              {this.state.recipes.map(recipe => (
-                <Card
-                  onClick={() => this.handleCardClick(recipe.id)}
-                  details={{title:recipe.title, image:recipe.image}}
-                />
-              ))}
-            </StackGrid>
-          </div>
-        </Transition>
-        <Transition visible={!this.state.visible} animation='vertical flip' duration={1200}>
-          <div className="Home-intro">
-          </div>
-        </Transition>
+        <NavBar
+          resetAll={this.handleReset}
+          isloggedin={this.state.isloggedin}
+          user_firstname={this.state.user_firstname}
+          session_data={this.state.session_data}
+          ingredients={this.state.ingredients}
+          onSearchResultSelect={this.handleResultSelect}>
+
+          <StackGrid
+            gutterHeight={-50}
+            columnWidth={300}>
+            {this.state.recipes.map(recipe => (
+              <Card
+                onClick={() => this.handleCardClick(recipe.id)}
+                details={{title:recipe.title, image:recipe.image}}
+              />
+            ))}
+          </StackGrid>
+        </NavBar>
       </div>
     );
   }

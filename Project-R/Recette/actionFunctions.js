@@ -130,7 +130,7 @@ module.exports = {
 		})
 	},
 	attemptAddRecipe:function(data,res,callback){
-		if(data.name == undefined || data.instruction == undefined || data.prep_time == undefined || data.cooking_time == undefined || data.ready_in == undefined || data.origin == undefined || data.instruction == undefined || data.image_location == undefined || data.body == undefined) {
+		if(data.name == undefined || data.prep_time == undefined || data.cooking_time == undefined || data.ready_in == undefined || data.origin == undefined || data.instruction == undefined || data.image_location == undefined || data.body == undefined) {
 			gen.structuralError(res, "Error.Base Headers/Parameters not met") 
 		}
 		else
