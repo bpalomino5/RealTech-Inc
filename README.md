@@ -28,11 +28,11 @@ What Got Done:
  
  Tasks for 3/8:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Work on addRecipe for front end
+ - Chris: Work on implementing activity feed
+ - Kenneth: Finish up and test remaining server functions
+ - Dongri: Finish up and test remaining server functions
+ - Daniel: Finish up and test remaining server function
 
 ## Date: 3/6/18
 
@@ -46,11 +46,11 @@ What Got Done:
  
  Tasks for 3/7:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Add search by origin and style
+ - Chris: Work on implementing activity feed
+ - Kenneth: Thoroughly test newly added server functions
+ - Dongri: Thoroughly test newly added server functions
+ - Daniel: Thoroughly test newly added server functions
 
 ## Date: 3/5/18
 
@@ -64,11 +64,11 @@ What Got Done:
  
  Tasks for 3/6:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Add search by origin and style
+ - Chris: Work on implementing activity feed
+ - Kenneth: Thoroughly test newly added server functions
+ - Dongri: Thoroughly test newly added server functions
+ - Daniel: Thoroughly test newly added server functions
 
 ## Date: 3/2/18
 
@@ -82,11 +82,11 @@ What Got Done:
  
  Tasks for the weekend:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Work on active user sessions
+ - Chris: Work on user favorites
+ - Kenneth: Add some recipes
+ - Dongri: Thoroughly test newly added server functions
+ - Daniel: Thoroughly test newly added server functions
 
 ## Date: 3/1/18
 
@@ -100,11 +100,11 @@ What Got Done:
  
  Tasks for 3/2:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Add search by ingredient
+ - Chris: Work on user favorites
+ - Kenneth: Add some recipes
+ - Dongri: Thoroughly test newly added server functions
+ - Daniel: Review implemented server functions and list remaining required ones
 
 ## Date: 2/28/18
 
@@ -118,11 +118,11 @@ What Got Done:
  
  Tasks for 3/1:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Work on user page & main page style
+ - Chris: Work on user favorites
+ - Kenneth: Fix database values
+ - Dongri: Work on some server functions
+ - Daniel: Add some recipes
 
 ## Date: 2/27/18
 
@@ -136,11 +136,11 @@ What Got Done:
  
  Tasks for 2/28:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Work on user page & main page style
+ - Chris: Work on user Preferences
+ - Kenneth: Modify database tables
+ - Dongri: Add some recipes
+ - Daniel: Add some recipes
 
 ## Date: 2/26/18
 
@@ -154,11 +154,11 @@ What Got Done:
  
  Tasks for 2/27:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Work on user page & main page style
+ - Chris: Work on user Preferences
+ - Kenneth: Fix some database values
+ - Dongri: Fix some database values
+ - Daniel: Work on some server functions
 
 ## Date: 2/23/18
 
@@ -172,11 +172,11 @@ What Got Done:
  
  Tasks for weekend:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Clean up front end code
+ - Chris: Work on user page
+ - Kenneth: Work on some server functions
+ - Dongri: Work on some server functions
+ - Daniel: Work on some server functions
 
 ## Date: 2/22/18
 
@@ -190,11 +190,11 @@ What Got Done:
  
  Tasks for 2/23:
  
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Work on user page
+ - Chris: Work on user page
+ - Kenneth: Work on some server functions
+ - Dongri: Fix some database values
+ - Daniel: Create list of server functions we'll need
 
 ## Date: 2/21/18
 
