@@ -16,6 +16,186 @@ https://damp-garden-53847.herokuapp.com/
 
 # Meeting Notes
 
+## Date: 3/7/18
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for 3/8:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
+## Date: 3/6/18
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for 3/7:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
+## Date: 3/5/18
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for 3/6:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
+## Date: 3/2/18
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for the weekend:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
+## Date: 3/1/18
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for 3/2:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
+## Date: 2/28/18
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for 3/1:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
+## Date: 2/27/18
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for 2/28:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
+## Date: 2/26/18
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for 2/27:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
+## Date: 2/23/18
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for weekend:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
+## Date: 2/22/18
+
+What Got Done:
+
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+ 
+ Tasks for 2/23:
+ 
+ - Brandon: 
+ - Chris: 
+ - Kenneth: 
+ - Dongri: 
+ - Daniel: 
+
 ## Date: 2/21/18
 
 What Got Done:
