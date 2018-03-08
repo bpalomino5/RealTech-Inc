@@ -330,9 +330,7 @@ module.exports = {
 	},
 	getRecipesByIngredient:function(ID, callback){
 		module.exports.getRecipeIDsByIngredient(ID, function(recipe_ids){
-			module.exports.getRecipesByIng(recipe_ids, function(recipes){
-				callback(recipes);
-			});
+			callback(recipe_ids);
 		});
 	},
 	getRecipeIDsByIngredient:function(ID, callback) {
