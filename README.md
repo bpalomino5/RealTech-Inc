@@ -20,11 +20,11 @@ https://damp-garden-53847.herokuapp.com/
 
 What Got Done:
 
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Added search by style
+ - Chris: Worked on user activity feed
+ - Kenneth: Thoroughly tested server functions
+ - Dongri: Thoroughly tested server functions
+ - Daniel: Thoroughly tested server functions
  
  Tasks for 3/8:
  
@@ -38,11 +38,11 @@ What Got Done:
 
 What Got Done:
 
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Added search by origin
+ - Chris: Worked on activity feed for users
+ - Kenneth: Thoroughly tested server functions
+ - Dongri: Thoroughly tested server functions
+ - Daniel: Thoroughly tested server functions
  
  Tasks for 3/7:
  
@@ -56,11 +56,11 @@ What Got Done:
 
 What Got Done:
 
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Worked on user optimization
+ - Chris: Worked on user favorites
+ - Kenneth: Added some recipes
+ - Dongri: Thoroughly tested server functions
+ - Daniel: Thoroughly tested server functions
  
  Tasks for 3/6:
  
@@ -74,11 +74,11 @@ What Got Done:
 
 What Got Done:
 
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Added search by ingredients to main page
+ - Chris: Worked on userFavorites
+ - Kenneth: Added some recipes
+ - Dongri: Thoroughly tested some server functions
+ - Daniel: Reviewed the completed server functions and listed the remaining to be done
  
  Tasks for the weekend:
  
@@ -92,11 +92,11 @@ What Got Done:
 
 What Got Done:
 
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Made some modifications to user page style
+ - Chris: Worked on userFavorites
+ - Kenneth: Fixed some database values
+ - Dongri: Worked on some server functions
+ - Daniel: Added some recipes
  
  Tasks for 3/2:
  
@@ -110,11 +110,11 @@ What Got Done:
 
 What Got Done:
 
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Made some modifications to user page style
+ - Chris: Worked on userPreferences
+ - Kenneth: Modified database tables
+ - Dongri: Added some recipes
+ - Daniel: Added some recipes
  
  Tasks for 3/1:
  
@@ -128,11 +128,11 @@ What Got Done:
 
 What Got Done:
 
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Made some modifications to main page style
+ - Chris: Worked on userPreferences
+ - Kenneth: Fixed some database values
+ - Dongri: Fixed some database values
+ - Daniel: Worked on server functions
  
  Tasks for 2/28:
  
@@ -146,11 +146,11 @@ What Got Done:
 
 What Got Done:
 
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Cleaned front end code
+ - Chris: Worked on user page UI
+ - Kenneth: Worked on server functions
+ - Dongri: Worked on server functions
+ - Daniel: Worked on server functions
  
  Tasks for 2/27:
  
@@ -164,11 +164,11 @@ What Got Done:
 
 What Got Done:
 
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Worked on user page UI
+ - Chris: Worked on user page UI
+ - Kenneth: Finished some server functions
+ - Dongri: Database maintenance
+ - Daniel: Added a list of server functions to be implemented
  
  Tasks for weekend:
  
@@ -182,11 +182,11 @@ What Got Done:
 
 What Got Done:
 
- - Brandon: 
- - Chris: 
- - Kenneth: 
- - Dongri: 
- - Daniel: 
+ - Brandon: Modeled basic addRecipe display for client
+ - Chris: Worked on user page interface
+ - Kenneth: Worked on server functions
+ - Dongri: Worked on server functions
+ - Daniel: Worked on server functions
  
  Tasks for 2/23:
  
