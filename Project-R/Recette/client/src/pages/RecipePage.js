@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../layouts/RecipePage.css';
+import DataStore from '../utils/DataStore';
 import ClientTools from '../utils/ClientTools';
+import NavBar from '../components/NavBar';
 import { Button, Comment, Form, Header, Grid, Segment, Divider, Modal, Icon } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 
@@ -9,7 +11,7 @@ class RecipePage extends Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-			data: [],
+			recipe_data: [],
 			comments: [],
 			reply: '',
 			session_data: null,
@@ -18,23 +20,27 @@ class RecipePage extends Component{
 		};
 		this.SubmitComment=this.SubmitComment.bind(this);
 		this.handleUserNameClick=this.handleUserNameClick.bind(this);
+		this.handleResultSelect=this.handleResultSelect.bind(this);
 	}
 
 	componentWillMount() {
-		if(this.props.location.state){
-			this.setState({session_data: this.props.location.state.session_data, user_firstname: this.props.location.state.user_firstname})
+		let sessionData = DataStore.getSessionData('session_data');
+		if(sessionData){
+			this.setState({session_data: sessionData});
 		}
+
+		let userData = DataStore.getSessionData('user_data');
+		if(userData){
+			this.setState({user_firstname: userData.first_name});
+		}
+
 		this.getRecipeData();
 		this.getRecipeComments();
 	}
 
-	componentDidMount(){
-
-	}
-
 	async getRecipeData() {
 		var data = await ClientTools.getRecipeByID(this.props.match.params.id);
-		this.setState({data: [...this.state.data, data.recipeInfo]});
+		this.setState({recipe_data: [...this.state.recipe_data, data.recipeInfo]});
 	}
 
 	async getRecipeComments(){
@@ -53,9 +59,7 @@ class RecipePage extends Component{
 			console.log(response);
 			if(response!=null){
 				if(response.code===1){
-					this.setState({comments: [...this.state.comments, {user: this.state.user_firstname, message: data.message}]})
-					//reset textarea
-					this.setState({reply: ''})
+					this.setState({comments: [...this.state.comments, {user: this.state.user_firstname, message: data.message}], reply: ''})
 				}
 			}
 		}
@@ -71,75 +75,82 @@ class RecipePage extends Component{
 		this.goToPage(`/profiles/${id}`)
 	}
 
+	handleResultSelect(id) {
+    console.log(id);
+  }
+
 	render() {
 		if(this.state.redirect){
-      return <Redirect push to={{pathname: this.state.page, state: { session_data: this.state.session_data, user_firstname: this.state.user_firstname}}} />;
+      return <Redirect push to={{pathname: this.state.page}} />;
     }
 
 		return(
 			<div className='container'>
-				{this.state.data.map(item => (
-					<div className='body'>
-						<h1 className='textStyle'>{item.name}</h1>
-						<div className='imageContainer'>
-							<img src={`../../${item.image_location}`} alt="recipe example" align="middle" />
+				<NavBar
+					onSearchResultSelect={this.handleResultSelect}>
+					{this.state.recipe_data.map(item => (
+						<div className='body'>
+							<h1 className='textStyle'>{item.name}</h1>
+							<div className='imageContainer'>
+								<img src={`../../${item.image_location}`} alt="recipe example" align="middle" />
+							</div>
+							<div className='infoSection'>
+								<Grid columns={2} relaxed>
+									<Grid.Column width={4}>
+										<Segment basic>
+											<h2 className='textStyle'>Ingredients</h2>
+											<Divider />
+											{item.ingredients.map(i => (
+												<div className='ingredientTextStyle'>{i.quantity} {i.unit_name} {i.name}</div>
+											))}
+										</Segment>
+									</Grid.Column>
+									<Grid.Column width={9}>
+										<Segment basic>
+										   	<h2 className='textStyle'>Directions </h2>
+										    <Divider />
+												<div className='display-linebreak'>{item.instruction}</div>
+										</Segment>
+									</Grid.Column>
+								</Grid>
+							</div>
 						</div>
-						<div className='infoSection'>
-							<Grid columns={2} relaxed>
-								<Grid.Column width={4}>
-									<Segment basic>
-										<h2 className='textStyle'>Ingredients</h2>
-										<Divider />
-										{item.ingredients.map(i => (
-											<div className='ingredientTextStyle'>{i.quantity} {i.unit_name} {i.name}</div>
-										))}
-									</Segment>
-								</Grid.Column>
-								<Grid.Column width={9}>
-									<Segment basic>
-									   	<h2 className='textStyle'>Directions </h2>
-									    <Divider />
-											<div className='display-linebreak'>{item.instruction}</div>
-									</Segment>
-								</Grid.Column>
-							</Grid>
-						</div>
+					))}
+					<div className='commentSection'>
+						<Comment.Group>
+							<Header as='h2' dividing>Comments</Header>
+							{this.state.comments.map(comment => (
+								<Comment>
+						      <Comment.Content>
+						        <Comment.Author as='a' onClick={() => this.handleUserNameClick(comment.id)}>{comment.user}</Comment.Author>
+						        <Comment.Metadata>
+						          <div>Today at 5:42PM</div>
+						        </Comment.Metadata>
+						        <Comment.Text>{comment.message}</Comment.Text>
+						      </Comment.Content>
+						    </Comment>
+							))}
+							<Form reply>
+					      <Form.TextArea 
+					      	value={this.state.reply}
+	                onChange={(e, {value}) => this.setState({reply: value})}
+	              />
+					      <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={this.SubmitComment} />
+					    </Form>
+						</Comment.Group>
 					</div>
-				))}
-				<div className='commentSection'>
-					<Comment.Group>
-						<Header as='h2' dividing>Comments</Header>
-						{this.state.comments.map(comment => (
-							<Comment>
-					      <Comment.Content>
-					        <Comment.Author as='a' onClick={() => this.handleUserNameClick(comment.id)}>{comment.user}</Comment.Author>
-					        <Comment.Metadata>
-					          <div>Today at 5:42PM</div>
-					        </Comment.Metadata>
-					        <Comment.Text>{comment.message}</Comment.Text>
-					      </Comment.Content>
-					    </Comment>
-						))}
-						<Form reply>
-				      <Form.TextArea 
-				      	value={this.state.reply}
-                onChange={(e, {value}) => this.setState({reply: value})}
-              />
-				      <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={this.SubmitComment} />
-				    </Form>
-					</Comment.Group>
-				</div>
-				<Modal open={this.state.showPrompt} basic size='small' closeOnDimmerClick={true}>
-			    <Header icon='archive' content='User account is required' />
-			    <Modal.Content>
-			      <p>Hi! If you enjoy our content, then please sign in or create a user account in order to comment on this recipe. Thanks!</p>
-			    </Modal.Content>
-			    <Modal.Actions>
-			      <Button color='green' inverted onClick={() => this.setState({showPrompt: false})}>
-			        <Icon name='checkmark' /> Close
-			      </Button>
-			    </Modal.Actions>
-			  </Modal>
+					<Modal open={this.state.showPrompt} basic size='small' closeOnDimmerClick={true}>
+				    <Header icon='archive' content='User account is required' />
+				    <Modal.Content>
+				      <p>Hi! If you enjoy our content, then please sign in or create a user account in order to comment on this recipe. Thanks!</p>
+				    </Modal.Content>
+				    <Modal.Actions>
+				      <Button color='green' inverted onClick={() => this.setState({showPrompt: false})}>
+				        <Icon name='checkmark' /> Close
+				      </Button>
+				    </Modal.Actions>
+				  </Modal>
+			  </NavBar>
 			</div>
 		);
 	}

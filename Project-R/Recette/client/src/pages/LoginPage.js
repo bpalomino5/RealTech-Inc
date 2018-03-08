@@ -32,7 +32,6 @@ class LoginPage extends Component{
     if(response!=null){
       if(response.code===1){ //login successful
         DataStore.storeSessionData('session_data', response.data);
-        // this.setState({session_data: response.data})
         this.goToPage('/')
       }
       else{
