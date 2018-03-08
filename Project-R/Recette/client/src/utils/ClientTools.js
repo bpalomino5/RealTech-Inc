@@ -105,6 +105,14 @@ class ClientTools{
       .then(this.checkStatus)
       .then(this.parseJSON)
   }
+
+  getDataVersion(){
+    return fetch('/getDataVersion',{
+      accept: 'application/json'
+    })
+      .then(this.checkStatus)
+      .then(this.parseJSON);
+  }
  
   checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {

@@ -6,6 +6,7 @@ import ClientTools from '../utils/ClientTools';
 import StackGrid from "react-stack-grid";
 import Card from '../components/Card';
 import NavBar from '../components/NavBar';
+import DataStore from '../utils/DataStore';
 import '../layouts/HomePage.css';
 
 class HomePage extends Component {
@@ -13,52 +14,40 @@ class HomePage extends Component {
     super(props);
     this.state = { 
       recipes: [], 
-      ingredients: [],
       redirect: false, 
-      page: null,
-      isloggedin: false,
-      session_data: null,
-      user_firstname: '',
+      page: null
     };
-    this.handleReset=this.handleReset.bind(this);
   }
 
   componentWillMount(){
-    if(this.props.location.state){
-      //check for data coming from login session start
-      if(this.state.session_data==null){
-        this.setState({session_data: this.props.location.state.session_data})
-      }
-      //user log off check
-      if(this.props.location.state.isloggedin!=null){
-        this.setState({isloggedin: this.props.location.state.isloggedin})
-      }
-    }
     this.getData();
   }
 
-  componentDidMount(){
-    if(this.state.session_data){
-      this.getUserData();
-    }
-  }
-
-   async getUserData() {
-    let response = await ClientTools.getUserData({user_id:this.state.session_data.user_id, user_token: this.state.session_data.user_token});
-    console.log(response);
-    if(response!=null){
-      if(response.code===1){
-        this.setState({user_firstname: response.data.first_name})
+  async getData(){
+    //need to check with latest data
+    let local = DataStore.getData('data_version');
+    if(local){        
+      let response =  await ClientTools.getDataVersion();
+      if(response){
+        if(local.version===response.version){ // all up to date
+          let recipeData = DataStore.getData('recipes');
+          if(recipeData){ 
+            this.setState({recipes: recipeData});
+          }
+        }
       }
     }
-  }
+    else{ // no local data 
+      let data = await ClientTools.getRecipes();
+      this.setState({recipes: data.recipes});
+      DataStore.storeData('recipes',data.recipes); //store in data store
 
-  async getData(){
-    var data = await ClientTools.getRecipes();
-    this.setState({recipes: data.recipes});
+      let ingredientData = await ClientTools.getIngredients();
+      DataStore.storeData('ingredients',ingredientData.ingredients); //store in data store
 
-    var ingredientData = await ClientTools.getIngredients();
-    this.setState({ingredients: ingredientData.ingredients});
+      let Dbversion = await ClientTools.getDataVersion();
+      if(Dbversion) DataStore.storeData('data_version', Dbversion);
+    }
   }
 
   async loadRecipesbyIngredient(ingredientID){
@@ -84,28 +73,15 @@ class HomePage extends Component {
     this.setState({redirect: true, page: page})
   }
 
-  handleReset() {
-    this.setState({session_data: null, user_firstname: null, isloggedin: false})
-    this.props.history.replace({
-      pathname: this.props.location.pathname,
-      state: {}
-    });
-  }
-
   render() {
     if(this.state.redirect){
-      return <Redirect push to={{pathname: this.state.page, state: { session_data: this.state.session_data, user_firstname: this.state.user_firstname}}} />;
+      return <Redirect push to={{pathname: this.state.page}} />;
     }
 
     return (
       <div className="Home">
         <Helmet bodyAttributes={{style: 'background-color : #2E2F2F'}}/>
         <NavBar
-          resetAll={this.handleReset}
-          isloggedin={this.state.isloggedin}
-          user_firstname={this.state.user_firstname}
-          session_data={this.state.session_data}
-          ingredients={this.state.ingredients}
           onSearchResultSelect={this.handleResultSelect}>
 
           <StackGrid
@@ -113,6 +89,7 @@ class HomePage extends Component {
             columnWidth={300}>
             {this.state.recipes.map(recipe => (
               <Card
+                key={recipe.id}
                 onClick={() => this.handleCardClick(recipe.id)}
                 details={{title:recipe.title, image:recipe.image}}
               />

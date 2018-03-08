@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import '../layouts/LoginPage.css';
 import ClientTools from '../utils/ClientTools';
+import DataStore from '../utils/DataStore';
 import { Redirect, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
@@ -27,10 +28,11 @@ class LoginPage extends Component{
 
   async AttemptLogin() {
     let response = await ClientTools.login({user_name:this.state.username, user_password: this.state.password});
-    console.log(response);
+    // console.log(response);
     if(response!=null){
       if(response.code===1){ //login successful
-        this.setState({session_data: response.data})
+        DataStore.storeSessionData('session_data', response.data);
+        // this.setState({session_data: response.data})
         this.goToPage('/')
       }
       else{
@@ -41,7 +43,7 @@ class LoginPage extends Component{
 
   render() {
     if(this.state.redirect){
-      return <Redirect push to={{pathname: this.state.page, state: {isloggedin: true, session_data: this.state.session_data}}} />;
+      return <Redirect push to={{pathname: this.state.page}} />;
     }
     return(
       <div className='login-form'>

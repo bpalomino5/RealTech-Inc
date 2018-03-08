@@ -31,6 +31,11 @@ app.use(bodyParser.urlencoded({extended:false}));
 //serving static path for images stored on server
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
+app.get('/getDataVersion', function(req,res){
+	serverFunctions.getDataVersion(function(version){			
+		res.json(version);
+	})
+});
 
 app.get('/getRecipeByID', function(req,res){
 	serverFunctions.getRecipeByID(req.query.id, function(recipeInfo){

@@ -4,6 +4,18 @@ var bcrypt = require('bcrypt');
 var async = require('async');
 
 module.exports = {
+	getDataVersion:function(callback){
+		var query = "Select count(*) as 'version' from recipes";
+		connectionPool.query(query, function(err,results){
+			if(err){
+				module.exports.printError('getDataVersion', 'SQL Query Error: getting data version from db', err, {})
+				callback("An internal error occured")
+			}
+			if(results.length == 1){
+				callback(results[0])
+			}
+		})
+	},
 	checkUsername:function(user_name, callback){
 		var query = "Select * from user_data where user_data.username = '" + user_name + "'";
 		connectionPool.query(query, function(err, results){
