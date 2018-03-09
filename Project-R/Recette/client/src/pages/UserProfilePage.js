@@ -74,7 +74,7 @@ class UserProfilePage extends Component{
                             prep_time:      this.state.user_inputted_recipe.prep_time, 
                             cooking_time:   this.state.user_inputted_recipe.cooking_time, 
                             ready_in:       this.state.user_inputted_recipe.ready_in, 
-                            origin:         this.state.lastname, 
+                            origin:         this.state.user_inputted_recipe.origin, 
                             directions:     this.state.user_inputted_recipe.directions,
                             image_location: this.state.user_inputted_recipe.image_location 
                           };
@@ -397,19 +397,24 @@ class UserProfilePage extends Component{
                                placeholder={`Ingredient #${index + 1} name`}
                                compact = 'true'
                                allowAdditions
-                               fluid search selection options={this.state.ingredients} />
+                               fluid search selection options={this.state.ingredients}
+                               />
+
                                <Form.Dropdown
                                placeholder='Quantity'
                                compact = 'true'
                                allowAdditions
-                               fluid search selection options={this.state.quantityOptions} />
+                               fluid search selection options={this.state.quantityOptions} 
+                               />
+
                                <Form.Dropdown
                                placeholder='Units'
                                compact = 'true'
                                allowAdditions
                                fluid search selection options={this.state.unitOptions} />
                                <Button color = 'teal' content='ADD' onClick={this.handleAddIngredient} />
-                               <Button color = 'red' content='DELETE' onClick={this.handleRemoveIngredient(index)} />
+                               <Button color = 'red' content='DELETE' onClick={this.handleRemoveIngredient(index)} 
+                               />
                             </Form.Group>
                               
                             </div>
@@ -419,7 +424,13 @@ class UserProfilePage extends Component{
                       </div>
 
                       <div className = 'direction-box'>
-                      <Form.TextArea label='Directions' required placeholder='Tell us how to make your creation...' value={this.state.user_inputted_recipe.directions} onChange={(e, {value}) => this.setState({directions: value})} />
+                        <Form.TextArea 
+                          label='Directions' 
+                          required 
+                          placeholder='Tell us how to make your creation...' 
+                          value={this.state.user_inputted_recipe.directions} 
+                          onChange={(e, {value}) => this.setState({directions: value})} 
+                          />
                       </div>
                    
                   <Form.Checkbox label='Add to My Favorites' />
