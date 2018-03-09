@@ -338,18 +338,16 @@ module.exports = {
 		});
 	},
 	getRecipeIDsByIngredient:function(ID, callback) {
-		//var recipe_ids = [];
+		var recipe_ids = [];
 		var sql = "SELECT * FROM has_ingredients WHERE ingredient_id = " + ID;
 		connectionPool.query(sql, function(err, rows) {
 			if (err)
 				module.exports.printError("getRecipeByIngredient", "SQL Query Error: could not get recipes by ingredient", err, {ID:ID})
-			else
-				callback(rows);
 			
-			//rows.forEach( (row) => {
-				//recipe_ids.push(row.recipe_id);
-			//});
-			//callback(rows);
+			rows.forEach( (row) => {
+				recipe_ids.push(row.recipe_id);
+			});
+			callback(recipe_ids);
 		});
 	},
 	getRecipesByIng:function(data, callback){
@@ -398,6 +396,7 @@ module.exports = {
 		});
 	},
 	getRecipesBySty:function(data, callback){
+		console.log(data)
 		var recipes = [];
 		async.forEachOf(data, function(recipe_id, i, inner_callback){
 			var sql = 'SELECT recipe_id, name, image_location FROM recipes WHERE recipes.recipe_id = ' + recipe_id;
