@@ -23,10 +23,18 @@ class UserProfilePage extends Component{
       ingredients: [],
       isloggedin: false,
       user_ingredients: [ {name: '', quantity: '', units: ''}], // used to store the user's inputted recipe
-      user_inputted_recipe: [ {user_id: '' ,name: '', prep_time: '', cooking_time: '', ready_in: '', origin: '', directions: '', image_location: '../../images/dummyimage.jpg'} ],
+      user_inputted_recipe: {user_id: '' ,name: '', prep_time: '', cooking_time: '', ready_in: '', origin: '', directions: '', image_location: '../../images/dummyimage.jpg'},
       quantityOptions: [ {text: '1' , value: 1}, {text: '2', value: 2}, {text: '3', value: 3}, {text: '4', value: 4}, {text: '5', value: 5}, {text: '6', value: 6} ], // displays values for quantity dropdown
       unitOptions: [ {text: '', value: ''}],  // should display units for units dropdown
       success: false,
+      user_id: '' ,
+      name: '', 
+      prep_time: '', 
+      cooking_time: '', 
+      ready_in: '', 
+      origin: '', 
+      directions: '', 
+      image_location: '../../images/dummyimage.jpg',  
     };
 
     this.AttemptLogout=this.AttemptLogout.bind(this);
@@ -61,22 +69,22 @@ class UserProfilePage extends Component{
 
   async attemptAddNewRecipe ()
   {
-      if(  this.state.user_inputted_recipe.name 
-        && this.state.user_inputted_recipe.prep_time 
-        && this.state.user_inputted_recipe.cooking_time 
-        && this.state.user_inputted_recipe.ready_in 
-        && this.state.user_inputted_recipe.origin 
-        && this.state.user_inputted_recipe.directions )
+      if(  this.state.name 
+        && this.state.prep_time 
+        && this.state.cooking_time 
+        && this.state.ready_in 
+        && this.state.origin 
+        && this.state.directions )
       {
           let newRecipe = { 
                             user_id:        this.state.session_data.user_id,
-                            name:           this.state.user_inputted_recipe.name, 
-                            prep_time:      this.state.user_inputted_recipe.prep_time, 
-                            cooking_time:   this.state.user_inputted_recipe.cooking_time, 
-                            ready_in:       this.state.user_inputted_recipe.ready_in, 
-                            origin:         this.state.user_inputted_recipe.origin, 
-                            directions:     this.state.user_inputted_recipe.directions,
-                            image_location: this.state.user_inputted_recipe.image_location 
+                            name:           this.state.name, 
+                            prep_time:      this.state.prep_time, 
+                            cooking_time:   this.state.cooking_time, 
+                            ready_in:       this.state.ready_in, 
+                            origin:         this.state.origin, 
+                            directions:     this.state.directions,
+                            image_location: this.state.image_location 
                           };
           let response = await ClientTools.addRecipe(newRecipe); // Call function that adds new recipe
           console.log(response);
@@ -346,7 +354,7 @@ class UserProfilePage extends Component{
                           fluid 
                           label='Recipe Name' 
                           placeholder='Recipe Name' 
-                          value={this.state.user_inputted_recipe.name} 
+                          value={this.state.name} 
                           onChange={(e, {value}) => this.setState({name: value})}
                           />
 
@@ -355,7 +363,7 @@ class UserProfilePage extends Component{
                          fluid 
                          label='Preparation Time' 
                          placeholder='HHMM' 
-                         value={this.state.user_inputted_recipe.prep_time} 
+                         value={this.state.prep_time} 
                          onChange={(e, {value}) => this.setState({prep_time: value})}
                          />
 
@@ -364,7 +372,7 @@ class UserProfilePage extends Component{
                          fluid 
                          label='Cook Time' 
                          placeholder='HHMM' 
-                         value={this.state.user_inputted_recipe.cooking_time} 
+                         value={this.state.cooking_time} 
                          onChange={(e, {value}) => this.setState({cooking_time: value})}
                          />
 
@@ -373,7 +381,7 @@ class UserProfilePage extends Component{
                          fluid 
                          label='Ready In' 
                          placeholder='HHMM' 
-                         value={this.state.user_inputted_recipe.ready_in} 
+                         value={this.state.ready_in} 
                          onChange={(e, {value}) => this.setState({ready_in: value})}
                          />
                          
@@ -382,7 +390,7 @@ class UserProfilePage extends Component{
                          fluid 
                          label='Origin' 
                          placeholder='America, Asia, Afria, Mexico, Russia' 
-                         value={this.state.user_inputted_recipe.origin} 
+                         value={this.state.origin} 
                          onChange={(e, {value}) => this.setState({origin: value})}
                          />
                       </Form.Group>
@@ -428,7 +436,7 @@ class UserProfilePage extends Component{
                           label='Directions' 
                           required 
                           placeholder='Tell us how to make your creation...' 
-                          value={this.state.user_inputted_recipe.directions} 
+                          value={this.state.directions} 
                           onChange={(e, {value}) => this.setState({directions: value})} 
                           />
                       </div>
