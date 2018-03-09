@@ -211,7 +211,7 @@ class UserProfilePage extends Component{
             </Grid.Column>
             <Grid.Column width={4}>
               <Segment basic>
-                <h2 className='info-section-headers'>My Recipes</h2>
+                <h2 className='info-section-headers'>My Favorites</h2>
                 <Divider />
                   <div className='myRecipesList'>
                     <ul>
@@ -270,10 +270,12 @@ class UserProfilePage extends Component{
                     <div className='forms'>
 
                       <Form.Group widths = 'equal'>
-                         <Form.Input fluid label='Recipe Name' placeholder='Recipe Name' />
-                         <Form.Input fluid label='Preparation Time' placeholder='HH:MM' />
-                         <Form.Input fluid label='Cook Time' placeholder='HH:MM' />
-                         <Form.Input fluid label='Ready In' placeholder='HH:MM' />
+                         <Form.Input required fluid label='Recipe Name' placeholder='Recipe Name' />
+                         <Form.Input required fluid label='Preparation Time' placeholder='HH:MM' />
+                         <Form.Input required fluid label='Cook Time' placeholder='HH:MM' />
+                         <Form.Input required fluid label='Ready In' placeholder='HH:MM' />
+                         <Form.Input required fluid label='Origin' placeholder='America, Asia, Afria, Mexico, Russia' />
+                         <Form.Input required fluid label='Ready In' placeholder='HH:MM' />
                       </Form.Group>
 
                       <Form.Group widths='equal'>
@@ -315,11 +317,9 @@ class UserProfilePage extends Component{
                         </div>
                       </Form.Group>
 
-                    <Form.Group>
                       <div className = 'direction-box'>
                       <Form.TextArea label='Directions' placeholder='Tell us how to prepare your creation...' />
                        </div>
-                    </Form.Group>
                    
                   <Form.Checkbox label='I agree to be Pooh Bear' />
                   <Button type='submit'>Submit</Button>
