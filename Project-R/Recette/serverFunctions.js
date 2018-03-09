@@ -396,7 +396,6 @@ module.exports = {
 		});
 	},
 	getRecipesBySty:function(data, callback){
-		console.log(data)
 		var recipes = [];
 		async.forEachOf(data, function(recipe_id, i, inner_callback){
 			var sql = 'SELECT recipe_id, name, image_location FROM recipes WHERE recipes.recipe_id = ' + recipe_id;
