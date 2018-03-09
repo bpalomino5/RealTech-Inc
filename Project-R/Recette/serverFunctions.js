@@ -254,31 +254,39 @@ module.exports = {
 	},
 	linkIngredients:function(data,callback){
 		module.exports.getRecipeName(data.name,function(recipe_id,struct_err,simple_err){
-			console.log(data);
 			data.body.forEach( (row) => {
 				module.exports.linkIngredient(row,recipe_id,function(struct_err,simple_err){
-					console.log("Ingredient Added.");
+					if(simple_err)
+						console.log("Error Occured");
+					else
+						console.log("Ingredient Added.");
 				})
 			});
 			callback(false,false)
 		})
 	},
 	getRecipeName:function(name,callback){
-		var sql = "SELECT recipe_id FROM recipes WHERE name = " + data.name;
+		var sql = "SELECT * FROM recipes WHERE name = '" + name + "'";
 		connectionPool.query(sql,function(err,result) {
 			if (err){
-				module.exports.printError("linkIngredients", "SQL Query Error: Searching for recipe name",err,{data:data})
+				module.exports.printError("getRecipeName", "SQL Query Error: Searching for recipe name",err,{data:data})
+				callback(false, true)
 			}
 			else
-				callback(result,false, false)
+			{
+				var string=JSON.stringify(result);
+				var json =JSON.parse(string);
+				callback(json[0].recipe_id, false, false)
+			}
 		});
 	},
 	linkIngredient:function(data,recipe_id,callback){
+		console.log(recipe_id)
 		var sql = "INSERT INTO has_ingredients (recipe_id, ingredient_id, quantity, unit_id) VALUES (" + recipe_id + "," + data.ingredient_id + "," + data.quantity + "," + data.unit_id + ")";
 		connectionPool.query(sql, function(err, results){
 			if(err){
-				module.exports.printError("linkIngredients","SQL Query Error: linking ingredients",err,{data:data})
-				callback("An Internal Error Occured")
+				module.exports.printError("linkIngredient","SQL Query Error: linking an ingredient",err,{data:data})
+				callback(false, true)
 			}
 			else
 				callback(false,false)
@@ -326,9 +334,7 @@ module.exports = {
 	},
 	getRecipesByIngredient:function(ID, callback){
 		module.exports.getRecipeIDsByIngredient(ID, function(recipe_ids){
-			module.exports.getRecipesByIng(recipe_ids, function(recipes){
-				callback(recipes);
-			});
+			callback(recipe_ids);
 		});
 	},
 	getRecipeIDsByIngredient:function(ID, callback) {
