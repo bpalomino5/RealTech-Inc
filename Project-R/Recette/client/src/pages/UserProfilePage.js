@@ -302,60 +302,32 @@ class UserProfilePage extends Component{
                          <Form.Input required fluid label='Origin' placeholder='America, Asia, Afria, Mexico, Russia' />
                          <Form.Input required fluid label='Ready In' placeholder='HH:MM' />
                       </Form.Group>
-
-                      <Form.Group widths='equal'>
-                        <div className = "drop-downs">
-
-                          <Form.Dropdown 
-                           label = "Ingredient 1"
-                           placeholder='Select Ingredient 1'
-                           compact = 'true'
-                           fluid search selection options={this.state.ingredients} />
-
-                        </div>
-
-                        <div className = "drop-downs">
-                          <Form.Dropdown
-                           label = "Ingredient 2"
-                           placeholder='Select Ingredient 2'
-                           compact = 'true'
-                           fluid search selection options={this.state.ingredients} />
-
-                        </div>
-
-                        <div className = "drop-downs">
-                          <Form.Dropdown
-                           label = "Ingredient 3"
-                           placeholder='Select Ingredient 3'
-                           compact = 'true'
-                           fluid search selection options={this.state.ingredients} />
-
-                        </div>
-
-                        <div className = "drop-downs">
-                          <Form.Dropdown
-                           label = "Ingredient 4"
-                           placeholder='Select Ingredient 4'
-                           compact = 'true'
-                           fluid search selection options={this.state.ingredients} />
-
-                        </div>
-                      </Form.Group>
-
-
+                      
+                      <div className='user-ingredients'>
                         <form onSubmit={this.handleSubmit}>
-                          <h4>Ingredients</h4>
+                          <h3>Ingredients</h3>
                           {this.state.shareholders.map((shareholder, idx) => (
                             <div className="dynamic-ingredient-list">
+                            <Form.Group>
                               <Form.Dropdown
                                placeholder={`Ingredient #${idx + 1} name`}
                                compact = 'true'
                                fluid search selection options={this.state.ingredients} />
+                               <Form.Dropdown
+                               placeholder='Quantity'
+                               compact = 'true'
+                               fluid search selection options={this.state.ingredients} />
+                               <Form.Dropdown
+                               placeholder='Units'
+                               compact = 'true'
+                               fluid search selection options={this.state.ingredients} />
+                            </Form.Group>
                               <button type="button" onClick={this.handleRemoveShareholder(idx)} className="small">-</button>
                             </div>
                           ))}
                           <button type="button" onClick={this.handleAddShareholder} className="small">Add Ingredient</button>
                         </form> 
+                      </div>
 
                       <div className = 'direction-box'>
                       <Form.TextArea label='Directions' placeholder='Tell us how to prepare your creation...' />
