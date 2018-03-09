@@ -339,7 +339,7 @@ module.exports = {
 	},
 	getRecipeIDsByIngredient:function(ID, callback) {
 		var recipe_ids = [];
-		var sql = 'SELECT recipe_id FROM has_ingredients WHERE ingredient_id = ' + ID;
+		var sql = "SELECT * FROM has_ingredients WHERE ingredient_id = " + ID;
 		connectionPool.query(sql, function(err, rows) {
 			if (err)
 				module.exports.printError("getRecipeByIngredient", "SQL Query Error: could not get recipes by ingredient", err, {ID:ID})
@@ -377,9 +377,9 @@ module.exports = {
 	},
 	getRecipesByStyle:function(ID, callback){
 		module.exports.getRecipeIDsByStyle(ID, function(recipe_ids){
-			module.exports.getRecipesBySty(recipe_ids, function(recipes){
-				callback(recipes);
-			});
+			//module.exports.getRecipesBySty(recipe_ids, function(recipes){
+				callback(recipe_ids);
+			//});
 		});
 	},
 	getRecipeIDsByStyle:function(ID, callback) {
@@ -397,20 +397,29 @@ module.exports = {
 	},
 	getRecipesBySty:function(data, callback){
 		var recipes = [];
-		data.forEach( (row) => {
-			var sql = 'SELECT recipe_id, name, image_location FROM recipes WHERE recipes.recipe_id = ' + row;
+		async.forEachOf(data, function(recipe_id, i, inner_callback){
+			var sql = 'SELECT recipe_id, name, image_location FROM recipes WHERE recipes.recipe_id = ' + recipe_id;
 			connectionPool.query(sql, function(err, results) {
-				if (err)
-					module.exports.printError("getRecipesByStyle", "SQL Query Error: could not get recipes", err, {})
+				if (err){
+					module.exports.printError("getRecipesByStyle", "SQL Query Error: could not get recipes", err, data)
+					inner_callback(err)
+				}
 				
-				recipes.push({
-					id: row.recipe_id,
-					title: row.name,
-					image: row.image_location
-				});
+				else{
+					recipes.push({
+						id: results[0].recipe_id,
+						title: results[0].name,
+						image: results[0].image_location
+					});
+					inner_callback(null);
+				}
 			});
+		}, function(err) {
+			if (err)
+				module.exports.printError("getRecipesBySty","some error",err,data);
+			else
+				callback(recipes)
 		});
-		callback(recipes);
 	},
 	getRecipesByOrigin:function(origin, callback){
 		var recipes = [];	

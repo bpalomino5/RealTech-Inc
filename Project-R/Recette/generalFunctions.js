@@ -7,6 +7,9 @@ module.exports = {
 	*/
 	checkReqSpecific:function(req,res,callback){
 		if(req.body.user_id == undefined || req.body.user_token == undefined){
+			console.log(req.body)
+			console.log(req.body.user_id)
+			console.log(req.body.user_token)
 			serverFunctions.printError("checkReqSpecific","Error: Base Headers/Parameters not met",null,null)
 			module.exports.structuralError(res,"Error: Base Headers/Parameters not met")
 		}
