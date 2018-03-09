@@ -82,3 +82,35 @@ img {
 	color: white;
 	font-size: 120%;
 }
+.favorite-cards {
+	background-color: teal;
+	color: white;
+}
+.new-recipe-addition-container {
+	font-family: Helvetica;
+	background-color: #222;
+	color: white;
+}
+
+.forms {
+	min-width: 200px;
+	max-width: 800px;
+	padding-left: 30px;
+}
+.drop-downs {
+	min-width: 200px;
+	max-width: 800px;
+	color: red;
+}
+
+.add-favorite-section-headers {
+	text-align: left;
+	color: white;
+	font-family: Helvetica;
+	padding-left: 40px;
+}
+
+.directions-box {
+	min-width: 200px;
+	max-width: 1500px;
+}
