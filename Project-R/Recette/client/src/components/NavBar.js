@@ -30,6 +30,7 @@ class NavBar extends Component{
     this.openMenu=this.openMenu.bind(this);
     this.openMobileSearch=this.openMobileSearch.bind(this);
     this.closeMobileSearch=this.closeMobileSearch.bind(this);
+    this.refreshPage=this.refreshPage.bind(this);
 	}
 
 	componentWillMount() {

@@ -7,7 +7,7 @@ class RecipeCard extends Component {
     return (
       <article className="card" onClick={this.props.onClick}>
         <header className="card-header">
-          <img src={image} alt="food"/>
+          <img src={"/"+image} alt="food"/>
           <div className="shadow" />
           <h4 className="card-header--title">{title}</h4>
         </header>
