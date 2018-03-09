@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../layouts/Card.css';
+import '../layouts/CustomCard.css';
 
-class Card extends Component {
+class CustomCard extends Component {
   render() {
     const { image, title } = this.props.details;
     return (
@@ -16,4 +16,4 @@ class Card extends Component {
   }
 }
 
-export default Card
+export default CustomCard

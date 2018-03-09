@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 
 import ClientTools from '../utils/ClientTools';
 import StackGrid from "react-stack-grid";
-import Card from '../components/Card';
+import CustomCard from '../components/CustomCard';
 import NavBar from '../components/NavBar';
 import DataStore from '../utils/DataStore';
 import '../layouts/HomePage.css';
@@ -89,7 +89,7 @@ class HomePage extends Component {
             gutterHeight={-50}
             columnWidth={300}>
             {this.state.recipes.map(recipe => (
-              <Card
+              <CustomCard
                 onClick={() => this.handleCardClick(recipe.id)}
                 details={{title:recipe.title, image:recipe.image}}
               />

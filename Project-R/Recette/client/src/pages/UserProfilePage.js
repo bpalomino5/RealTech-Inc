@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { Button, Feed, Card, Icon, List, Divider, Grid, Segment } from 'semantic-ui-react';
+import { Button, Feed, Card, Icon, List, Divider, Grid, Segment, Dropdown, Form } from 'semantic-ui-react';
+import StackGrid from "react-stack-grid";
+import CustomCard from '../components/CustomCard';
 import '../layouts/UserProfilePage.css';
 import ClientTools from '../utils/ClientTools';
+import NavBar from '../components/NavBar';
 import { Redirect, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 class UserProfilePage extends Component{
   constructor(props){
@@ -10,9 +14,15 @@ class UserProfilePage extends Component{
     this.state = {
       session_data: {user_id: '', user_token: ''},
       userdata: {username:'',email:'',first_name:'',last_name:'',biography:''},
+      recipes: {id: '', title: '',image: ''},
       userActivity: [],
       userFavorites: [],
       userPreferences: [],
+      favoritesTitles: [],
+      ingredients: [],
+      isloggedin: false,
+      user_input_ingredients: [{ quanity: '', name: ' ', units: ' '}],
+      shareholders: [ {name: ''}],
     };
 
     this.AttemptLogout=this.AttemptLogout.bind(this);
@@ -22,6 +32,10 @@ class UserProfilePage extends Component{
     if(this.props.location.state){
       this.setState({session_data: this.props.location.state.session_data})
     }
+    //user log off check
+    if(this.props.location.state.isloggedin!=null){
+      this.setState({isloggedin: this.props.location.state.isloggedin})
+    }
   }
 
   componentDidMount(){
@@ -29,10 +43,23 @@ class UserProfilePage extends Component{
     this.getActivity();
     this.getFavorites();
     this.getPreferences();
+    this.getRecipes();
+    this.getIngredients();
+    // this.matchRecipes();
   }
 
   goToPage(page){
     this.setState({redirect: true, page: page})
+  }
+
+  async getIngredients () {
+    let data = await ClientTools.getIngredients();
+    this.setState({ingredients: data.ingredients})
+  }
+
+  async getRecipes () {
+    let data = await ClientTools.getRecipes();
+    this.setState({recipes: data.recipes});
   }
 
   async getPreferences() {
@@ -79,16 +106,81 @@ class UserProfilePage extends Component{
       }
     }
   }
+
+  handleShareholderNameChange = (idx) => (evt) => {
+    const newShareholders = this.state.shareholders.map((shareholder, sidx) => {
+      if (idx !== sidx) return shareholder;
+      return { name: evt.target.value, age: evt.target.value };
+    });
+    
+    this.setState({ shareholders: newShareholders });
+  }
+  
+  handleSubmit = (evt) => {
+    const { name, shareholders } = this.state;
+    alert(`Incorporated: ${name} with ${shareholders.length} shareholders`);
+  }
+  
+  handleAddShareholder = () => {
+    this.setState({ shareholders: this.state.shareholders.concat([{ name: '' }]) });
+  }
+  
+  handleRemoveShareholder = (idx) => () => {
+    this.setState({ shareholders: this.state.shareholders.filter((s, sidx) => idx !== sidx) });
+  }
+  
+
+  /*
+  handleReset() {
+    this.setState({session_data: null, user_firstname: null, isloggedin: false})
+    this.props.history.replace({
+      pathname: this.props.location.pathname,
+      state: {}
+    });
+  */
+
+  /*
+  matchRecipes ()
+  { 
+    var i = 0;
+    var favoritesWithTitle = [];
+    for ( i = 0; i < this.state.recipes.length; i++ ) // recipes.length is returning a size of 0 here; may need to hard code to 67 to get loop running
+    {
+      if ( this.state.userFavorites[i] == this.state.recipes[i].id ) // producing error because .id
+          favoritesWithTitle[i] = this.state.recipes[i].title;       // producing same error because .title
+    }
+    this.setState( {favoritesTitles: favoritesWithTitle} );
+  }
+  */
+
+  /********* HTML for the 'favorite' cards. Not workinng yet since the reipce images and reipce titles haven't been matched by the recipe_ids *******************
+     <div className='favorite-cards'>
+          <StackGrid
+            gutterHeight={-50}
+            columnWidth={300}>
+            <h1> MY FAVORITES </h1>
+            {this.state.userFavorites.map(favorite => (
+              <Card
+                onClick={() => this.handleCardClick(favorite.recipe)}   
+                details={ this.state.recipes.title, this.state.recipes.image }
+              />
+                ))
+            }
+          </StackGrid>
+        </div>
+  ****************************************************************************************************************************************************************/
+
+
   render() {
     if(this.state.redirect){
-      return <Redirect to={{pathname: this.state.page, state: {isloggedin: false}}} />;
+      return <Redirect push to={{pathname: this.state.page, state: { session_data: this.state.session_data, user_firstname: this.state.user_firstname}}} />;
     }
 
     return(
       <div className='user-profile'>
         <div className="title-container">
-            <div className='title'><Link to={{pathname:`/`, state: { session_data: this.state.session_data}}}>Recette</Link> </div>
-            <div className='button-container'> <Button color='teal' onClick={this.AttemptLogout}>LOG OUT</Button> </div>
+          <div className='title'><Link to={{pathname:`/`, state: { session_data: this.state.session_data}}}>Recette</Link> </div>
+          <div className='button-container'> <Button color='teal' onClick={this.AttemptLogout}>LOG OUT</Button> </div>
         </div>
         <div className='banner-container'>
            <Card
@@ -144,7 +236,7 @@ class UserProfilePage extends Component{
             </Grid.Column>
             <Grid.Column width={4}>
               <Segment basic>
-                <h2 className='info-section-headers'>My Recipes</h2>
+                <h2 className='info-section-headers'>My Favorites</h2>
                 <Divider />
                   <div className='myRecipesList'>
                     <ul>
@@ -189,6 +281,70 @@ class UserProfilePage extends Component{
             </Grid.Column>
           </Grid>
         </div>
+
+       
+        <Grid columns={1}>
+            <Grid.Column width={20}>
+                <div className='new-recipe-addition-container'>
+
+                <h2 className='add-favorite-section-headers'>Add Your Own Recipe</h2>
+                  <Divider />
+                <div className='display-linebreak'></div>
+
+                  <Form inverted fluid>
+                    <div className='forms'>
+
+                      <Form.Group widths = 'equal'>
+                         <Form.Input required fluid label='Recipe Name' placeholder='Recipe Name' />
+                         <Form.Input required fluid label='Preparation Time' placeholder='HH:MM' />
+                         <Form.Input required fluid label='Cook Time' placeholder='HH:MM' />
+                         <Form.Input required fluid label='Ready In' placeholder='HH:MM' />
+                         <Form.Input required fluid label='Origin' placeholder='America, Asia, Afria, Mexico, Russia' />
+                         <Form.Input required fluid label='Ready In' placeholder='HH:MM' />
+                      </Form.Group>
+                      
+                      <div className='user-ingredients'>
+                        <form onSubmit={this.handleSubmit}>
+                          <h3>Ingredients</h3>
+                          {this.state.shareholders.map((shareholder, idx) => (
+                            <div className="dynamic-ingredient-list">
+                            <Form.Group>
+                              <Form.Dropdown
+                               placeholder={`Ingredient #${idx + 1} name`}
+                               compact = 'true'
+                               fluid search selection options={this.state.ingredients} />
+                               <Form.Dropdown
+                               placeholder='Quantity'
+                               compact = 'true'
+                               fluid search selection options={this.state.ingredients} />
+                               <Form.Dropdown
+                               placeholder='Units'
+                               compact = 'true'
+                               fluid search selection options={this.state.ingredients} />
+                               <Button color = 'teal' content='ADD' onClick={this.handleAddShareholder} />
+                               <Button color = 'red' content='DELETE' onClick={this.handleRemoveShareholder(idx)} />
+                            </Form.Group>
+                              
+                            </div>
+                          ))}
+                          
+                        </form> 
+                      </div>
+
+                      <div className = 'direction-box'>
+                      <Form.TextArea label='Directions' placeholder='Tell us how to prepare your creation...' />
+                      </div>
+                   
+                  <Form.Checkbox label='Add to My Favorites' />
+                  <Button color = 'green' type='submit'>SUBMIT</Button>
+                  </div>
+
+                 </Form>
+               </div>
+            </Grid.Column>
+        </Grid>
+        
+
       </div>
     );
   }
