@@ -335,10 +335,9 @@ class UserProfilePage extends Component{
                       <Form.TextArea label='Directions' placeholder='Tell us how to prepare your creation...' />
                       </div>
                    
-                  <Form.Checkbox label='I agree to be Pooh Bear' />
-                  <Button type='submit'>Submit</Button>
+                  <Form.Checkbox label='Add to My Favorites' />
+                  <Button color = 'green' type='submit'>SUBMIT</Button>
                   </div>
-
 
                  </Form>
                </div>
