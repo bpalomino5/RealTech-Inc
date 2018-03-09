@@ -13,7 +13,7 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      recipes: [], 
+      recipes: [],
       redirect: false, 
       page: null
     };
@@ -52,12 +52,13 @@ class HomePage extends Component {
 
   async loadRecipesbyIngredient(ingredientID){
     var data = await ClientTools.getRecipesByIngredient(ingredientID);
-    if(data!=null){
-      if(data.recipeInfo.length){
-        this.setState({recipes: data.recipeInfo})
+    if(data){
+      let recipes = [];
+      let allRecipes = DataStore.getData('recipes');
+      for (var i = 0; i < data.recipeIDs.length; i++) {
+        recipes.push(allRecipes[data.recipeIDs[i]-1]);
       }
-      else
-        console.log("empty array") //handle this
+      this.setState({recipes: recipes});
     }
   }
 
@@ -89,7 +90,6 @@ class HomePage extends Component {
             columnWidth={300}>
             {this.state.recipes.map(recipe => (
               <Card
-                key={recipe.id}
                 onClick={() => this.handleCardClick(recipe.id)}
                 details={{title:recipe.title, image:recipe.image}}
               />

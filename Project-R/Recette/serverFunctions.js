@@ -349,7 +349,7 @@ module.exports = {
 		var recipe_ids = [];
 		var sql = 'SELECT recipe_id FROM has_ingredients WHERE ingredient_id = ' + ID;
 		connectionPool.query(sql, function(err, rows) {
-			if (err)
+			if(err)
 				module.exports.printError("getRecipeByIngredient", "SQL Query Error: could not get recipes by ingredient", err, {ID:ID})
 			
 			rows.forEach( (row) => {

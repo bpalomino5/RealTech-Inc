@@ -47,7 +47,7 @@ app.get('/getRecipeByID', function(req,res){
 });
 
 app.get('/getRecipesByIngredient', function(req,res){
-	serverFunctions.getRecipesByIngredient(req.query.id, function(recipeInfo){
+	serverFunctions.getRecipesByIngredient(req.query.id, function(recipeIDs){
 		res.json({recipeIDs:recipeIDs})
 	})
 });
