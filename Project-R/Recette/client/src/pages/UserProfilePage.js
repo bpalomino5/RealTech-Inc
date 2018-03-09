@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Feed, Card, Icon, List, Divider, Grid, Segment, Dropdown, Form } from 'semantic-ui-react';
+import { Button, Feed, Card, Icon, List, Divider, Grid, Segment, Dropdown, Form, Message } from 'semantic-ui-react';
 import StackGrid from "react-stack-grid";
 import CustomCard from '../components/CustomCard';
 import '../layouts/UserProfilePage.css';
@@ -15,13 +15,18 @@ class UserProfilePage extends Component{
       session_data: {user_id: '', user_token: ''},
       userdata: {username:'',email:'',first_name:'',last_name:'',biography:''},
       recipes: {id: '', title: '',image: ''},
+      units: { unit: '', name: ''} ,
       userActivity: [],
       userFavorites: [],
       userPreferences: [],
       favoritesTitles: [],
       ingredients: [],
       isloggedin: false,
-      user_ingredients: [ {name: '', quantity: '', units: ''}],
+      user_ingredients: [ {name: '', quantity: '', units: ''}], // used to store the user's inputted recipe
+      user_inputted_recipe: [ {user_id: '' ,name: '', prep_time: '', cooking_time: '', ready_in: '', origin: '', directions: '', image_location: '../../images/dummyimage.jpg'} ],
+      quantityOptions: [ {text: '1' , value: 1}, {text: '2', value: 2}, {text: '3', value: 3}, {text: '4', value: 4}, {text: '5', value: 5}, {text: '6', value: 6} ], // displays values for quantity dropdown
+      unitOptions: [ {text: '', value: ''}],  // should display units for units dropdown
+      success: false,
     };
 
     this.AttemptLogout=this.AttemptLogout.bind(this);
@@ -44,13 +49,66 @@ class UserProfilePage extends Component{
     this.getPreferences();
     this.getRecipes();
     this.getIngredients();
+    this.getUnits();
+    this.unitsReworker();
     // this.matchRecipes();
   }
-
+  
+  
   goToPage(page){
     this.setState({redirect: true, page: page})
   }
 
+  async attemptAddNewRecipe ()
+  {
+      if(  this.state.user_inputted_recipe.name 
+        && this.state.user_inputted_recipe.prep_time 
+        && this.state.user_inputted_recipe.cooking_time 
+        && this.state.user_inputted_recipe.ready_in 
+        && this.state.user_inputted_recipe.origin 
+        && this.state.user_inputted_recipe.directions )
+      {
+          let newRecipe = { 
+                            user_id:        this.state.session_data.user_id,
+                            name:           this.state.user_inputted_recipe.name, 
+                            prep_time:      this.state.user_inputted_recipe.prep_time, 
+                            cooking_time:   this.state.user_inputted_recipe.cooking_time, 
+                            ready_in:       this.state.user_inputted_recipe.ready_in, 
+                            origin:         this.state.lastname, 
+                            directions:     this.state.user_inputted_recipe.directions,
+                            image_location: this.state.user_inputted_recipe.image_location 
+                          };
+          let response = await ClientTools.addRecipe(newRecipe); // Call function that adds new recipe
+          console.log(response);
+          if(response!=null){
+            if(response.code===1){
+               // show successfully added new recipe message
+            }
+            else this.setState({error:true, errorMessage: response.message})
+          } 
+      }
+      else this.setState({error:true, errorMessage: 'Please fill in all areas of the form.'})
+  }
+
+  async getUnits () {
+    let data = await ClientTools.getUnits();
+    if(data!=null){
+      this.setState( {units: data.units })
+    }
+  }
+
+  /* Helper function to display the unit dropdown bar properly */
+  async unitsReworker () {
+
+    var i = 0;
+    var units2 = [ {text: '', value: ''} ];
+    for ( i = 0; i < 20; i++ ) 
+    {
+        units2[i] = {text: String(this.state.units.name),value: i};
+        // years[i] = {text: String(i + 1900), value: i + 1900};
+    }
+    this.setState( {unitOptions: units2} );
+  }
   async getIngredients () {
     let data = await ClientTools.getIngredients();
     this.setState({ingredients: data.ingredients})
@@ -107,16 +165,14 @@ class UserProfilePage extends Component{
   }
 
   
-  handleSubmit = (evt) => {
-    const { name, user_ingredients } = this.state;
-  }
+  
   
   handleAddIngredient = () => {
     this.setState({ user_ingredients: this.state.user_ingredients.concat([{ name: '', quantity: '', units: '' }]) });
   }
   
-  handleRemoveIngredient = (idx) => () => {
-    this.setState({ user_ingredients: this.state.user_ingredients.filter((s, sidx) => idx !== sidx) });
+  handleRemoveIngredient = (index) => () => {
+    this.setState({ user_ingredients: this.state.user_ingredients.filter((s, sindex) => index !== sindex) });
   }
   
 
@@ -143,7 +199,7 @@ class UserProfilePage extends Component{
   }
   */
 
-  /********* HTML for the 'favorite' cards. Not workinng yet since the reipce images and reipce titles haven't been matched by the recipe_ids *******************
+  /********* HTML for the 'favorite' cards. Not workinng yet since the recipe images and reipce titles haven't been matched by the recipe_ids *******************
      <div className='favorite-cards'>
           <StackGrid
             gutterHeight={-50}
@@ -285,34 +341,75 @@ class UserProfilePage extends Component{
                     <div className='forms'>
 
                       <Form.Group widths = 'equal'>
-                         <Form.Input required fluid label='Recipe Name' placeholder='Recipe Name' />
-                         <Form.Input required fluid label='Preparation Time' placeholder='HH:MM' />
-                         <Form.Input required fluid label='Cook Time' placeholder='HH:MM' />
-                         <Form.Input required fluid label='Ready In' placeholder='HH:MM' />
-                         <Form.Input required fluid label='Origin' placeholder='America, Asia, Afria, Mexico, Russia' />
-                         <Form.Input required fluid label='Ready In' placeholder='HH:MM' />
+                         <Form.Input 
+                          required 
+                          fluid 
+                          label='Recipe Name' 
+                          placeholder='Recipe Name' 
+                          value={this.state.user_inputted_recipe.name} 
+                          onChange={(e, {value}) => this.setState({name: value})}
+                          />
+
+                         <Form.Input 
+                         required 
+                         fluid 
+                         label='Preparation Time' 
+                         placeholder='HHMM' 
+                         value={this.state.user_inputted_recipe.prep_time} 
+                         onChange={(e, {value}) => this.setState({prep_time: value})}
+                         />
+
+                         <Form.Input 
+                         required 
+                         fluid 
+                         label='Cook Time' 
+                         placeholder='HHMM' 
+                         value={this.state.user_inputted_recipe.cooking_time} 
+                         onChange={(e, {value}) => this.setState({cooking_time: value})}
+                         />
+
+                         <Form.Input 
+                         required 
+                         fluid 
+                         label='Ready In' 
+                         placeholder='HHMM' 
+                         value={this.state.user_inputted_recipe.ready_in} 
+                         onChange={(e, {value}) => this.setState({ready_in: value})}
+                         />
+                         
+                         <Form.Input 
+                         required 
+                         fluid 
+                         label='Origin' 
+                         placeholder='America, Asia, Afria, Mexico, Russia' 
+                         value={this.state.user_inputted_recipe.origin} 
+                         onChange={(e, {value}) => this.setState({origin: value})}
+                         />
                       </Form.Group>
                       
                       <div className='user-ingredients'>
                         <form onSubmit={this.handleSubmit}>
                           <h3>Ingredients</h3>
-                          {this.state.user_ingredients.map((shareholder, idx) => (
+                          {this.state.user_ingredients.map((ingredient, index) => (
                             <div className="dynamic-ingredient-list">
                             <Form.Group>
                               <Form.Dropdown
-                               placeholder={`Ingredient #${idx + 1} name`}
+                               placeholder={`Ingredient #${index + 1} name`}
                                compact = 'true'
+                               allowAdditions
                                fluid search selection options={this.state.ingredients} />
                                <Form.Dropdown
                                placeholder='Quantity'
                                compact = 'true'
-                               fluid search selection options={this.state.ingredients} />
+                               allowAdditions
+                               fluid search selection options={this.state.quantityOptions} />
                                <Form.Dropdown
                                placeholder='Units'
                                compact = 'true'
-                               fluid search selection options={this.state.ingredients} />
+                               allowAdditions
+                               fluid search selection options={this.state.unitOptions} />
                                <Button color = 'teal' content='ADD' onClick={this.handleAddIngredient} />
-                               <Button color = 'red' content='DELETE' onClick={this.handleRemoveIngredient(idx)} />
+                               <Button color = 'red' content='DELETE' onClick={this.handleRemoveIngredient(index)} />
                             </Form.Group>
                               
                             </div>
@@ -322,11 +419,16 @@ class UserProfilePage extends Component{
                       </div>
 
                       <div className = 'direction-box'>
-                      <Form.TextArea label='Directions' placeholder='Tell us how to prepare your creation...' />
+                      <Form.TextArea label='Directions' required placeholder='Tell us how to make your creation...' value={this.state.user_inputted_recipe.directions} onChange={(e, {value}) => this.setState({directions: value})} />
                       </div>
                    
                   <Form.Checkbox label='Add to My Favorites' />
-                  <Button color = 'green' type='submit'>SUBMIT</Button>
+                  <Button color = 'green' type='submit' onClick={this.attemptAddNewRecipe}>SUBMIT</Button>
+                  <Message
+                    success
+                    header='Added new recipe!'
+                    content='Your new recipe will now be added to our library!'
+                  />
                   </div>
 
                  </Form>

@@ -17,6 +17,13 @@ class ClientTools{
     return this.rawPostRequest('/createUser',data);
   }
 
+  addRecipe(data){
+    return this.rawPostRequest('/addRecipe',data);
+  }
+
+  addIngredient(data){
+    return this.rawPostRequest('/addIngredient', data);
+  }
   login(data){
     return this.rawPostRequest('/login',data);   
   }
@@ -47,6 +54,14 @@ class ClientTools{
     })
     .then(this.checkStatus)
     .then(this.parseJSON);
+  }
+
+  getUnits(){
+    return fetch('/getUnits', {
+      accept: "application/json"
+    })
+      .then(this.checkStatus)
+      .then(this.parseJSON);
   }
 
   getIngredients(){
