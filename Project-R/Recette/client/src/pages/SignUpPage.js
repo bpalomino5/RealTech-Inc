@@ -77,6 +77,7 @@ class SignUpPage extends Component{
               <Segment stacked>
                 <Form.Input
                   fluid
+                  required
                   icon='user'
                   iconPosition='left'
                   placeholder='First Name'
@@ -85,6 +86,7 @@ class SignUpPage extends Component{
                 />
                 <Form.Input
                   fluid
+                  required
                   icon='user'
                   iconPosition='left'
                   placeholder='Last Name'
@@ -93,6 +95,7 @@ class SignUpPage extends Component{
                 />
                 <Form.Input
                   fluid
+                  required
                   icon='user'
                   iconPosition='left'
                   placeholder='Username'
@@ -101,6 +104,7 @@ class SignUpPage extends Component{
                 />
                  <Form.Input
                   fluid
+                  required
                   icon='mail'
                   iconPosition='left'
                   placeholder='E-mail'
@@ -109,6 +113,7 @@ class SignUpPage extends Component{
                 />
                  <Form.Input
                   fluid
+                  required
                   icon='lock'
                   iconPosition='left'
                   placeholder='Password'
@@ -118,6 +123,7 @@ class SignUpPage extends Component{
                 />
                  <Form.Input
                   fluid
+                  required
                   icon='lock'
                   iconPosition='left'
                   placeholder='Confirm Password'
