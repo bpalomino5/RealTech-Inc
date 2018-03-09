@@ -3,6 +3,7 @@ import { Button, Feed, Card, Icon, List, Divider, Grid, Segment, Dropdown, Form,
 import StackGrid from "react-stack-grid";
 import RecipeCard from '../components/RecipeCard';
 import '../layouts/UserProfilePage.css';
+import DataStore from '../utils/DataStore';
 import ClientTools from '../utils/ClientTools';
 import NavBar from '../components/NavBar';
 import { Redirect, Link } from 'react-router-dom';
@@ -21,7 +22,6 @@ class UserProfilePage extends Component{
       userPreferences: [],
       favoritesTitles: [],
       ingredients: [],
-      isloggedin: false,
       user_ingredients: [ {name: '', quantity: '', units: ''}], // used to store the user's inputted recipe
       user_inputted_recipe: [ {user_id: '' ,name: '', prep_time: '', cooking_time: '', ready_in: '', origin: '', directions: '', image_location: '../../images/dummyimage.jpg'} ],
       quantityOptions: [ {text: '1' , value: 1}, {text: '2', value: 2}, {text: '3', value: 3}, {text: '4', value: 4}, {text: '5', value: 5}, {text: '6', value: 6} ], // displays values for quantity dropdown
@@ -33,13 +33,8 @@ class UserProfilePage extends Component{
   }
 
   componentWillMount(){
-    if(this.props.location.state){
-      this.setState({session_data: this.props.location.state.session_data})
-    }
-    //user log off check
-    if(this.props.location.state.isloggedin!=null){
-      this.setState({isloggedin: this.props.location.state.isloggedin})
-    }
+    let sessionData = DataStore.getSessionData('session_data');
+    if(sessionData) this.setState({session_data: sessionData})
   }
 
   componentDidMount(){
@@ -219,15 +214,14 @@ class UserProfilePage extends Component{
 
   render() {
     if(this.state.redirect){
-      return <Redirect push to={{pathname: this.state.page, state: { session_data: this.state.session_data, user_firstname: this.state.user_firstname}}} />;
+      return <Redirect push to={{pathname: this.state.page}} />;
     }
 
     return(
+      <div>
+        <NavBar>
       <div className='user-profile'>
-        <div className="title-container">
-          <div className='title'><Link to={{pathname:`/`, state: { session_data: this.state.session_data}}}>Recette</Link> </div>
-          <div className='button-container'> <Button color='teal' onClick={this.AttemptLogout}>LOG OUT</Button> </div>
-        </div>
+        
         <div className='banner-container'>
            <Card
             fluid = 'true'
@@ -448,6 +442,8 @@ class UserProfilePage extends Component{
         </Grid>
         
 
+      </div>
+      </NavBar>
       </div>
     );
   }
