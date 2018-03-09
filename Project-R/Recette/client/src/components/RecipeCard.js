@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../layouts/CustomCard.css';
+import '../layouts/RecipeCard.css';
 
-class CustomCard extends Component {
+class RecipeCard extends Component {
   render() {
     const { image, title } = this.props.details;
     return (

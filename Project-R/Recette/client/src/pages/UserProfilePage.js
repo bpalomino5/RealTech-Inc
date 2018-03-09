@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Feed, Card, Icon, List, Divider, Grid, Segment, Dropdown, Form } from 'semantic-ui-react';
 import StackGrid from "react-stack-grid";
-import CustomCard from '../components/CustomCard';
+import RecipeCard from '../components/RecipeCard';
 import '../layouts/UserProfilePage.css';
 import ClientTools from '../utils/ClientTools';
 import NavBar from '../components/NavBar';
