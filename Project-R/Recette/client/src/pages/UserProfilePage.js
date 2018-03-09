@@ -321,11 +321,13 @@ class UserProfilePage extends Component{
                                placeholder='Units'
                                compact = 'true'
                                fluid search selection options={this.state.ingredients} />
+                               <Button color = 'teal' content='ADD' onClick={this.handleAddShareholder} />
+                               <Button color = 'red' content='DELETE' onClick={this.handleRemoveShareholder(idx)} />
                             </Form.Group>
-                              <button type="button" onClick={this.handleRemoveShareholder(idx)} className="small">-</button>
+                              
                             </div>
                           ))}
-                          <button type="button" onClick={this.handleAddShareholder} className="small">Add Ingredient</button>
+                          
                         </form> 
                       </div>
 
