@@ -16,6 +16,186 @@ https://damp-garden-53847.herokuapp.com/
 
 # Meeting Notes
 
+## Date: 3/7/18
+
+What Got Done:
+
+ - Brandon: Added search by style
+ - Chris: Worked on user activity feed
+ - Kenneth: Thoroughly tested server functions
+ - Dongri: Thoroughly tested server functions
+ - Daniel: Thoroughly tested server functions
+ 
+ Tasks for 3/8:
+ 
+ - Brandon: Work on addRecipe for front end
+ - Chris: Work on implementing activity feed
+ - Kenneth: Finish up and test remaining server functions
+ - Dongri: Finish up and test remaining server functions
+ - Daniel: Finish up and test remaining server function
+
+## Date: 3/6/18
+
+What Got Done:
+
+ - Brandon: Added search by origin
+ - Chris: Worked on activity feed for users
+ - Kenneth: Thoroughly tested server functions
+ - Dongri: Thoroughly tested server functions
+ - Daniel: Thoroughly tested server functions
+ 
+ Tasks for 3/7:
+ 
+ - Brandon: Add search by origin and style
+ - Chris: Work on implementing activity feed
+ - Kenneth: Thoroughly test newly added server functions
+ - Dongri: Thoroughly test newly added server functions
+ - Daniel: Thoroughly test newly added server functions
+
+## Date: 3/5/18
+
+What Got Done:
+
+ - Brandon: Worked on user optimization
+ - Chris: Worked on user favorites
+ - Kenneth: Added some recipes
+ - Dongri: Thoroughly tested server functions
+ - Daniel: Thoroughly tested server functions
+ 
+ Tasks for 3/6:
+ 
+ - Brandon: Add search by origin and style
+ - Chris: Work on implementing activity feed
+ - Kenneth: Thoroughly test newly added server functions
+ - Dongri: Thoroughly test newly added server functions
+ - Daniel: Thoroughly test newly added server functions
+
+## Date: 3/2/18
+
+What Got Done:
+
+ - Brandon: Added search by ingredients to main page
+ - Chris: Worked on userFavorites
+ - Kenneth: Added some recipes
+ - Dongri: Thoroughly tested some server functions
+ - Daniel: Reviewed the completed server functions and listed the remaining to be done
+ 
+ Tasks for the weekend:
+ 
+ - Brandon: Work on active user sessions
+ - Chris: Work on user favorites
+ - Kenneth: Add some recipes
+ - Dongri: Thoroughly test newly added server functions
+ - Daniel: Thoroughly test newly added server functions
+
+## Date: 3/1/18
+
+What Got Done:
+
+ - Brandon: Made some modifications to user page style
+ - Chris: Worked on userFavorites
+ - Kenneth: Fixed some database values
+ - Dongri: Worked on some server functions
+ - Daniel: Added some recipes
+ 
+ Tasks for 3/2:
+ 
+ - Brandon: Add search by ingredient
+ - Chris: Work on user favorites
+ - Kenneth: Add some recipes
+ - Dongri: Thoroughly test newly added server functions
+ - Daniel: Review implemented server functions and list remaining required ones
+
+## Date: 2/28/18
+
+What Got Done:
+
+ - Brandon: Made some modifications to user page style
+ - Chris: Worked on userPreferences
+ - Kenneth: Modified database tables
+ - Dongri: Added some recipes
+ - Daniel: Added some recipes
+ 
+ Tasks for 3/1:
+ 
+ - Brandon: Work on user page & main page style
+ - Chris: Work on user favorites
+ - Kenneth: Fix database values
+ - Dongri: Work on some server functions
+ - Daniel: Add some recipes
+
+## Date: 2/27/18
+
+What Got Done:
+
+ - Brandon: Made some modifications to main page style
+ - Chris: Worked on userPreferences
+ - Kenneth: Fixed some database values
+ - Dongri: Fixed some database values
+ - Daniel: Worked on server functions
+ 
+ Tasks for 2/28:
+ 
+ - Brandon: Work on user page & main page style
+ - Chris: Work on user Preferences
+ - Kenneth: Modify database tables
+ - Dongri: Add some recipes
+ - Daniel: Add some recipes
+
+## Date: 2/26/18
+
+What Got Done:
+
+ - Brandon: Cleaned front end code
+ - Chris: Worked on user page UI
+ - Kenneth: Worked on server functions
+ - Dongri: Worked on server functions
+ - Daniel: Worked on server functions
+ 
+ Tasks for 2/27:
+ 
+ - Brandon: Work on user page & main page style
+ - Chris: Work on user Preferences
+ - Kenneth: Fix some database values
+ - Dongri: Fix some database values
+ - Daniel: Work on some server functions
+
+## Date: 2/23/18
+
+What Got Done:
+
+ - Brandon: Worked on user page UI
+ - Chris: Worked on user page UI
+ - Kenneth: Finished some server functions
+ - Dongri: Database maintenance
+ - Daniel: Added a list of server functions to be implemented
+ 
+ Tasks for weekend:
+ 
+ - Brandon: Clean up front end code
+ - Chris: Work on user page
+ - Kenneth: Work on some server functions
+ - Dongri: Work on some server functions
+ - Daniel: Work on some server functions
+
+## Date: 2/22/18
+
+What Got Done:
+
+ - Brandon: Modeled basic addRecipe display for client
+ - Chris: Worked on user page interface
+ - Kenneth: Worked on server functions
+ - Dongri: Worked on server functions
+ - Daniel: Worked on server functions
+ 
+ Tasks for 2/23:
+ 
+ - Brandon: Work on user page
+ - Chris: Work on user page
+ - Kenneth: Work on some server functions
+ - Dongri: Fix some database values
+ - Daniel: Create list of server functions we'll need
+
 ## Date: 2/21/18
 
 What Got Done:
