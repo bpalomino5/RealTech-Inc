@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Search, Button, Image, Menu, Icon, Sidebar, Segment, Grid, Header} from 'semantic-ui-react';
+import { Search, Button, Image, Menu, Icon, Sidebar, Segment, Grid, Header, Responsive, Accordion} from 'semantic-ui-react';
 import _ from 'lodash';
 import { Redirect } from 'react-router-dom';
 
@@ -21,11 +21,15 @@ class NavBar extends Component{
       visible: true,
       redirect: false, 
       page: null,
+      mobileSearch: false,
+      companyAccordian: false,
 		};
 		this.AttemptLogin=this.AttemptLogin.bind(this);
     this.AttemptLogout=this.AttemptLogout.bind(this);
     this.OpenProfilePage=this.OpenProfilePage.bind(this);
     this.openMenu=this.openMenu.bind(this);
+    this.openMobileSearch=this.openMobileSearch.bind(this);
+    this.closeMobileSearch=this.closeMobileSearch.bind(this);
 	}
 
 	componentWillMount() {
@@ -107,10 +111,6 @@ class NavBar extends Component{
    	this.setState({session_data: null, first_name: '', isloggedin: false});
    	DataStore.removeSessionData('session_data');
    	DataStore.removeSessionData('user_data');
-    // this.props.history.replace({
-    //   pathname: this.props.location.pathname,
-    //   state: {}
-    // });
   }
 
   async AttemptLogout() {
@@ -125,6 +125,19 @@ class NavBar extends Component{
     }
   }
 
+  openMobileSearch() {
+  	this.setState({mobileSearch: true})
+  }
+
+  closeMobileSearch() {
+  	this.setState({mobileSearch: false});
+  }
+
+  toggleCompanyAccordian = () => {
+  	this.setState({companyAccordian: !this.state.companyAccordian})
+  }
+
+
 	render() {
 		if(this.state.redirect){
       return <Redirect push to={{pathname: this.state.page}} />;
@@ -132,6 +145,8 @@ class NavBar extends Component{
 
 		return(
 			<div>
+				{/*Computer*/}
+				<Responsive minWidth={568}>
 				<Menu fixed='top'>
 		      <div className="headerContainer">
 		        <div className="logoBox" onClick={this.refreshPage}>
@@ -184,7 +199,82 @@ class NavBar extends Component{
 		        </Segment>
 		      </Sidebar>
 		      {this.props.children}
-		    </Sidebar.Pushable>   
+		    </Sidebar.Pushable>
+		    </Responsive>
+		    
+		  	{/*MOBILE*/}
+		    <Responsive maxWidth={567}>
+				  <Sidebar.Pushable>
+			      <Sidebar as={Segment} animation='overlay' vertical width='wide' visible={!this.state.visible} direction='left' icon='labeled' inverted={"true"}>
+							<div className="mobileButtonBox">
+			          <div hidden={!this.state.isloggedin} className="profileBox" onClick={this.OpenProfilePage}>
+			            <Image src='https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg' />
+			            <h2>{this.state.first_name}</h2>
+			          </div>
+			          <div hidden={this.state.isloggedin}>
+			            <Button color='teal' onClick={this.AttemptLogin}>SIGN UP / LOG IN</Button>
+			          </div>
+			          <div className="mobileCloseMenu" onClick={this.openMenu}>
+			          	<Icon name='cancel' size='large' />
+			          </div>
+			        </div>
+			      	<Menu inverted fluid vertical>
+			      	<Menu.Item link>
+			      		<Icon name='home' />Home
+			      	</Menu.Item>
+			      	<Accordion as={Menu.Item} inverted onClick={this.toggleCompanyAccordian}>
+			      		<Accordion.Title>
+			      			<Icon name='dropdown' />Company
+			      		</Accordion.Title>
+			      		<Accordion.Content active={this.state.companyAccordian}>
+			      			<p>About Recette</p>
+			      			<p>The Team</p>
+			      			<p>Contact Us</p>
+			      		</Accordion.Content>
+			      	</Accordion>
+			      	<Menu.Item>
+			      		Media
+			      	</Menu.Item>
+			      	<Menu.Item link onClick={this.AttemptLogout}>
+			      		Log out<Icon name='power' inverted link />
+			      	</Menu.Item>
+			      	</Menu>
+			      </Sidebar>
+			      <Menu fixed='top' borderless>
+				      {!this.state.mobileSearch && <div className="headerContainer">
+				        <div className="logoBox" onClick={this.refreshPage}>
+				          <h1>Recette</h1>
+				        </div>
+				        <div className="buttonBox">
+					        <Menu.Item onClick={this.openMobileSearch}>
+					        	<Icon name='search' size='large' />
+					        </Menu.Item>
+					        <Menu.Item onClick={this.openMenu}>
+					          <Icon name='bars' size='large' />
+					        </Menu.Item>
+				        </div>
+				       </div>
+				      }
+				    	{this.state.mobileSearch && <div className="headerContainer">
+				    		<Menu.Item onClick={this.closeMobileSearch}>
+				    			<Icon name='chevron left' size='large' />
+				    		</Menu.Item>
+				        <Search 
+				            className="searchBox"
+				            loading={this.state.isLoading}
+				            onResultSelect={this.handleResultSelect}
+				            onSearchChange={this.handleSearchChange}
+				            results={this.state.results}
+				            value={this.state.value}
+				            aligned='right'
+				        />
+				      	</div>
+				    	}
+					  </Menu>
+				  	<div className="navBoundsBox" />
+			      {this.props.children}
+			    </Sidebar.Pushable>
+		    </Responsive>
 	    </div> 
 		)
 	}

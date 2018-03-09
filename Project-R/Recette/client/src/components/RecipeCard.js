@@ -16,4 +16,4 @@ class RecipeCard extends Component {
   }
 }
 
-export default CustomCard
+export default RecipeCard
