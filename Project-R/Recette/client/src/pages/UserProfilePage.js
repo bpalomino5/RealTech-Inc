@@ -21,6 +21,8 @@ class UserProfilePage extends Component{
       favoritesTitles: [],
       ingredients: [],
       isloggedin: false,
+      user_input_ingredients: [{ quanity: '', name: ' ', units: ' '}],
+      shareholders: [ {name: ''}],
     };
 
     this.AttemptLogout=this.AttemptLogout.bind(this);
@@ -104,6 +106,29 @@ class UserProfilePage extends Component{
       }
     }
   }
+
+  handleShareholderNameChange = (idx) => (evt) => {
+    const newShareholders = this.state.shareholders.map((shareholder, sidx) => {
+      if (idx !== sidx) return shareholder;
+      return { name: evt.target.value, age: evt.target.value };
+    });
+    
+    this.setState({ shareholders: newShareholders });
+  }
+  
+  handleSubmit = (evt) => {
+    const { name, shareholders } = this.state;
+    alert(`Incorporated: ${name} with ${shareholders.length} shareholders`);
+  }
+  
+  handleAddShareholder = () => {
+    this.setState({ shareholders: this.state.shareholders.concat([{ name: '' }]) });
+  }
+  
+  handleRemoveShareholder = (idx) => () => {
+    this.setState({ shareholders: this.state.shareholders.filter((s, sidx) => idx !== sidx) });
+  }
+  
 
   /*
   handleReset() {
@@ -317,13 +342,30 @@ class UserProfilePage extends Component{
                         </div>
                       </Form.Group>
 
+
+                        <form onSubmit={this.handleSubmit}>
+                          <h4>Ingredients</h4>
+                          {this.state.shareholders.map((shareholder, idx) => (
+                            <div className="dynamic-ingredient-list">
+                              <Form.Dropdown
+                               placeholder={`Ingredient #${idx + 1} name`}
+                               compact = 'true'
+                               fluid search selection options={this.state.ingredients} />
+                              <button type="button" onClick={this.handleRemoveShareholder(idx)} className="small">-</button>
+                            </div>
+                          ))}
+                          <button type="button" onClick={this.handleAddShareholder} className="small">Add Ingredient</button>
+                        </form> 
+
                       <div className = 'direction-box'>
                       <Form.TextArea label='Directions' placeholder='Tell us how to prepare your creation...' />
-                       </div>
+                      </div>
                    
                   <Form.Checkbox label='I agree to be Pooh Bear' />
                   <Button type='submit'>Submit</Button>
                   </div>
+
+
                  </Form>
                </div>
             </Grid.Column>
