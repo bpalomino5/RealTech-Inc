@@ -53,14 +53,14 @@ app.get('/getRecipesByIngredient', function(req,res){
 });
 
 app.get('/getRecipesByStyle', function(req,res){
-	serverFunctions.getRecipesByStyle(req.query.id, function(recipeInfo){
-		res.json({recipeInfo:recipeInfo})
+	serverFunctions.getRecipesByStyle(req.query.id, function(recipeIDs){
+		res.json({recipeIDs:recipeIDs})
 	})
 });
 
 app.get('/getRecipesByOrigin', function(req,res){
-	serverFunctions.getRecipesByOrigin(req.query.origin, function(recipeInfo){
-		res.json({recipeInfo:recipeInfo})
+	serverFunctions.getRecipesByOrigin(req.query.origin, function(recipeIDs){
+		res.json({recipeIDs:recipeIDs})
 	})
 });
 

@@ -13,7 +13,7 @@ class NavBar extends Component{
 		this.state={
 			session_data: null,
 			first_name: '',
-			ingredients: [],
+			searchData: [], 
 			isloggedin: false,
 			isLoading: false,
       results: [],
@@ -35,13 +35,16 @@ class NavBar extends Component{
 
 	componentWillMount() {
 		let sessionData = DataStore.getSessionData('session_data');
-    if(sessionData){
-      this.setState({session_data: sessionData});
-    }
+    if(sessionData) this.setState({session_data: sessionData});
 
-		let ingredientsData = DataStore.getData('ingredients');
-		if(ingredientsData){
-			this.setState({ingredients: ingredientsData});
+		let recipes = DataStore.getData('recipes');
+		let ingredients = DataStore.getData('ingredients');
+		let styles = DataStore.getData('styles');
+
+		if(ingredients && styles && recipes){
+			recipes = recipes.concat(ingredients);
+			recipes = recipes.concat(styles);
+			this.setState({searchData: recipes})
 		}
 	}
 
@@ -53,6 +56,7 @@ class NavBar extends Component{
 			else
 				this.getUserData();
 		}
+		
 	}
 
 	async getUserData() {
@@ -69,7 +73,10 @@ class NavBar extends Component{
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
 	handleResultSelect = (e, { result }) => {
-		this.props.onSearchResultSelect(result.id)
+		console.log(result);
+		if(result.style_id) this.props.onSearchResultSelect('style',result.style_id);
+		if(result.ingredient_id) this.props.onSearchResultSelect('ingredient',result.ingredient_id)
+		if(result.id) this.props.onSearchResultSelect('recipe_name', result.id)
   }
 
   handleSearchChange = (e, { value }) => {
@@ -83,7 +90,7 @@ class NavBar extends Component{
 
       this.setState({
         isLoading: false,
-        results: _.filter(this.state.ingredients, isMatch),
+        results: _.filter(this.state.searchData, isMatch),
       })
     }, 500)
   }

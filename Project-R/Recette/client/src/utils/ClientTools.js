@@ -56,6 +56,14 @@ class ClientTools{
     .then(this.parseJSON);
   }
 
+  getRecipesByStyle(id){
+    return fetch(`/getRecipesByStyle?id=${encodeURIComponent(id)}`, {
+      accept: "application/json"
+    })
+    .then(this.checkStatus)
+    .then(this.parseJSON);
+  }
+
   getUnits(){
     return fetch('/getUnits', {
       accept: "application/json"
@@ -67,6 +75,14 @@ class ClientTools{
   getIngredients(){
     return fetch('/getIngredients', {
       accept: "application/json"
+    })
+      .then(this.checkStatus)
+      .then(this.parseJSON);
+  }
+
+  getStyles(){
+    return fetch('/getStyles', {
+      accept: 'application/json'
     })
       .then(this.checkStatus)
       .then(this.parseJSON);

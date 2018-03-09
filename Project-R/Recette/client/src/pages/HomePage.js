@@ -35,6 +35,20 @@ class HomePage extends Component {
             this.setState({recipes: recipeData});
           }
         }
+        else{ //update all
+          let data = await ClientTools.getRecipes();
+          this.setState({recipes: data.recipes});
+          DataStore.storeData('recipes',data.recipes); //store in data store
+
+          let ingredientData = await ClientTools.getIngredients();
+          DataStore.storeData('ingredients',ingredientData.ingredients); //store in data store
+
+          let stylesData = await ClientTools.getStyles();
+          DataStore.storeData('styles', stylesData.styles);
+
+          let Dbversion = await ClientTools.getDataVersion();
+          if(Dbversion) DataStore.storeData('data_version', Dbversion);
+        }
       }
     }
     else{ // no local data 
@@ -44,6 +58,9 @@ class HomePage extends Component {
 
       let ingredientData = await ClientTools.getIngredients();
       DataStore.storeData('ingredients',ingredientData.ingredients); //store in data store
+
+      let stylesData = await ClientTools.getStyles();
+      DataStore.storeData('styles', stylesData.styles);
 
       let Dbversion = await ClientTools.getDataVersion();
       if(Dbversion) DataStore.storeData('data_version', Dbversion);
@@ -62,12 +79,26 @@ class HomePage extends Component {
     }
   }
 
+  async loadRecipesbyStyle(styleID){
+    var data = await ClientTools.getRecipesByStyle(styleID);
+    if(data){
+      let recipes = [];
+      let allRecipes = DataStore.getData('recipes');
+      for (var i = 0; i < data.recipeIDs.length; i++) {
+        recipes.push(allRecipes[data.recipeIDs[i]-1]);
+      }
+      this.setState({recipes: recipes});
+    }
+  }
+
   handleCardClick(id) {
     this.goToPage(`/recipes/${id}`)
   }
 
-  handleResultSelect = (id) => {
-    this.loadRecipesbyIngredient(id)
+  handleResultSelect = (type,id) => {
+    if(type==='ingredient') this.loadRecipesbyIngredient(id)
+    else if(type==='style') this.loadRecipesbyStyle(id)
+    else if(type==='recipe_name') this.handleCardClick(id)
   }
 
   goToPage(page){

@@ -458,8 +458,8 @@ module.exports = {
 			
 			rows.forEach( (row) => {
 				ingredients.push({
-					id: row.ingredient_id,
-						title: row.name
+					ingredient_id: row.ingredient_id,
+					title: row.name
 				});
 			});
 			callback(ingredients);
@@ -546,14 +546,15 @@ module.exports = {
 	},
 	getStyles:function(callback) {
 		var styles = [];
-		var sql = 'SELECT name FROM style';
+		var sql = 'SELECT style_id, name FROM style';
 		connectionPool.query(sql, function(err, rows){
 			if(err)
 				module.exports.printError("getStyles", "SQL Query Error: getting styles", err, {ID:ID})
 
 			rows.forEach((row) =>{
 				styles.push({
-					style: row.name
+					style_id: row.style_id,
+					title: row.name
 				});
 			});
 			callback(styles);
