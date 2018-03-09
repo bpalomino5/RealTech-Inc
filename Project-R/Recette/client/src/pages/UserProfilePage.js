@@ -21,8 +21,7 @@ class UserProfilePage extends Component{
       favoritesTitles: [],
       ingredients: [],
       isloggedin: false,
-      user_input_ingredients: [{ quanity: '', name: ' ', units: ' '}],
-      shareholders: [ {name: ''}],
+      user_ingredients: [ {name: '', quantity: '', units: ''}],
     };
 
     this.AttemptLogout=this.AttemptLogout.bind(this);
@@ -107,26 +106,17 @@ class UserProfilePage extends Component{
     }
   }
 
-  handleShareholderNameChange = (idx) => (evt) => {
-    const newShareholders = this.state.shareholders.map((shareholder, sidx) => {
-      if (idx !== sidx) return shareholder;
-      return { name: evt.target.value, age: evt.target.value };
-    });
-    
-    this.setState({ shareholders: newShareholders });
-  }
   
   handleSubmit = (evt) => {
-    const { name, shareholders } = this.state;
-    alert(`Incorporated: ${name} with ${shareholders.length} shareholders`);
+    const { name, user_ingredients } = this.state;
   }
   
-  handleAddShareholder = () => {
-    this.setState({ shareholders: this.state.shareholders.concat([{ name: '' }]) });
+  handleAddIngredient = () => {
+    this.setState({ user_ingredients: this.state.user_ingredients.concat([{ name: '', quantity: '', units: '' }]) });
   }
   
-  handleRemoveShareholder = (idx) => () => {
-    this.setState({ shareholders: this.state.shareholders.filter((s, sidx) => idx !== sidx) });
+  handleRemoveIngredient = (idx) => () => {
+    this.setState({ user_ingredients: this.state.user_ingredients.filter((s, sidx) => idx !== sidx) });
   }
   
 
@@ -306,7 +296,7 @@ class UserProfilePage extends Component{
                       <div className='user-ingredients'>
                         <form onSubmit={this.handleSubmit}>
                           <h3>Ingredients</h3>
-                          {this.state.shareholders.map((shareholder, idx) => (
+                          {this.state.user_ingredients.map((shareholder, idx) => (
                             <div className="dynamic-ingredient-list">
                             <Form.Group>
                               <Form.Dropdown
@@ -321,8 +311,8 @@ class UserProfilePage extends Component{
                                placeholder='Units'
                                compact = 'true'
                                fluid search selection options={this.state.ingredients} />
-                               <Button color = 'teal' content='ADD' onClick={this.handleAddShareholder} />
-                               <Button color = 'red' content='DELETE' onClick={this.handleRemoveShareholder(idx)} />
+                               <Button color = 'teal' content='ADD' onClick={this.handleAddIngredient} />
+                               <Button color = 'red' content='DELETE' onClick={this.handleRemoveIngredient(idx)} />
                             </Form.Group>
                               
                             </div>
