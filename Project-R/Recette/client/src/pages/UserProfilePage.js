@@ -6,7 +6,7 @@ import '../layouts/UserProfilePage.css';
 import DataStore from '../utils/DataStore';
 import ClientTools from '../utils/ClientTools';
 import NavBar from '../components/NavBar';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 class UserProfilePage extends Component{
@@ -23,7 +23,6 @@ class UserProfilePage extends Component{
       favoritesTitles: [],
       ingredients: [],
       user_ingredients: [ {ingredient_id: '', quantity: '', unit_id: ''}],
-      success: false,
       name: '', 
       prep_time: '', 
       cooking_time: '', 
@@ -31,11 +30,14 @@ class UserProfilePage extends Component{
       origin: '', 
       directions: '', 
       image_location: 'images/dummyimage.jpg',  
+      recipeModalOpen: false,
     };
 
     this.AttemptLogout=this.AttemptLogout.bind(this);
     this.attemptAddNewRecipe=this.attemptAddNewRecipe.bind(this);
     this.handleResultSelect=this.handleResultSelect.bind(this);
+    this.handleModalClose=this.handleModalClose.bind(this);
+    this.handleModalOpen=this.handleModalOpen.bind(this);
   }
 
   componentWillMount(){
@@ -51,7 +53,6 @@ class UserProfilePage extends Component{
     this.getIngredients();
     this.getUnits();
   }
-  
   
   goToPage(page){
     this.setState({redirect: true, page: page})
@@ -70,14 +71,17 @@ class UserProfilePage extends Component{
                         instruction:    this.state.directions,
                         image_location: this.state.image_location
                       };
-                      
-      if(this.state.user_ingredients[0].ingredient_id != '') newRecipe.body = this.state.user_ingredients;
+
+      if(this.state.user_ingredients.length >= 1){
+        newRecipe.body = this.state.user_ingredients;
+      }
                      
       let response = await ClientTools.addRecipe(newRecipe); // Call function that adds new recipe
       console.log(response);
       if(response!=null){
         if(response.code===1){
            // show successfully added new recipe message
+           this.handleModalClose()
         }
         else this.setState({error:true, errorMessage: response.message})
       } 
@@ -99,7 +103,7 @@ class UserProfilePage extends Component{
 
   async getPreferences() {
     let data = await ClientTools.getPreferences(this.props.match.params.id);
-    console.log(data);
+    // console.log(data);
     if(data!=null){
       this.setState({userPreferences: data.preferences})
     }
@@ -107,7 +111,7 @@ class UserProfilePage extends Component{
 
   async getPublicUserData() {
     let response = await ClientTools.getPublicUserData({profile_id: this.props.match.params.id});
-    console.log(response);
+    // console.log(response);
     if(response!=null){
       if(response.code===1){
         this.setState({userdata: response.data})
@@ -117,13 +121,12 @@ class UserProfilePage extends Component{
 
   async getActivity() {
     let response = await ClientTools.getActivity(this.props.match.params.id);
-    console.log(response);
+    // console.log(response);
     if(response!=null){
       this.setState({userActivity: response.activity})
     }
   }
 
-  
   async getFavorites() {
     let data = await ClientTools.getFavorites(this.props.match.params.id);
     console.log(data);
@@ -133,15 +136,14 @@ class UserProfilePage extends Component{
       for (var i = 0; i < data.favorites.length; i++) {
         recipes.push(allRecipes[data.favorites[i].recipe]);
       }
-      console.log(recipes);
+      // console.log(recipes);
       this.setState({recipes: recipes});
-      //this.setState({userFavorites: data.favorites})
     }
   }
   
   async AttemptLogout() {
     let response = await ClientTools.logout({user_token: this.state.session_data.user_token});
-    console.log(response);
+    // console.log(response);
     if(response!=null){
       if(response.code===1){
         this.goToPage('/')
@@ -169,13 +171,21 @@ class UserProfilePage extends Component{
     console.log(id);
   }
 
+  handleModalClose() {
+    this.setState({recipeModalOpen: false})
+  }
+
+  handleModalOpen() {
+    this.setState({recipeModalOpen: true})
+  }
+
   render() {
     if(this.state.redirect){
       return <Redirect push to={{pathname: this.state.page}} />;
     }
 
      const ModalExampleScrollingContent = (
-      <Modal trigger={<Button>Add Recipe</Button>} closeIcon>
+      <Modal trigger={<Button onClick={this.handleModalOpen}>Add Recipe</Button>} closeIcon onClose={this.handleModalClose} open={this.state.recipeModalOpen}>
         <Modal.Header>Add Your Own Recipe</Modal.Header>
         <Modal.Content>
           <Modal.Description>
@@ -310,13 +320,14 @@ class UserProfilePage extends Component{
 
     return(
       <div>
+        <Helmet bodyAttributes={{style: 'background-color : #2E2F2F'}}/>
         <NavBar
           onSearchResultSelect={this.handleResultSelect}>
           <div className='user-profile'> 
             <div className='banner-container'>
                <Card
                 fluid = 'true'
-                color = 'teal'
+                
                 image='../../images/recette_header_wide.png'
                 header= {this.state.userdata.first_name}
                 meta='Recetter'
@@ -324,7 +335,7 @@ class UserProfilePage extends Component{
                />
             </div>
             <div className='infoSection'>
-              <Grid columns={4} relaxed>
+              <Grid columns={4} relaxed centered>
                 <Grid.Column width={4}>
                   <Segment basic>
                       <h2 className='info-section-headers'>My Info </h2>

@@ -212,43 +212,8 @@ class NavBar extends Component{
 		    
 		  	{/*MOBILE*/}
 		    <Responsive maxWidth={567}>
-				  <Sidebar.Pushable>
-			      <Sidebar as={Segment} animation='overlay' vertical width='wide' visible={!this.state.visible} direction='left' icon='labeled' inverted={"true"}>
-							<div className="mobileButtonBox">
-			          <div hidden={!this.state.isloggedin} className="profileBox" onClick={this.OpenProfilePage}>
-			            <Image src='https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg' />
-			            <h2>{this.state.first_name}</h2>
-			          </div>
-			          <div hidden={this.state.isloggedin}>
-			            <Button color='teal' onClick={this.AttemptLogin}>SIGN UP / LOG IN</Button>
-			          </div>
-			          <div className="mobileCloseMenu" onClick={this.openMenu}>
-			          	<Icon name='cancel' size='large' />
-			          </div>
-			        </div>
-			      	<Menu inverted fluid vertical>
-			      	<Menu.Item link>
-			      		<Icon name='home' />Home
-			      	</Menu.Item>
-			      	<Accordion as={Menu.Item} inverted onClick={this.toggleCompanyAccordian}>
-			      		<Accordion.Title>
-			      			<Icon name='dropdown' />Company
-			      		</Accordion.Title>
-			      		<Accordion.Content active={this.state.companyAccordian}>
-			      			<p>About Recette</p>
-			      			<p>The Team</p>
-			      			<p>Contact Us</p>
-			      		</Accordion.Content>
-			      	</Accordion>
-			      	<Menu.Item>
-			      		Media
-			      	</Menu.Item>
-			      	<Menu.Item link onClick={this.AttemptLogout}>
-			      		Log out<Icon name='power' inverted link />
-			      	</Menu.Item>
-			      	</Menu>
-			      </Sidebar>
-			      <Menu fixed='top' borderless>
+			    <Sidebar.Pusher>
+				    <Menu fixed='top' borderless>
 				      {!this.state.mobileSearch && <div className="headerContainer">
 				        <div className="logoBox" onClick={this.refreshPage}>
 				          <h1>Recette</h1>
@@ -281,7 +246,42 @@ class NavBar extends Component{
 					  </Menu>
 				  	<div className="navBoundsBox" />
 			      {this.props.children}
-			    </Sidebar.Pushable>
+				  </Sidebar.Pusher>
+		      <Sidebar as={Segment} animation='overlay' vertical width='wide' visible={!this.state.visible} direction='left' icon='labeled' inverted={"true"}>
+						<div className="mobileButtonBox">
+		          <div hidden={!this.state.isloggedin} className="profileBox" onClick={this.OpenProfilePage}>
+		            <Image src='https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg' />
+		            <h2>{this.state.first_name}</h2>
+		          </div>
+		          <div hidden={this.state.isloggedin}>
+		            <Button color='teal' onClick={this.AttemptLogin}>SIGN UP / LOG IN</Button>
+		          </div>
+		          <div className="mobileCloseMenu" onClick={this.openMenu}>
+		          	<Icon name='cancel' size='large' />
+		          </div>
+		        </div>
+		      	<Menu inverted fluid vertical>
+			      	<Menu.Item link>
+			      		<Icon name='home' />Home
+			      	</Menu.Item>
+			      	<Accordion as={Menu.Item} inverted onClick={this.toggleCompanyAccordian}>
+			      		<Accordion.Title>
+			      			<Icon name='dropdown' />Company
+			      		</Accordion.Title>
+			      		<Accordion.Content active={this.state.companyAccordian}>
+			      			<p>About Recette</p>
+			      			<p>The Team</p>
+			      			<p>Contact Us</p>
+			      		</Accordion.Content>
+			      	</Accordion>
+			      	<Menu.Item>
+			      		Media
+			      	</Menu.Item>
+			      	<Menu.Item link onClick={this.AttemptLogout}>
+			      		Log out<Icon name='power' inverted link />
+			      	</Menu.Item>
+		      	</Menu>
+		      </Sidebar>			      
 		    </Responsive>
 	    </div> 
 		)

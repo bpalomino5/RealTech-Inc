@@ -4,12 +4,12 @@
 }
 
 .infoSection {
-	background-color: #222;
+	/*background-color: #222;*/
 	color: white;
 }
 
 .banner-container {
-	background-color: green; /* red for debugging */
+	/*background-color: green; /* red for debugging */
 	font-family: Helvetica;
 	font-size: 140%;
 	font-style: italic;
