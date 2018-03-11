@@ -33,6 +33,7 @@ class UserProfilePage extends Component{
       prep_time: '', 
       cooking_time: '', 
       ready_in: '', 
+      style: '',
       origin: '', 
       directions: '', 
       image_location: '../../images/dummyimage.jpg',  
@@ -246,6 +247,15 @@ class UserProfilePage extends Component{
                              placeholder='HHMM' 
                              value={this.state.ready_in} 
                              onChange={(e, {value}) => this.setState({ready_in: value})}
+                             />
+
+                             <Form.Input 
+                             required 
+                             fluid 
+                             label='Style' 
+                             placeholder='Breakfast, Lunch, Dinner' 
+                             value={this.state.style} 
+                             onChange={(e, {value}) => this.setState({style: value})}
                              />
                              
                              <Form.Input 
