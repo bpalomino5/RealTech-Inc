@@ -255,7 +255,7 @@ module.exports = {
 		});
 	},
 	addRecipe:function(data,callback){
-		var sql = "INSERT INTO recipes (user_id, name, prep_time, cooking_time, ready_in, origin, instruction, image_location) VALUES ('" + data.user_id + "','" + data.name + "','" + data.prep_time + "','" + data.cooking_time + "','" + data.ready_in + "','" + data.origin + "','" + data.instruction + "','" + data.image_location + "')";
+		var sql = "INSERT INTO recipes (user_id, name, prep_time, cooking_time, ready_in, origin, instruction, image_location) VALUES ('" + data.user_id + "',\"" + data.name + "\",'" + data.prep_time + "','" + data.cooking_time + "','" + data.ready_in + "','" + data.origin + "',\"" + data.instruction + "\",\"" + data.image_location + "\")";
 		connectionPool.query(sql,function(err,results){
 			if(err){
 				module.exports.printError("addRecipe", "SQL Query Error: Adding a new Recipe",err,{data:data})
@@ -278,7 +278,7 @@ module.exports = {
 		})
 	},
 	getRecipeName:function(name,callback){
-		var sql = "SELECT * FROM recipes WHERE name = '" + name + "'";
+		var sql = "SELECT * FROM recipes WHERE name = \"" + name + "\"";
 		connectionPool.query(sql,function(err,result) {
 			if (err){
 				module.exports.printError("getRecipeName", "SQL Query Error: Searching for recipe name",err,{data:data})

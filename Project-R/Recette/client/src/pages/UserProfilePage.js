@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Feed, Card, Icon, List, Divider, Grid, Segment, Dropdown, Form, Message, Modal, Image, Header } from 'semantic-ui-react';
+import { Button, Feed, Card, Icon, List, Divider, Grid, Segment, Form, Message, Modal, Header } from 'semantic-ui-react';
 import StackGrid from "react-stack-grid";
 import RecipeCard from '../components/RecipeCard';
 import '../layouts/UserProfilePage.css';
@@ -8,8 +8,6 @@ import ClientTools from '../utils/ClientTools';
 import NavBar from '../components/NavBar';
 import { Redirect, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import _ from 'lodash';
-
 
 class UserProfilePage extends Component{
   constructor(props){
@@ -18,16 +16,13 @@ class UserProfilePage extends Component{
       session_data: {user_id: '', user_token: ''},
       userdata: {username:'',email:'',first_name:'',last_name:'',biography:''},
       recipes: [],
-      units: { unit: '', name: ''} ,
+      units: [],
       userActivity: [],
       userFavorites: [],
       userPreferences: [],
       favoritesTitles: [],
       ingredients: [],
-      user_ingredients: [ {name: '', quantity: '', units: ''}], // used to store the user's inputted recipe
-      user_inputted_recipe: {user_id: '' ,name: '', prep_time: '', cooking_time: '', ready_in: '', origin: '', directions: '', image_location: '../../images/dummyimage.jpg'},
-      quantityOptions: [ {text: '1' , value: 1}, {text: '2', value: 2}, {text: '3', value: 3}, {text: '4', value: 4}, {text: '5', value: 5}, {text: '6', value: 6} ], // displays values for quantity dropdown
-      unitOptions: [ {text: '', value: ''}],  // should display units for units dropdown
+      user_ingredients: [ {ingredient_id: '', quantity: '', unit_id: ''}],
       success: false,
       name: '', 
       prep_time: '', 
@@ -35,7 +30,7 @@ class UserProfilePage extends Component{
       ready_in: '', 
       origin: '', 
       directions: '', 
-      image_location: '../../images/dummyimage.jpg',  
+      image_location: 'images/dummyimage.jpg',  
     };
 
     this.AttemptLogout=this.AttemptLogout.bind(this);
@@ -55,8 +50,6 @@ class UserProfilePage extends Component{
     this.getPreferences();
     this.getIngredients();
     this.getUnits();
-    this.unitsReworker();
-    // this.matchRecipes();
   }
   
   
@@ -64,36 +57,32 @@ class UserProfilePage extends Component{
     this.setState({redirect: true, page: page})
   }
 
-  async attemptAddNewRecipe ()
-  {
-      if(  this.state.name 
-        && this.state.prep_time 
-        && this.state.cooking_time 
-        && this.state.ready_in 
-        && this.state.origin 
-        && this.state.directions )
-      {
-          let newRecipe = { 
-                            user_token:     this.state.session_data.user_token,
-                            user_id:        this.state.session_data.user_id,
-                            name:           this.state.name, 
-                            prep_time:      this.state.prep_time, 
-                            cooking_time:   this.state.cooking_time, 
-                            ready_in:       this.state.ready_in, 
-                            origin:         this.state.origin, 
-                            instruction:     this.state.directions,
-                            image_location: this.state.image_location 
-                          };
-          let response = await ClientTools.addRecipe(newRecipe); // Call function that adds new recipe
-          console.log(response);
-          if(response!=null){
-            if(response.code===1){
-               // show successfully added new recipe message
-            }
-            else this.setState({error:true, errorMessage: response.message})
-          } 
-      }
-      else this.setState({error:true, errorMessage: 'Please fill in all areas of the form.'})
+  async attemptAddNewRecipe() {
+    if(this.state.name && this.state.prep_time && this.state.cooking_time && this.state.ready_in && this.state.origin && this.state.directions){
+      let newRecipe = { 
+                        user_token:     this.state.session_data.user_token,
+                        user_id:        this.state.session_data.user_id,
+                        name:           this.state.name, 
+                        prep_time:      this.state.prep_time, 
+                        cooking_time:   this.state.cooking_time, 
+                        ready_in:       this.state.ready_in, 
+                        origin:         this.state.origin, 
+                        instruction:    this.state.directions,
+                        image_location: this.state.image_location
+                      };
+                      
+      if(this.state.user_ingredients[0].ingredient_id != '') newRecipe.body = this.state.user_ingredients;
+                     
+      let response = await ClientTools.addRecipe(newRecipe); // Call function that adds new recipe
+      console.log(response);
+      if(response!=null){
+        if(response.code===1){
+           // show successfully added new recipe message
+        }
+        else this.setState({error:true, errorMessage: response.message})
+      } 
+    }
+    else this.setState({error:true, errorMessage: 'Please fill in all areas of the form.'})
   }
 
   async getUnits () {
@@ -103,27 +92,10 @@ class UserProfilePage extends Component{
     }
   }
 
-  /* Helper function to display the unit dropdown bar properly */
-  async unitsReworker () {
-
-    var i = 0;
-    var units2 = [ {text: '', value: ''} ];
-    for ( i = 0; i < 20; i++ ) 
-    {
-        units2[i] = {text: String(this.state.units.name),value: i};
-        // years[i] = {text: String(i + 1900), value: i + 1900};
-    }
-    this.setState( {unitOptions: units2} );
-  }
   async getIngredients () {
     let ingredients = DataStore.getData('ingredients');
     this.setState({ingredients: ingredients})
   }
-
-  // async getRecipes () {
-  //   let data = await ClientTools.getRecipes();
-  //   this.setState({recipes: data.recipes});
-  // }
 
   async getPreferences() {
     let data = await ClientTools.getPreferences(this.props.match.params.id);
@@ -181,7 +153,8 @@ class UserProfilePage extends Component{
   
   
   handleAddIngredient = () => {
-    this.setState({ user_ingredients: this.state.user_ingredients.concat([{ name: '', quantity: '', units: '' }]) });
+    //add to user_ingredients list
+    this.setState({ user_ingredients: this.state.user_ingredients.concat([{ ingredient_id: this.state.ingredient_name, quantity: this.state.ingredient_quantity, unit_id: this.state.ingredient_unit}])});
   }
   
   handleRemoveIngredient = (index) => () => {
@@ -202,13 +175,13 @@ class UserProfilePage extends Component{
     }
 
      const ModalExampleScrollingContent = (
-      <Modal trigger={<Button>Add Recipe</Button>}>
+      <Modal trigger={<Button>Add Recipe</Button>} closeIcon>
         <Modal.Header>Add Your Own Recipe</Modal.Header>
         <Modal.Content>
           <Modal.Description>
             <Grid columns={1}>
                 <Grid.Column width={20}>
-                    <div className='display-linebreak'></div>
+                  <div className='display-linebreak'></div>
                       <Form fluid>
                         <div className='forms'>
                           <Form.Group widths = 'equal'>
@@ -259,41 +232,52 @@ class UserProfilePage extends Component{
                           </Form.Group>
                           
                           <div className='user-ingredients'>
-                            <form onSubmit={this.handleSubmit}>
-                              <h3>Ingredients</h3>
-                              {this.state.user_ingredients.map((ingredient, index) => (
-                                <div className="dynamic-ingredient-list">
+                            <Header as='h3'>Ingredients</Header>
+                            {this.state.user_ingredients.map((ingredient, index) => (
+                              <div>
                                 <Form.Group>
                                   <Form.Dropdown
-                                   placeholder={`Ingredient #${index + 1} name`}
-                                   compact = 'true'
-                                   allowAdditions
-                                   fluid search selection options={this.state.ingredients}
-                                   />
+                                    placeholder={`Ingredient #${index + 1} name`}
+                                    search
+                                    selection
+                                    value={ingredient.ingredient_id} 
+                                    onChange={(e, {value}) => {ingredient.ingredient_id = value; this.forceUpdate()}}
+                                    options={this.state.ingredients.map(ingredient => ({
+                                      text: ingredient.title,
+                                      value: ingredient.ingredient_id,
+                                    }))}
+                                  />
 
-                                   <Form.Dropdown
-                                   placeholder='Quantity'
-                                   compact = 'true'
-                                   allowAdditions
-                                   fluid search selection options={this.state.quantityOptions} 
-                                   />
+                                  <Form.Dropdown
+                                    placeholder='Quantity'
+                                    search
+                                    compact
+                                    selection
+                                    value={ingredient.quantity} 
+                                    onChange={(e, {value}) => {ingredient.quantity = value; this.forceUpdate()}}
+                                    options={[...Array(11).keys()].slice(1).map(n => ({
+                                      text: n,
+                                      value: n
+                                    }))} 
+                                  />
 
-                                   <Form.Dropdown
-                                   placeholder='Units'
-                                   compact = 'true'
-                                   allowAdditions
-                                   fluid search selection options={this.state.unitOptions} />
-                                   <Button color = 'teal' content='ADD' onClick={this.handleAddIngredient} />
-                                   <Button color = 'red' content='DELETE' onClick={this.handleRemoveIngredient(index)} 
-                                   />
+                                  <Form.Dropdown
+                                    placeholder='Units'
+                                    search
+                                    selection
+                                    value={ingredient.unit_id} 
+                                    onChange={(e, {value}) => {ingredient.unit_id = value; this.forceUpdate()}}
+                                    options={this.state.units.map(unit => ({
+                                      text: unit.name,
+                                      value: unit.unit,
+                                    }))}
+                                  />
+                                  <Button color = 'teal' content='ADD' onClick={this.handleAddIngredient} />
+                                  <Button color = 'red' content='DELETE' onClick={this.handleRemoveIngredient(index)} />
                                 </Form.Group>
-                                  
-                                </div>
-                              ))}
-                              
-                            </form> 
+                              </div>
+                            ))}
                           </div>
-
                           <div className = 'direction-box'>
                             <Form.TextArea 
                               label='Directions' 
@@ -302,16 +286,15 @@ class UserProfilePage extends Component{
                               value={this.state.directions} 
                               onChange={(e, {value}) => this.setState({directions: value})} 
                               />
-                          </div>
-                       
+                          </div>   
                       <Form.Checkbox label='Add to My Favorites' />
                       <Message
                         success
                         header='Added new recipe!'
                         content='Your new recipe will now be added to our library!'
                       />
-                      </div>
-                      </Form>
+                    </div>
+                  </Form>
                 </Grid.Column>
             </Grid>
           </Modal.Description>
