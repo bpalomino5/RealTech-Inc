@@ -79,10 +79,17 @@ class UserProfilePage extends Component{
       }
 
       let response = await ClientTools.addRecipe(newRecipe); // Call function that adds new recipe
-      console.log(response);
+      // console.log(response);
       if(response!=null){
         if(response.code===1){
+          this.updateActivity('Added new recipe '+ newRecipe.name);
           // show successfully added new recipe message
+          
+          //update Recipes
+          let data = await ClientTools.getRecipes();
+          console.log(data);
+          DataStore.storeData('recipes',data.recipes);
+
           if(this.state.addFavoriteChecked) this.addNewRecipeToFavorites(response.data.recipe_id);
           this.handleModalClose()
         }
@@ -92,20 +99,28 @@ class UserProfilePage extends Component{
     else this.setState({error:true, errorMessage: 'Please fill in all areas of the form.'})
   }
 
-async addNewRecipeToFavorites(recipe_id) {
-  let favoriteData = this.state.session_data;
-  favoriteData.recipe_id=recipe_id;
-  let response = await ClientTools.addFavorite(favoriteData);
-  //console.log(response);
+  async updateActivity(message){
+    let activityData = this.state.session_data;
+    activityData.message=message;
+    let response = await ClientTools.addActivity(activityData);
+    if(response){
+      window.location.reload();
+    }
+  }
 
-  //update Recipes
-  let data = await ClientTools.getRecipes();
-  console.log(data);
-  DataStore.storeData('recipes',data.recipes);
-
-  //update Favorites
-  this.getFavorites()
-}
+  async addNewRecipeToFavorites(recipe_id) {
+    let favoriteData = this.state.session_data;
+    favoriteData.recipe_id=recipe_id;
+    let response = await ClientTools.addFavorite(favoriteData);
+    if(response){
+      if(response.code===1){
+        // update page
+       
+        //update Favorites
+        this.getFavorites()
+      }
+    }
+  }
 
   async getUnits () {
     let data = await ClientTools.getUnits();
@@ -121,7 +136,6 @@ async addNewRecipeToFavorites(recipe_id) {
 
   async getPreferences() {
     let data = await ClientTools.getPreferences(this.props.match.params.id);
-    console.log(data);
     let styles = DataStore.getData('styles');
     if(data.preferences.length > 0){
       let preferences = [];
@@ -147,15 +161,15 @@ async addNewRecipeToFavorites(recipe_id) {
 
   async getActivity() {
     let response = await ClientTools.getActivity(this.props.match.params.id);
-    // console.log(response);
-    if(response!=null){
+    if(response.activity.length > 0){
       this.setState({userActivity: response.activity})
     }
+    else
+      this.setState({userActivity: [{activity: 'No recent activity!'}]})
   }
 
   async getFavorites() {
     let data = await ClientTools.getFavorites(this.props.match.params.id);
-    //console.log(data);
     if(data!=null){
       let recipes = [];
       let allRecipes = DataStore.getData('recipes');
@@ -212,7 +226,7 @@ async addNewRecipeToFavorites(recipe_id) {
       return <Redirect push to={{pathname: this.state.page}} />;
     }
 
-     const ModalExampleScrollingContent = (
+     const ModalAddRecipe = (
       <Modal trigger={<Button onClick={this.handleModalOpen}>Add Recipe</Button>} closeIcon onClose={this.handleModalClose} open={this.state.recipeModalOpen}>
         <Modal.Header>Add Your Own Recipe</Modal.Header>
         <Modal.Content>
@@ -358,7 +372,6 @@ async addNewRecipeToFavorites(recipe_id) {
       </Modal>
     );
 
-
     return(
       <div>
         <Helmet bodyAttributes={{style: 'background-color : #2E2F2F'}}/>
@@ -368,13 +381,12 @@ async addNewRecipeToFavorites(recipe_id) {
           <div className='user-profile'> 
             <div className='banner-container'>
                <Card
-                fluid = 'true'
-                
+                fluid
                 image='../../images/recette_header_wide.png'
                 header= {this.state.userdata.first_name}
                 meta='Recetter'
-                description= {this.state.userdata.biography} 
-               />
+                description= {this.state.userdata.biography}
+              />
             </div>
             <div className='infoSection'>
               <Grid columns={3}  centered>
@@ -402,16 +414,8 @@ async addNewRecipeToFavorites(recipe_id) {
                           <Feed.Event>
                             <Feed.Content>
                               <Feed.Summary>
-                                <Feed.User><h3>{this.state.userdata.username}</h3></Feed.User> 
-                                  <div className='activity-feed-text'><Icon name='comment' color='teal' circular='true' size = 'large' />{activity.activity}</div>
-                                <Feed.Date><div className='activity-feed-text'>1 Hour Ago</div></Feed.Date>
+                                <div className='activity-feed-text'><Icon name='comment' color='teal' circular='true' size = 'large' />{activity.activity}</div>
                               </Feed.Summary>
-                              <Feed.Meta>
-                                <Feed.Like>
-                                 <Icon color='teal' name='like' />
-                                  <div className='activity-feed-text'>4 Likes</div>
-                                </Feed.Like>
-                              </Feed.Meta>
                             </Feed.Content>
                           </Feed.Event>
                         ))}                      
@@ -457,7 +461,7 @@ async addNewRecipeToFavorites(recipe_id) {
                 />
                 ))}
               </StackGrid>
-              {ModalExampleScrollingContent}
+              {ModalAddRecipe}
             </div>
           </div>
         </NavBar>

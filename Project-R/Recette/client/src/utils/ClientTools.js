@@ -28,6 +28,10 @@ class ClientTools{
   addFavorite(data){
     return this.rawPostRequest('/addFavorite',data);
   }
+
+  addActivity(data){
+    return this.rawPostRequest('/addActivity',data);
+  }
   
   login(data){
     return this.rawPostRequest('/login',data);   

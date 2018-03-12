@@ -1,18 +1,10 @@
-.container {
-	background-color: #222;
-}
-
-.topSection {
-	background-color: white;
-  /*height: 150px;*/
-  padding: 0px;
-}
-
 .body {
 	padding-top: 20px;
 }
 
 .display-linebreak {
+	font-size: 18px;
+	font-family: 'Kalam', cursive;
   white-space: pre-line;
   color: white;
 }
@@ -35,17 +27,46 @@
 	padding: 50px;
 }
 
-.textStyle {
-	text-align: center;
-	color: white;
+.ingredientSection {
+	padding: 20px;
+	background-color: #FBFAF8;
 }
 
-.ingredientTextStyle {
-	text-align: left;
+.recipeHeader {
+	text-align: center;
 	color: white;
+	font-family: 'Shadows Into Light Two', cursive;
+}
+
+.textStyle {
+	font-size: 28px;
+	text-align: center;
+	color: white;
+	font-family: 'Kalam', cursive;
+}
+
+.iHeader {
+	font-family: 'Shadows Into Light Two', cursive;
+	text-align: left;
+	color: #2E2F2F;
+}
+
+.tStyles {
+	font-size: 18px;
+	font-family: 'Shadows Into Light Two', cursive;
+	text-align: left;
+	color: #2E2F2F;
+}
+
+.commentHeader {
+	text-align: left;
+	color: #2E2F2F;
+	font-family: 'Shadows Into Light Two', cursive;
 }
 
 .commentSection {
 	background-color: #FBFAF8;
 	padding: 50px;
+	margin-left: 30%;
+	margin-right: 10%;
 }

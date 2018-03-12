@@ -207,7 +207,7 @@ module.exports = {
 	},
 	addComment:function(data,callback){
 		module.exports.getTime(function(time){
-			var query_insert_comment = "INSERT INTO recipe_comments (user_id, recipe_id, text) VALUES ("+ data.user_id +","+ data.recipe_id +",'"+data.message+"')";
+			var query_insert_comment = "INSERT INTO recipe_comments (user_id, recipe_id, text) VALUES ("+ data.user_id +","+ data.recipe_id +",\""+data.message+"\")";
 			connectionPool.query(query_insert_comment,function(err, results){
 				if(err){
 					module.exports.printError("addComment","SQL Query Error: inserting new comment",err,{timestamp:time,data:data})
@@ -244,7 +244,7 @@ module.exports = {
 		});
 	},
 	addActivity:function(data, callback){
-		var sql = "INSERT INTO user_activities (user_id, message) VALUES ("+ data.user_id +",'"+ data.message +"')";
+		var sql = "INSERT INTO user_activities (user_id, message) VALUES ("+ data.user_id +",\""+ data.message +"\")";
 		connectionPool.query(sql, function(err, results){
 			if(err){
 				module.exports.printError("addActivity","SQL Query Error: inserting new activity",err,{data:data})

@@ -190,10 +190,10 @@ class NavBar extends Component{
 		      </div>
 		    </Menu>
 		    <div className="navBoundsBox" />
-		    <Sidebar.Pushable>
+				<Sidebar.Pushable>		  
 		      <Sidebar as={'div'} animation='overlay' width='very wide' visible={!this.state.visible} direction='top' icon='labeled' inverted={"true"}>
 		        <Segment raised inverted  textAlign='center'>
-		           <Grid columns={3} divided inverted verticalAlign='middle'>
+		           <Grid columns={3} divided inverted verticalAlign='middle'>		           	
 		            <Grid.Row>
 		              <Grid.Column>
 		                <Header size='large' inverted color='grey'>Company</Header>
@@ -212,7 +212,7 @@ class NavBar extends Component{
 		          </Grid>
 		        </Segment>
 		      </Sidebar>
-		      {this.props.children}
+		    	{this.props.children}
 		    </Sidebar.Pushable>
 		    </Responsive>
 		    

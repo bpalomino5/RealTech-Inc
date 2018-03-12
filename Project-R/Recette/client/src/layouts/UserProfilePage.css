@@ -1,15 +1,14 @@
+
 .user-profile {
 	color: white;
 	font-family: Helvetica;
 }
 
 .infoSection {
-	/*background-color: #222;*/
 	color: white;
 }
 
 .banner-container {
-	/*background-color: green; /* red for debugging */
 	font-family: Helvetica;
 	font-size: 140%;
 	font-style: italic;
@@ -88,9 +87,6 @@ img {
 	padding-left: 40px;
 }
 
-.user-ingredients {
-	
-}
 .directions-box {
 	min-width: 200px;
 	max-width: 2000px;

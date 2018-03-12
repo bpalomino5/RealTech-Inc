@@ -23,7 +23,7 @@ class HomePage extends Component {
     this.getData();
   }
 
-  async getData(){
+  async getData(){    
     //need to check with latest data
     let local = DataStore.getData('data_version');
     if(local){        

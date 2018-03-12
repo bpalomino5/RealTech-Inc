@@ -5,7 +5,7 @@ class RecipeCard extends Component {
   render() {
     const { image, title } = this.props.details;
     return (
-      <article className="card" onClick={this.props.onClick}>
+      <article className="recipeCard" onClick={this.props.onClick}>
         <header className="card-header">
           <img src={"/"+image} alt="food"/>
           <div className="shadow" />

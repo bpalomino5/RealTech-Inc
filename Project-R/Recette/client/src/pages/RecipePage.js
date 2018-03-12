@@ -5,6 +5,8 @@ import ClientTools from '../utils/ClientTools';
 import NavBar from '../components/NavBar';
 import { Button, Comment, Form, Header, Grid, Segment, Divider, Modal, Icon } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
 
 
 class RecipePage extends Component{
@@ -19,6 +21,7 @@ class RecipePage extends Component{
 			user_firstname: '',
 		};
 		this.SubmitComment=this.SubmitComment.bind(this);
+		this.updateActivity=this.updateActivity.bind(this);
 		this.handleUserNameClick=this.handleUserNameClick.bind(this);
 		this.handleResultSelect=this.handleResultSelect.bind(this);
 	}
@@ -52,13 +55,14 @@ class RecipePage extends Component{
 
 	async SubmitComment() {
 		if(this.state.session_data){
-			let data = this.state.session_data;
+			let data = JSON.parse(JSON.stringify(this.state.session_data));
 			data.recipe_id = this.props.match.params.id;
 			data.message = this.state.reply
 			let response = await ClientTools.addComment(data);
-			console.log(response);
+			// console.log(response);
 			if(response!=null){
 				if(response.code===1){
+					this.updateActivity('Commented on recipe ' + this.state.recipe_data[0].name);
 					this.setState({comments: [...this.state.comments, {user: this.state.user_firstname, message: data.message}], reply: ''})
 				}
 			}
@@ -66,6 +70,14 @@ class RecipePage extends Component{
 		else
 			this.setState({showPrompt: true})
 	}
+
+	async updateActivity(message){
+    let activityData = JSON.parse(JSON.stringify(this.state.session_data));
+    activityData.message=message;
+    // console.log(activityData);
+    let response  = await ClientTools.addActivity(activityData);
+    console.log(response);
+  }
 
 	goToPage(page){
     this.setState({redirect: true, page: page})
@@ -85,26 +97,27 @@ class RecipePage extends Component{
     }
 
 		return(
-			<div className='container'>
+			<div>
+			  <Helmet bodyAttributes={{style: 'background-color : #2E2F2F'}}/>
 				<NavBar
 				  path={this.props.match.path}
 					onSearchResultSelect={this.handleResultSelect}>
 					{this.state.recipe_data.map(item => (
 						<div className='body'>
-							<h1 className='textStyle'>{item.name}</h1>
+							<h1 className='recipeHeader'>{item.name}</h1>
 							<div className='imageContainer'>
 								<img src={`../../${item.image_location}`} alt="recipe example" align="middle" />
 							</div>
 							<div className='infoSection'>
 								<Grid columns={2} relaxed>
 									<Grid.Column width={4}>
-										<Segment basic>
-											<h2 className='textStyle'>Ingredients</h2>
+										<div className='ingredientSection'>
+											<h2 className='iHeader'>Ingredients</h2>
 											<Divider />
 											{item.ingredients.map(i => (
-												<div className='ingredientTextStyle'>{i.quantity} {i.unit_name} {i.name}</div>
+												<div className='tStyles'>{i.quantity} {i.unit_name} {i.name}</div>
 											))}
-										</Segment>
+										</div>
 									</Grid.Column>
 									<Grid.Column width={9}>
 										<Segment basic>
@@ -118,15 +131,14 @@ class RecipePage extends Component{
 						</div>
 					))}
 					<div className='commentSection'>
+					<Segment basic >
 						<Comment.Group>
-							<Header as='h2' dividing>Comments</Header>
+							<h2 className='commentHeader'>Comments</h2>
+							<Divider />
 							{this.state.comments.map(comment => (
 								<Comment>
 						      <Comment.Content>
 						        <Comment.Author as='a' onClick={() => this.handleUserNameClick(comment.id)}>{comment.user}</Comment.Author>
-						        <Comment.Metadata>
-						          <div>Today at 5:42PM</div>
-						        </Comment.Metadata>
 						        <Comment.Text>{comment.message}</Comment.Text>
 						      </Comment.Content>
 						    </Comment>
@@ -139,6 +151,7 @@ class RecipePage extends Component{
 					      <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={this.SubmitComment} />
 					    </Form>
 						</Comment.Group>
+						</Segment>
 					</div>
 					<Modal open={this.state.showPrompt} basic size='small' closeOnDimmerClick={true}>
 				    <Header icon='archive' content='User account is required' />
