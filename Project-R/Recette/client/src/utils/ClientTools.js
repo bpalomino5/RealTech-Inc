@@ -24,6 +24,11 @@ class ClientTools{
   addIngredient(data){
     return this.rawPostRequest('/addIngredient', data);
   }
+
+  addFavorite(data){
+    return this.rawPostRequest('/addFavorite',data);
+  }
+  
   login(data){
     return this.rawPostRequest('/login',data);   
   }

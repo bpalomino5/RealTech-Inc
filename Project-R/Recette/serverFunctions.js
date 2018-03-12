@@ -274,7 +274,7 @@ module.exports = {
 						console.log("Ingredient Added.");
 				})
 			});
-			callback(false,false)
+			callback(false,false,recipe_id)
 		})
 	},
 	getRecipeName:function(name,callback){
@@ -467,7 +467,7 @@ module.exports = {
 	},
 	getIngredients:function(ID, callback) {
 		var ingredients = [];	
-		var sql = 'SELECT has_ingredients.quantity, unit.unit_name, ingredients.name FROM has_ingredients INNER JOIN ingredients ON has_ingredients.ingredient_id=ingredients.ingredient_id inner join unit on has_ingredients.unit_id=unit.unit_id WHERE has_ingredients.recipe_id ='+ ID;
+		var sql = 'SELECT has_ingredients.quantity, unit.unit_name, unit.unit_id, ingredients.name FROM has_ingredients INNER JOIN ingredients ON has_ingredients.ingredient_id=ingredients.ingredient_id inner join unit on has_ingredients.unit_id=unit.unit_id WHERE has_ingredients.recipe_id ='+ ID;
 		connectionPool.query(sql, (err, rows) => {
 			if (err){
 				module.exports.printError("getIngredients","SQL Query Error: error getting ingredients by recipe id", err,{ID:ID})
@@ -475,7 +475,12 @@ module.exports = {
 			}
 
 			rows.forEach( (row) => {
-				if(parseInt(row.quantity)>1) row.unit_name=row.unit_name.concat('s');
+				if(parseInt(row.quantity)>1){
+					if(row.unit_id == 20)
+						row.name = row.name.concat('s')
+					else
+						row.unit_name=row.unit_name.concat('s');
+				}
 				
 				ingredients.push({
 					name: row.name,

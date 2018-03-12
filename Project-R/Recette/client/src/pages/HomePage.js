@@ -114,6 +114,7 @@ class HomePage extends Component {
       <div className="Home">
         <Helmet bodyAttributes={{style: 'background-color : #2E2F2F'}}/>
         <NavBar
+          path={this.props.match.path}
           onSearchResultSelect={this.handleResultSelect}>
 
           <StackGrid

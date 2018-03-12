@@ -87,6 +87,7 @@ class RecipePage extends Component{
 		return(
 			<div className='container'>
 				<NavBar
+				  path={this.props.match.path}
 					onSearchResultSelect={this.handleResultSelect}>
 					{this.state.recipe_data.map(item => (
 						<div className='body'>

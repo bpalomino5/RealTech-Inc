@@ -30,7 +30,8 @@ class UserProfilePage extends Component{
       style: '',
       origin: '', 
       directions: '', 
-      image_location: 'images/dummyimage.jpg',  
+      image_location: 'images/dummyimage.jpg',
+      addFavoriteChecked: false,
       recipeModalOpen: false,
     };
 
@@ -76,19 +77,35 @@ class UserProfilePage extends Component{
       if(this.state.user_ingredients.length >= 1){
         newRecipe.body = this.state.user_ingredients;
       }
-                     
+
       let response = await ClientTools.addRecipe(newRecipe); // Call function that adds new recipe
       console.log(response);
       if(response!=null){
         if(response.code===1){
-           // show successfully added new recipe message
-           this.handleModalClose()
+          // show successfully added new recipe message
+          if(this.state.addFavoriteChecked) this.addNewRecipeToFavorites(response.data.recipe_id);
+          this.handleModalClose()
         }
         else this.setState({error:true, errorMessage: response.message})
       } 
     }
     else this.setState({error:true, errorMessage: 'Please fill in all areas of the form.'})
   }
+
+async addNewRecipeToFavorites(recipe_id) {
+  let favoriteData = this.state.session_data;
+  favoriteData.recipe_id=recipe_id;
+  let response = await ClientTools.addFavorite(favoriteData);
+  //console.log(response);
+
+  //update Recipes
+  let data = await ClientTools.getRecipes();
+  console.log(data);
+  DataStore.storeData('recipes',data.recipes);
+
+  //update Favorites
+  this.getFavorites()
+}
 
   async getUnits () {
     let data = await ClientTools.getUnits();
@@ -104,9 +121,17 @@ class UserProfilePage extends Component{
 
   async getPreferences() {
     let data = await ClientTools.getPreferences(this.props.match.params.id);
-    // console.log(data);
-    if(data!=null){
-      this.setState({userPreferences: data.preferences})
+    console.log(data);
+    let styles = DataStore.getData('styles');
+    if(data.preferences.length > 0){
+      let preferences = [];
+      for(var i=0;i<data.preferences.length;i++){
+        preferences.push(styles[i]);
+      }
+      this.setState({userPreferences: preferences})
+    }
+    else{
+      this.setState({userPreferences: [{title: 'No preferences yet!'}]})
     }
   }
 
@@ -130,14 +155,16 @@ class UserProfilePage extends Component{
 
   async getFavorites() {
     let data = await ClientTools.getFavorites(this.props.match.params.id);
-    console.log(data);
+    //console.log(data);
     if(data!=null){
       let recipes = [];
       let allRecipes = DataStore.getData('recipes');
       for (var i = 0; i < data.favorites.length; i++) {
-        recipes.push(allRecipes[data.favorites[i].recipe]);
+        for(var j = 0; j < allRecipes.length; j++){
+          if(allRecipes[j].id===data.favorites[i].recipe)
+            recipes.push(allRecipes[j])
+        }
       }
-      // console.log(recipes);
       this.setState({recipes: recipes});
     }
   }
@@ -307,7 +334,11 @@ class UserProfilePage extends Component{
                               onChange={(e, {value}) => this.setState({directions: value})} 
                               />
                           </div>   
-                      <Form.Checkbox label='Add to My Favorites' />
+                      <Form.Checkbox 
+                        label='Add to My Favorites'
+                        checked={this.state.addFavoriteChecked} 
+                        onClick={() => this.setState({addFavoriteChecked: !this.state.addFavoriteChecked})}
+                      />
                       <Message
                         success
                         header='Added new recipe!'
@@ -332,6 +363,7 @@ class UserProfilePage extends Component{
       <div>
         <Helmet bodyAttributes={{style: 'background-color : #2E2F2F'}}/>
         <NavBar
+          path={this.props.match.path}
           onSearchResultSelect={this.handleResultSelect}>
           <div className='user-profile'> 
             <div className='banner-container'>
@@ -345,8 +377,8 @@ class UserProfilePage extends Component{
                />
             </div>
             <div className='infoSection'>
-              <Grid columns={4} relaxed centered>
-                <Grid.Column width={4}>
+              <Grid columns={3}  centered>
+                <Grid.Column width={5}>
                   <Segment basic>
                       <h2 className='info-section-headers'>My Info </h2>
                       <Divider />
@@ -360,7 +392,7 @@ class UserProfilePage extends Component{
                         </div>
                   </Segment>
                 </Grid.Column>
-                <Grid.Column width = {4}>
+                <Grid.Column width = {5}>
                   <Segment basic>
                     <h2 className='info-section-headers'>My Activity</h2>
                     <Divider />
@@ -386,12 +418,11 @@ class UserProfilePage extends Component{
                     </Feed>
                   </Segment>
                 </Grid.Column>               
-                 <Grid.Column width = {4}>
+                 <Grid.Column width = {5}>
                   <Segment basic>
                     <h2 className='info-section-headers'>My Preferences</h2>
                     <Divider />
-                    <div className='display-linebreak'></div>
-                      <Feed>
+                      <Feed size='large'>
                         {this.state.userPreferences.map(preferences => (
                           <Feed.Event>
                             <Feed.Content>
@@ -400,7 +431,9 @@ class UserProfilePage extends Component{
                                   <List.Item>
                                   <List.Icon name='star' size='large' color='teal' circular='true' verticalAlign='middle' />
                                     <List.Content>
-                                      <List.Header><div className='activity-feed'>{preferences.style}</div></List.Header>
+                                      <List.Header>
+                                        <div className='activity-feed-text'>{preferences.title}</div>
+                                      </List.Header>
                                     </List.Content>
                                   </List.Item>                                
                                 </List>

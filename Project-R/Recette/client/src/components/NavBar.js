@@ -30,7 +30,7 @@ class NavBar extends Component{
     this.openMenu=this.openMenu.bind(this);
     this.openMobileSearch=this.openMobileSearch.bind(this);
     this.closeMobileSearch=this.closeMobileSearch.bind(this);
-    this.refreshPage=this.refreshPage.bind(this);
+    this.OpenHomePage=this.OpenHomePage.bind(this);
 	}
 
 	componentWillMount() {
@@ -104,11 +104,17 @@ class NavBar extends Component{
   }
 
   OpenProfilePage() {
-    this.goToPage(`/profiles/${this.state.session_data.user_id}`)
+  	if(this.props.path==='/profiles/:id')
+  		window.location.reload(); //reload profile page
+  	else
+    	this.goToPage(`/profiles/${this.state.session_data.user_id}`)
   }
 
-  refreshPage(){
-    window.location.reload();
+  OpenHomePage(){
+  	if(this.props.path==='/')
+    	window.location.reload();
+    else
+    	this.goToPage('/')
   }
 
   openMenu(){
@@ -157,7 +163,7 @@ class NavBar extends Component{
 				<Responsive minWidth={568}>
 				<Menu fixed='top'>
 		      <div className="headerContainer">
-		        <div className="logoBox" onClick={this.refreshPage}>
+		        <div className="logoBox" onClick={this.OpenHomePage}>
 		          <h1>Recette</h1>
 		        </div>
 		        <Search 
@@ -215,7 +221,7 @@ class NavBar extends Component{
 			    <Sidebar.Pusher>
 				    <Menu fixed='top' borderless>
 				      {!this.state.mobileSearch && <div className="headerContainer">
-				        <div className="logoBox" onClick={this.refreshPage}>
+				        <div className="logoBox" onClick={this.OpenHomePage}>
 				          <h1>Recette</h1>
 				        </div>
 				        <div className="buttonBox">

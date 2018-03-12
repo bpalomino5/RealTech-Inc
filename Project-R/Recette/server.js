@@ -195,8 +195,8 @@ app.post('/addComment', function(req,res) {
 });
 app.post('/addRecipe', function(req,res){
 	gen.checkReqSpecific(req,res,function(data){
-		action.addRecipe(data,res,function(message){
-			gen.validResponse(res,message)
+		action.addRecipe(data,res,function(message,data){
+			gen.validResponse(res,message,data)
 		})
 	})
 });

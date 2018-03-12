@@ -140,9 +140,9 @@ module.exports = {
 		module.exports.attemptAddRecipe(data,res,function(){
 			serverFunctions.addRecipe(data,function(struct_err,simple_err){
 				gen.handleErrors(res,struct_err,simple_err,function(){
-					serverFunctions.linkIngredients(data,function(struct_err,simple_err){
+					serverFunctions.linkIngredients(data,function(struct_err,simple_err,recipe_id){
 						gen.handleErrors(res,struct_err,simple_err,function(){
-							callback("Recipe has been added")
+							callback("Recipe has been added",{recipe_id: recipe_id})
 						})
 					})
 				})
