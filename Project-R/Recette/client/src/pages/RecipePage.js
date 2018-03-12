@@ -87,8 +87,8 @@ class RecipePage extends Component{
 		this.goToPage(`/profiles/${id}`)
 	}
 
-	handleResultSelect(id) {
-    console.log(id);
+	handleResultSelect(type,id) {
+    if(type==='recipe_name') this.goToPage(`/recipes/${id}`)
   }
 
 	render() {

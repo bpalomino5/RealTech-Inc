@@ -435,7 +435,7 @@ module.exports = {
 	},
 	getRecipesByOrigin:function(origin, callback){
 		var recipes = [];	
-		var sql = 'SELECT recipe_id, name, image_location FROM recipes WHERE origin ='+ origin;
+		var sql = 'SELECT recipe_id, name, image_location FROM recipes WHERE origin = \''+ origin +'\'';
 		connectionPool.query(sql, (err, rows) => {
 			if (err)
 				module.exports.printError("getRecipesByOrigin", "SQL Query Error: could not get recipes", err, {})

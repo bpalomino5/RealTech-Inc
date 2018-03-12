@@ -209,8 +209,8 @@ class UserProfilePage extends Component{
     this.goToPage(`/recipes/${id}`)
   }
   
-  handleResultSelect(id) {
-    console.log(id);
+  handleResultSelect(type,id) {
+    if(type==='recipe_name') this.handleCardClick(id)
   }
 
   handleModalClose() {
