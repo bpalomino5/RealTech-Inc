@@ -104,7 +104,7 @@ class NavBar extends Component{
   }
 
   OpenProfilePage() {
-  	if(this.props.path==='/profiles/:id')
+  	if(this.props.path=='/profiles/:id')
   		window.location.reload(); //reload profile page
   	else
     	this.goToPage(`/profiles/${this.state.session_data.user_id}`)
