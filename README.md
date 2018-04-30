@@ -16,6 +16,42 @@ https://damp-garden-53847.herokuapp.com/
 
 # Meeting Notes
 
+## Date: 3/9/18
+
+What Got Done:
+
+ - Brandon: Added search by style
+ - Chris: Worked on user activity feed
+ - Kenneth: Thoroughly tested server functions
+ - Dongri: Thoroughly tested server functions
+ - Daniel: Thoroughly tested server functions
+ 
+ Tasks for the weekend:
+ 
+ - Brandon: Work on addRecipe for front end
+ - Chris: Work on implementing activity feed
+ - Kenneth: Finish up and test remaining server functions
+ - Dongri: Finish up and test remaining server functions
+ - Daniel: Finish up and test remaining server function
+
+## Date: 3/8/18
+
+What Got Done:
+
+ - Brandon: Added search by style
+ - Chris: Worked on user activity feed
+ - Kenneth: Thoroughly tested server functions
+ - Dongri: Thoroughly tested server functions
+ - Daniel: Thoroughly tested server functions
+ 
+ Tasks for 3/9:
+ 
+ - Brandon: Work on addRecipe for front end
+ - Chris: Work on implementing activity feed
+ - Kenneth: Finish up and test remaining server functions
+ - Dongri: Finish up and test remaining server functions
+ - Daniel: Finish up and test remaining server function
+
 ## Date: 3/7/18
 
 What Got Done:
