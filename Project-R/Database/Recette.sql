@@ -1,680 +1,1489 @@
--- phpMyAdmin SQL Dump
--- version 4.7.3
--- https://www.phpmyadmin.net/
---
--- Host: localhost:8889
--- Generation Time: Feb 07, 2018 at 03:54 AM
--- Server version: 5.6.35
--- PHP Version: 7.1.8
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+# ************************************************************
+# Sequel Pro SQL dump
+# Version 4541
+#
+# http://www.sequelpro.com/
+# https://github.com/sequelpro/sequelpro
+#
+# Host: us-cdbr-iron-east-05.cleardb.net (MySQL 5.6.36-log)
+# Database: heroku_c7d7094d02a13d7
+# Generation Time: 2018-04-30 17:56:38 +0000
+# ************************************************************
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Database: `Recette`
---
 
--- --------------------------------------------------------
+# Dump of table has_ingredients
+# ------------------------------------------------------------
 
---
--- Table structure for table `created_by`
---
-
-CREATE TABLE `created_by` (
-  `user_id` int(11) NOT NULL,
-  `recipe_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `created_by`
---
-
-INSERT INTO `created_by` (`user_id`, `recipe_id`) VALUES
-(1, 1),
-(1, 5),
-(1, 14),
-(1, 2),
-(1, 13),
-(1, 6),
-(1, 3),
-(1, 15),
-(1, 9),
-(1, 9),
-(1, 10),
-(1, 12),
-(1, 8),
-(1, 11),
-(1, 4),
-(1, 11),
-(1, 7),
-(1, 16),
-(1, 17),
-(1, 18),
-(1, 19),
-(1, 20),
-(1, 21);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `has_ingredients`
---
+DROP TABLE IF EXISTS `has_ingredients`;
 
 CREATE TABLE `has_ingredients` (
-  `dummy_id` int(11) NOT NULL,
   `recipe_id` int(20) NOT NULL,
   `ingredient_id` int(20) NOT NULL,
-  `quantity` varchar(10) NOT NULL
+  `quantity` varchar(10) NOT NULL,
+  `unit_id` int(20) NOT NULL,
+  KEY `recipe_id` (`recipe_id`),
+  KEY `ingredient_id` (`ingredient_id`),
+  KEY `unit_id` (`unit_id`),
+  CONSTRAINT `has_ingredients_ibfk_1` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredients` (`ingredient_id`),
+  CONSTRAINT `has_ingredients_ibfk_2` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`),
+  CONSTRAINT `has_ingredients_ibfk_3` FOREIGN KEY (`unit_id`) REFERENCES `unit` (`unit_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `has_ingredients`
---
+LOCK TABLES `has_ingredients` WRITE;
+/*!40000 ALTER TABLE `has_ingredients` DISABLE KEYS */;
 
-INSERT INTO `has_ingredients` (`dummy_id`, `recipe_id`, `ingredient_id`, `quantity`) VALUES
-(1, 1, 8, '0'),
-(2, 1, 7, '0'),
-(3, 5, 11, '0'),
-(4, 5, 2, '0'),
-(5, 14, 6, '0'),
-(6, 2, 1, '0'),
-(7, 13, 5, '0'),
-(8, 13, 1, '0'),
-(9, 13, 7, '0'),
-(10, 6, 5, '0'),
-(11, 6, 1, '0'),
-(12, 6, 8, '0'),
-(13, 3, 10, '0'),
-(14, 3, 4, '0'),
-(15, 3, 2, '0'),
-(16, 15, 10, '0'),
-(17, 15, 2, '0'),
-(18, 9, 3, '0'),
-(19, 10, 1, '0'),
-(20, 12, 2, '0'),
-(21, 12, 8, '0'),
-(22, 12, 4, '0'),
-(23, 4, 11, '0'),
-(24, 4, 2, '0'),
-(25, 11, 9, '0'),
-(26, 11, 10, '0'),
-(27, 7, 7, '0'),
-(28, 7, 3, '0'),
-(29, 16, 15, '0'),
-(30, 16, 16, '0'),
-(31, 16, 17, '0'),
-(32, 16, 20, '0'),
-(33, 16, 21, '0'),
-(34, 16, 22, '0'),
-(35, 16, 23, '0'),
-(36, 16, 1, '0'),
-(37, 17, 18, '0'),
-(38, 17, 24, '0'),
-(39, 17, 19, '0'),
-(40, 17, 26, '0'),
-(41, 17, 25, '0'),
-(42, 17, 27, '0'),
-(43, 17, 28, '0'),
-(44, 17, 29, '0'),
-(45, 17, 30, '0'),
-(46, 17, 16, '0'),
-(47, 17, 32, '0'),
-(48, 17, 31, '0'),
-(49, 18, 37, '0'),
-(50, 18, 36, '0'),
-(51, 18, 38, '0'),
-(52, 18, 7, '0'),
-(53, 18, 43, '0'),
-(54, 18, 31, '0'),
-(55, 18, 27, '0'),
-(56, 18, 44, '0'),
-(57, 18, 45, '0'),
-(58, 18, 25, '0'),
-(59, 18, 39, '0'),
-(60, 18, 40, '0'),
-(61, 18, 29, '0'),
-(62, 18, 41, '0'),
-(63, 19, 35, '0'),
-(64, 19, 46, '0'),
-(65, 19, 40, '0'),
-(66, 19, 47, '0'),
-(67, 19, 29, '0'),
-(68, 19, 27, '0'),
-(69, 19, 48, '0'),
-(70, 19, 15, '0'),
-(71, 19, 49, '0'),
-(72, 19, 31, '0'),
-(74, 19, 50, '0'),
-(75, 20, 51, '0'),
-(76, 20, 42, '0'),
-(77, 20, 7, '0'),
-(78, 20, 25, '0'),
-(79, 20, 15, '0'),
-(80, 20, 3, '0'),
-(81, 20, 52, '0'),
-(82, 20, 54, '0'),
-(83, 20, 53, '0'),
-(84, 20, 55, '0'),
-(85, 20, 56, '0'),
-(86, 20, 44, '0'),
-(87, 21, 57, ''),
-(88, 21, 58, ''),
-(89, 21, 40, ''),
-(90, 21, 59, ''),
-(91, 21, 60, ''),
-(92, 21, 62, ''),
-(93, 22, 27, ''),
-(94, 22, 42, ''),
-(95, 22, 22, ''),
-(96, 22, 31, ''),
-(97, 22, 63, ''),
-(98, 22, 64, ''),
-(99, 23, 39, ''),
-(100, 23, 16, ''),
-(101, 23, 67, ''),
-(102, 23, 68, ''),
-(103, 23, 31, ''),
-(104, 23, 69, ''),
-(105, 23, 70, ''),
-(106, 23, 44, ''),
-(107, 23, 29, ''),
-(108, 23, 40, ''),
-(109, 23, 57, ''),
-(110, 23, 71, ''),
-(111, 24, 40, ''),
-(112, 24, 35, ''),
-(113, 24, 39, ''),
-(114, 24, 48, ''),
-(115, 24, 34, ''),
-(116, 24, 33, ''),
-(117, 25, 61, ''),
-(118, 25, 72, ''),
-(119, 25, 41, ''),
-(120, 25, 24, ''),
-(121, 25, 1, ''),
-(122, 25, 44, ''),
-(123, 25, 74, ''),
-(124, 25, 75, '');
+INSERT INTO `has_ingredients` (`recipe_id`, `ingredient_id`, `quantity`, `unit_id`)
+VALUES
+	(1,73,'1',3),
+	(1,162,'3',3),
+	(14,107,'8',3),
+	(13,106,'2',3),
+	(13,1,'1',1),
+	(13,7,'2',2),
+	(15,39,'4',9),
+	(15,52,'1',20),
+	(9,1,'1',17),
+	(10,1,'1/2',3),
+	(12,35,'1',8),
+	(12,16,'2',14),
+	(12,43,'2',20),
+	(11,61,'1',20),
+	(11,47,'4',9),
+	(16,15,'1/4',3),
+	(16,16,'2',14),
+	(16,17,'3/4',1),
+	(16,20,'1/4',3),
+	(16,21,'1/2',3),
+	(16,22,'2',2),
+	(16,23,'1',3),
+	(16,1,'3/4',1),
+	(17,18,'1',3),
+	(17,24,'2',20),
+	(17,19,'2',8),
+	(17,26,'1/2',20),
+	(17,25,'1',2),
+	(17,27,'2',20),
+	(17,28,'2',20),
+	(17,29,'2',20),
+	(17,30,'3',15),
+	(17,16,'1',14),
+	(17,128,'10',9),
+	(17,31,'8',9),
+	(18,37,'1',2),
+	(18,36,'4',16),
+	(18,38,'1',1),
+	(18,7,'2/3',3),
+	(18,43,'2',20),
+	(18,129,'2',9),
+	(18,27,'1/2',3),
+	(18,44,'1',17),
+	(18,45,'1',17),
+	(18,106,'2',3),
+	(18,39,'1/2',3),
+	(18,40,'1/4',3),
+	(18,29,'2',2),
+	(18,41,'1',1),
+	(19,35,'1',8),
+	(19,46,'1',3),
+	(19,40,'1',3),
+	(19,47,'10',9),
+	(19,29,'4',20),
+	(19,27,'4',9),
+	(19,48,'1.25',9),
+	(19,15,'3/4',3),
+	(19,49,'18',9),
+	(19,31,'1',3),
+	(19,34,'15.5',9),
+	(20,51,'12',9),
+	(20,42,'2',2),
+	(20,7,'2',2),
+	(20,25,'3',2),
+	(20,15,'1/4',3),
+	(20,3,'1',3),
+	(20,52,'1/3',3),
+	(20,54,'1/4',3),
+	(20,53,'1/3',3),
+	(20,55,'1',17),
+	(20,56,'2',20),
+	(20,44,'1',17),
+	(21,57,'1',3),
+	(21,58,'4',9),
+	(21,40,'16',9),
+	(21,59,'10',9),
+	(21,60,'1.8',9),
+	(21,130,'1',20),
+	(22,27,'3/4',3),
+	(22,42,'2',2),
+	(22,132,'3/4',1),
+	(22,31,'1 1/4',3),
+	(22,63,'16.3',9),
+	(22,64,'1/4',3),
+	(23,39,'8',9),
+	(23,16,'3',14),
+	(23,67,'14',9),
+	(23,68,'2',1),
+	(23,31,'6',9),
+	(23,65,'1',8),
+	(23,70,'1/2',3),
+	(23,44,'1',17),
+	(23,29,'1/3',3),
+	(23,40,'1/2',3),
+	(23,57,'1/4',3),
+	(23,71,'1',20),
+	(24,40,'1',3),
+	(24,35,'1',8),
+	(24,39,'4',9),
+	(24,48,'1.25',9),
+	(24,34,'16',9),
+	(24,33,'4',3),
+	(25,61,'3',20),
+	(25,72,'3',2),
+	(25,41,'1',20),
+	(25,24,'2',20),
+	(25,1,'1',1),
+	(25,44,'1',17),
+	(25,74,'1',1),
+	(25,75,'1/2',3),
+	(9,3,'1',3),
+	(9,73,'1',3),
+	(9,87,'2',2),
+	(9,88,'2',3),
+	(9,89,'3/4',3),
+	(10,90,'3',18),
+	(10,91,'1 1/2',2),
+	(10,92,'2',1),
+	(10,29,'1',19),
+	(10,16,'3',18),
+	(11,33,'1',3),
+	(11,46,'1',2),
+	(11,29,'4',20),
+	(11,24,'1',20),
+	(11,40,'1/4',3),
+	(11,93,'1/2',3),
+	(11,94,'',20),
+	(11,95,'1',9),
+	(11,96,'8',20),
+	(11,97,'2',3),
+	(12,64,'2',3),
+	(12,98,'12',20),
+	(12,99,'16',9),
+	(12,100,'1/2',1),
+	(12,101,'1',1),
+	(12,102,'1/2',3),
+	(12,103,'25',9),
+	(13,104,'30',20),
+	(13,105,'2',2),
+	(13,45,'1/2',1),
+	(13,43,'1',20),
+	(13,28,'6',20),
+	(14,108,'4',12),
+	(14,109,'8',12),
+	(14,110,'2',3),
+	(14,111,'8',12),
+	(14,112,'2',2),
+	(15,42,'1/4',3),
+	(15,113,'4',20),
+	(15,114,'',20),
+	(15,115,'4',20),
+	(1,77,'1',3),
+	(1,42,'1',3),
+	(1,79,'1',1),
+	(1,1,'1/2',1),
+	(1,78,'2',1),
+	(1,43,'2',20),
+	(1,84,'2',3),
+	(1,83,'1',3),
+	(2,117,'1',20),
+	(2,1,'',20),
+	(2,106,'1',5),
+	(3,119,'1',3),
+	(3,120,'4',9),
+	(3,121,'1/4',3),
+	(3,122,'1',2),
+	(3,123,'1/4',1),
+	(3,124,'1/4',2),
+	(3,125,'1',1),
+	(3,126,'12',20),
+	(3,1,'1 1/2',1),
+	(18,42,'3',2),
+	(18,15,'2/3',3),
+	(22,131,'',20),
+	(24,131,'',20),
+	(32,133,'8',9),
+	(32,42,'1/2',3),
+	(32,76,'2',3),
+	(32,69,'2',8),
+	(32,134,'1',1),
+	(33,127,'1',8),
+	(33,42,'1/2',3),
+	(33,88,'2',3),
+	(33,45,'1/2',1),
+	(33,102,'1',3),
+	(33,116,'1/3',3),
+	(33,69,'1',8),
+	(30,135,'1',3),
+	(30,136,'1/4',3),
+	(30,73,'1',2),
+	(30,137,'1/2',3),
+	(30,57,'1/4',3),
+	(30,138,'8',8),
+	(30,139,'2 1/2',2),
+	(30,140,'1',20),
+	(30,61,'2',20),
+	(31,42,'1',2),
+	(31,141,'1/2',3),
+	(31,142,'1/4',3),
+	(31,16,'1',14),
+	(31,143,'3',3),
+	(31,144,'8',9),
+	(31,15,'1/2',3),
+	(31,145,'1/4',1),
+	(31,134,'1/4',1),
+	(31,146,'1/4',1),
+	(31,147,'1',8),
+	(31,1,'1/2',1),
+	(31,148,'1/2',3),
+	(31,149,'3/4',8),
+	(29,150,'1/4',3),
+	(29,13,'2',2),
+	(29,16,'1',14),
+	(29,151,'1/4',1),
+	(29,45,'1/8',1),
+	(29,152,'1',8),
+	(34,43,'2',20),
+	(34,3,'2/3',3),
+	(34,1,'2',1),
+	(34,45,'1/4',1),
+	(34,62,'3',20),
+	(34,35,'1 1/2',8),
+	(34,52,'1',20),
+	(34,31,'1',3),
+	(34,154,'1/2',3),
+	(34,77,'1/4',3),
+	(34,155,'1/4',3),
+	(34,156,'1',2),
+	(26,18,'15',9),
+	(26,154,'1/2',3),
+	(26,157,'2',2),
+	(26,147,'3',20),
+	(26,158,'1/2',1),
+	(26,45,'1/2',1),
+	(26,159,'1/2',1),
+	(26,160,'1/2',1),
+	(26,100,'1/4',1),
+	(26,117,'1',3),
+	(26,52,'1/2',3),
+	(26,161,'1/2',3),
+	(26,42,'3',2),
+	(26,162,'3',2),
+	(26,3,'1 1/2',3),
+	(26,163,'15',9),
+	(26,31,'8',9),
+	(26,164,'1',3),
+	(35,165,'10',9),
+	(35,166,'3/4',3),
+	(35,171,'8',9),
+	(35,39,'8',9),
+	(35,93,'1',3),
+	(35,31,'1 1/2',3),
+	(35,161,'1',19),
+	(36,167,'2',20),
+	(36,168,'2',20),
+	(36,169,'8',9),
+	(36,170,'1',8),
+	(36,73,'2',2),
+	(36,77,'1',2),
+	(36,172,'10',20),
+	(36,131,'',20),
+	(36,173,'2',2),
+	(37,32,'12',20),
+	(37,106,'1',2),
+	(37,74,'1',2),
+	(37,39,'8',9),
+	(37,102,'1/4',3),
+	(37,45,'1/4',1),
+	(37,175,'1/4',1),
+	(37,44,'1/4',1),
+	(38,39,'8',9),
+	(38,57,'1',3),
+	(38,176,'4',9),
+	(38,177,'2',9),
+	(38,102,'1',3),
+	(39,35,'1',8),
+	(39,43,'1',20),
+	(39,177,'1/4',3),
+	(39,45,'1/8',1),
+	(39,178,'1/2',1),
+	(39,175,'1/2',1),
+	(39,100,'1/2',1),
+	(39,124,'1',1),
+	(39,106,'1',2),
+	(39,52,'1',3),
+	(39,162,'2',2),
+	(39,179,'1',3),
+	(39,180,'1',2),
+	(39,178,'1/2',1),
+	(40,181,'1',2),
+	(40,182,'1',2),
+	(40,73,'1/2',3),
+	(40,13,'1/2',3),
+	(40,183,'1/4',3),
+	(40,16,'1',14),
+	(40,184,'1/2',1),
+	(40,45,'1/4',1),
+	(40,185,'12',20),
+	(41,186,'1',20),
+	(41,1,'1/2',1),
+	(41,187,'1',2),
+	(41,168,'1',20),
+	(41,188,'1/3',3),
+	(41,189,'1/4',3),
+	(41,190,'1/4',3),
+	(42,191,'4',3),
+	(42,57,'1',3),
+	(42,192,'1',1),
+	(42,161,'1',3),
+	(42,142,'2',20),
+	(42,141,'1/2',3),
+	(42,82,'1',3),
+	(42,1,'1',1),
+	(42,45,'1',3),
+	(43,194,'6',9),
+	(43,196,'1/4',3),
+	(43,25,'1',2),
+	(43,20,'1',2),
+	(43,16,'2',14),
+	(43,45,'1/2',1),
+	(43,197,'1',20),
+	(43,198,'5',9),
+	(43,70,'1',20),
+	(44,199,'4',3),
+	(44,57,'1',3),
+	(44,200,'1/4',3),
+	(44,73,'2/3',3),
+	(44,156,'2 1/2',2),
+	(44,1,'1 1/2',1),
+	(44,45,'1/2',1),
+	(44,52,'1',20),
+	(44,161,'2',20),
+	(44,141,'1',20),
+	(44,154,'1/4',3),
+	(44,201,'2',2),
+	(45,202,'15',9),
+	(45,203,'15',9),
+	(45,210,'15',9),
+	(45,141,'1',20),
+	(45,70,'1',20),
+	(45,204,'10',9),
+	(45,205,'1',20),
+	(45,25,'1/2',3),
+	(45,206,'1/2',3),
+	(45,207,'2',2),
+	(45,20,'1',2),
+	(45,73,'2',2),
+	(45,1,'1',2),
+	(45,16,'1',14),
+	(45,208,'1/4',3),
+	(45,45,'1/2',2),
+	(45,123,'1',20),
+	(45,209,'1/2',1),
+	(46,211,'3/4',3),
+	(46,15,'4',3),
+	(46,212,'3/4',3),
+	(46,199,'1',3),
+	(46,106,'2',2),
+	(46,52,'2',20),
+	(46,16,'4',14),
+	(46,213,'15.5',9),
+	(46,146,'1/4',1),
+	(46,1,'1',1),
+	(46,45,'1',1),
+	(47,25,'1',1),
+	(47,214,'1/2',8),
+	(47,215,'1/2',3),
+	(47,216,'1/4',1),
+	(47,17,'1/4',1),
+	(47,193,'1/8',1),
+	(47,217,'1/8',1),
+	(47,218,'16',9),
+	(47,219,'1',20),
+	(48,161,'1',20),
+	(48,16,'1',1),
+	(48,220,'6',9),
+	(48,221,'2',20),
+	(48,15,'10',3),
+	(48,222,'6',20),
+	(48,147,'2',20),
+	(48,223,'1/4',3),
+	(48,224,'3',8),
+	(48,52,'1',20),
+	(48,203,'12',9),
+	(48,225,'1/4',3),
+	(48,15,'1/2',3),
+	(49,25,'3',2),
+	(49,52,'1 1/3',3),
+	(49,226,'1',3),
+	(49,16,'2',14),
+	(49,213,'2 1/2',3),
+	(49,17,'1',1),
+	(49,193,'1',1),
+	(49,1,'1',1),
+	(49,227,'1',20),
+	(49,43,'4',20),
+	(50,228,'14',9),
+	(50,25,'2',2),
+	(50,35,'2',8),
+	(50,229,'1',20),
+	(50,17,'2',1),
+	(50,230,'2',1),
+	(50,1,'1',1),
+	(50,45,'1',1),
+	(50,52,'1',20),
+	(50,16,'1',14),
+	(50,162,'1',2),
+	(50,15,'1',2),
+	(50,231,'1',5),
+	(51,25,'1/2',3),
+	(51,154,'4',20),
+	(51,52,'1',20),
+	(51,158,'1',1),
+	(51,45,'1/2',1),
+	(51,17,'1/2',1),
+	(51,233,'1/4',1),
+	(51,232,'1/2',20),
+	(51,117,'5',20),
+	(52,13,'3/4',3),
+	(52,15,'3/4',3),
+	(52,200,'3',2),
+	(52,234,'1/4',3),
+	(52,73,'2',2),
+	(52,45,'1',2),
+	(52,235,'2',2),
+	(52,16,'1/4',3),
+	(52,52,'1/2',20),
+	(52,236,'3',8),
+	(53,237,'2 1/4',8),
+	(53,25,'4',1),
+	(53,238,'1',20),
+	(53,239,'1',20),
+	(53,240,'1/2',3),
+	(53,15,'1/2',3),
+	(53,241,'1/3',3),
+	(53,242,'1/3',3),
+	(54,243,'.25',9),
+	(54,244,'1',3),
+	(54,73,'1/4',3),
+	(54,3,'3',2),
+	(54,43,'1',20),
+	(54,1,'2',1),
+	(54,245,'4 1/2',3),
+	(54,16,'2',1),
+	(54,42,'1/4',3),
+	(55,15,'1 1/2',3),
+	(55,246,'2',2),
+	(55,20,'1/4',3),
+	(55,136,'1/3',3),
+	(55,13,'2 1/2',2),
+	(55,247,'1',2),
+	(55,77,'1',3),
+	(55,248,'1/2',1),
+	(55,16,'1/2',1),
+	(55,142,'2',2),
+	(55,146,'1/4',1),
+	(55,182,'3',2),
+	(55,15,'2',2),
+	(55,249,'3',20),
+	(55,162,'1',3),
+	(55,1,'1/4',1),
+	(55,45,'1/4',1),
+	(55,25,'3',20),
+	(56,18,'1/2',3),
+	(56,248,'1 1/2',2),
+	(56,13,'3',2),
+	(56,250,'3',2),
+	(56,251,'1 1/2',2),
+	(56,252,'2',1),
+	(56,16,'3',14),
+	(56,253,'8',9),
+	(56,142,'1/4',3),
+	(56,254,'1/4',3),
+	(1,255,'2',1),
+	(3,35,'3',8),
+	(3,45,'1',1),
+	(4,133,'16',9),
+	(4,35,'1',8),
+	(4,52,'1',20),
+	(4,256,'32',9),
+	(4,1,'1/2',1),
+	(4,43,'2',20),
+	(4,102,'1/3',3),
+	(4,42,'5',2),
+	(4,99,'2',3),
+	(4,64,'4',3),
+	(5,257,'1',8),
+	(5,155,'1/4',3),
+	(5,235,'3 1/2',2),
+	(5,13,'3 1/2',2),
+	(5,77,'2',2),
+	(5,38,'2',2),
+	(5,258,'1 1/2',1),
+	(5,259,'1/4',3),
+	(5,154,'2',20),
+	(5,260,'1',20),
+	(5,70,'1',20),
+	(5,139,'1',2),
+	(5,92,'1',1),
+	(6,42,'1',2),
+	(6,261,'6',9),
+	(6,262,'1/4',3),
+	(6,263,'1/4',3),
+	(6,259,'1',20),
+	(6,43,'1',20),
+	(6,264,'1',3),
+	(6,265,'1/4',3),
+	(6,13,'1 1/2',2),
+	(6,100,'1/8',1),
+	(6,185,'1/8',1),
+	(7,43,'2',20),
+	(7,266,'1 3/4',3),
+	(7,223,'1/4',3),
+	(7,267,'1/4',3),
+	(7,78,'1',1),
+	(7,268,'1',3),
+	(7,269,'1/2',3),
+	(7,270,'1/4',3),
+	(7,162,'1/4',3),
+	(7,80,'4',1),
+	(7,8,'1',2),
+	(7,1,'1/4',1),
+	(8,42,'1/2',3),
+	(8,43,'24',20),
+	(8,1,'2 1/4',1),
+	(8,3,'2 1/2',3),
+	(57,162,'1/2',3),
+	(57,193,'1/4',1),
+	(57,44,'1/4',1),
+	(57,1,'1/4',1),
+	(57,271,'10',20),
+	(57,272,'',20),
+	(57,42,'1/4',3),
+	(57,273,'1/4',3),
+	(57,45,'1',22),
+	(57,100,'1',22),
+	(58,274,'6',20),
+	(58,119,'1/2',3),
+	(58,74,'3',14),
+	(58,25,'1/4',3),
+	(58,275,'2',2),
+	(58,118,'1/4',3),
+	(58,1,'1/4',1),
+	(58,45,'1/4',1),
+	(58,276,'1',20),
+	(58,64,'2',3),
+	(59,16,'4',14),
+	(59,277,'10',9),
+	(59,278,'14',9),
+	(59,279,'10',9),
+	(59,64,'1',3),
+	(59,102,'1/3',3),
+	(59,39,'8',9),
+	(60,95,'1',9),
+	(60,34,'16',9),
+	(60,39,'8',9),
+	(60,40,'16',9),
+	(60,46,'16',9),
+	(60,280,'1',20),
+	(60,281,'1',20),
+	(60,259,'1',19),
+	(60,282,'1',20),
+	(60,283,'1',21),
+	(60,31,'2',3),
+	(101,162,'3',14),
+	(111,279,'1',7),
+	(151,217,'1',42),
+	(151,81,'2',32),
+	(151,217,'1',42),
+	(151,81,'2',32),
+	(151,217,'1',42),
+	(151,81,'2',32),
+	(151,217,'1',42),
+	(151,81,'2',32),
+	(191,81,'4',3);
 
--- --------------------------------------------------------
+/*!40000 ALTER TABLE `has_ingredients` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- Table structure for table `ingredients`
---
+
+# Dump of table has_style
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `has_style`;
+
+CREATE TABLE `has_style` (
+  `recipe_id` int(20) NOT NULL,
+  `style_id` int(20) NOT NULL,
+  KEY `recipe_id` (`recipe_id`),
+  KEY `style_id` (`style_id`),
+  CONSTRAINT `has_style_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`),
+  CONSTRAINT `has_style_ibfk_2` FOREIGN KEY (`style_id`) REFERENCES `style` (`style_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `has_style` WRITE;
+/*!40000 ALTER TABLE `has_style` DISABLE KEYS */;
+
+INSERT INTO `has_style` (`recipe_id`, `style_id`)
+VALUES
+	(1,10),
+	(2,3),
+	(3,3),
+	(4,2),
+	(5,3),
+	(6,3),
+	(7,1),
+	(8,1),
+	(9,9),
+	(10,9),
+	(11,3),
+	(12,2),
+	(13,3),
+	(14,1),
+	(15,3),
+	(16,7),
+	(17,7),
+	(18,7),
+	(19,7),
+	(20,7),
+	(21,7),
+	(22,7),
+	(23,7),
+	(24,7),
+	(25,7),
+	(26,1),
+	(27,11),
+	(28,11),
+	(29,11),
+	(30,12),
+	(31,3),
+	(32,2),
+	(33,2),
+	(34,2),
+	(35,7),
+	(36,7),
+	(37,7),
+	(38,7),
+	(39,2),
+	(40,2),
+	(41,2),
+	(42,2),
+	(43,2),
+	(44,2),
+	(45,2),
+	(46,2),
+	(47,2),
+	(48,2),
+	(49,2),
+	(50,2),
+	(51,2),
+	(52,2),
+	(53,2),
+	(54,2),
+	(55,2),
+	(56,2),
+	(57,7),
+	(58,7),
+	(59,7),
+	(60,7),
+	(1,9),
+	(1,22),
+	(2,1),
+	(2,9),
+	(3,2),
+	(3,6),
+	(4,17),
+	(4,2),
+	(5,2),
+	(5,18),
+	(4,8),
+	(5,8),
+	(6,2),
+	(6,20),
+	(6,24),
+	(7,10),
+	(8,11),
+	(4,25),
+	(8,25),
+	(10,11),
+	(10,13),
+	(10,14),
+	(10,5),
+	(11,2),
+	(12,25),
+	(13,26),
+	(11,26),
+	(13,27),
+	(1,25),
+	(2,27),
+	(14,28),
+	(6,29),
+	(7,29),
+	(8,29),
+	(11,29),
+	(14,29),
+	(15,29),
+	(16,29),
+	(17,29),
+	(25,29),
+	(28,29),
+	(32,29),
+	(33,29),
+	(38,29),
+	(41,29),
+	(42,29),
+	(43,29),
+	(56,29),
+	(26,30),
+	(31,30),
+	(21,31),
+	(23,31),
+	(24,31),
+	(25,31),
+	(59,31),
+	(60,31),
+	(32,17),
+	(32,8),
+	(33,17),
+	(33,8),
+	(56,8),
+	(27,26),
+	(40,26),
+	(42,26),
+	(55,26),
+	(57,26),
+	(31,19),
+	(32,19),
+	(33,19),
+	(20,25),
+	(22,25),
+	(23,25),
+	(24,25),
+	(34,25),
+	(37,25),
+	(47,25),
+	(58,25),
+	(59,25),
+	(38,31);
+
+/*!40000 ALTER TABLE `has_style` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table ingredients
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `ingredients`;
 
 CREATE TABLE `ingredients` (
-  `ingredient_id` int(20) NOT NULL,
+  `ingredient_id` int(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `unit_id` int(20) NOT NULL
+  PRIMARY KEY (`ingredient_id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=284 DEFAULT CHARSET=utf8;
+
+LOCK TABLES `ingredients` WRITE;
+/*!40000 ALTER TABLE `ingredients` DISABLE KEYS */;
+
+INSERT INTO `ingredients` (`ingredient_id`, `name`)
+VALUES
+	(279,'Alfredo-style pasta sauce'),
+	(162,'all-purpose flour'),
+	(217,'allspice'),
+	(81,'almond'),
+	(19,'American cheese'),
+	(168,'apple'),
+	(188,'apple cider vinegar'),
+	(67,'artichoke bottoms'),
+	(195,'artichoke heart'),
+	(278,'artichoke hearts'),
+	(61,'avocados'),
+	(36,'bacon'),
+	(37,'bacon fat'),
+	(56,'baguettes'),
+	(80,'baking powder'),
+	(79,'baking soda'),
+	(275,'balsamic vinegar'),
+	(118,'basil'),
+	(147,'bay leaf'),
+	(50,'beans'),
+	(221,'beef bouillon'),
+	(180,'beef broth'),
+	(224,'beef oxtail'),
+	(226,'bell pepper'),
+	(202,'black bean'),
+	(47,'black olives'),
+	(45,'black pepper'),
+	(222,'black peppercorn'),
+	(120,'blue cheese'),
+	(261,'boneless pork loin chop'),
+	(111,'brandy'),
+	(62,'bread'),
+	(178,'bread crumb'),
+	(245,'bread flour'),
+	(211,'brown lentil'),
+	(238,'brown onion'),
+	(77,'brown sugar'),
+	(42,'butter'),
+	(63,'buttermilk biscuit dough'),
+	(128,'button mushroom'),
+	(210,'cannellini bean'),
+	(223,'canola oil'),
+	(89,'caramel dessert sauce'),
+	(230,'cardamom'),
+	(154,'carrot'),
+	(44,'cayenne pepper'),
+	(161,'celery'),
+	(31,'cheddar cheese'),
+	(157,'chicken bouillon granule'),
+	(28,'chicken breast'),
+	(18,'chicken broth'),
+	(192,'chicken meat'),
+	(186,'chicken thighs'),
+	(271,'chicken wings'),
+	(166,'chicken-flavored crackers'),
+	(242,'chickpea'),
+	(23,'chickpeas'),
+	(252,'chile paste'),
+	(227,'chile pepper'),
+	(209,'chili powder'),
+	(121,'chives'),
+	(84,'chocolate chips'),
+	(112,'chocolate sprinkles'),
+	(263,'chopped broccoli'),
+	(262,'chopped carrot'),
+	(281,'chopped green bell pepper'),
+	(176,'chopped green chillies'),
+	(259,'chopped green onion'),
+	(280,'chopped tomato'),
+	(165,'chunk chicken'),
+	(184,'cider vinegar'),
+	(72,'cilantro'),
+	(173,'cinnamon sugar'),
+	(144,'clam juice'),
+	(241,'coconut milk'),
+	(107,'coffee'),
+	(109,'coffee flavored liqueur'),
+	(33,'Colby-Monterey Jack cheese'),
+	(264,'cold cooked rice'),
+	(183,'cold water'),
+	(164,'cooked ham'),
+	(219,'cooking oil spray'),
+	(181,'cooking sherry'),
+	(131,'cooking spray'),
+	(96,'corn tortillas'),
+	(182,'cornstarch'),
+	(225,'cornstarch dissolved'),
+	(99,'cottage cheese'),
+	(39,'cream cheese'),
+	(163,'cream-style corn'),
+	(108,'creme de cacao'),
+	(215,'crushed tomato'),
+	(140,'cucumber'),
+	(17,'cumin'),
+	(190,'currant'),
+	(240,'curry powder'),
+	(234,'dark brown sugar'),
+	(177,'diced jalapeno peppers'),
+	(75,'diced onion'),
+	(134,'dried basil'),
+	(194,'dried cranberries'),
+	(160,'dried marjoram'),
+	(101,'dried oregano'),
+	(132,'dried parsley flakes'),
+	(145,'dried thyme'),
+	(60,'dry leek soup mix'),
+	(125,'dry mustard'),
+	(105,'dry potato flakes'),
+	(243,'dry yeast'),
+	(43,'egg'),
+	(199,'elbow macaroni'),
+	(189,'feta cheese'),
+	(269,'flax seed meal'),
+	(7,'flour'),
+	(174,'flour tortillas'),
+	(276,'French baguette'),
+	(208,'fresh cilantro'),
+	(196,'fresh dill'),
+	(207,'fresh lime juice'),
+	(149,'fresh shrimp'),
+	(197,'fresh spinach'),
+	(277,'frozen chopped spinach'),
+	(204,'frozen corn kernel'),
+	(265,'frozen peas'),
+	(172,'fruit preserves'),
+	(16,'garlic'),
+	(100,'garlic powder'),
+	(151,'garlic salt'),
+	(248,'ginger root'),
+	(141,'green bell pepper'),
+	(142,'green onion'),
+	(29,'green onions'),
+	(35,'ground beef'),
+	(216,'ground cinnamon'),
+	(185,'ground ginger'),
+	(126,'hamburger rolls'),
+	(232,'head cabbage'),
+	(88,'heavy cream'),
+	(251,'honey'),
+	(113,'hot dog buns'),
+	(123,'hot pepper sauce'),
+	(273,'hot sauce'),
+	(255,'hot water'),
+	(14,'ice'),
+	(282,'iceberg lettuce'),
+	(137,'imitation crabmeat'),
+	(87,'instant coffee granules'),
+	(27,'jalapenos'),
+	(187,'kale'),
+	(155,'ketchup'),
+	(203,'kidney bean'),
+	(167,'kiwi'),
+	(236,'Korean-style short ribs'),
+	(38,'kosher salt'),
+	(237,'lamb meat'),
+	(69,'large shrimp'),
+	(98,'lasagna noodles'),
+	(214,'lean ground beef'),
+	(229,'leek'),
+	(66,'lemon'),
+	(20,'lemon juice'),
+	(94,'lettuce'),
+	(41,'lime'),
+	(258,'lime juice'),
+	(127,'linguine pasta'),
+	(212,'long grain rice'),
+	(148,'long-grain white rice'),
+	(65,'lump crabmeat'),
+	(150,'maple syrup'),
+	(57,'mayonnaise'),
+	(30,'mexican chorizo'),
+	(3,'milk'),
+	(86,'milk chocolate chip'),
+	(74,'minced garlic'),
+	(91,'monosodium glutamate(MSG)'),
+	(64,'mozzarella cheese'),
+	(32,'mushroom'),
+	(114,'mustard'),
+	(90,'napa cabbage'),
+	(138,'nori'),
+	(55,'nutmeg'),
+	(231,'oil'),
+	(272,'oil for deep frying'),
+	(25,'olive oil'),
+	(52,'onion'),
+	(175,'onion powder'),
+	(246,'orange juice'),
+	(247,'orange zest'),
+	(218,'package phyllo dough'),
+	(193,'paprika'),
+	(102,'parmesan cheese'),
+	(22,'parsley'),
+	(254,'peanut'),
+	(250,'peanut butter'),
+	(82,'pecan'),
+	(171,'pepper sauce'),
+	(116,'pesto'),
+	(201,'pimento peppers'),
+	(274,'plum tomatoes'),
+	(117,'potato'),
+	(54,'provolone cheese'),
+	(93,'ranch dressing'),
+	(169,'raspberries'),
+	(70,'red bell pepper'),
+	(205,'red onion'),
+	(146,'red pepper flake'),
+	(92,'red pepper flakes'),
+	(239,'red potato'),
+	(206,'red wine vinegar'),
+	(34,'refried beans'),
+	(136,'rice vinegar'),
+	(97,'rotisserie chicken'),
+	(130,'round sourdough bread'),
+	(152,'salmon'),
+	(46,'salsa'),
+	(1,'salt'),
+	(104,'saltine crackers'),
+	(115,'sausages'),
+	(158,'sea salt'),
+	(179,'seasoned salt'),
+	(235,'sesame oil'),
+	(139,'sesame seeds'),
+	(135,'short-grain white rice'),
+	(266,'skim milk'),
+	(249,'skinless chicken breast'),
+	(283,'sliced black olives'),
+	(40,'sour cream'),
+	(71,'sourdough bread'),
+	(13,'soy sauce'),
+	(133,'spaghetti'),
+	(256,'spaghetti sauce'),
+	(59,'spinach'),
+	(228,'spring roll wrapper'),
+	(51,'steak'),
+	(122,'steak sauce'),
+	(170,'strawberries'),
+	(8,'sugar'),
+	(119,'sun-dried tomato'),
+	(53,'sweet peppers'),
+	(48,'taco'),
+	(95,'taco seasoning mix'),
+	(21,'tahini'),
+	(68,'tarragon'),
+	(257,'thick Chinese wheat noodles'),
+	(159,'thyme'),
+	(191,'toasted pine nuts'),
+	(213,'tomato'),
+	(220,'tomato paste'),
+	(103,'tomato-basil pasta sauce'),
+	(143,'tomato-vegetable juice cocktail'),
+	(24,'tomatoes'),
+	(49,'tortilla chips'),
+	(198,'tuna'),
+	(233,'turmeric'),
+	(253,'Udon noodle'),
+	(267,'unsweetened applesauce'),
+	(78,'vanilla extract'),
+	(106,'vegetable oil'),
+	(83,'walnut'),
+	(244,'warm water'),
+	(15,'water'),
+	(58,'water chestnuts'),
+	(270,'wheat germ'),
+	(110,'whipped cream'),
+	(129,'white Cheddar cheese'),
+	(85,'white chocolate chip'),
+	(73,'white sugar'),
+	(200,'white vinegar'),
+	(76,'white wine'),
+	(268,'whole wheat pastry flour'),
+	(124,'Worcestershire sauce'),
+	(156,'yellow mustard'),
+	(26,'yellow onion'),
+	(260,'zucchini');
+
+/*!40000 ALTER TABLE `ingredients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table is_loggedin
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `is_loggedin`;
+
+CREATE TABLE `is_loggedin` (
+  `user_id` int(10) NOT NULL,
+  `user_token` varchar(6) NOT NULL DEFAULT '',
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `is_loggedin_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_data` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `ingredients`
---
+LOCK TABLES `is_loggedin` WRITE;
+/*!40000 ALTER TABLE `is_loggedin` DISABLE KEYS */;
 
-INSERT INTO `ingredients` (`ingredient_id`, `name`, `unit_id`) VALUES
-(1, 'Salt', 1),
-(2, 'Meat', 8),
-(3, 'Milk', 3),
-(4, 'Cheese', 9),
-(5, 'Chicken', 8),
-(6, 'Coffee Beans', 2),
-(7, 'Flour', 3),
-(8, 'Sugar', 2),
-(9, 'Beef', 8),
-(10, 'Buns', 0),
-(11, 'Noodles', 8),
-(12, 'Rice', 3),
-(13, 'Soy Sauce', 2),
-(14, 'Ice', 0),
-(15, 'Water', 3),
-(16, 'Garlic', 14),
-(17, 'Cumin', 1),
-(18, 'Chicken broth', 3),
-(19, 'American cheese', 8),
-(20, 'Lemon juice', 3),
-(21, 'Tahini', 3),
-(22, 'Parsley', 2),
-(23, 'Chickpeas', 3),
-(24, 'Tomatoes', 0),
-(25, 'Olive oil', 2),
-(26, 'Yellow onion', 0),
-(27, 'Jalapenos', 0),
-(28, 'Chicken breast', 0),
-(29, 'Green onions', 0),
-(30, 'Mexican chorizo', 15),
-(31, 'Cheddar cheese', 9),
-(32, 'Mushroom', 0),
-(33, 'Colby-Monterey Jack cheese', 3),
-(34, 'Refried beans', 9),
-(35, 'Ground beef', 9),
-(36, 'Bacon', 16),
-(37, 'Bacon fat', 2),
-(38, 'Kosher salt', 1),
-(39, 'Cream cheese', 3),
-(40, 'Sour cream', 3),
-(41, 'Lime juice', 1),
-(42, 'Butter', 2),
-(43, 'Egg', 0),
-(44, 'Cayenne pepper', 17),
-(45, 'Black pepper', 17),
-(46, 'Salsa', 3),
-(47, 'Black olives', 9),
-(48, 'Taco', 9),
-(49, 'Tortilla chips', 9),
-(50, 'Beans', 9),
-(51, 'Steak', 9),
-(52, 'Onion', 3),
-(53, 'Sweet peppers', 3),
-(54, 'Provolone cheese', 9),
-(55, 'Nutmeg', 17),
-(56, 'Baguettes', 0),
-(57, 'Mayonnaise', 3),
-(58, 'Water chestnuts', 9),
-(59, 'Spinach', 9),
-(60, 'Leek soup', 9),
-(61, 'Avocados', 0),
-(62, 'Bread', 8),
-(63, 'Buttermilk biscuit dough', 9),
-(64, 'Mozzarella cheese', 3),
-(65, 'Lump crabmeat', 8),
-(66, 'Lemon', 0),
-(67, 'Artichoke bottoms', 9),
-(68, 'Tarragon', 1),
-(69, 'Worcestershire sauce', 1),
-(70, 'Red bell pepper', 3),
-(71, 'Sourdough bread', 0),
-(72, 'Cilantro', 2),
-(74, 'Minced garlic', 1),
-(75, 'Diced onion', 3);
+INSERT INTO `is_loggedin` (`user_id`, `user_token`)
+VALUES
+	(191,'R3QYRY'),
+	(212,'5KT1PN');
 
--- --------------------------------------------------------
+/*!40000 ALTER TABLE `is_loggedin` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- Table structure for table `origin`
---
 
-CREATE TABLE `origin` (
-  `origin_id` int(20) NOT NULL,
-  `name` varchar(40) NOT NULL
+# Dump of table recipe_comments
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `recipe_comments`;
+
+CREATE TABLE `recipe_comments` (
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `recipe_id` int(100) NOT NULL,
+  `text` varchar(999) DEFAULT NULL,
+  KEY `user_id` (`user_id`,`recipe_id`),
+  KEY `recipe_id` (`recipe_id`),
+  CONSTRAINT `recipe_comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_data` (`user_id`),
+  CONSTRAINT `recipe_comments_ibfk_2` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `origin`
---
+LOCK TABLES `recipe_comments` WRITE;
+/*!40000 ALTER TABLE `recipe_comments` DISABLE KEYS */;
 
-INSERT INTO `origin` (`origin_id`, `name`) VALUES
-(1, 'America'),
-(2, 'China'),
-(3, 'Italy'),
-(4, 'Europe'),
-(5, 'Mexico'),
-(6, 'Canada'),
-(7, 'Korea'),
-(8, 'Vietnam'),
-(9, 'France');
+INSERT INTO `recipe_comments` (`user_id`, `recipe_id`, `text`)
+VALUES
+	(0,9,'Hello, I saw your Recipe! It looks pretty good, I can\'t wait to try it !!!'),
+	(0,1,'The cookies are delicious!'),
+	(1,1,'MOAR cookies!'),
+	(1,1,'Value'),
+	(61,2,'hello recipe'),
+	(2,3,'hello world'),
+	(2,5,'hello world'),
+	(2,5,'hello world'),
+	(2,1,'hi'),
+	(61,2,'hi everyone'),
+	(161,3,'burgers!'),
+	(191,4,'FIRST'),
+	(212,2,'ertertret'),
+	(212,6,'ertertre'),
+	(2,21,'esafsdfsd'),
+	(191,19,'This looks bomb!'),
+	(2,2,'Hi'),
+	(2,3,'Delicious!'),
+	(191,3,'bomb.com'),
+	(191,6,'I want this but with chicken!'),
+	(191,111,'Much douche, much gucci'),
+	(191,1,'Pooh bear');
 
--- --------------------------------------------------------
+/*!40000 ALTER TABLE `recipe_comments` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- Table structure for table `recipes`
---
+
+# Dump of table recipes
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `recipes`;
 
 CREATE TABLE `recipes` (
-  `recipe_id` int(100) NOT NULL,
+  `recipe_id` int(100) NOT NULL AUTO_INCREMENT,
   `user_id` int(100) NOT NULL DEFAULT '0',
-  `name` varchar(30) NOT NULL,
+  `name` varchar(100) NOT NULL DEFAULT '',
   `prep_time` time NOT NULL,
   `cooking_time` time NOT NULL,
   `ready_in` time NOT NULL,
-  `rating` enum('0','1','2','3','4','5') DEFAULT NULL,
-  `origin_id` int(20) NOT NULL,
-  `style_id` int(11) NOT NULL,
+  `origin` varchar(50) NOT NULL DEFAULT '',
   `instruction` text NOT NULL,
-  `image_location` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `image_location` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`recipe_id`) USING BTREE,
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_data` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `recipes`
---
+LOCK TABLES `recipes` WRITE;
+/*!40000 ALTER TABLE `recipes` DISABLE KEYS */;
 
-INSERT INTO `recipes` (`recipe_id`, `user_id`, `name`, `prep_time`, `cooking_time`, `ready_in`, `rating`, `origin_id`, `style_id`, `instruction`, `image_location`) VALUES
-(1, 1, 'Chocolate Chip Cookie', '01:00:00', '00:05:00', '00:00:00', '5', 1, 2, '', 'images/cookie1.jpg'),
-(2, 1, 'French Fries', '01:00:00', '00:05:00', '00:00:00', '2', 1, 3, '', 'images/fries2.jpg'),
-(3, 1, 'Hamburger', '01:00:00', '00:05:00', '00:00:00', '4', 1, 3, '', 'images/burger3.jpg'),
-(4, 1, 'Spaghetti', '01:00:00', '00:05:00', '00:00:00', '4', 3, 2, '', 'images/spaghetti4.jpg'),
-(5, 1, 'Chow Mein', '01:00:00', '00:05:00', '00:00:00', '4', 2, 3, '', 'images/chowMein5.jpg'),
-(6, 1, 'Fried Rice', '01:00:00', '00:05:00', '00:00:00', '3', 2, 3, '', 'images/friedrice6.jpg'),
-(7, 1, 'Waffle', '01:00:00', '00:05:00', '00:00:00', '3', 4, 1, '', 'images/waffles7.jpg'),
-(8, 1, 'Scrambled Eggs', '01:00:00', '00:05:00', '00:00:00', '4', 1, 1, '', 'images/eggs8.jpg'),
-(9, 1, 'Ice Cream', '01:00:00', '00:05:00', '00:00:00', '4', 1, 2, '', 'images/iceCream9.jpg'),
-(10, 1, 'Kimchi', '01:00:00', '00:05:00', '00:00:00', '3', 7, 3, '', 'images/kimchi10.jpg'),
-(11, 1, 'Taco', '01:00:00', '00:05:00', '00:00:00', '4', 5, 2, '', 'images/taco-11.jpg'),
-(12, 1, 'Meat Lasagna', '01:00:00', '00:05:00', '00:00:00', '4', 1, 2, '', 'images/lasagna12.jpg'),
-(13, 1, 'Fried Chicken', '01:00:00', '00:05:00', '00:00:00', '5', 1, 4, '', 'images/chicken13.jpg'),
-(14, 1, 'Coffee', '01:00:00', '00:05:00', '00:00:00', '5', 1, 1, '', 'images/coffer14.jpg'),
-(15, 1, 'Hot Dog', '01:00:00', '00:05:00', '00:00:00', '4', 1, 3, '', 'images/hotdog15.jpg'),
-(16, 1, 'Tao Hummus', '00:10:00', '00:10:00', '00:00:00', '5', 1, 7, 'Combine chickpeas, tahini, water, lemon juice, garlic, cumin, and salt in food processor or blender; puree until smooth. Transfer hummus to a flat dish. Sprinkle parsley over the hummus to serve.', 'images/taoHummus16.jpg'),
-(17, 1, 'Loaded Queso Fundido', '00:15:00', '00:20:00', '00:35:00', '4', 5, 7, '1. Bring chicken broth to a boil in a pot; add American cheese, bring to a simmer, reduce heat to low, and cook, stirring frequently, until the cheese melts into the broth, about 5 minutes.\r\n2. Heat olive oil in a skillet over medium-high heat; saute chicken and chorizo in oil until the chicken is no longer pink in the center, 5 to 7 minutes. Add mushrooms, tomatoes, onion, jalapenos, green onions, and garlic; saute until all vegetables are tender, 7 to 10 minutes.\r\n3. Stir chicken mixture into the melted cheese; bring to a simmer. Stir Cheddar cheese into the mixture and cook until completely melted, about 5 minutes.', 'images/loadedQuesoFundido17.jpg'),
-(18, 1, 'Bacon Jalapeno Popper Puffs', '00:15:00', '00:30:00', '01:15:00', '5', 1, 7, '1. Place bacon in a large skillet and cook over medium-high heat, turning occasionally, until evenly browned and crisp, about 10 minutes. Drain bacon slices on paper towels. Crumble or finely chop. Drain fat from skillet, reserving 1 tablespoon.\r\n2. Mix cream cheese, creme fraiche, green onions, and lime juice together in a bowl. If mixture seems too thick, add enough water to thin it to your preferred consistency.\r\n3. Place skillet over medium-high heat. Add cold water, butter, reserved bacon fat, and salt. Bring mixture to a simmer; reduce heat to medium. Pour in flour all at once. Stir to mix and mash with a wooden spoon until dough starts to pull together, 2 to 3 minutes. Remove pan from heat; transfer dough to a mixing bowl and let cool for about 5 minutes.\r\n4. When dough is cool, whisk in 1 egg. Mixture will separate slightly. Continue whisking in first egg until mixture pulls back together. Repeat with the second egg. Scrape down sides of bowl. Add diced jalapeno, bacon pieces, shredded cheese, cayenne pepper, and black pepper. Mix thoroughly with a spatula. Wrap dough in plastic wrap and refrigerate until cool, 30 minutes to 1 hour.\r\n5. Heat oil in deep fryer to 375 degrees F.\r\n6. Using a small scoop, scoop out rounds of dough. Drop rounds of dough into hot oil and cook until golden brown and cooked through, 3 to 4 minutes. Work in batches if necessary. Transfer to a cooling rack.\r\n7. serve with dipping sauce garnished with a few green onion slices.', 'images/baconJalapenoPopperPuffs18.jpg'),
-(19, 1, 'Super Nachos', '00:30:00', '00:20:00', '00:50:00', '4', 5, 7, '1. Cook and stir ground beef in a skillet over medium heat until meat is crumbly and no longer pink, 5 to 10 minutes. Drain excess grease. Stir in taco seasoning mix and water and simmer until beef mixture has thickened, 8 to 10 minutes.\r\n2. Set the oven rack about 6 inches from the heat source and preheat the broiler. Line a baking sheet with aluminum foil.\r\n3. Spread tortilla chips on the prepared baking sheet; top with Cheddar cheese and dot with refried beans and ground beef mixture.\r\n4. Broil in the preheated oven until cheese is melted, watching carefully to prevent burning, 3 to 5 minutes.\r\n5. Top nachos with salsa, sour cream, black olives, green onions, and jalapeno peppers.', 'images/supernachos19.jpg'),
-(20, 1, 'Mini Philly Cheesesteaks', '00:30:00', '00:30:00', '01:20:00', '4', 1, 7, '1. Preheat oven to 400 degrees F (200 degrees C). Line baking sheets with aluminum foil.\r\n2. Melt butter in a skillet over medium-high heat. Whisk flour into hot butter and cook, whisking constantly, until mixture is pale and flour taste cooks off, about 1 minute. Pour milk into flour mixture and cook, whisking constantly, until mixture is hot and thickened, 3 to 6 minutes. Add 2 ounces provolone cheese, nutmeg, cayenne pepper, and salt; stir until cheese is completely melted. Remove from heat.\r\n3. Season steak all over with salt and ground black pepper.\r\n4. Heat 1 tablespoon olive oil in skillet over medium-high heat. Cook steak in hot oil, turning occasionally, until meat is slightly firm and pink on the inside, 5 to 7 minutes. Transfer meat to a plate.\r\n5. Return skillet to heat and pour water into the skillet; bring to a boil while scraping the browned bits of food off of the bottom of the pan with a wooden spoon. Pour liquid from the skillet over steak. Cool steak to room temperature; dice meat and place meat and accumulated juices from the plate into a large bowl.\r\n6. Heat 1 tablespoon oil in a skillet over medium-high heat; saute onion and peppers in hot oil until softened and slightly translucent, about 5 minutes.\r\n7. Stir peppers and onions mixture into diced meat; season with salt and pepper.\r\n8. Spread bread slices out on prepared baking sheets and drizzle remaining olive oil over the top. Turn slices over so that the oiled-side is facing down. Spread a thick layer of cheese mixture onto each slice. Spoon meat mixture over cheese. Sprinkle provolone cheese over the top of each slice.\r\n9. Bake in the preheated oven until browned and cheese is melted, 12 to 15 minutes.', 'images/miniPhillyCheeseSteaks20.jpg'),
-(21, 1, 'Best Spinach Dip Ever', '00:15:00', '00:00:00', '06:15:00', '4', 1, 7, '1. In a medium bowl, mix together mayonnaise, sour cream, dry leek soup mix, water chestnuts and chopped spinach. Chill in the refrigerator 6 hours, or overnight.\r\n2. Remove top and interior of sourdough bread. Fill with mayonnaise mixture. Tear removed bread chunks into pieces for dipping.', 'images/bestSpinachDipEver21.jpg'),
-(22, 1, 'Big Ray\'s Mexican Monkey Bread', '00:10:00', '00:40:00', '00:55:00', '4', 5, 7, '1. Preheat oven to 350 degrees F (175 degrees C). Prepare a 9x5-inch loaf pan with cooking spray.\r\n2. Pour melted butter into a small bowl. Dip each piece of biscuit dough in melted butter to coat.\r\n3. Arrange enough of the biscuit dough pieces in the bottom of the loaf pan to form a single layer; top with 1/2 cup Cheddar cheese, 1/4 cup pepper slices, and 1/4 teaspoon parsley. Repeat layering once and top with remaining biscuit dough pieces, pepper slices, and parsley flakes.\r\n4. Mix remaining 1/4 cup Cheddar cheese and mozzarella cheese together in a bowl; spread over the top of the ingredients to cover.\r\n5. Bake in preheated oven until golden brown, 40 to 45 minutes. Cool bread in pan for 5 minutes before inverting onto a plate to serve.', 'images/bigRaysMexcanMonkeyBread22.jpg'),
-(23, 1, 'Baked Crab and Artichoke Dip', '00:30:00', '00:30:00', '01:00:00', '4', 1, 7, '1. Preheat oven to 375 degrees F (190 degrees C). Line a baking dish with aluminum foil.\r\n2. Combine cream cheese, crab meat, artichoke bottoms, 6 ounces Cheddar cheese, red bell pepper, green onions, sour cream, mayonnaise, garlic, lemon zest and juice, tarragon, Worcestershire sauce, and cayenne pepper in a large bowl; season with salt and black pepper.\r\n3. Cut the top 1/3 off the loaf of sourdough bread and discard. Remove the bread filling and discard, leaving just the crust. Place in the prepared baking dish.\r\n4. Transfer artichoke mixture to the prepared bread bowl; top with 2 tablespoons Cheddar cheese and cayenne pepper.\r\n5. Bake in the preheated oven until dip is warmed and top is golden brown, about 30 minutes.', 'images/BakedCrabandArtichokeDip23.jpg'),
-(24, 1, 'Cheesy Burrito Game Day Dip', '00:15:00', '00:30:00', '00:45:00', '4', 1, 7, '1. Preheat oven to 350 degrees F (175 degrees C). Spray a 9x13-inch baking dish with cooking spray.\r\n2. Heat a large skillet over medium-high heat. Cook and stir beef in the hot skillet until browned and crumbly, 5 to 7 minutes; drain and discard grease.\r\n3. Stir ground beef, refried beans, 3 cups Colby-Monterey Jack cheese, sour cream, cream cheese, and taco seasoning mix together in a bowl until well mixed. Spread mixture into the prepared baking dish.\r\n4. Bake in the preheated oven for 20 minutes; sprinkle with remaining 1 cup Colby-Monterey Jack cheese. Continue baking until cheese is melted, about 5 more minutes.', 'images/cheesyBurritoGameDayDip24.jpg'),
-(25, 1, 'Guacamole', '00:10:00', '00:00:00', '00:10:00', '5', 5, 7, '1. In a medium bowl, mash together the avocados, lime juice, and salt. Mix in onion, cilantro, tomatoes, and garlic. Stir in cayenne pepper. Refrigerate 1 hour for best flavor, or serve immediately.', 'images/guacamole25.jpg');
+INSERT INTO `recipes` (`recipe_id`, `user_id`, `name`, `prep_time`, `cooking_time`, `ready_in`, `origin`, `instruction`, `image_location`)
+VALUES
+	(1,1,'Best Chocolate Chip Cookies','00:20:00','00:10:00','01:00:00','','1. Preheat oven to 350 degrees F (175 degrees C). Cream together the butter, white sugar, and brown sugar until smooth. \n\n2. Beat in the eggs one at a time, then stir in the vanilla. Dissolve baking soda in hot water.Add to batter along with salt.\n\n3. Stir in flour, chocolate chips, and nuts.Drop by large spoonfuls onto ungreased pans. Bake for about 10 minutes in the preheated oven, or until edges are nicely browned.\n','images/bestChocolateChipCookies1.jpg'),
+	(2,1,'Chef John\'s French Fries','00:10:00','00:10:00','00:50:00','New York','1. Soak potatoes in a large bowl of water for about 30 minutes. Pat dry thoroughly with paper towels.\n\n2. Heat oil in a deep-fryer or large saucepan to 275 degrees F (135 degrees C). Gently add the potatoes in the hot oil for about 5 minutes, stirring and flipping the potatoes occasionally. Remove potatoes from oil with a slotted spoon to drain on paper towel and to cool completely.\n\n3. Heat oil in a deep-fryer or large saucepan to 350 degrees F (175 degrees C). Fry the potatoes again until golden brown, 5 to 6 minutes. Blot with a paper towel. Sprinkle with salt to serve.\n','images/chefJohnsFrenchFries2.jpg'),
+	(3,1,'Sun Dried Tomato and Blue Cheese Burger','00:20:00','00:10:00','02:30:00','America','1. In a large bowl, mix the ground beef, sun-dried tomatoes, blue cheese, chives, steak sauce, hot pepper sauce, Worcestershire sauce, black pepper, salt, and mustard. Cover and refrigerate for two hours.\n\n2. Preheat an outdoor grill for high heat. Gently form mixture into twelve equally-sized patties.\n\n3. Grill burgers for five minutes per side, or to desired doneness. Serve on rolls.\n','images/sun-DriedTomatoandBlueCheeseBurgers3.jpg'),
+	(4,1,'Baked Spaghetti','00:25:00','01:00:00','01:25:00','Italy','1. Preheat oven to 350 degrees F (175 degrees C). Lightly grease a 9x13-inch baking dish.\n\n2. Bring a large pot of lightly salted water to a boil. Cook spaghetti in boiling water, stirring occasionally until cooked through but firm to the bite, about 12 minutes. Drain.\n\n3. Heat a large skillet over medium heat; cook and stir beef and onion until meat is browned and onions are soft and translucent, about 7 minutes. Drain. Stir in spaghetti sauce and seasoned salt.\n\n4. Whisk eggs, Parmesan cheese, and butter in a large bowl. Mix in spaghetti to egg mixture and toss to coat. Place half the spaghetti mixture into baking dish. Top with half the cottage cheese, mozzarella, and meat sauce. Repeat layers. Cover with aluminum foil.\n\n5. Bake in preheated oven for 40 minutes. Remove foil and continue to bake until the cheese is melted and lightly browned, 20 to 25 minutes longer.\n','images/bakedSpaghetti4.jpg'),
+	(5,1,'Shanghai Noodle Salad','00:20:00','00:05:00','02:40:00','China','1. Fill a large pot with lightly salted water and bring to a rolling boil over high heat. Once the water is boiling, stir in the Chinese noodles, and return to a boil. Cook the noodles uncovered, stirring occasionally, until they have cooked through, about 5 minutes. Drain well in a colander set in the sink. Rinse the noodles with cold water several times to chill, then drain again.\n\n2. In a large salad bowl, whisk together the ketchup, sesame oil, soy sauce, brown sugar, kosher salt, and lime juice until the brown sugar has dissolved. Place the noodles, green onion, carrots, zucchini, red pepper, sesame seeds, and red pepper flakes into the bowl, and gently toss to thoroughly mix the salad and coat with dressing. Chill at least 2 hours before serving.','images/ShanghaiNoodleSalad5.jpg'),
+	(6,1,'Pork Fried Rice','00:15:00','00:15:00','00:30:00','China','1. Melt butter in a large non-stick skillet over medium heat. Cook and stir pork, carrot, broccoli, peas, and green onion in melted butter until pork is cooked through, 7 to 10 minutes. Remove pork mixture to a bowl and return skillet to medium heat.\n\n2. Scramble egg in the skillet until completely set. Return the pork mixture to the skillet. Stir rice, peas, soy sauce, garlic powder, and ground ginger into the pork mixture; cook and stir until heated through, 7 to 10 minutes.\n','images/porkFriedRice6.jpg'),
+	(7,1,'Whole Grain Waffles','00:10:00','00:05:00','00:15:00','Europe','1. In a large bowl, whisk together the eggs, milk, oil, applesauce, and vanilla. Beat in whole wheat pastry flour, flax seed meal, wheat germ, all-purpose flour, baking powder, sugar, and salt until batter is smooth.\n\n2. Preheat a waffle iron, and coat with cooking spray. Pour batter into waffle iron in batches, and cook until crisp and golden brown.\n','images/wholeGrainWaffles7.jpg'),
+	(8,1,'Oven Scrambled Eggs','00:10:00','00:25:00','00:35:00','America','1. Preheat the oven to 350 degrees F (175 degrees C).\n\n2. Pour melted butter into a glass 9x13 inch baking dish. In a large bowl, whisk together eggs and salt until well blended. Gradually whisk in milk. Pour egg mixture into the baking dish.\n\n3. Bake uncovered for 10 minutes, then stir, and bake an additional 10 to 15 minutes, or until eggs are set. Serve immediately.\n','images/ovenScrambledEggs8.jpg'),
+	(9,1,'Caramel Macchiato Ice Cream','00:10:00','00:00:00','04:10:00','','1. Whisk together milk, instant coffee granules, sugar, and salt in a large bowl until sugar is dissolved. Stir in the heavy cream, then cover and refrigerate until chilled, at least 2 hours.\n\n2. Pour the chilled mixture into an ice cream maker and freeze according to manufacturer\'s directions until it reaches \"soft-serve\" consistency. Transfer half of the ice cream to a one- or two-quart lidded plastic container. Pour half of the caramel sauce over the top, then repeat the layers with the remaining ice cream and caramel. Swirl the caramel into the ice cream using a chopstick or knife. Cover surface with plastic wrap and seal. For best results, ice cream should ripen in the freezer for at least 2 hours or overnight.','images/caramelMacchiatoIceCream9.jpg'),
+	(10,1,'Korean Kimchi','00:20:00','00:00:00','51:20:00','Korea','1. Cut the cabbage leaves into 2 inch long pieces. Spread 1/4 of the leaves into a large, non-metallic bowl and sprinkle with 1/4 of the salt. Repeat layering all of the cabbage has been salted. Let stand at room temperature until a lot of liquid has been pulled from the leaves and the cabbage is tender, 3 to 4 hours; drain. Rinse the cabbage in 2 or 3 changes of water. Drain again very well and return the cabbage to the mixing bowl.\n\n2. Sprinkle the cabbage with the minced garlic, green onions, MSG, and red pepper flakes. Season to taste with additional salt and toss until evenly combined. Pack the mixture into a sterilized gallon-sized glass jar. Cover the jar with wax paper and a loose fitting lid so the seal is not airtight.\n\n3. Allow the cabbage to ferment at room temperature until it reaches the desired degree of sourness, 2 to 5 days. Store in an airtight jar in the refrigerator.','images/koreanKimchi10.jpg'),
+	(11,1,'Ranch Chicken Tacos','00:20:00','00:05:00','00:25:00','Mexico','1. Combine ranch dressing, sour cream, 1 teaspoon taco seasoning, and salsa in a small bowl. Cover and refrigerate until serving.\n\n2. Toss chicken with remaining taco seasoning. Cover bowl loosely with wax paper or plastic wrap. Microwave chicken until chicken is heated through, about 2 to 3 minutes.\n\n3. Warm the tortillas in a skillet for about a minute on each side to make them pliable. Place a scoop of chicken on the tortilla and top with lettuce, tomato, green onion, olives, avocado, cheese, and a spoonful of the ranch dressing mixture.','images/ranchChickenTacos11.jpg'),
+	(12,1,'Simple Meat Lasagna','00:25:00','01:00:00','01:35:00','America','1. Preheat oven to 350 degrees F (175 degrees C).\n\n2. Fill a large pot with lightly salted water and bring to a rolling boil over high heat. Once the water is boiling, add the lasagna noodles a few at a time, and return to a boil. Cook the pasta uncovered, stirring occasionally, until the pasta has cooked through, but is still firm to the bite, about 10 minutes. Remove the noodles to a plate.\n\n3. Place the ground beef into a skillet over medium heat, add the garlic, garlic powder, oregano, salt, and black pepper to the skillet. Cook the meat, chopping it into small chunks as it cooks, until no longer pink, about 10 minutes. Drain excess grease.\n\n4. In a bowl, mix the cottage cheese, eggs, and Parmesan cheese until thoroughly combined.\n\n5. Place 4 noodles side by side into the bottom of a 9x13-inch baking pan; top with a layer of the tomato-basil sauce, a layer of ground beef mixture, and a layer of the cottage cheese mixture. Repeat layers twice more, ending with a layer of sauce; sprinkle top with the mozzarella cheese. Cover the dish with aluminum foil.\n\n6. Bake in the preheated oven until the casserole is bubbling and the cheese has melted, about 30 minutes. Remove foil and bake until cheese has begun to brown, about 10 more minutes. Allow to stand at least 10 minutes before serving.','images/simpleMeatLasagna12.jpg'),
+	(13,1,'Chicken Fried Chicken','00:25:00','00:20:00','00:45:00','America','1. Place crackers in a large resealable plastic bag; seal bag and crush crackers with a rolling pin until they are coarse crumbs. Add the flour, potato flakes, seasoned salt, and pepper and mix well.\n\n2. Beat egg in a shallow dish or bowl. One by one, dredge chicken pieces in egg, then place in bag with crumb mixture. Seal bag and shake to coat.\n\n3. Heat oil in a deep-fryer or large saucepan to 350 degrees F (175 degrees C).\n\n4. Fry chicken, turning frequently, until golden brown and juices run clear, 15 to 20 minutes.','images/chickenFriedChicken13.jpg'),
+	(14,1,'Coffee Nudge','00:01:00','00:10:00','00:11:00','America','1. In the bottom of 8 coffee mugs, pour 1 ounce each coffee liqueur and brandy. Pour in 1/2 ounce each creme de cacao. Fill each cup with hot coffee and garnish with a dollop of whipped cream and chocolate sprinkles.','images/coffeeNudge14.jpg'),
+	(15,1,'Seattle Cream Cheese Dogs','00:10:00','00:20:00','00:30:00','America','1. Preheat grill or grill pan for medium-high heat.\n\n2. Melt butter in a skillet over medium heat. Add onions, and cook slowly until the onions have softened and turned deep brown, about 15 minutes. Warm the cream cheese over low heat in a small skillet until very soft.\n\n3. Grill hot dogs until well browned. Lightly grill hot dog buns on both sides.\n\n4. To assemble cheese dogs, spread warm cream cheese on toasted hot dog bun, add hot dog or sausage, top with onions, mustard and sauerkraut, if desired.','images/seattleCreamCheeseDogs15.jpg'),
+	(16,1,'Tao Hummus','00:10:00','00:10:00','00:10:00','Greek','1. Combine chickpeas, tahini, water, lemon juice, garlic, cumin, and salt in food processor or blender; puree until smooth. Transfer hummus to a flat dish. Sprinkle parsley over the hummus to serve.','images/taoHummus16.jpg'),
+	(17,1,'Loaded Queso Fundido','00:15:00','00:20:00','00:35:00','Mexico','1. Bring chicken broth to a boil in a pot; add American cheese, bring to a simmer, reduce heat to low, and cook, stirring frequently, until the cheese melts into the broth, about 5 minutes.\r\n\n2. Heat olive oil in a skillet over medium-high heat; saute chicken and chorizo in oil until the chicken is no longer pink in the center, 5 to 7 minutes. Add mushrooms, tomatoes, onion, jalapenos, green onions, and garlic; saute until all vegetables are tender, 7 to 10 minutes.\r\n\n3. Stir chicken mixture into the melted cheese; bring to a simmer. Stir Cheddar cheese into the mixture and cook until completely melted, about 5 minutes.','images/loadedQuesoFundido17.jpg'),
+	(18,1,'Bacon Jalapeno Popper Puffs','00:15:00','00:30:00','01:15:00','America','1. Place bacon in a large skillet and cook over medium-high heat, turning occasionally, until evenly browned and crisp, about 10 minutes. Drain bacon slices on paper towels. Crumble or finely chop. Drain fat from skillet, reserving 1 tablespoon.\r\n\n2. Mix cream cheese, creme fraiche, green onions, and lime juice together in a bowl. If mixture seems too thick, add enough water to thin it to your preferred consistency.\r\n\n3. Place skillet over medium-high heat. Add cold water, butter, reserved bacon fat, and salt. Bring mixture to a simmer; reduce heat to medium. Pour in flour all at once. Stir to mix and mash with a wooden spoon until dough starts to pull together, 2 to 3 minutes. Remove pan from heat; transfer dough to a mixing bowl and let cool for about 5 minutes.\r\n\n4. When dough is cool, whisk in 1 egg. Mixture will separate slightly. Continue whisking in first egg until mixture pulls back together. Repeat with the second egg. Scrape down sides of bowl. Add diced jalapeno, bacon pieces, shredded cheese, cayenne pepper, and black pepper. Mix thoroughly with a spatula. Wrap dough in plastic wrap and refrigerate until cool, 30 minutes to 1 hour.\r\n\n5. Heat oil in deep fryer to 375 degrees F.\r\n\n6. Using a small scoop, scoop out rounds of dough. Drop rounds of dough into hot oil and cook until golden brown and cooked through, 3 to 4 minutes. Work in batches if necessary. Transfer to a cooling rack.\r\n\n7. serve with dipping sauce garnished with a few green onion slices.','images/baconJalapenoPopperPuffs18.jpg'),
+	(19,1,'Super Nachos','00:30:00','00:20:00','00:50:00','Mexico','1. Cook and stir ground beef in a skillet over medium heat until meat is crumbly and no longer pink, 5 to 10 minutes. Drain excess grease. Stir in taco seasoning mix and water and simmer until beef mixture has thickened, 8 to 10 minutes.\r\n\n2. Set the oven rack about 6 inches from the heat source and preheat the broiler. Line a baking sheet with aluminum foil.\r\n\n3. Spread tortilla chips on the prepared baking sheet; top with Cheddar cheese and dot with refried beans and ground beef mixture.\r\n\n4. Broil in the preheated oven until cheese is melted, watching carefully to prevent burning, 3 to 5 minutes.\r\n\n5. Top nachos with salsa, sour cream, black olives, green onions, and jalapeno peppers.','images/superNachos19.jpg'),
+	(20,1,'Mini Philly Cheesesteaks','00:30:00','00:30:00','01:20:00','America','1. Preheat oven to 400 degrees F (200 degrees C). Line baking sheets with aluminum foil.\r\n\n2. Melt butter in a skillet over medium-high heat. Whisk flour into hot butter and cook, whisking constantly, until mixture is pale and flour taste cooks off, about 1 minute. Pour milk into flour mixture and cook, whisking constantly, until mixture is hot and thickened, 3 to 6 minutes. Add 2 ounces provolone cheese, nutmeg, cayenne pepper, and salt; stir until cheese is completely melted. Remove from heat.\r\n\n3. Season steak all over with salt and ground black pepper.\r\n\n4. Heat 1 tablespoon olive oil in skillet over medium-high heat. Cook steak in hot oil, turning occasionally, until meat is slightly firm and pink on the inside, 5 to 7 minutes. Transfer meat to a plate.\r\n\n5. Return skillet to heat and pour water into the skillet; bring to a boil while scraping the browned bits of food off of the bottom of the pan with a wooden spoon. Pour liquid from the skillet over steak. Cool steak to room temperature; dice meat and place meat and accumulated juices from the plate into a large bowl.\r\n\n6. Heat 1 tablespoon oil in a skillet over medium-high heat; saute onion and peppers in hot oil until softened and slightly translucent, about 5 minutes.\r\n\n7. Stir peppers and onions mixture into diced meat; season with salt and pepper.\r\n\n8. Spread bread slices out on prepared baking sheets and drizzle remaining olive oil over the top. Turn slices over so that the oiled-side is facing down. Spread a thick layer of cheese mixture onto each slice. Spoon meat mixture over cheese. Sprinkle provolone cheese over the top of each slice.\r\n\n9. Bake in the preheated oven until browned and cheese is melted, 12 to 15 minutes.','images/miniPhillyCheeseSteaks20.jpg'),
+	(21,1,'Best Spinach Dip Ever','00:15:00','00:00:00','06:15:00','America','1. In a medium bowl, mix together mayonnaise, sour cream, dry leek soup mix, water chestnuts and chopped spinach. Chill in the refrigerator 6 hours, or overnight.\r\n\n2. Remove top and interior of sourdough bread. Fill with mayonnaise mixture. Tear removed bread chunks into pieces for dipping.','images/bestSpinachDipEver21.jpg'),
+	(22,1,'Big Ray\'s Mexican Monkey Bread','00:10:00','00:40:00','00:55:00','Mexico','1. Preheat oven to 350 degrees F (175 degrees C). Prepare a 9x5-inch loaf pan with cooking spray.\r\n\n2. Pour melted butter into a small bowl. Dip each piece of biscuit dough in melted butter to coat.\r\n\n3. Arrange enough of the biscuit dough pieces in the bottom of the loaf pan to form a single layer; top with 1/2 cup Cheddar cheese, 1/4 cup pepper slices, and 1/4 teaspoon parsley. Repeat layering once and top with remaining biscuit dough pieces, pepper slices, and parsley flakes.\r\n\n4. Mix remaining 1/4 cup Cheddar cheese and mozzarella cheese together in a bowl; spread over the top of the ingredients to cover.\r\n\n5. Bake in preheated oven until golden brown, 40 to 45 minutes. Cool bread in pan for 5 minutes before inverting onto a plate to serve.','images/bigRaysMexcanMonkeyBread22.jpg'),
+	(23,1,'Baked Crab and Artichoke Dip','00:30:00','00:30:00','01:00:00','America','1. Preheat oven to 375 degrees F (190 degrees C). Line a baking dish with aluminum foil.\r\n\n2. Combine cream cheese, crab meat, artichoke bottoms, 6 ounces Cheddar cheese, red bell pepper, green onions, sour cream, mayonnaise, garlic, lemon zest and juice, tarragon, Worcestershire sauce, and cayenne pepper in a large bowl; season with salt and black pepper.\r\n\n3. Cut the top 1/3 off the loaf of sourdough bread and discard. Remove the bread filling and discard, leaving just the crust. Place in the prepared baking dish.\r\n\n4. Transfer artichoke mixture to the prepared bread bowl; top with 2 tablespoons Cheddar cheese and cayenne pepper.\r\n\n5. Bake in the preheated oven until dip is warmed and top is golden brown, about 30 minutes.','images/BakedCrabandArtichokeDip23.jpg'),
+	(24,1,'Cheesy Burrito Game Day Dip','00:15:00','00:30:00','00:45:00','America','1. Preheat oven to 350 degrees F (175 degrees C). Spray a 9x13-inch baking dish with cooking spray.\r\n\n2. Heat a large skillet over medium-high heat. Cook and stir beef in the hot skillet until browned and crumbly, 5 to 7 minutes; drain and discard grease.\r\n\n3. Stir ground beef, refried beans, 3 cups Colby-Monterey Jack cheese, sour cream, cream cheese, and taco seasoning mix together in a bowl until well mixed. Spread mixture into the prepared baking dish.\r\n\n4. Bake in the preheated oven for 20 minutes; sprinkle with remaining 1 cup Colby-Monterey Jack cheese. Continue baking until cheese is melted, about 5 more minutes.','images/cheesyBurritoGameDayDip24.jpg'),
+	(25,1,'Guacamole','00:10:00','00:00:00','00:10:00','Mexico','1. In a medium bowl, mash together the avocados, lime juice, and salt. \n\n2. Mix in onion, cilantro, tomatoes, and garlic. Stir in cayenne pepper. \n\n3. Refrigerate 1 hour for best flavor, or serve immediately.','images/guacamole25.jpg'),
+	(26,1,'Cheesy Ham and Corn Chowder','00:25:00','00:50:00','01:15:00','','1. Stir chicken broth, carrots, chicken bouillon, bay leaves, sea salt, pepper, thyme, marjoram, and garlic powder together in a Dutch oven; bring to a boil, reduce heat to medium, and cook for 10 minutes. Add potatoes and onion; cook for 10 minutes more. Add celery; cook until all vegetables are fork tender, about 10 minutes more.\n    \n2. Melt butter in a saucepan over low heat. Remove from heat and whisk flour into butter until smooth. Return saucepan to medium heat; gradually add milk to butter mixture, whisking constantly, and cook until mixture thickens, 6 to 7 minutes.\n    \n3. Stir milk mixture into vegetable mixture; add corn, Cheddar cheese, and ham, reduce heat to low, and simmer until ham is heated through and cheese melts, 10 to 15 minutes.\n','images/cheesyHamcornChowder26.jpg'),
+	(27,1,'Healthy Turmeric Chicken Stew','00:15:00','00:28:00','00:43:00','','1. Heat olive oil in a large skillet over medium-high heat. Add chicken; cook until browned and no longer pink in the center, about 5 minutes. Add sweet potatoes and onion; cook and stir until onion is translucent, 2 to 3 minutes. Add eggplant, garlic, ginger, and turmeric; cook until fragrant, about 1 minute more. Pour in broth and simmer stew until thickened, stirring occasionally, about 20 minutes.','images/tumericStew27.jpg'),
+	(28,1,'Acai Smoothie Bowl','00:10:00','00:00:00','00:10:00','','1. Combine acai pulp, 2/3 of the banana, and 2 tablespoons of soy milk in a blender; blend until smooth, but still thick. Add more soy milk as needed; smoothie should have the consistency of frozen yogurt.\n\n2. Slice the remaining banana. Pour thick smoothie into a bowl and top with granola and sliced bananas.\n','images/acaibowl28.jpg'),
+	(29,1,'Maple Glazed Salmon','00:10:00','00:20:00','01:00:00','','1. In a small bowl, mix the maple syrup, soy sauce, garlic, garlic salt, and pepper.\n\n2. Place salmon in a shallow glass baking dish, and coat with the maple syrup mixture. Cover the dish, and marinate salmon in the refrigerator 30 minutes, turning once.\n\n3. Preheat oven to 400 degrees F (200 degrees C).\n\n4. Place the baking dish in the preheated oven, and bake salmon uncovered 20 minutes, or until easily flaked with a fork.\n','images/mapleGlazedSalmon29.jpg'),
+	(30,1,'California Roll Sushi','00:45:00','00:15:00','01:30:00','Japan','1. Wash the rice in several changes of water until the rinse water is no longer cloudy, drain well, and place in a covered pan or rice cooker with 1 cup water. Bring to a boil, reduce heat to a simmer, and cover the pan. Allow the rice to simmer until the top looks dry, about 15 minutes. Turn off the heat, and let stand for 10 minutes to absorb the rest of the water.\n\n2. Mix the rice vinegar and sugar in a small bowl until the sugar has dissolved, and stir the mixture into the cooked rice until well combined. Allow the rice to cool, and set aside.\n\n3. Mix the imitation crabmeat with mayonnaise in a bowl, and set aside. To roll the sushi, cover a bamboo rolling mat with plastic wrap. Lay a sheet of nori, shiny side down, on the plastic wrap. With wet fingers, firmly pat a thin, even layer of prepared rice over the nori, leaving 1/4 inch uncovered at the bottom edge of the sheet. Sprinkle the rice with about 1/2 teaspoon of sesame seeds, and gently press them into the rice. Carefully flip the nori sheet over so the seaweed side is up.\n\n4. Place 2 or 3 long cucumber spears, 2 or 3 slices of avocado, and about 1 tablespoon of imitation crab mixture in a line across the nori sheet, about 1/4 from the uncovered edge. Pick up the edge of the bamboo rolling sheet, fold the bottom edge of the sheet up, enclosing the filling, and tightly roll the sushi into a cylinder about 1 1/2 inch in diameter. Once the sushi is rolled, wrap it in the mat and gently squeeze to compact it tightly.\n\n5. Cut each roll into 1 inch pieces with a very sharp knife dipped in water.\n','images/californiarollsushi30.jpg'),
+	(31,1,'Big Ed\'s Cajun Shrimp Soup','00:15:00','00:25:00','00:40:00','','1. Melt butter in a large pot over medium heat. Saute green bell pepper, onions, and garlic until tender. Stir in vegetable juice, clam juice, and water. Season with thyme, basil, red pepper, bay leaf, and salt. Bring to a boil, and stir in rice. Reduce heat, and cover. Simmer 15 minutes, until rice is tender.\n\n2. Stir in shrimp, and cook 5 minutes, or until shrimp are opaque. Remove the bay leaf, and season with hot sauce.\n','images/edcajunshrimp31.jpg'),
+	(32,1,'Quick Shrimp Scampi Pasta','00:15:00','00:20:00','00:35:00','','1. Bring a large pot of lightly salted water to a boil. Add pasta and cook for 8 to 10 minutes or until al dente; drain.\n\n2. In a large saucepan, melt butter and add white wine. Over medium heat, add shrimp and basil. Cook until pink all over; about 3 to 5 minutes. Serve over pasta.\n','images/shrimpscampi32.jpg'),
+	(33,1,'Creamy Pesto Shrimp','00:15:00','00:15:00','00:30:00','','1. Bring a large pot of lightly salted water to a boil. Add linguine pasta, and cook for 8 to 10 minutes, or until al dente; drain.\n  \n2. In a large skillet, melt the butter over medium heat. Stir in cream, and season with pepper. Cook 6 to 8 minutes, stirring constantly.\n    \n3. Stir Parmesan cheese into cream sauce, stirring until thoroughly mixed. Blend in the pesto, and cook for 3 to 5 minutes, until thickened.\n    \n4. Stir in the shrimp, and cook until they turn pink, about 5 minutes. Serve over the hot linguine.\n','images/pestoshrimp33.jpg'),
+	(34,1,'Best Ever Meat Loaf','00:20:00','01:00:00','01:20:00','','1. Preheat oven to 350 degrees F (175 degrees C).\n\n2. Whisk eggs, milk, salt, and ground black pepper in a large bowl. Add crumbled bread and stir until dissolved. Mix ground beef, onion, Cheddar cheese, and carrot into bread mixture; transfer mixture to a 9x5-inch loaf pan. Combine brown sugar, ketchup, and mustard in a small bowl; spread over meat mixture.\n    \n3. Bake in the preheated oven until no longer pink in the center, 1 to 1 1/4 hours. An instant-read thermometer inserted into the center should read at least 160 degrees F (70 degrees C).\n','images/bestmeatloaf34.jpg'),
+	(35,1,'Buffalo Chicken Dip','00:05:00','00:40:00','00:45:00','America','1. Heat chicken and hot sauce in a skillet over medium heat, until heated through. \n\n2.Stir in cream cheese and ranch dressing. \n\n3. Cook, stirring until well blended and warm. \n\n4. Mix in half of the shredded cheese, and transfer the mixture to a slow cooker. \n\n5. Sprinkle the remaining cheese over the top, cover, and cook on Low setting until hot and bubbly. \n\n6. Serve with celery sticks and crackers.','images/buffaloChickenDip35.jpg'),
+	(36,1,'Annie\'s Fruit Salsa and Cinnamon Chips','00:15:00','00:10:00','00:45:00','America','1. In a large bowl, thoroughly mix kiwis, Golden Delicious apples, raspberries, strawberries, white sugar, brown sugar and fruit preserves. Cover and chill in the refrigerator at least 15 minutes.\n\n2. Preheat oven to 350 degrees F (175 degrees C).\n\n3. Coat one side of each flour tortilla with butter flavored cooking spray. Cut into wedges and arrange in a single layer on a large baking sheet. Sprinkle wedges with desired amount of cinnamon sugar. Spray again with cooking spray.\n\n4. Bake in the preheated oven 8 to 10 minutes. Repeat with any remaining tortilla wedges. Allow to cool approximately 15 minutes. Serve with chilled fruit mixture.','images/annie\'sFruitSalsaAndCinnamonChips36.jpg'),
+	(37,1,'Mouth-Watering Stuffed Mushrooms','00:25:00','00:20:00','00:45:00','','1. Preheat oven to 350 degrees F (175 degrees C). Spray a baking sheet with cooking spray. Clean mushrooms with a damp paper towel. Carefully break off stems. Chop stems extremely fine, discarding tough end of stems.\n\n2. Heat oil in a large skillet over medium heat. Add garlic and chopped mushroom stems to the skillet. Fry until any moisture has disappeared, taking care not to burn garlic. Set aside to cool.\n\n3. When garlic and mushroom mixture is no longer hot, stir in cream cheese, Parmesan cheese, black pepper, onion powder and cayenne pepper. Mixture should be very thick. Using a little spoon, fill each mushroom cap with a generous amount of stuffing. Arrange the mushroom caps on prepared cookie sheet.\n\n4. Bake for 20 minutes in the preheated oven, or until the mushrooms are piping hot and liquid starts to form under caps.','images/mouthWateringStuffedMushrooms37.jpg'),
+	(38,1,'Jalapeno Popper Spread','00:10:00','00:03:00','00:13:00','','1. Stir together cream cheese and mayonnaise in a large bowl until smooth. Stir in green chiles and jalapeno peppers. Pour mixture into a microwave safe serving dish, and sprinkle with Parmesan cheese.\n\n2. Microwave on High until hot, about 3 minutes.','images/jalapenoPopperSpread38.jpg'),
+	(39,1,'Hamburger Steak with Onions and Gravy','00:15:00','00:25:00','00:40:00','America','1. In a large bowl, mix together the ground beef, egg, bread crumbs, pepper, salt, onion powder, garlic powder, and Worcestershire sauce. Form into 8 balls, and flatten into patties.\n    \n2. Heat the oil in a large skillet over medium heat. Fry the patties and onion in the oil until patties are nicely browned, about 4 minutes per side. Remove the beef patties to a plate, and keep warm.\n    \n3. Sprinkle flour over the onions and drippings in the skillet. Stir in flour with a fork, scraping bits of beef off of the bottom as you stir. Gradually mix in the beef broth and sherry. Season with seasoned salt. Simmer and stir over medium-low heat for about 5 minutes, until the gravy thickens. Turn heat to low, return patties to the gravy, cover, and simmer for another 15 minutes.\n','images/hamburgersteak39.jpg'),
+	(40,1,'Baked Teriyaki Chicken','00:30:00','01:00:00','01:30:00','','1. In a small saucepan over low heat, combine the cornstarch, cold water, sugar, soy sauce, vinegar, garlic, ginger and ground black pepper. Let simmer, stirring frequently, until sauce thickens and bubbles.\n    \n2. Preheat oven to 425 degrees F (220 degrees C).\n    \n3. Place chicken pieces in a lightly greased 9x13 inch baking dish. Brush chicken with the sauce. Turn pieces over, and brush again.\n    \n4. Bake in the preheated oven for 30 minutes. Turn pieces over, and bake for another 30 minutes, until no longer pink and juices run clear. Brush with sauce every 10 minutes during cooking.\n','images/teriyaki40.jpg'),
+	(41,1,'Kale and Feta Salad','00:15:00','00:00:00','00:15:00','','1. Massage kale with salt in a large mixing bowl for 2 minutes. Pour vinegar over the kale and toss to coat. Fold apple, feta cheese, currants, and pine nuts into the kale.','images/salad41.jpg'),
+	(42,1,'Holiday Chicken Salad','00:15:00','00:00:00','00:15:00','','1. In a medium bowl, mix together mayonnaise with paprika and seasoned salt. Blend in dried cranberries, celery, bell pepper, onion, and nuts. Add chopped chicken, and mix well. Season with black pepper to taste. Chill 1 hour.','images/chickensalad42.jpg'),
+	(43,1,'Tuna Artichoke Salad','00:10:00','00:00:00','00:10:00','','1. Mix artichoke hearts, dill, olive oil, lemon juice, garlic, and black pepper together in a bowl; add spinach, tuna, and red bell pepper and toss.','images/tunaartichoke43.jpg'),
+	(44,1,'Classic Macaroni Salad','00:20:00','00:10:00','04:30:00','','1. Bring a large pot of lightly salted water to a boil. Add the macaroni, and cook until tender, about 8 minutes. Rinse under cold water and drain.\n    \n2. In a large bowl, mix together the mayonnaise, vinegar, sugar, mustard, salt and pepper. Stir in the onion, celery, green pepper, carrot, pimentos and macaroni. Refrigerate for at least 4 hours before serving, but preferably overnight.\n','images/macaroni44.jpg'),
+	(45,1,'Mexican Bean Salad','00:15:00','00:00:00','01:15:00','Mexican','1. In a large bowl, combine beans, bell peppers, frozen corn, and red onion.\n    \n2. In a small bowl, whisk together olive oil, red wine vinegar, lime juice, lemon juice, sugar, salt, garlic, cilantro, cumin, and black pepper. Season to taste with hot sauce and chili powder.\n    \n3. Pour olive oil dressing over vegetables; mix well. Chill thoroughly, and serve cold.\n','images/beansalad45.jpg'),
+	(46,0,'Egyptian Koshari','00:15:00','00:45:00','01:00:00','Egypt','1. Combine the lentils and water in a large saucepan. Bring to a boil, then simmer over medium heat for 25 minutes. Add the rice to the lentils, and continue to simmer for an additional 20 minutes, or until rice is tender.\n    \n2. Fill a separate saucepan with lightly salted water and bring to a boil. Add the macaroni and cook until tender, about 8 minutes. Drain.\n    \n3. Meanwhile, heat the vegetable oil in a large skillet over medium heat. Add onion and garlic; cook and stir until onion is lightly browned. Pour in the tomatoes and season with red pepper flakes, salt and pepper. Simmer over medium heat for 10 to 20 minutes.\n    \n4. In a large serving dish, stir together the lentils, rice and macaroni. Mix in the tomato sauce until evenly coated.\n','images/koshari46.jpg'),
+	(47,0,'Morrocan Meat Cigars','00:30:00','00:25:00','01:00:00','Morroco','1. Preheat oven to 350 degrees F (175 degrees C). Lightly grease a baking sheet.\n    \n2. Heat olive oil in skillet over medium-high heat. Cook ground beef until it loses its pink color and begins to brown. Drain fat from skillet. Add tomatoes, cinnamon, cumin, paprika and allspice. Reduce heat to medium and simmer until mixture reduces slightly, about 10 minutes.\n    \n3. Remove one phyllo sheet from package and keep the rest covered with a clean cloth until ready to use. On a flat work surface, cut the phyllo sheet into 2 14x9-inch rectangles. Spray the first half-sheet with cooking spray, place the 2nd half on top of it and spray again with oil. Place a generous teaspoon of the meat mixture near the narrow end of the dough. Fold dough over the top of the meat, fold in the sides of the dough, and roll into a narrow tube (cigar) shape. Repeat until all the meat has been rolled up. Arrange cigars on prepared baking sheet.\n    \n4. Bake in preheated oven until lightly browned, about 25 minutes.\n','images/morrococigar47.jpg'),
+	(48,0,'African-Style Oxtail Stew','00:20:00','03:15:00','03:35:00','Africa','1. Place celery, garlic, tomato paste, bouillon cubes, and water into a large Dutch oven; stir until the tomato paste has dissolved. Add peppercorns and bay leaves, place over medium heat and bring to a simmer.\n    \n2. Meanwhile, heat oil in a large skillet over medium-high heat. Add oxtail and cook until browned on all sides, about 10 minutes. Remove oxtail from hot oil and place into Dutch oven. Pour out all but 1 tablespoon of oil from the skillet, reduce heat to medium, and cook the onion until softened and translucent, about 5 minutes; add to oxtail.\n    \n3. Reduce heat to medium-low, cover, and simmer for 2 1/2 hours. Season with salt and pepper, recover, and continue to cook until the oxtail is tender, but not falling off of the bone, about 30 minutes.\n    \n4. Remove oxtail pieces and place into a serving dish. Add kidney beans to Dutch oven and return to a simmer. Thicken with cornstarch dissolved in water, simmer for 1 minute until thickened and clear. Pour sauce over the oxtail.\n','images/beefstew48.jpg'),
+	(49,0,'Chakchouka','00:20:00','00:20:00','00:40:00','Israel','1. Heat the olive oil in a skillet over medium heat. Stir in the onion, bell peppers, and garlic; cook and stir until the vegetables have softened and the onion has turned translucent, about 5 minutes.\n    \n2. Combine the tomatoes, cumin, paprika, salt, and chile pepper into a bowl and mix briefly. Pour the tomato mixture into the skillet, and stir to combine.\n    \n3. Simmer, uncovered, until the tomato juices have cooked off, about 10 minutes. Make four indentations in the tomato mixture for the eggs. Crack the eggs into the indentations. Cover the skillet and let the eggs cook until they\'re firm but not dry, about 5 minutes.\n','images/chak49.jpg'),
+	(50,0,'Sambusa','00:25:00','00:45:00','01:10:00','Somalia','1. Heat olive oil in a large skillet over medium heat. Add onions, leek and garlic, and cook, stirring until the onions are transparent. Add ground beef, and cook until about halfway done. Season with cumin, cardamom, salt and pepper. Mix well, and continue cooking until beef has browned.\n    \n2. In a small dish or cup, mix together the flour and water to make a thin paste. Using one wrapper at a time, fold into the shape of a cone. Fill the cone with the meat mixture, close the top, and seal with the paste. Repeat until wraps or filling are used up.\n    \n3. Heat the oil to 365 degrees F ( 170 degrees C) in a deep-fryer or deep heavy pot. There should be enough oil to submerge the wraps. Fry the Sambusa a few at a time until golden brown. Remove carefully to drain on paper towels.\n','images/sambusa50.jpg'),
+	(51,0,'Ethiopian Cabbage Dish','00:25:00','00:40:00','01:05:00','Ethiopia','1. Heat the olive oil in a skillet over medium heat. Cook the carrots and onion in the hot oil about 5 minutes. Stir in the salt, pepper, cumin, turmeric, and cabbage and cook another 15 to 20 minutes. Add the potatoes; cover. Reduce heat to medium-low and cook until potatoes are soft, 20 to 30 minutes.','images/cabbage51.jpg'),
+	(52,0,'Gal-Bi','00:15:00','00:10:00','07:25:00','Korea','1. Pour soy sauce, water, and vinegar into a large, non-metallic bowl. Whisk in brown sugar, white sugar, pepper, sesame oil, garlic, and onion until the sugars have dissolved. Submerge the ribs in this marinade, and cover with plastic wrap. Refrigerate 7 to 12 hours; the longer, the better.\n    \n2. Preheat an outdoor grill for medium-high heat.\n    \n3. Remove ribs from the marinade, shake off excess, and discard the marinade. Cook on preheated grill until the meat is no longer pink, 5 to 7 minutes per side.\n','images/galbi52.jpg'),
+	(53,0,'Lamb Korma','00:10:00','01:15:00','01:25:00','Persia','1. Place lamb in a bowl and drizzle 2 teaspoons olive oil over lamb; stir until coated.\n   \n2.  Heat remaining 2 teaspoons olive oil in a saucepan over low heat; cook and stir onion until softened, 10 to 15 minutes. Remove saucepan from heat and add potato to onion.\n    \n3. Heat a large skillet over medium heat; cook and stir lamb, working in small batches, until browned, about 5 minutes per batch. Transfer browned lamb to onion mixture.\n    \n4. Stir curry into lamb-onion mixture and cook over medium heat for 1 minute. Add water to lamb-onion mixture and bring to a boil. Reduce heat to low, cover saucepan, and simmer until lamb is cooked through and potatoes are tender, about 45 minutes.\n    \n5. Mix coconut milk and chickpeas into lamb-onion mixture and simmer until heated through, about 5 minutes.\n','images/korma54.jpg'),
+	(54,0,'Naan','00:30:00','00:07:00','03:00:00','India','1. In a large bowl, dissolve yeast in warm water. Let stand about 10 minutes, until frothy. Stir in sugar, milk, egg, salt, and enough flour to make a soft dough. Knead for 6 to 8 minutes on a lightly floured surface, or until smooth. Place dough in a well oiled bowl, cover with a damp cloth, and set aside to rise. Let it rise 1 hour, until the dough has doubled in volume.\n    \n2.Punch down dough, and knead in garlic. Pinch off small handfuls of dough about the size of a golf ball. Roll into balls, and place on a tray. Cover with a towel, and allow to rise until doubled in size, about 30 minutes.\n   \n3. During the second rising, preheat grill to high heat.\n    \n4. At grill side, roll one ball of dough out into a thin circle. Lightly oil grill. Place dough on grill, and cook for 2 to 3 minutes, or until puffy and lightly browned. Brush uncooked side with butter, and turn over. Brush cooked side with butter, and cook until browned, another 2 to 4 minutes. Remove from grill, and continue the process until all the naan has been prepared.\n','images/naan54.jpg'),
+	(55,0,'Asian Orange Chicken','00:40:00','00:40:00','03:20:00','Asia','1. Pour 1 1/2 cups water, orange juice, lemon juice, rice vinegar, and soy sauce into a saucepan and set over medium-high heat. Stir in the orange zest, brown sugar, ginger, garlic, chopped onion, and red pepper flakes. Bring to a boil. Remove from heat, and cool 10 to 15 minutes.\n    \n2. Place the chicken pieces into a resealable plastic bag. When contents of saucepan have cooled, pour 1 cup of sauce into bag. Reserve the remaining sauce. Seal the bag, and refrigerate at least 2 hours.\n    \n3. In another resealable plastic bag, mix the flour, salt, and pepper. Add the marinated chicken pieces, seal the bag, and shake to coat.\n    \n4. Heat the olive oil in a large skillet over medium heat. Place chicken into the skillet, and brown on both sides. Drain on a plate lined with paper towels, and cover with aluminum foil.\n    \n5. Wipe out the skillet, and add the sauce. Bring to a boil over medium-high heat. Mix together the cornstarch and 2 tablespoons water; stir into the sauce. Reduce heat to medium low, add the chicken pieces, and simmer, about 5 minutes, stirring occasionally.\n','images/orangechicken55.jpg'),
+	(56,0,'Peanut Butter Noodle ','00:15:00','00:10:00','00:25:00','','1. Bring a large pot of water to a boil. Add noodles and cook until tender according to package directions. Drain.\n    \n2. Meanwhile, combine chicken broth, ginger, soy sauce, peanut butter, honey, chili paste, and garlic in a small saucepan. Cook over medium heat until peanut butter melts and is heated through. Add noodles, and toss to coat. Garnish with green onions and peanuts.\n','images/peanutnoodle56.jpg'),
+	(57,0,'Restaurant-Style Buffalo Chicken Wings','00:15:00','00:15:00','02:00:00','America','1. In a small bowl mix together the flour, paprika, cayenne pepper and salt. Place chicken wings in a large nonporous glass dish or bowl and sprinkle flour mixture over them until they are evenly coated. Cover dish or bowl and refrigerate for 60 to 90 minutes.\n\n2. Heat oil in a deep fryer to 375 degrees F (190 degrees C). The oil should be just enough to cover wings entirely, an inch or so deep. Combine the butter, hot sauce, pepper and garlic powder in a small saucepan over low heat. Stir together and heat until butter is melted and mixture is well blended. Remove from heat and reserve for serving.\n\n3. Fry coated wings in hot oil for 10 to 15 minutes, or until parts of wings begin to turn brown. Remove from heat, place wings in serving bowl, add hot sauce mixture and stir together. Serve.','images/restaurantStyleBuffaloChickenWings57.jpg'),
+	(58,0,'Double Tomato Bruschetta','00:15:00','00:07:00','00:35:00','America','1. Preheat the oven on broiler setting.\n\n2. In a large bowl, combine the roma tomatoes, sun-dried tomatoes, garlic, olive oil, vinegar, basil, salt, and pepper. Allow the mixture to sit for 10 minutes.\n\n3. Cut the baguette into 3/4-inch slices. On a baking sheet, arrange the baguette slices in a single layer. Broil for 1 to 2 minutes, until slightly brown.\n\n4. Divide the tomato mixture evenly over the baguette slices. Top the slices with mozzarella cheese.\n\n5. Broil for 5 minutes, or until the cheese is melted.','images/doubleTomatoBruschetta58.jpg'),
+	(59,0,'Artichoke & Spinach Dip Restaurant Style','00:15:00','00:30:00','01:15:00','America','1. Preheat oven to 350 degrees F (175 degrees C).\n\n2. Place garlic in a small baking dish. Bake in the preheated oven 20 to 30 minutes, until soft. Remove from heat. When cool enough to touch, squeeze softened garlic from skins.\n\n3. In an 8x8 inch baking dish, spread the roasted garlic, spinach, artichoke hearts, Alfredo-style pasta sauce, mozzarella cheese, Parmesan cheese, and cream cheese.\n\n4. Bake in the preheated oven 30 minutes, or until cheeses are melted and bubbly. Serve warm.','images/artichokeSpinachDipRestaurantStyle59.jpg'),
+	(60,0,'Seven Layer Taco Dip','00:30:00','00:00:00','00:30:00','Mexico','1. In a medium bowl, blend the taco seasoning mix and refried beans. Spread the mixture onto a large serving platter.\n\n2. Mix the sour cream and cream cheese in a medium bowl. Spread over the refried beans.\n\n3. Top the layers with salsa. Place a layer of tomato, green bell pepper, green onions and lettuce over the salsa, and top with Cheddar cheese. Garnish with black olives.','images/sevenLayerTacoDip60.jpg'),
+	(101,2,'Doge','00:11:00','00:11:00','00:00:11','America','Yes','images/dummyimage.jpg'),
+	(111,191,'Demo','00:00:20','00:00:20','00:00:20','America','1. Consume the whole gallon.','images/dummyimage.jpg'),
+	(151,181,'fdsafkl','00:00:00','00:00:00','00:00:00','jklfdsa','dads','images/dummyimage.jpg'),
+	(191,2,'Doge2','00:00:11','00:00:00','00:00:11','America','Hello world','images/dummyimage.jpg');
 
--- --------------------------------------------------------
+/*!40000 ALTER TABLE `recipes` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- Table structure for table `style`
---
+
+# Dump of table style
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `style`;
 
 CREATE TABLE `style` (
-  `style_id` int(20) NOT NULL,
-  `name` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `style_id` int(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) NOT NULL,
+  PRIMARY KEY (`style_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `style`
---
+LOCK TABLES `style` WRITE;
+/*!40000 ALTER TABLE `style` DISABLE KEYS */;
 
-INSERT INTO `style` (`style_id`, `name`) VALUES
-(1, 'Breakfast'),
-(2, 'Dinner'),
-(3, 'Lunch'),
-(4, 'BBQ'),
-(5, 'Buffet'),
-(6, 'Burger'),
-(7, 'Appetizer');
+INSERT INTO `style` (`style_id`, `name`)
+VALUES
+	(1,'Breakfast'),
+	(2,'Dinner'),
+	(3,'Lunch'),
+	(4,'BBQ'),
+	(5,'Buffet'),
+	(6,'Burger'),
+	(7,'Appetizer'),
+	(8,'Noodle'),
+	(9,'Sides'),
+	(10,'Dessert'),
+	(11,'Healthy'),
+	(12,'Cuisine'),
+	(13,'Vegetarian'),
+	(14,'Vegan'),
+	(15,'Grilling'),
+	(16,'Bread'),
+	(17,'Pasta'),
+	(18,'Salad'),
+	(19,'Shrimp'),
+	(20,'Pork'),
+	(21,'Beef'),
+	(22,'Cookies'),
+	(23,'Cake'),
+	(24,'Rice'),
+	(25,'Baked'),
+	(26,'Chicken'),
+	(27,'Fried'),
+	(28,'Drink'),
+	(29,'Quick'),
+	(30,'Soup'),
+	(31,'Dip');
 
--- --------------------------------------------------------
+/*!40000 ALTER TABLE `style` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- Table structure for table `unit`
---
+
+# Dump of table unit
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `unit`;
 
 CREATE TABLE `unit` (
-  `unit_id` int(20) NOT NULL,
-  `name` varchar(30) NOT NULL
+  `unit_id` int(20) NOT NULL AUTO_INCREMENT,
+  `unit_name` varchar(30) NOT NULL DEFAULT '',
+  PRIMARY KEY (`unit_id`),
+  UNIQUE KEY `name` (`unit_name`),
+  KEY `unit_id` (`unit_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+
+LOCK TABLES `unit` WRITE;
+/*!40000 ALTER TABLE `unit` DISABLE KEYS */;
+
+INSERT INTO `unit` (`unit_id`, `unit_name`)
+VALUES
+	(20,''),
+	(42,'Americano'),
+	(19,'bunch'),
+	(21,'can'),
+	(14,'clove'),
+	(3,'cup'),
+	(22,'dash'),
+	(12,'fluid oz'),
+	(7,'gallon'),
+	(11,'gram'),
+	(32,'handful'),
+	(18,'head'),
+	(13,'kilogram'),
+	(15,'link'),
+	(6,'liter'),
+	(10,'milliliter'),
+	(9,'ounce'),
+	(17,'pinch'),
+	(4,'pint'),
+	(8,'pound'),
+	(5,'quart'),
+	(16,'strip'),
+	(2,'tablespoon'),
+	(1,'teaspoon');
+
+/*!40000 ALTER TABLE `unit` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table user_activities
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user_activities`;
+
+CREATE TABLE `user_activities` (
+  `user_id` int(20) NOT NULL,
+  `message` varchar(300) DEFAULT NULL,
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `user_activities_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_data` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `unit`
---
+LOCK TABLES `user_activities` WRITE;
+/*!40000 ALTER TABLE `user_activities` DISABLE KEYS */;
 
-INSERT INTO `unit` (`unit_id`, `name`) VALUES
-(14, 'cloves'),
-(3, 'cup'),
-(12, 'fluid oz'),
-(7, 'gallon'),
-(11, 'grams'),
-(13, 'kilogram'),
-(15, 'links'),
-(6, 'liter'),
-(10, 'milliliter'),
-(9, 'ounces'),
-(17, 'pinch'),
-(4, 'pint'),
-(8, 'pound'),
-(5, 'quart'),
-(16, 'strips'),
-(2, 'tablespoon'),
-(1, 'teaspoon');
+INSERT INTO `user_activities` (`user_id`, `message`)
+VALUES
+	(2,'Commented on recipe Chef John\'s French Fries'),
+	(2,'Commented on recipe Sun Dried Tomato and Blue Cheese Burger'),
+	(2,'Added new recipe Doge'),
+	(191,'Commented on recipe Sun Dried Tomato and Blue Cheese Burger'),
+	(191,'Added new recipe Demo'),
+	(191,'Commented on recipe Pork Fried Rice'),
+	(191,'Commented on recipe Demo'),
+	(181,'Added new recipe fdsafkl'),
+	(181,'Added new recipe fdsafkl'),
+	(2,'Added new recipe Doge2'),
+	(191,'Commented on recipe Best Chocolate Chip Cookies');
 
--- --------------------------------------------------------
+/*!40000 ALTER TABLE `user_activities` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- Table structure for table `user_data`
---
+
+# Dump of table user_data
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user_data`;
 
 CREATE TABLE `user_data` (
-  `user_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,
-  `password` varchar(30) NOT NULL,
+  `password` varchar(80) NOT NULL DEFAULT '',
   `email` varchar(40) NOT NULL,
   `first_name` varchar(20) NOT NULL,
-  `last_name` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `last_name` varchar(20) NOT NULL,
+  `biography` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=232 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `user_data`
---
+LOCK TABLES `user_data` WRITE;
+/*!40000 ALTER TABLE `user_data` DISABLE KEYS */;
 
-INSERT INTO `user_data` (`user_id`, `username`, `password`, `email`, `first_name`, `last_name`) VALUES
-(1, 'realtech', 'cs435', 'RealTechInc@cpp.edu', 'Real', 'Tech');
+INSERT INTO `user_data` (`user_id`, `username`, `password`, `email`, `first_name`, `last_name`, `biography`)
+VALUES
+	(0,'Anonymous','Anonymous','Anonymous','Anonymous','Anonymous','hello'),
+	(1,'realtech','cs435','RealTechInc@cpp.edu','Real','Tech','Hello my name is Anon. I AM SO TIRED'),
+	(2,'bpalomino','$2a$10$BUyges6MQO1ierObYrmPp.51HcC3ML11/w6tAhH/R6niT/.6IuwVW','bpalomino@cpp.edu','Brandon','Palomino','I live to eat!'),
+	(61,'bptest2','$2a$10$0JUGLRdGDKvK.DmJ05.oh.Mo4Sng2jX0d5myuyagZ.c/kuwdZ/FYC','bpt','bp','test','this is bptest2'),
+	(151,'bpalomino5','$2a$10$OvJQrYsFnjN.GuZlMJGwiuJBBh5V0ubLmfYzEOHEYO.pxbdFOr/Km','b@cpp.edu','Brandon','Palomino',NULL),
+	(161,'ckent52','$2a$10$B4tp4JKr0lErFSdo4q.ty.pzjCAK6vBHphYZbb8sgbwHpYwwqLFp6','ckent@new52.com','Clark','Kent',NULL),
+	(171,'theMaster','$2a$10$jI31GtMgYTS95srQFDGYvePMtF/FEG4Vc5Sqy0Vh8bpJOpqs9wTiC','the@master.master','The','Master','Drums'),
+	(181,'joodongri','$2a$10$7BhhfbjmkczEHi16HA2k/O0Bj8nlkeE.tn3XyJaN8Pbk4h9ur0J5C','joodongri@gmail.com','Dongri','Zhu',NULL),
+	(191,'rivas1','$2a$10$RYX.zr1etU54Eldzpf1Ep.RbWqvqpPXv5yzvZq9gClm/bTARGnASy','rivas1@cpp.edu','Christopher','Rivas','I love enchilidas and pupusas'),
+	(212,'daniel','$2a$10$h7z./ykYVkr4BCY5A4QdRezoR5QOYb3aA08pjhXb456Qtqso3y8AG','daniel','daniel','gurrera',NULL),
+	(222,'klung','$2a$10$yvUA0r8zTX8PctUhpoJfsu.k/H2/wC2xPYX3uHuFxydo.gENhnwjy','klung@cpp.edu','Ken','U',NULL),
+	(231,'ku','$2a$10$jR5VJVLX.YZ6.GYd/MmJmOKp5ZtLc7Y6zDt6m3ST9PzpA4it6XNb.','ku@cpp.edu','K','U',NULL);
 
--- --------------------------------------------------------
+/*!40000 ALTER TABLE `user_data` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- Table structure for table `user_rating`
---
 
-CREATE TABLE `user_rating` (
+# Dump of table user_favorites
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user_favorites`;
+
+CREATE TABLE `user_favorites` (
   `user_id` int(20) NOT NULL,
   `recipe_id` int(20) NOT NULL,
-  `rating` decimal(4,0) NOT NULL
+  KEY `user_id` (`user_id`),
+  KEY `recipe_id` (`recipe_id`),
+  CONSTRAINT `user_favorites_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_data` (`user_id`),
+  CONSTRAINT `user_favorites_ibfk_2` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Indexes for dumped tables
---
+LOCK TABLES `user_favorites` WRITE;
+/*!40000 ALTER TABLE `user_favorites` DISABLE KEYS */;
 
---
--- Indexes for table `created_by`
---
-ALTER TABLE `created_by`
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `recipe_id` (`recipe_id`);
+INSERT INTO `user_favorites` (`user_id`, `recipe_id`)
+VALUES
+	(2,1),
+	(2,21),
+	(191,2),
+	(191,3),
+	(191,4),
+	(2,5),
+	(2,9),
+	(2,7),
+	(2,101),
+	(191,111),
+	(2,191);
 
---
--- Indexes for table `has_ingredients`
---
-ALTER TABLE `has_ingredients`
-  ADD PRIMARY KEY (`dummy_id`),
-  ADD KEY `recipe_id` (`recipe_id`),
-  ADD KEY `ingredient_id` (`ingredient_id`);
+/*!40000 ALTER TABLE `user_favorites` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- Indexes for table `ingredients`
---
-ALTER TABLE `ingredients`
-  ADD PRIMARY KEY (`ingredient_id`),
-  ADD KEY `unit_id` (`unit_id`);
 
---
--- Indexes for table `origin`
---
-ALTER TABLE `origin`
-  ADD PRIMARY KEY (`origin_id`);
+# Dump of table user_preferences
+# ------------------------------------------------------------
 
---
--- Indexes for table `recipes`
---
-ALTER TABLE `recipes`
-  ADD PRIMARY KEY (`recipe_id`) USING BTREE,
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `origin_id` (`origin_id`),
-  ADD KEY `style_id` (`style_id`);
+DROP TABLE IF EXISTS `user_preferences`;
 
---
--- Indexes for table `style`
---
-ALTER TABLE `style`
-  ADD PRIMARY KEY (`style_id`);
+CREATE TABLE `user_preferences` (
+  `user_id` int(20) NOT NULL,
+  `style_id` int(20) DEFAULT NULL,
+  `origin` varchar(100) DEFAULT NULL,
+  KEY `style_id` (`style_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `user_preferences_ibfk_1` FOREIGN KEY (`style_id`) REFERENCES `style` (`style_id`),
+  CONSTRAINT `user_preferences_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user_data` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Indexes for table `unit`
---
-ALTER TABLE `unit`
-  ADD PRIMARY KEY (`unit_id`),
-  ADD UNIQUE KEY `name` (`name`);
+LOCK TABLES `user_preferences` WRITE;
+/*!40000 ALTER TABLE `user_preferences` DISABLE KEYS */;
 
---
--- Indexes for table `user_data`
---
-ALTER TABLE `user_data`
-  ADD PRIMARY KEY (`user_id`);
+INSERT INTO `user_preferences` (`user_id`, `style_id`, `origin`)
+VALUES
+	(191,1,NULL),
+	(191,2,NULL),
+	(191,3,NULL);
 
---
--- Indexes for table `user_rating`
---
-ALTER TABLE `user_rating`
-  ADD PRIMARY KEY (`user_id`,`recipe_id`);
+/*!40000 ALTER TABLE `user_preferences` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- AUTO_INCREMENT for dumped tables
---
 
---
--- AUTO_INCREMENT for table `has_ingredients`
---
-ALTER TABLE `has_ingredients`
-  MODIFY `dummy_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
---
--- AUTO_INCREMENT for table `ingredients`
---
-ALTER TABLE `ingredients`
-  MODIFY `ingredient_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
---
--- AUTO_INCREMENT for table `origin`
---
-ALTER TABLE `origin`
-  MODIFY `origin_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT for table `recipes`
---
-ALTER TABLE `recipes`
-  MODIFY `recipe_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
---
--- AUTO_INCREMENT for table `style`
---
-ALTER TABLE `style`
-  MODIFY `style_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `unit`
---
-ALTER TABLE `unit`
-  MODIFY `unit_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
---
--- AUTO_INCREMENT for table `user_data`
---
-ALTER TABLE `user_data`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- Constraints for dumped tables
---
 
---
--- Constraints for table `created_by`
---
-ALTER TABLE `created_by`
-  ADD CONSTRAINT `created_by_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_data` (`user_id`),
-  ADD CONSTRAINT `created_by_ibfk_2` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`);
-
---
--- Constraints for table `has_ingredients`
---
-ALTER TABLE `has_ingredients`
-  ADD CONSTRAINT `has_ingredients_ibfk_1` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredients` (`ingredient_id`),
-  ADD CONSTRAINT `has_ingredients_ibfk_2` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`);
-
---
--- Constraints for table `recipes`
---
-ALTER TABLE `recipes`
-  ADD CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_data` (`user_id`),
-  ADD CONSTRAINT `recipes_ibfk_2` FOREIGN KEY (`origin_id`) REFERENCES `origin` (`origin_id`),
-  ADD CONSTRAINT `recipes_ibfk_3` FOREIGN KEY (`style_id`) REFERENCES `style` (`style_id`);
-
---
--- Stored Procedures
---
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addIngredient`(IN `recipes_id` INT(100), IN `ingredients_id` INT(30), IN `ingredient_quantity` INT(30))
-BEGIN
-  insert into has_ingredients(recipe_id, ingredient_id, quantity)
-  values(recipes_id, ingredients_id, ingredient_quantity);
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addRecipe`(IN `creator_id` INT(100), IN `recipe_name` VARCHAR(30), IN `recipe_prep_time` TIME, IN `recipe_cooking_time` TIME, IN `recipe_origin_id` INT(20), IN `recipe_style_id` INT(20), IN `recipe_image` LONGBLOB)
-BEGIN
-  insert into recipes(user_id, name, prep_time, cooking_time, rating, origin_id, style_id, image)
-  values(creator_id, recipe_name, recipe_prep_time, recipe_cooking_time, recipe_origin_id, recipe_style_id, recipe_image);
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `createUser`(
-  in user_username varchar(30),
-  in user_password varchar(30),
-  in user_email varchar(40),
-  in user_first varchar(20),
-  in user_last varchar(20)
-)
-BEGIN
-  insert into user_data(username,user_data.password,email,first_name,last_name)
-  values(user_username, user_password, user_email, user_first, user_last);
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`‘root’`@`‘localhost’` PROCEDURE `getIngredients`()
-BEGIN
-  #This procedure returns all Ingredients in the database
-  SELECT name FROM ingredients; 
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`‘root’`@`‘localhost’` PROCEDURE `getImage`()
-BEGIN
-  #This procedure returns all Ingredients in the database
-  SELECT image_location FROM recipes; 
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`‘root’`@`‘localhost’` PROCEDURE `findIngredientsByID`(IN `recipe_id` INT)
-BEGIN
-  #Returns Ingredients that the recipe is using (ID).
-  SELECT ingredient_id FROM has_ingredients where has_ingredients.recipe_id = recipe_id; 
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`‘root’`@`‘localhost’` PROCEDURE `getRecipeByID`(IN `recipe_id` INT)
-BEGIN
-  #This procedure gets data from the recipe table
-  SELECT name, prep_time, cooking_time, origin_id, style_id, image, rating FROM recipes where recipes.recipe_id = recipe_id; 
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`‘root’`@`‘localhost’` PROCEDURE `getRecipe`()
-BEGIN
-  SELECT name, prep_time, cooking_time, origin_id, style_id, image, rating FROM recipes; # This procedure grabs information from the Recipe table.
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `newIngredient`(IN `ingredient_unit` INT(20), IN `ingredient_name` VARCHAR(30))
-BEGIN
-  insert into ingredients(name, unit_id)
-  values(ingredient_name, ingredient_unit)
-  on DUPLICATE KEY UPDATE name = name;
-END$$
-DELIMITER ;
-
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
